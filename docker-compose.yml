@@ -1,0 +1,36 @@
+version: '3'
+services:
+  web:
+    container_name: buildy-apache
+    build: config
+    ports :
+      - "3000:80"
+    volumes:
+     - ./www:/var/www/html/
+     - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
+     - ./server/apache2.conf:/etc/apache2/apache2.conf
+     - ./server/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+     - database
+  
+  database:
+    container_name: buildy-db
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always
+  
+  phpmyadmin:
+    container_name: buildy-myadmin
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - database
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
