@@ -24,8 +24,7 @@ git checkout -b feature/<your_branch_name>
 ...
 git add path/to/edited/file1 path/to/edited/file2 path/to/edited/file3 
 git commit -m "Explicit and short message explaining what I did"
-git push -u origin feature/<your
--branch_name>
+git push -u origin feature/<your-branch_name>
 git checkout develop
 ```
 A little explanation: 
