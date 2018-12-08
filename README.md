@@ -46,7 +46,7 @@ A little explanation:
 - Finally, we've finished our change so we're going back to develop to not mess up the history of our futur branch, always do that, or you might as well push to develop but you know where this is going.
 
 ## Rebase a branch
-You either messed up or didn't pull or your branch falled behind by bad luck so you can't push and you're as stucked as you're fucked
+You either messed up or didn't pull or your branch falled behind by bad luck so you can't push and you're as stucked as you're fucked. <strong>DO NOT AUTOMATICALLY REBASE WHEN YOU GAVE CONFLIT, ASK FIRST.<strong>
 ```sh
 git checkout develop
 git pull --rebase
