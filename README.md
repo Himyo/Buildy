@@ -31,7 +31,7 @@ git checkout develop
 A little explanation: 
 - First thing first! The branch you'll probably be on is develop but just in case we'll move our current position to it.
 
-- Next, we're pulling the possible change added to the remote version of develop. This will reduce the chance of us [having to rebase our branch](#Rebase-a-branch) later.
+- Next, we're pulling the possible change added to the remote version of develop. This will reduce the chance of us having conflit and [having to rebase our branch](#Rebase-a-branch) later.
 
 - Next, we're creating our new branch. This branch only exist on our computer for now.
 
