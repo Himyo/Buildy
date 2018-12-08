@@ -4,8 +4,9 @@ Projet Annuelle 3 IW1
  ## Requirements
  - Docker
 
-## Optional 
+## Optional Tools
 - Gitkraken
+- SonarQube
 
 ## Cloning the Repo
 
