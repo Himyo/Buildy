@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     container_name: buildy-apache
-    build: config
+    build: ./config/web
     ports :
       - "3000:80"
     volumes:
@@ -11,26 +11,22 @@ services:
      - ./server/apache2.conf:/etc/apache2/apache2.conf
      - ./server/php.ini:/usr/local/etc/php/php.ini
     depends_on:
-     - database
+     - postgres
   
-  database:
+  postgres:
     container_name: buildy-db
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: user
-      MYSQL_PASSWORD: root
-    volumes:
-      - ./db_data:/var/lib/mysql
+    image: postgres:9.6 
+    env_file:
+    - ./config/env 
     restart: always
   
-  phpmyadmin:
-    container_name: buildy-myadmin
-    image: phpmyadmin/phpmyadmin:4.7
+  pgadmin:
+    container_name: buildy-admin
+    image: fenglc/pgadmin4
+    restart: always
+    env_file:
+      - ./config/env
     depends_on:
-      - database
+      - postgres
     ports:
-      - 8080:80
-    environment:
-      - PMA_ARBITRARY=1
+      - 5050:5050

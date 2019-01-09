@@ -1,0 +1,5 @@
+POSTGRES_DB=db
+POSTGRES_USER=root 
+POSTGRES_PASSWORD=root
+DEFAULT_USER=pgadmin@mail.com
+DEFAULT_PASSWORD=mypassword
