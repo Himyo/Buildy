@@ -1,6 +1,6 @@
 <?php
-define("DBDRIVER", "mysql");
+define("DBDRIVER", "pgsql");
 define("DBHOST", "database");
-define("DBNAME", "mvcdocker2");
+define("DBNAME", "db");
 define("DBUSER", "root");
-define("DBPWD", "password");
+define("DBPWD", "root");
