@@ -1,5 +1,4 @@
-POSTGRES_DB=db
-POSTGRES_USER=root 
+POSTGRES_USER=buildy
 POSTGRES_PASSWORD=root
-DEFAULT_USER=buildy.patcg@gmail.com
-DEFAULT_PASSWORD=buildy
+DEFAULT_USER=buildy@gmail.com
+DEFAULT_PASSWORD=root

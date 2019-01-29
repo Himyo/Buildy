@@ -15,9 +15,11 @@ services:
   
   postgres:
     container_name: buildy-db
-    image: postgres:9.6 
+    build: ./config/db 
     env_file:
-    - ./config/env 
+    - ./config/env
+    volumes:
+    - ./postgres-data:/var/lib/postgresql/data
     restart: always
   
   pgadmin:
