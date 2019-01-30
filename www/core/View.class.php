@@ -29,6 +29,19 @@ class View{
 
 	}
 
+
+	//$modal = form //"views/modals/form.mod.php"
+	//$config = [ ..... ]
+	public function addComponent($component, $config){
+		//form.mod.php
+		$componentPath = "views/components/".$component.".comp.php";
+		if( file_exists($componentPath)){
+			include $componentPath;
+		}else{
+			die("Attention le fichier component n'existe pas ".$componentPath);
+		}
+	}
+
 	//$this->data =["pseudo"=>"prof", "age"=>30, "city"=>"Paris"]
 	public function assign($key, $value){
 		$this->data[$key]=$value;

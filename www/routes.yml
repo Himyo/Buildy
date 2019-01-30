@@ -2,6 +2,10 @@
   controller: Pages
   action: default
 
+"/test":
+  controller: Pages
+  action: test
+
 "/liste_des_utilisateurs":
   controller: Users
   action: default
@@ -9,6 +13,11 @@
 "/ajouter_un_utilisateur":
   controller: Users
   action: add
+
+
+"/enregistrer_un_utilisateur":
+  controller: Users
+  action: save
 
 "/connexion":
   controller: Users
