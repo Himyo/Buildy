@@ -7,23 +7,72 @@ class UsersController{
 	}
 	
 	public function addAction(){
-	
 		$user = new Users();
-		$user->setFirstname("Yves");
-		$user->setLastname("skrzypczyk");
-		$user->setEmail("y.skrzypczyk@gmail.com");
-		$user->setPwd("Test1234");
-		$user->save();
+		$form = $user->getRegisterForm();
+
+	
+		$v = new View("addUser", "front");
+		$v->assign("form", $form);
+		
+		
+	}
+
+	public function saveAction(){
+
+		$user = new Users();
+		$form = $user->getRegisterForm();
+
+		//Est ce qu'il y a des données dans POST ou GET($form["config"]["method"])
+		$method = strtoupper($form["config"]["method"]);
+		$data = $GLOBALS["_".$method];
 
 
-		//$v = new View("addUser", "front");
+		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
+			
+			$validator = new Validator($form,$data);
+			$form["errors"] = $validator->errors;
+
+			if(empty($errors)){
+				$user->setFirstname($data["firstname"]);	
+				$user->setLastname($data["lastname"]);
+				$user->setEmail($data["email"]);
+				$user->setPwd($data["pwd"]);
+				$user->save();
+			}
+
+			
+
+		}
+
+		$v = new View("addUser", "front");
+		$v->assign("form", $form);
+		
 		
 	}
 
 
 	public function loginAction(){
+
+		$user = new Users();
+		$form = $user->getLoginForm();
+
+		$method = strtoupper($form["config"]["method"]);
+		$data = $GLOBALS["_".$method];
+		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
+			
+			$validator = new Validator($form,$data);
+			$form["errors"] = $validator->errors;
+
+			if(empty($errors)){
+				//Connexion avec token
+				//$token = md5(substr(uniqid().time(), 4, 10)."mxu(4il");
+
+			}
+
+		}
 	
 		$v = new View("loginUser", "front");
+			$v->assign("form", $form);
 		
 	}
 
