@@ -1,32 +1,37 @@
 version: '3'
 services:
   web:
-    container_name: buildy-apache
-    build: ./config/web
+    build: ./config/web 
+    container_name: apache-3IW
     ports :
-      - "3000:80"
+     - "5000:80"
     volumes:
      - ./www:/var/www/html/
      - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
      - ./server/apache2.conf:/etc/apache2/apache2.conf
      - ./server/php.ini:/usr/local/etc/php/php.ini
     depends_on:
-     - postgres
-  
-  postgres:
-    container_name: buildy-db
-    image: postgres:9.6 
+     - database
+
+  database:
+    image: mysql:5.7
+    container_name: mysql-mvc
+    ports :
+      - "3306:3306"
     env_file:
-    - ./config/env 
+    - ./config/env
+    volumes:
+      - ./db_data:/var/lib/mysql
     restart: always
-  
-  pgadmin:
-    container_name: buildy-admin
-    image: fenglc/pgadmin4
-    restart: always
-    env_file:
-      - ./config/env
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin-mvc
     depends_on:
-      - postgres
+      - database
     ports:
-      - 5050:5050
+      - 8080:80
+    environment:
+        - PMA_ARBITRARY=1
+
+      
