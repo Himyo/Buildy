@@ -22,6 +22,7 @@ services:
     - ./config/env
     volumes:
       - ./db_data:/var/lib/mysql
+      - ./config/db.sql:/docker-entrypoint-initdb.d/db.sql
     restart: always
 
   phpmyadmin:
