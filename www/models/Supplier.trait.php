@@ -1,6 +1,5 @@
 <?php
 
-
 trait Supplier {
 
     public function supply(array $data) {

@@ -1,5 +1,5 @@
 <?php
-class Form extends Validator {
+class Form {
 
     // CONFIG
     protected $id;
@@ -12,17 +12,21 @@ class Form extends Validator {
     // DATA 
     protected $fields;
 
-    public function __construct($slug) {
+    public function __construct($slug, $data) {
         //TODO Add id if neccesary
         $method = Routing::getRoute($slug)["m"];
         $this->setMethod("_".$method);
         $this->setAction($slug);
+        foreach($data as $field) {
+            $placeholder = $field["placeholder"];
+            $fields[$placeholder] = new Field($field);
+        }
     }
 
 
-    public function addField($field) {
-        $label= $field->getLabel();
-        $fields[$label] = $field;
+    public function addField($fields) {
+        $placeholder= $field->getPlaceholder();
+        $fields[$placeholder] = $field;
     }
     public function removeField($fieldName) {
         unset($this->fields[$fieldName]);

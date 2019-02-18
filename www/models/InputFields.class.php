@@ -9,15 +9,15 @@ class InputFields extends Field {
     public function make() {
 
         $form = "";
-        $form .= "<label>".$this->label."</label><input
-            type='".$this->type."' name='".$this->name."' ";
-        $form .="value ='".$this->value."' ";
+        $form .= "<label>".$this->placeholder."</label>
+            <input type='".$this->type."' name=
+            '".$this->name."value='".$this->value."' ";
         
-        if($this->maxlength >= $this->minlength +1){
+        if($this->maxLength >= $this->minLength +1){
             $form .="maxlength='".$this->maxlength."' ";
         }
-        if($this->minlength > 0){
-            $form .="minlength='".$this->minlength."' ";
+        if($this->minLength > 0){
+            $form .="minlength='".$this->minLength."' ";
         }
         $form .= "/>";
         return $form;

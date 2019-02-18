@@ -6,8 +6,7 @@ class Field {
 
     protected $errorMessage;
     protected $type;
-    protected $label;
-    protected $label;
+    protected $placeholder;
     protected $value;
     protected $validator;
 
@@ -61,23 +60,16 @@ class Field {
     }
 
     /**
-     * Get the value of label
+     * Get the value of placeholder
      */ 
-    public function getLabel()
+    public function getPlaceholder()
     {
-        return $this->label;
+        return $this->placeholder;
     }
 
-    /**
-     * Set the value of label
-     *
-     * @return  self
-     */ 
-    public function setLabel($label)
+    public function setPlaceholder($placeholder)
     {
-        $this->label = $label;
-
-        return $this;
+        $this->placeholder = $placeholder;
     }
 
     /**
@@ -88,15 +80,21 @@ class Field {
         return $this->value;
     }
 
-    /**
-     * Set the value of value
-     *
-     * @return  self
-     */ 
     public function setValue($value)
     {
         $this->value = $value;
+    }
 
-        return $this;
+    /**
+     * Get the value of validator
+     */ 
+    public function getValidator()
+    {
+        return $this->validator;
+    }
+
+    public function setValidator($validator)
+    {
+        $this->validator = $validator;
     }
 }

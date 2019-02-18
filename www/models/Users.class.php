@@ -37,7 +37,29 @@ class Users extends BaseSQL{
 		$this->token = $token;
 	}
 
-	public function getRegisterForm(){
+	public function getRegisterForm() {
+		$slug = Routing::getSlug("Users", "save");
+		$form = new Form($slug);
+		$data = [
+			"firstname" => [
+				
+			],
+			"lastname" => [
+
+			],
+			"email" => [
+
+			],
+			"pwd" => [
+
+			],
+			"pwdConfirm" => [
+
+			]
+		];
+	}
+
+	public function getRegister(){
 		$slug = Routing::getSlug("Users", "save");
 		$method = Routing::getRoute($slug)["m"];
 		return [
