@@ -15,12 +15,13 @@ class Routing{
 			$c = ucfirst($routes[$slug]["controller"])."Controller";
 			$a = $routes[$slug]["action"]."Action";
 			$cPath = "controllers/".$c.".class.php";
-
+			$method = $routes[$slug]["method"];
 		}else{
-			return ["c"=>null, "a"=>null,"cPath"=>null ];
+			// TODO: Refacto
+			return ["c"=>null, "a"=>null,"cPath"=>null, "m"=>null];
 		}
 
-		return ["c"=>$c, "a"=>$a,"cPath"=>$cPath ];
+		return ["c"=>$c, "a"=>$a,"cPath"=>$cPath, "m"=>$method];
 	}
 
 
@@ -31,11 +32,11 @@ class Routing{
 			
 			if( !empty($cAndA["controller"]) && 
 				!empty($cAndA["action"]) && 
+				!empty($cAndA["method"]) &&
 				$cAndA["controller"] == $c &&
 				$cAndA["action"] == $a){
 					return $slug;
 				}
-
 		}
 
 		return null;

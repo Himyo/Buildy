@@ -26,7 +26,6 @@ class UsersController{
 		$method = strtoupper($form["config"]["method"]);
 		$data = $GLOBALS["_".$method];
 
-
 		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
 			
 			$validator = new Validator($form,$data);
@@ -64,8 +63,8 @@ class UsersController{
 			$form["errors"] = $validator->errors;
 
 			if(empty($errors)){
-				//Connexion avec token
-				//$token = md5(substr(uniqid().time(), 4, 10)."mxu(4il");
+				$token = md5(substr(uniqid().time(), 4, 10)."");
+				
 
 			}
 

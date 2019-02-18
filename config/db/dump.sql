@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema db
+-- Schema buildy
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema db
+-- Schema buildy
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db` DEFAULT CHARACTER SET utf8 ;
-USE `db` ;
+CREATE SCHEMA IF NOT EXISTS `buildy` DEFAULT CHARACTER SET utf8 ;
+USE `buildy` ;
 
 -- -----------------------------------------------------
--- Table `db`.`Photo`
+-- Table `buildy`.`Photo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Photo` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Photo` (
   `id` INT NOT NULL,
   `path` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
@@ -29,9 +29,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Users`
+-- Table `buildy`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Users` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Users` (
   `id` INT NOT NULL,
   `lastname` VARCHAR(45) NULL,
   `firstname` VARCHAR(45) NULL,
@@ -42,16 +42,16 @@ CREATE TABLE IF NOT EXISTS `db`.`Users` (
   INDEX `fk_members_photo1_idx` (`photo_id` ASC),
   CONSTRAINT `fk_members_photo1`
     FOREIGN KEY (`photo_id`)
-    REFERENCES `db`.`Photo` (`id`)
+    REFERENCES `buildy`.`Photo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Games`
+-- Table `buildy`.`Games`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Games` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Games` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `created_at` VARCHAR(45) NULL,
@@ -61,9 +61,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Releases`
+-- Table `buildy`.`Releases`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Releases` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Releases` (
   `id` INT NOT NULL,
   `games_id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
@@ -72,16 +72,16 @@ CREATE TABLE IF NOT EXISTS `db`.`Releases` (
   INDEX `fk_release_games1_idx` (`games_id` ASC),
   CONSTRAINT `fk_release_games1`
     FOREIGN KEY (`games_id`)
-    REFERENCES `db`.`Games` (`id`)
+    REFERENCES `buildy`.`Games` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Cards`
+-- Table `buildy`.`Cards`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Cards` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Cards` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
@@ -94,26 +94,26 @@ CREATE TABLE IF NOT EXISTS `db`.`Cards` (
   INDEX `fk_cards_games1_idx` (`games_id` ASC),
   CONSTRAINT `fk_cards_release1`
     FOREIGN KEY (`releases_id`)
-    REFERENCES `db`.`Releases` (`id`)
+    REFERENCES `buildy`.`Releases` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cards_photo1`
     FOREIGN KEY (`photo_id`)
-    REFERENCES `db`.`Photo` (`id`)
+    REFERENCES `buildy`.`Photo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cards_games1`
     FOREIGN KEY (`games_id`)
-    REFERENCES `db`.`Games` (`id`)
+    REFERENCES `buildy`.`Games` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Decks`
+-- Table `buildy`.`Decks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Decks` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Decks` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `created_at` TIMESTAMP NULL,
@@ -127,68 +127,68 @@ CREATE TABLE IF NOT EXISTS `db`.`Decks` (
   INDEX `fk_decks_photo1_idx` (`photo_id` ASC),
   CONSTRAINT `fk_decks_members1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `db`.`Users` (`id`)
+    REFERENCES `buildy`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_decks_games1`
     FOREIGN KEY (`games_id`)
-    REFERENCES `db`.`Games` (`id`)
+    REFERENCES `buildy`.`Games` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_decks_photo1`
     FOREIGN KEY (`photo_id`)
-    REFERENCES `db`.`Photo` (`id`)
+    REFERENCES `buildy`.`Photo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Users_cards`
+-- Table `buildy`.`Users_cards`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Users_cards` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Users_cards` (
   `users_id` INT NOT NULL,
   `cards_id` INT NOT NULL,
   INDEX `fk_member_card_members_idx` (`users_id` ASC),
   INDEX `fk_member_card_cards1_idx` (`cards_id` ASC),
   CONSTRAINT `fk_member_card_members`
     FOREIGN KEY (`users_id`)
-    REFERENCES `db`.`Users` (`id`)
+    REFERENCES `buildy`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_member_card_cards1`
     FOREIGN KEY (`cards_id`)
-    REFERENCES `db`.`Cards` (`id`)
+    REFERENCES `buildy`.`Cards` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Decks_cards`
+-- Table `buildy`.`Decks_cards`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Decks_cards` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Decks_cards` (
   `decks_id` INT NOT NULL,
   `cards_id` INT NOT NULL,
   INDEX `fk_decks_card_decks1_idx` (`decks_id` ASC),
   INDEX `fk_decks_card_cards1_idx` (`cards_id` ASC),
   CONSTRAINT `fk_decks_card_decks1`
     FOREIGN KEY (`decks_id`)
-    REFERENCES `db`.`Decks` (`id`)
+    REFERENCES `buildy`.`Decks` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_decks_card_cards1`
     FOREIGN KEY (`cards_id`)
-    REFERENCES `db`.`Cards` (`id`)
+    REFERENCES `buildy`.`Cards` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Tournements`
+-- Table `buildy`.`Tournements`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Tournements` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Tournements` (
   `id` INT NOT NULL,
   `created_at` TIMESTAMP NULL,
   `ended_at` TIMESTAMP NULL,
@@ -200,16 +200,16 @@ CREATE TABLE IF NOT EXISTS `db`.`Tournements` (
   INDEX `fk_tournaments_games1_idx` (`games_id` ASC),
   CONSTRAINT `fk_tournaments_games1`
     FOREIGN KEY (`games_id`)
-    REFERENCES `db`.`Games` (`id`)
+    REFERENCES `buildy`.`Games` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Tournaments_members`
+-- Table `buildy`.`Tournaments_members`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Tournaments_members` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Tournaments_members` (
   `users_id` INT NOT NULL,
   `tournaments_id` INT NOT NULL,
   `status` VARCHAR(45) NULL,
@@ -218,42 +218,42 @@ CREATE TABLE IF NOT EXISTS `db`.`Tournaments_members` (
   INDEX `fk_tournament_member_tournaments1_idx` (`tournaments_id` ASC),
   CONSTRAINT `fk_tournament_member_members1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `db`.`Users` (`id`)
+    REFERENCES `buildy`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tournament_member_tournaments1`
     FOREIGN KEY (`tournaments_id`)
-    REFERENCES `db`.`Tournements` (`id`)
+    REFERENCES `buildy`.`Tournements` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Ban_list`
+-- Table `buildy`.`Ban_list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Ban_list` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Ban_list` (
   `cards_id` INT NOT NULL,
   `releases_id` INT NOT NULL,
   INDEX `fk_ban_list_cards1_idx` (`cards_id` ASC),
   INDEX `fk_ban_list_releases1_idx` (`releases_id` ASC),
   CONSTRAINT `fk_ban_list_cards1`
     FOREIGN KEY (`cards_id`)
-    REFERENCES `db`.`Cards` (`id`)
+    REFERENCES `buildy`.`Cards` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ban_list_releases1`
     FOREIGN KEY (`releases_id`)
-    REFERENCES `db`.`Releases` (`id`)
+    REFERENCES `buildy`.`Releases` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Articles`
+-- Table `buildy`.`Articles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Articles` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Articles` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `created_at` VARCHAR(45) NULL,
@@ -265,21 +265,21 @@ CREATE TABLE IF NOT EXISTS `db`.`Articles` (
   INDEX `fk_articles_members1_idx` (`users_id` ASC),
   CONSTRAINT `fk_articles_photo1`
     FOREIGN KEY (`photo_id`)
-    REFERENCES `db`.`Photo` (`id`)
+    REFERENCES `buildy`.`Photo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_articles_members1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `db`.`Users` (`id`)
+    REFERENCES `buildy`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Commentaires`
+-- Table `buildy`.`Commentaires`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Commentaires` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Commentaires` (
   `id` INT NOT NULL,
   `content` VARCHAR(45) NULL,
   `users_id` INT NOT NULL,
@@ -291,47 +291,47 @@ CREATE TABLE IF NOT EXISTS `db`.`Commentaires` (
   INDEX `fk_commentaires_article1_idx` (`articles_id` ASC),
   CONSTRAINT `fk_commentaires_members1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `db`.`Users` (`id`)
+    REFERENCES `buildy`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_commentaires_commentaires1`
     FOREIGN KEY (`commentaires_id`)
-    REFERENCES `db`.`Commentaires` (`id`)
+    REFERENCES `buildy`.`Commentaires` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_commentaires_article1`
     FOREIGN KEY (`articles_id`)
-    REFERENCES `db`.`Articles` (`id`)
+    REFERENCES `buildy`.`Articles` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Articles_games`
+-- Table `buildy`.`Articles_games`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Articles_games` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Articles_games` (
   `games_id` INT NOT NULL,
   `articles_id` INT NOT NULL,
   INDEX `fk_articles_games_games1_idx` (`games_id` ASC),
   INDEX `fk_articles_games_articles1_idx` (`articles_id` ASC),
   CONSTRAINT `fk_articles_games_games1`
     FOREIGN KEY (`games_id`)
-    REFERENCES `db`.`Games` (`id`)
+    REFERENCES `buildy`.`Games` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_articles_games_articles1`
     FOREIGN KEY (`articles_id`)
-    REFERENCES `db`.`Articles` (`id`)
+    REFERENCES `buildy`.`Articles` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db`.`Favoris`
+-- Table `buildy`.`Favoris`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`Favoris` (
+CREATE TABLE IF NOT EXISTS `buildy`.`Favoris` (
   `users_id` INT NOT NULL,
   `cards_id` INT NOT NULL,
   `articles_id` INT NOT NULL,
@@ -348,37 +348,37 @@ CREATE TABLE IF NOT EXISTS `db`.`Favoris` (
   INDEX `fk_favoris_tournaments1_idx` (`tournaments_id` ASC),
   CONSTRAINT `fk_favoris_members1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `db`.`Users` (`id`)
+    REFERENCES `buildy`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoris_cards1`
     FOREIGN KEY (`cards_id`)
-    REFERENCES `db`.`Cards` (`id`)
+    REFERENCES `buildy`.`Cards` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoris_articles1`
     FOREIGN KEY (`articles_id`)
-    REFERENCES `db`.`Articles` (`id`)
+    REFERENCES `buildy`.`Articles` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoris_games1`
     FOREIGN KEY (`games_id`)
-    REFERENCES `db`.`Games` (`id`)
+    REFERENCES `buildy`.`Games` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoris_photo1`
     FOREIGN KEY (`photo_id`)
-    REFERENCES `db`.`Photo` (`id`)
+    REFERENCES `buildy`.`Photo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoris_decks1`
     FOREIGN KEY (`decks_id`)
-    REFERENCES `db`.`Decks` (`id`)
+    REFERENCES `buildy`.`Decks` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoris_tournaments1`
     FOREIGN KEY (`tournaments_id`)
-    REFERENCES `db`.`Tournements` (`id`)
+    REFERENCES `buildy`.`Tournements` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
