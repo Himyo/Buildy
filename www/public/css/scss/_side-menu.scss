@@ -1,0 +1,47 @@
+.side-menu {
+  background-color: #555555;
+  display: flex;
+  flex: 1 0px;
+  flex-flow: column wrap;
+
+  i {
+    width: 20px;
+  }
+
+  a {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #cccccc;
+  }
+
+  a:hover {
+    background-color: #333333;
+  }
+}
+
+.menu-title {
+  background-color: #555555;
+  cursor: pointer;
+  display: flex;
+
+  a {
+    width: 100%;
+  }
+}
+
+.dropdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    color: #cccccc;
+
+    a {
+      padding: 5px 5px 5px 15px;
+      display: flex;
+    }
+  }
+}

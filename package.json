@@ -1,0 +1,24 @@
+{
+  "name": "buildy",
+  "version": "1.0.0",
+  "description": "Projet Annuelle 3 IW1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "./node_modules/sass/sass.js ./www/public/css/scss/ --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Himyo/Buildy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Himyo/Buildy/issues"
+  },
+  "homepage": "https://github.com/Himyo/Buildy#readme",
+  "dependencies": {
+    "node-sass": "^4.11.0",
+    "sass": "^1.17.0"
+  }
+}
