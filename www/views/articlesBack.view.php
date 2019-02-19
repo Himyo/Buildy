@@ -1,7 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Anthony
- * Date: 2019-02-19
- * Time: 14:59
- */
+<div class="page">
+    <div class="content">
+        <h1>Articles</h1>
+
+    </div>
+</div>
