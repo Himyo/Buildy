@@ -1,0 +1,32 @@
+.footer {
+  width: 100%;
+  background-color: #555555;
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #cccccc;
+  }
+}
+
+.menu-footer {
+  flex: 1 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a:hover {
+    background-color: #333333;
+  }
+}
+
+.copyright {
+  width: 100%;
+  color: #cccccc;
+  display: flex;
+  justify-content: center;
+}

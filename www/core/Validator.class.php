@@ -79,6 +79,10 @@ class Validator{
 					preg_match("#[0-9]#", $string));
 	}
 
+	public function isValid() {
+		return count($this->errors) === 0;
+	}
+
 
 
 }

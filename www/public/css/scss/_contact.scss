@@ -1,0 +1,51 @@
+.contact {
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px solid #555555;
+}
+
+.form-contact {
+  margin-left: 10px;
+  display: flex;
+  flex: 1 0px;
+
+  form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+  }
+
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #555555;
+  }
+
+  label:first-child {
+    margin-top: 10px;
+  }
+
+  .input-contact:focus,
+  textarea:focus {
+    border: 2px solid #555555;
+  }
+}
+
+.btn-contact {
+  padding: 5px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+
+  :hover {
+    color: #dddddd;
+    background-color: #555555;
+  }
+}
+
+.info-contact {
+  display: flex;
+  flex: 1 0px;
+  flex-flow: column wrap;
+}

@@ -1,0 +1,433 @@
+.button-classic {
+  background-color: #555555;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic:hover {
+  opacity: 1
+}
+
+.button-classic-succes {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-succes:hover {
+  opacity: 1
+}
+
+.button-classic-error {
+  background-color: #f44336;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-error:hover {
+  opacity: 1
+}
+
+.button-classic-warning {
+  background-color: #ffaa00;;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-warning:hover {
+  opacity: 1
+}
+
+
+
+
+.button-outline {
+  border: 1px solid #555555;
+  border-radius: 8px;
+  color: #555555;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-outline:hover {
+  opacity: 1
+}
+
+.button-outline-succes {
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  color: #4caf50;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-outline-succes:hover {
+  opacity: 1
+}
+
+.button-outline-error {
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  color: #f44336;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-outline-error:hover {
+  opacity: 1
+}
+
+.button-outline-warning {
+  border: 1px solid #ffaa00;
+  border-radius: 8px;
+  color: #ffaa00;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-outline-warning:hover {
+  opacity: 1
+}
+
+
+
+
+.button-square {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square:hover {
+  opacity: 1
+}
+
+.button-square-succes {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-succes:hover {
+  opacity: 1
+}
+
+.button-square-error {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-error:hover {
+  opacity: 1
+}
+
+.button-square-warning {
+  background-color: #ffaa00;
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-warning:hover {
+  opacity: 1
+}
+
+
+
+
+
+
+.button-square-outline {
+  border: 1px solid #4caf50;
+  color: #4caf50;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-outline:hover {
+  opacity: 1
+}
+
+.button-square-outline-succes {
+  border: 1px solid #4caf50;
+  color: #4caf50;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-outline-succes:hover {
+  opacity: 1
+}
+
+.button-square-outline-error {
+  border: 1px solid #f44336;
+  color: #f44336;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-outline-error:hover {
+  opacity: 1
+}
+
+.button-square-outline-warning {
+  border: 1px solid #ffaa00;
+  color: #ffaa00;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-outline-warning:hover {
+  opacity: 1
+}
+
+
+
+.button-classic-b {
+  background-color: #555555;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-b:hover {
+  opacity: 1
+}
+
+.button-classic-succes-b {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-succes-b:hover {
+  opacity: 1
+}
+
+.button-classic-error-b {
+  background-color: #f44336;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-error-b:hover {
+  opacity: 1
+}
+
+.button-classic-warning-b {
+  background-color: #ffaa00;;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-classic-warning-b:hover {
+  opacity: 1
+}
+
+
+
+
+
+
+.button-square-b {
+  background-color: #4caf50;
+  border: none;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-b:hover {
+  opacity: 1
+}
+
+.button-square-succes-b {
+  background-color: #4caf50;
+  border: none;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-succes-b:hover {
+  opacity: 1
+}
+
+.button-square-error-b {
+  background-color: #f44336;
+  border: none;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-error-b:hover {
+  opacity: 1
+}
+
+.button-square-warning-b {
+  background-color: #ffaa00;
+  border: none;
+  color: black;
+  padding: 10px 28px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-square-warning-b:hover {
+  opacity: 1
+}

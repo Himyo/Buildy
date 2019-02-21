@@ -1,0 +1,36 @@
+.header {
+  width: 100%;
+  background-color: #555555;
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #cccccc;
+  }
+
+  img {
+    flex: 1 0px;
+    max-width: 250px;
+    max-height: 100px;
+  }
+}
+
+.menu-header {
+  flex: 5 0px;
+  display: flex;
+  align-items: center;
+
+  a {
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    :hover {
+      background-color: #333333;
+    }
+  }
+}

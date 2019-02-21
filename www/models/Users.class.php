@@ -37,15 +37,40 @@ class Users extends BaseSQL{
 		$this->token = $token;
 	}
 
-	public function getRegisterForm(){
+	public function getRegisterForm() {
+		$slug = Routing::getSlug("Users", "save");
+		$form = new Form($slug);
+		$data = [
+			"firstname" => [
+				
+			],
+			"lastname" => [
+
+			],
+			"email" => [
+
+			],
+			"pwd" => [
+
+			],
+			"pwdConfirm" => [
+
+			]
+		];
+	}
+
+	public function getRegister(){
+		$slug = Routing::getSlug("Users", "save");
+		$method = Routing::getRoute($slug)["m"];
 		return [
 					"config"=>[ 
-						"method"=>"POST", 
-						"action"=>Routing::getSlug("Users", "save"), 
+						"method"=>$method, 
+						"action"=>$slug,
 						"class"=>"", 
 						"id"=>"",
 						"submit"=>"S'inscrire",
-						"reset"=>"Annuler" ],
+						"reset"=>"Annuler" 
+					],
 
 
 					"data"=>[
@@ -71,17 +96,17 @@ class Users extends BaseSQL{
 								"error"=>"Le mot de passe doit faire au minimum 6 caractères avec des minuscules, majuscules et chiffres"],
 
 							"pwdConfirm"=>["type"=>"password","placeholder"=>"Confirmation", "required"=>true, "class"=>"form-control", "id"=>"pwdConfirm", "confirm"=>"pwd", "error"=>"Les mots de passe ne correspondent pas"]
-
 					]
-
 				];
 	}
 
 	public function getLoginForm(){
+		$slug = Routing::getSlug("Users", "login");
+		$method = Routing::getRoute($slug)["m"];
 		return [
 					"config"=>[ 
-						"method"=>"POST", 
-						"action"=>"", 
+						"method"=>$method, 
+						"action"=>$action, 
 						"class"=>"", 
 						"id"=>"",
 						"submit"=>"Se connecter",
