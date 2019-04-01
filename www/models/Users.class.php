@@ -37,96 +37,103 @@ class Users extends BaseSQL{
 		$this->token = $token;
 	}
 
-	public function getRegisterForm() {
-		$slug = Routing::getSlug("Users", "save");
+	
+	public function getRegisterForm(){
+		$slug = Routing::getSlug("Users", "register");
+
+		$firstname = new InputField ([ 
+			"type"=>"text",
+			"placeholder"=>"Votre Prénom", 
+			"required"=>true, 
+			"id"=>"firstname",
+			"minlength"=>2,
+			"maxlength"=>50,
+			"error" => "Firstname invalide"
+		]);
+
+		$lastname = new InputField ([
+			"type"=>"text",
+			"placeholder"=>"Votre nom",
+			"required"=>true,
+			"id"=>"lastname",
+			"minlength"=>2,
+			"maxlength"=>100,
+			"error" => "Lastname invalide"
+		]);
+
+		$email = new InputField ([
+			"type"=>"email",
+			"placeholder"=>"Votre email",
+			"required"=>true,
+			"id"=>"email",
+			"maxlength"=>250,
+			"error" => "Email invalide"
+		]);
+
+		$emailConfirm = new Field([
+			"type"=>"text",
+			"placeholder"=>"Confirmation", 
+			"required"=>true, 
+			"id"=>"emailConfirm", 
+			"confirm"=>"email", 
+			"error"=>"Les emails ne correspondent pas"
+		]);
+
+		$psw = new InputField ([
+			"type"=>"password",
+			"placeholder"=>"Votre mot de passe",
+			"required"=>true, 
+			"id"=>"pwd",
+			"minlength"=>6,
+			"error"=>"Le mot de passe doit contenir au moins une lettre minscule, majuscule et un nombre"
+		]);
+
+		$pswConfirm = new Field([
+			"type"=>"password",
+			"placeholder"=>"Confirmation", 
+			"required"=>true, 
+			"id"=>"pwdConfirm", 
+			"confirm"=>"pwd", 
+			"error"=>"Les mots de passe ne correspondent pas"
+		]);
+
 		$form = new Form($slug);
-		$data = [
-			"firstname" => [
-				
-			],
-			"lastname" => [
-
-			],
-			"email" => [
-
-			],
-			"pwd" => [
-
-			],
-			"pwdConfirm" => [
-
-			]
-		];
-	}
-
-	public function getRegister(){
-		$slug = Routing::getSlug("Users", "save");
-		$method = Routing::getRoute($slug)["m"];
-		return [
-					"config"=>[ 
-						"method"=>$method, 
-						"action"=>$slug,
-						"class"=>"", 
-						"id"=>"",
-						"submit"=>"S'inscrire",
-						"reset"=>"Annuler" 
-					],
-
-
-					"data"=>[
-
-							"firstname"=>[
-								"type"=>"text",
-								"placeholder"=>"Votre Prénom", 
-								"required"=>true, 
-								"class"=>"form-control", 
-								"id"=>"firstname",
-								"minlength"=>2,
-								"maxlength"=>50,
-								"error"=>"Le prénom doit faire entre 2 et 50 caractères"
-							],
-
-							"lastname"=>["type"=>"text","placeholder"=>"Votre nom", "required"=>true, "class"=>"form-control", "id"=>"lastname","minlength"=>2,"maxlength"=>100,
-								"error"=>"Le nom doit faire entre 2 et 100 caractères"],
-
-							"email"=>["type"=>"email","placeholder"=>"Votre email", "required"=>true, "class"=>"form-control", "id"=>"email","maxlength"=>250,
-								"error"=>"L'email n'est pas valide ou il dépasse les 250 caractères"],
-
-							"pwd"=>["type"=>"password","placeholder"=>"Votre mot de passe", "required"=>true, "class"=>"form-control", "id"=>"pwd","minlength"=>6,
-								"error"=>"Le mot de passe doit faire au minimum 6 caractères avec des minuscules, majuscules et chiffres"],
-
-							"pwdConfirm"=>["type"=>"password","placeholder"=>"Confirmation", "required"=>true, "class"=>"form-control", "id"=>"pwdConfirm", "confirm"=>"pwd", "error"=>"Les mots de passe ne correspondent pas"]
-					]
-				];
+		$fields = [$firstname, $lastname, $email, $emailConfirm, $psw, $pswConfirm];
+		foreach($fields as $field) {
+			$form->addField($field);
+		}
+		return $form;
 	}
 
 	public function getLoginForm(){
 		$slug = Routing::getSlug("Users", "login");
-		$method = Routing::getRoute($slug)["m"];
-		return [
-					"config"=>[ 
-						"method"=>$method, 
-						"action"=>$action, 
-						"class"=>"", 
-						"id"=>"",
-						"submit"=>"Se connecter",
-						"reset"=>"Annuler" ],
+		
+		$email = new InputField ([
+			"type"=>"email",
+			"placeholder"=>"Votre email", 
+			"required"=>true, 
+			"class"=>"form-control", 
+			"id"=>"email",
+			"error"=>"L'email n'est pas valide"
+		]);
 
+		$pwd = new InputField ([
+			"type"=>"password",
+			"placeholder"=>"Votre mot de passe", 
+			"required"=>true, 
+			"class"=>"form-control", 
+			"id"=>"pwd",
+			"error"=>"Veuillez préciser un mot de passe"
+		]);
+		
+		$form = new Form($slug);
+		$fields = [$email, $pwd];
 
-					"data"=>[
-
-							"email"=>["type"=>"email","placeholder"=>"Votre email", "required"=>true, "class"=>"form-control", "id"=>"email",
-								"error"=>"L'email n'est pas valide"],
-
-							"pwd"=>["type"=>"password","placeholder"=>"Votre mot de passe", "required"=>true, "class"=>"form-control", "id"=>"pwd",
-								"error"=>"Veuillez préciser un mot de passe"]
-
-					]
-
-				];
+		foreach ($fields as $field) {
+			$form->addFields($field);
+		}
+		return $form;
 	}
-
-
 }
 
 

@@ -38,6 +38,7 @@ class BaseSQL{
 		$query->execute( $where );
 		return $query->fetch();
 	}
+	
 	public function save(){
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0 [pdo] => PDO Object ( ) [table] => Users )
 		$dataObject = get_object_vars($this);

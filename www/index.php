@@ -3,15 +3,20 @@
 require "conf.inc.php";
 
 function myAutoloader($class){
+	echo '<br>'. $class;
 	$classPath = "core/".$class.".class.php";
 	$classModel = "models/".$class.".class.php";
-	if(file_exists($classPath)){
+	$traitPath = "trait/".$class.".trait.php";
+	if(file_exists($classPath)) {
 		include $classPath;
-	}else if(file_exists($classModel)){
+	}
+	else if(file_exists($classModel)) {
 		include $classModel;
 	}
+	else if(file_exists($traitPath)) {
+		include $traitPath;
+	}
 }
-
 //Cela veut dire que si j'essaye d'instancier une class qui n'existe pas
 //La fonction myAutoloader va être lancée
 spl_autoload_register("myAutoloader");

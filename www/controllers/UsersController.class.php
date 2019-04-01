@@ -5,48 +5,24 @@ class UsersController{
 	public function defaultAction(){
 		echo "users default";
 	}
-	
-	public function addAction(){
-		$user = new Users();
-		$form = $user->getRegisterForm();
 
-	
-		$v = new View("addUser", "front");
-		$v->assign("form", $form);
-		
-		
-	}
-
-	public function saveAction(){
+	public function registerAction(){
 
 		$user = new Users();
 		$form = $user->getRegisterForm();
-
-		//Est ce qu'il y a des données dans POST ou GET($form["config"]["method"])
-		$method = strtoupper($form["config"]["method"]);
-		$data = $GLOBALS["_".$method];
-
+		$data = $GLOBALS[$form->getMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			
-			$validator = new Validator($form,$data);
-			$form["errors"] = $validator->errors;
-
-			if(empty($errors)){
-				$user->setFirstname($data["firstname"]);	
-				$user->setLastname($data["lastname"]);
-				$user->setEmail($data["email"]);
-				$user->setPwd($data["pwd"]);
+			$form->addValidator($data);
+			if(!$form->isValid()){
+				$errors = $form->getErrors();
+			}
+			else {
+				$user->supply($data);
 				$user->save();
 			}
-
-			
-
 		}
-
 		$v = new View("addUser", "front");
-		$v->assign("form", $form);
-		
-		
+		$v->assign("form", new FormBuilder($form));
 	}
 
 
@@ -54,31 +30,39 @@ class UsersController{
 
 		$user = new Users();
 		$form = $user->getLoginForm();
-
-		$method = strtoupper($form["config"]["method"]);
-		$data = $GLOBALS["_".$method];
+		$data = $GLOBALS[$form->getMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			
-			$validator = new Validator($form,$data);
-			$form["errors"] = $validator->errors;
-
-			if(empty($errors)){
-				$token = md5(substr(uniqid().time(), 4, 10)."");
-				
-
+			$form->addValidator($data);
+			if(!$form->isValid()) {
+				$errors = $form->getErrors();
 			}
+			else {
+				$queryResult = $user->getOneBy($data);
+				if($queryResult) {
+					$token = password_hash(substr(uniqid().time(), 4, 10)."");
 
+					session_name();
+					session_start();
+					$lastSessionToken  = $_SESSION[$user->getFirstname()]->getToken();
+					if($lastSessionToken == $queryResult['token']) {
+						$user->setToken($token);
+						$user->save();
+						$_SESSION[$user->getFirstname()] = $user;
+					}
+					else {
+						die('Token exchange failed');
+					}
+				}
+			}
 		}
-	
 		$v = new View("loginUser", "front");
-			$v->assign("form", $form);
-		
+		$v->assign("form", new FormBuilder($form));
 	}
 
 
 	public function forgetPasswordAction(){
 	
 		$v = new View("forgetPasswordUser", "front");
-		
+        $v->assign("form", new FormBuilder($form));
 	}
 }
