@@ -52,7 +52,8 @@ class BaseSQL{
 			implode(",:", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
 			$query->execute( $dataChild );
-		}else{
+		}
+		else {
 			//UPDATE
 			$sqlUpdate = [];
 			foreach ($dataChild as $key => $value) {

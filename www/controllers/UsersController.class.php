@@ -17,8 +17,12 @@ class UsersController{
 				$errors = $form->getErrors();
 			}
 			else {
+				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname());
+				$user->setToken($token);
 				$user->supply($data);
 				$user->save();
+				session_start();
+				$_SESSION['user'] = $user;
 			}
 		}
 		$v = new View("addUser", "front");
@@ -26,7 +30,7 @@ class UsersController{
 	}
 
 
-	public function loginAction(){
+	public function loginAction() {
 
 		$user = new Users();
 		$form = $user->getLoginForm();
@@ -39,15 +43,15 @@ class UsersController{
 			else {
 				$queryResult = $user->getOneBy($data);
 				if($queryResult) {
-					$token = password_hash(substr(uniqid().time(), 4, 10)."");
-
-					session_name();
 					session_start();
-					$lastSessionToken  = $_SESSION[$user->getFirstname()]->getToken();
+					$lastSessionToken  = $_SESSION['user']->getToken();
 					if($lastSessionToken == $queryResult['token']) {
+						$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname());
 						$user->setToken($token);
+						$user->supply($data);
 						$user->save();
-						$_SESSION[$user->getFirstname()] = $user;
+						$_SESSION['user'] = $user;
+						$_SESSION['loggedin'] = true;
 					}
 					else {
 						die('Token exchange failed');

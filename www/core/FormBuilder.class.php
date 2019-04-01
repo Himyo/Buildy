@@ -54,7 +54,7 @@ class FormBuilder {
             placeholder='.$field->getPlaceholder().'
             id='.$field->getId().'
             class='.$field->getClass().'
-            value='.$this->data[$field->getId()]??"".'>';
+            value='.$this->data[$field->getId()]??''.'>';
 
             echo '<label for="'.$field->getId().'">'.$field->getPlaceholder().'</label>';
         }
