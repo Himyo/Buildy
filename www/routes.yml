@@ -16,12 +16,7 @@
 "/ajouter_un_utilisateur":
   controller: Users
   action: add
-  method: "_GET" 
-
-"/enregistrer_un_utilisateur":
-  controller: Users
-  action: register
-  method: "_POST"
+  method: "_POST" 
 
 "/connexion":
   controller: Users
@@ -43,13 +38,7 @@
 "/add_users":
   controller: Users
   action: add
-  method: "_GET" 
-
-
-"/register":
-  controller: Users
-  action: register 
-  method: "_POST"
+  method: "_POST" 
 
 "/connection":
   controller: Users

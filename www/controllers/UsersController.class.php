@@ -12,7 +12,6 @@ class UsersController{
 		$form = $user->getRegisterForm();
 		$data = $GLOBALS[$form->getMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
-			var_dump($data);
 			$form->addValidator($data);
 			if(!$form->isValid()){
 				$errors = $form->getErrors();
