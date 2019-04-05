@@ -3,8 +3,8 @@
 require "conf.inc.php";
 
 function myAutoloader($class){
-	echo '<br>'. $class;
 	$classPath = "core/".$class.".class.php";
+	$controllerPath = "controllers/".$class.".class.php";
 	$classModel = "models/".$class.".class.php";
 	$traitPath = "trait/".$class.".trait.php";
 	if(file_exists($classPath)) {
@@ -15,6 +15,12 @@ function myAutoloader($class){
 	}
 	else if(file_exists($traitPath)) {
 		include $traitPath;
+	}
+	else if(file_exists($controllerPath)) {
+		include $controllerPath;
+	}
+	else {
+		echo '<br> Failed to load '.$class;
 	}
 }
 //Cela veut dire que si j'essaye d'instancier une class qui n'existe pas
@@ -39,24 +45,24 @@ extract($routes);
 
 
 //vérifier l'existence du fichier et de la class controller
-if( file_exists($cPath) ){
-	include $cPath;
-	if( class_exists($c)){
+if( file_exists($controllerPath) ){
+	include $controllerPath;
+	if( class_exists($controller)){
 		//instancier dynamiquement le controller
-		$cObject = new $c();
+		$controllerObject = new $controller();
 		//vérifier que la méthode (l'action) existe
-		if( method_exists($cObject, $a) ){
+		if( method_exists($controllerObject, $action) ){
 			//appel dynamique de la méthode	
-			$cObject->$a();
+			$controllerObject->$action();
 		}else{
-			die("La methode ".$a." n'existe pas");
+			die("La methode ".$action." n'existe pas ".$controller);
 		}
 		
 	}else{
-		die("La class controller ".$c." n'existe pas");
+		die("La class controller ".$controller." n'existe pas");
 	}
 }else{
-	die("Le fichier controller ".$c." n'existe pas");
+	die("Le fichier controller ".$controller." n'existe pas");
 }
 
 

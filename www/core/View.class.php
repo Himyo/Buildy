@@ -1,9 +1,9 @@
 <?php
 class View{
 
-	private $v;
-	private $t;
-	private $data = [];
+	public $v;
+	public $t;
+	public $data = [];
 
 	public function __construct($v, $t="back"){
 		$this->setView($v);
@@ -42,7 +42,6 @@ class View{
 		}
 	}
 
-	//$this->data =["pseudo"=>"prof", "age"=>30, "city"=>"Paris"]
 	public function assign($key, $value){
 		$this->data[$key]=$value;
 	}
@@ -50,10 +49,8 @@ class View{
 
 	public function __destruct(){
 		extract($this->data);
-		//$this->data =["pseudo"=>"prof", "age"=>30, "city"=>"Paris"]
-		//$pseudo = "prof"
-		//$age = 30
-		//$city = "Paris"
+		$lala = ['ab'=>30];
+		extract($lala);
 		include $this->t;
 	}
 }

@@ -2,6 +2,8 @@
 //TODO make abstract class ?
 class Field {
 
+    use Supplier;
+    
     protected $id;
     protected $type;
     protected $placeholder;

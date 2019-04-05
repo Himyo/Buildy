@@ -39,7 +39,7 @@ class Users extends BaseSQL{
 
 	
 	public function getRegisterForm(){
-		$slug = Routing::getSlug("Users", "register");
+		$slug = Routing::getSlug("Users", "add");
 
 		$firstname = new InputField ([ 
 			"type"=>"text",
@@ -130,8 +130,25 @@ class Users extends BaseSQL{
 		$fields = [$email, $pwd];
 
 		foreach ($fields as $field) {
-			$form->addFields($field);
+			$form->addField($field);
 		}
+		return $form;
+	}
+
+	public function getForgetPasswordForm() {
+		$slug = Routing::getSlug("Users", "forgetPassword");
+
+		$email = new InputField ([
+			"type"=>"email",
+			"placeholder"=>"Votre email", 
+			"required"=>true, 
+			"class"=>"form-control", 
+			"id"=>"email",
+			"error"=>"L'email n'est pas valide"
+		]);
+
+		$form = new Form($slug);
+		$form->addField($email);
 		return $form;
 	}
 }

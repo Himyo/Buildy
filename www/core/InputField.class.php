@@ -1,6 +1,6 @@
 <?php
 
-class InputFields extends Field {
+class InputField extends Field {
     
 
     protected $minlength;

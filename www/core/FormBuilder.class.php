@@ -5,9 +5,8 @@ class FormBuilder {
     protected $form;
     protected $data;
 
-    public function __construct($slug) {
-        $this->setForm(new Form($slug));
-        $this->data = $data;
+    public function __construct($form) {
+        $this->setForm($form);
     }
     
     public function getForm() {
@@ -36,35 +35,34 @@ class FormBuilder {
     public function getConfig() {
         $action = $this->form->getAction();
         $method = $this->form->getMethod();
-        $class = $this->form->getClassName();
+        $class = $this->form->getClassname();
         $id = $this->form->getId();
-        echo "action=".$action;
-        echo "method=".$method;
-        echo "class=".$class;
-        echo "id=".$id;
+        return ' id="'.$id.'" action="'.$action.'" method="'.$method.'" class="'.$class.'" ';
     }
 
     public function getField() {
-        echo '<div class="form-group"><div class="form-label-group">';
+        $fieldsHtml = "";
         foreach($this->form->getFields() as $field) {
-            if($field->getType() === 'password') { unset($data[$field->getId()]); }
-            echo '<input 
-            type='.$field->getType().'
-            name='.$field->getName().'
-            placeholder='.$field->getPlaceholder().'
-            id='.$field->getId().'
-            class='.$field->getClass().'
-            value='.$this->data[$field->getId()]??''.'>';
-
-            echo '<label for="'.$field->getId().'">'.$field->getPlaceholder().'</label>';
+            if($field->getType() === 'password') { unset($this->data[$field->getId()]); }
+            $data = $this->data[$field->getPlaceholder()]??"";
+            $fieldsHtml .='
+                <input
+                type="'.$field->getType().'"
+                name="'.$field->getId().'"
+                placeholder="'.$field->getPlaceholder().'"
+                id="'.$field->getId().'"
+                class="'.$field->getClassname().'"
+                value="'.$data.'"><br>';
         }
-        echo '</div></div>'; 
-        echo '<input type="submit" class="btn btn-primary btn-block" value="'.$this->form->getSubmit().'">"';
+        $fieldsHtml .= '<input type="submit" class="btn btn-primary btn-block" value="Submit">';
+        return $fieldsHtml;
     }
 
     public function make() {
         $this->isValid();
-        $this->getConfig();
-        $this->getField();
+        echo '<form '
+        .$this->getConfig().'> '
+        .$this->getField().
+        '</form>';
     }
 }

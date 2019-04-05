@@ -8,7 +8,7 @@ class Form {
     protected $method;
     protected $action;
     protected $className = "class-form";
-    protected $submitText;
+    protected $submitText = "Confirm";
     protected $resetText;
     protected $validator = null;
     
@@ -16,8 +16,8 @@ class Form {
     protected $fields;
 
     public function __construct($slug) {
-        $method = Routing::getRoute($slug)["m"];
-        $this->setMethod($method);
+        $slugData = Routing::getRoute($slug);
+        $this->setMethod($slugData['method']);
         $this->setAction($slug);
     }
 
@@ -41,8 +41,7 @@ class Form {
 
     public function isValid() {
         if ($this->validator == null) {
-            //TODO: remove die
-            die("[FORM.CLASS] VALIDATOR MUST BE INITIALIZED");
+            return true;
         }
         return $this->validator->isValid();
     }
@@ -112,7 +111,7 @@ class Form {
     /**
      * Get the value of className
      */ 
-    public function getClassName()
+    public function getClassname()
     {
         return $this->className;
     }

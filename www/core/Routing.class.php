@@ -12,16 +12,18 @@ class Routing{
 			if(empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])){
 				die("Il y a une erreur dans le fichier routes.yml");
 			}
-			$c = ucfirst($routes[$slug]["controller"])."Controller";
-			$a = $routes[$slug]["action"]."Action";
-			$cPath = "controllers/".$c.".class.php";
+			$controller = ucfirst($routes[$slug]["controller"])."Controller";
+			$action = $routes[$slug]["action"]."Action";
+			$controllerPath = "controllers/".$controller.".class.php";
 			$method = $routes[$slug]["method"];
 		}else{
 			// TODO: Refacto
-			return ["c"=>null, "a"=>null,"cPath"=>null, "m"=>null];
+			echo "No routes found:";
+			var_dump($slug);
+			return ["controller"=>null, "action"=>null,"controllerPath"=>null, "method"=>null];
 		}
 
-		return ["c"=>$c, "a"=>$a,"cPath"=>$cPath, "m"=>$method];
+		return ["controller"=>$controller, "action"=>$action,"controllerPath"=>$controllerPath, "method"=>$method];
 	}
 
 
