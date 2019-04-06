@@ -5,10 +5,11 @@ class FormBuilder {
     protected $form;
     protected $data;
 
+    //TODO: Check the type of $form to be Form
     public function __construct($form) {
         $this->setForm($form);
     }
-    
+
     public function getForm() {
         return $this->form;
     }

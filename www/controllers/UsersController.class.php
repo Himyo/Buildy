@@ -18,7 +18,7 @@ class UsersController{
 			}
 			else {
 				//TODO: Real user registration 
-				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname());
+				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
 				$user->setToken($token);
 				$user->supply($data);
 				$user->save();
@@ -49,7 +49,7 @@ class UsersController{
 					session_start();
 					$lastSessionToken  = $_SESSION['user']->getToken();
 					if($lastSessionToken == $queryResult['token']) {
-						$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname());
+						$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
 						$user->setToken($token);
 						$user->supply($data);
 						$user->save();
@@ -70,9 +70,9 @@ class UsersController{
 	public function forgetPasswordAction(){
 		$user = new Users();
 		$form = $user->getForgetPasswordForm();
-		$data = $GLOBAL[$form->getMethod()];
+		$data = $GLOBALS[$form->getMethod()];
 		if($_SERVER['REQUEST_METHOD'] == $form->getMethod() && !empty($data)) {
-			//TODO: Mailling
+			//TODO: Mailing
 			var_dump($data);
 		}
 		$v = new View("forgetPasswordUser", "front");
