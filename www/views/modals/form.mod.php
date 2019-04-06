@@ -1,6 +1,6 @@
 
 <?php 
-	$data = ($form->getMethod()=="_POST")?$_POST:$_GET; 
+	$data = ($form->getMethod()=="post")?$_POST:$_GET;
 	echo $form->getForm()->getMethod();
 	$form->setData($data);
 ?>

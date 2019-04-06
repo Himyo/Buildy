@@ -6,12 +6,13 @@ class UsersController{
 		echo "users default";
 	}
 
-	public function addAction(){
+	public function saveAction(){
 
 		$user = new Users();
 		$form = $user->getRegisterForm();
-		$data = $GLOBALS[$form->getMethod()];
-		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
+		$method = "_".strtoupper($form->getMethod());
+		$data = $GLOBALS[$method];
+		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
 			$form->addValidator($data);
 			if(!$form->isValid()){
 				$errors = $form->getErrors();
@@ -27,7 +28,7 @@ class UsersController{
 			}
 		}
 		//TODO: Take decision for action settings
-		$v = new View("addUser", "front");
+		$v = new View("saveUser", "front");
 		$v->assign("form", new FormBuilder($form));
 	}
 
@@ -36,8 +37,9 @@ class UsersController{
 
 		$user = new Users();
 		$form = $user->getLoginForm();
-		$data = $GLOBALS[$form->getMethod()];
-		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
+        $method = "_".strtoupper($form->getMethod());
+        $data = $GLOBALS[$method];
+        if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
 			$form->addValidator($data);
 			if(!$form->isValid()) {
 				$errors = $form->getErrors();
@@ -70,8 +72,9 @@ class UsersController{
 	public function forgetPasswordAction(){
 		$user = new Users();
 		$form = $user->getForgetPasswordForm();
-		$data = $GLOBALS[$form->getMethod()];
-		if($_SERVER['REQUEST_METHOD'] == $form->getMethod() && !empty($data)) {
+        $method = "_".strtoupper($form->getMethod());
+        $data = $GLOBALS[$method];
+        if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
 			//TODO: Mailing
 			var_dump($data);
 		}

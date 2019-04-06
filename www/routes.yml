@@ -1,51 +1,60 @@
 "/":
   controller: Pages
   action: default
-  method: "_GET" 
+  method: "get"
 
 "/test":
   controller: Pages
   action: test
-  method: "_GET" 
+  method: "get"
 
 "/liste_des_utilisateurs":
   controller: Users
   action: default
-  method: "_GET" 
+  method: "get"
 
 "/ajouter_un_utilisateur":
   controller: Users
   action: add
-  method: "_POST" 
+  method: "post"
+
+"/enregister_un_utilisateur":
+  controller: Users
+  action: save
+  method: "post"
 
 "/connexion":
   controller: Users
   action: login
-  method: "_POST"
+  method: "post"
 
 "/mot_de_passe_oublie":
   controller: Users
   action: forgetPassword
-  method: "_GET" 
+  method: "get"
 
 # ######################################## EN ######################################
 
 "/users":
   controller: Users
   action: default
-  method: "_GET" 
+  method: "get"
 
 "/add_users":
   controller: Users
   action: add
-  method: "_POST" 
+  method: "post"
+"/register":
+  controller: Users
+  action: save
+  method: "post"
 
 "/connection":
   controller: Users
   action: login
-  method: "_POST"
+  method: "post"
 
 "/forget_password":
   controller: Users
   action: forgetPassword
-  method: "_GET"
+  method: "get"

@@ -1,6 +1,7 @@
 <?php
 class Users extends BaseSQL{
 
+    use Supplier;
 	public $id = null;
 	public $firstname;
 	public $lastname;
@@ -21,6 +22,12 @@ class Users extends BaseSQL{
 	public function setLastname($lastname){
 		$this->lastname = strtoupper(trim($lastname));
 	}
+	public function getFirstname() {
+	    return $this->firstname;
+    }
+    public function getLastname() {
+	    return $this->lastname;
+    }
 	public function setEmail($email){
 		$this->email = strtolower(trim($email));
 	}
@@ -39,7 +46,7 @@ class Users extends BaseSQL{
 
 	
 	public function getRegisterForm(){
-		$slug = Routing::getSlug("Users", "add");
+		$slug = Routing::getSlug("Users", "save");
 
 		$firstname = new InputField ([ 
 			"type"=>"text",
