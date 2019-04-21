@@ -38,20 +38,23 @@ class BaseSQL{
 		$query->execute( $where );
 		return $query->fetch();
 	}
-	
+
 	public function save(){
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0 [pdo] => PDO Object ( ) [table] => Users )
 		$dataObject = get_object_vars($this);
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0)
 		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
+
 		if( is_null($dataChild["id"])){
 			//INSERT
 			//array_keys($dataChild) -> [id, firstname, lastname, email]
+            unset($dataChild["id"]) ;
 			$sql ="INSERT INTO ".$this->table." ( ". 
 			implode(",", array_keys($dataChild) ) .") VALUES ( :". 
 			implode(",:", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
-			$query->execute( $dataChild );
+			$queryStatus = $query->execute( $dataChild );
+			return $queryStatus;
 		}
 		else {
 			//UPDATE
@@ -62,7 +65,8 @@ class BaseSQL{
 			}
 			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
 			$query = $this->pdo->prepare($sql);
-			$query->execute( $dataChild );
+			$queryStatus = $query->execute( $dataChild );
+			return $queryStatus;
 		}
 	}
 }

@@ -8,6 +8,7 @@ class Field {
     protected $type;
     protected $placeholder;
     protected $classname = 'class-form-fields';
+    protected $confirm;
     protected $required;
     protected $error;
     protected $value;
@@ -51,6 +52,14 @@ class Field {
 
     public function getValue() {
         return $this->value;
+    }
+
+    public function getConfirm() {
+        return $this->confirm;
+    }
+
+    public function setConfirm($confirm) {
+        $this->confirm = $confirm;
     }
 
     public function setValue($value) {

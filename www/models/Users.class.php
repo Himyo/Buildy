@@ -2,14 +2,14 @@
 class Users extends BaseSQL{
 
     use Supplier;
-	public $id = null;
+	public $id;
 	public $firstname;
 	public $lastname;
 	public $email;
-	public $pwd;
+	public $password;
 	public $role=1;
 	public $status=0;
-	public $token;
+	public $token = "-1";
 
 	public function __construct(){
 		parent::__construct();
@@ -31,8 +31,8 @@ class Users extends BaseSQL{
 	public function setEmail($email){
 		$this->email = strtolower(trim($email));
 	}
-	public function setPwd($pwd){
-		$this->pwd = password_hash($pwd, PASSWORD_DEFAULT);
+	public function setPassword($password){
+		$this->password = password_hash($password, PASSWORD_DEFAULT);
 	}
 	public function setRole($role){
 		$this->role = $role;
@@ -43,9 +43,13 @@ class Users extends BaseSQL{
 	public function setToken($token){
 		$this->token = $token;
 	}
+	public function setId($id)
+    {
+        $this->setId($id);
+    }
 
-	
-	public function getRegisterForm(){
+
+    public function getRegisterForm(){
 		$slug = Routing::getSlug("Users", "save");
 
 		$firstname = new InputField ([ 
@@ -90,7 +94,7 @@ class Users extends BaseSQL{
 			"type"=>"password",
 			"placeholder"=>"Votre mot de passe",
 			"required"=>true, 
-			"id"=>"pwd",
+			"id"=>"password",
 			"minlength"=>6,
 			"error"=>"Le mot de passe doit contenir au moins une lettre minscule, majuscule et un nombre"
 		]);
@@ -99,13 +103,14 @@ class Users extends BaseSQL{
 			"type"=>"password",
 			"placeholder"=>"Confirmation", 
 			"required"=>true, 
-			"id"=>"pwdConfirm", 
-			"confirm"=>"pwd", 
+			"id"=>"passwordConfirm",
+			"confirm"=>"password",
 			"error"=>"Les mots de passe ne correspondent pas"
 		]);
 
 		$form = new Form($slug);
-		$fields = [$firstname, $lastname, $email, $emailConfirm, $psw, $pswConfirm];
+//		$fields = [$firstname, $lastname, $email, $emailConfirm, $psw, $pswConfirm];
+        $fields = [$firstname, $lastname, $email, $emailConfirm, $psw];
 		foreach($fields as $field) {
 			$form->addField($field);
 		}
@@ -124,17 +129,17 @@ class Users extends BaseSQL{
 			"error"=>"L'email n'est pas valide"
 		]);
 
-		$pwd = new InputField ([
+		$password = new InputField ([
 			"type"=>"password",
 			"placeholder"=>"Votre mot de passe", 
 			"required"=>true, 
 			"class"=>"form-control", 
-			"id"=>"pwd",
+			"id"=>"password",
 			"error"=>"Veuillez préciser un mot de passe"
 		]);
 		
 		$form = new Form($slug);
-		$fields = [$email, $pwd];
+		$fields = [$email, $password];
 
 		foreach ($fields as $field) {
 			$form->addField($field);

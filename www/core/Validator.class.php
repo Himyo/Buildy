@@ -14,33 +14,33 @@ class Validator{
 			$fieldInfo = $field->extract();
 			//Isset
 			if( !isset($data[$name])){
-				die("Tentative : faille XSS");
+				die("Tentative : faille XSS ".$name);
 			} 
 			else {
 				//!empty if required - method
 				if( ($fieldInfo["required"]??false) && !self::notEmpty( $data[$name] ) ){
-					$this->errors[]=$field["error"];
+                    $this->errors[]=$field->getError();
 				}
 				//minlength  - method
-				if(isset($fieldInfo["minlength"]) && !self::minLength($data[$name], $info["minlength"])){
-					$this->errors[]=$field["error"];
+				if(isset($fieldInfo["minlength"]) && !self::minLength($data[$name], $field->getMinLength())){
+                    $this->errors[]=$field->getError();
 				}
 				//maxlength - method
-				if(isset($fieldInfo["maxlength"]) && !self::maxLength($data[$name], $info["maxlength"])){
-					$this->errors[]=$field["error"];
+				if(isset($fieldInfo["maxlength"]) && !self::maxLength($data[$name], $field->getMaxLength())){
+					$this->errors[]=$field->getError();
 				}
 				//email - method
 				if($fieldInfo["type"]=="email" && !self::checkEmail($data[$name])){
-					$this->errors[]=$field["error"];
+                    $this->errors[]=$field->getError();
 				}
 				//confirm 
 				//TODO: Do the field check in AJAX
-				if(isset($fieldInfo["confirm"]) && $data[$name] != $data[$info["confirm"]]){
-					$this->errors[]=$field["error"];
+				if(isset($fieldInfo["confirm"]) && ($data[$name] != $data[$field->getConfirm()])){
+                    $this->errors[]=$field->getError();
 				}
 				//password : maj min et chiffres - method
 				else if($fieldInfo["type"]=="password" && !self::checkPassword($data[$name])){
-					$this->errors[]=$fieldInfo["error"];
+                    $this->errors[]=$field->getError();
 				}
 			}
 		}
