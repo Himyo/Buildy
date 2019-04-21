@@ -6,34 +6,27 @@ class UsersController{
 		echo "users default";
 	}
 
-	public function saveAction(){
-
+	public function saveAction($template = "front"){
 		$user = new Users();
 		$form = $user->getRegisterForm();
-		$method = "_".strtoupper($form->getMethod());
-		$data = $GLOBALS[$method];
+		$method = strtoupper($form->getMethod());
+		$data = $GLOBALS['_'.$method];
 		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
 			$form->addValidator($data);
-			if(!$form->isValid()){
-				$errors = $form->getErrors();
-			}
-			else {
-				//TODO: Real user registration 
-				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
-				$user->setToken($token);
-				$user->supply($data);
-				$user->save();
-				session_start();
-				$_SESSION['user'] = $user;
+			if($form->isValid()) {
+				//TODO: Real user registration
+                $user->supply($data);
+                $user->save();
+
 			}
 		}
 		//TODO: Take decision for action settings
-		$v = new View("saveUser", "front");
+		$v = new View("saveUser", $template);
 		$v->assign("form", new FormBuilder($form));
 	}
 
 
-	public function loginAction() {
+	public function loginAction($template = "front") {
 
 		$user = new Users();
 		$form = $user->getLoginForm();
@@ -41,31 +34,29 @@ class UsersController{
         $data = $GLOBALS[$method];
         if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
 			$form->addValidator($data);
-			if(!$form->isValid()) {
-				$errors = $form->getErrors();
-			}
-			else {
-				//TODO: Real user connection 
+			if($form->isValid()) {
+				//TODO: Real user connection
 				$queryResult = $user->getOneBy($data);
 				if($queryResult) {
-					session_start();
-					$lastSessionToken  = $_SESSION['user']->getToken();
-					if($lastSessionToken == $queryResult['token']) {
-						$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
-						$user->setToken($token);
-						$user->supply($data);
-						$user->save();
-						$_SESSION['user'] = $user;
-						$_SESSION['loggedin'] = true;
-					}
-					else {
-						die('Token exchange failed');
-					}
-				}
-			}
+//					$lastSessionToken  = $_SESSION['user']->getToken();
+//					if($lastSessionToken == $queryResult['token']) {
+                    session_start();
+                    $token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
+                    $user->setToken($token);
+                    $user->supply($data);
+                    $user->save();
+                    $_SESSION['user'] = $user;
+                    $_SESSION['loggedin'] = true;
+                    $v = new View("homepage", $template);
+                    $v->assign("user", $user);
+                }
+                else {
+                    die('Token exchange failed');
+                }
+            }
 		}
-		$v = new View("loginUser", "front");
-		$v->assign("form", new FormBuilder($form));
+        $v = new View("loginUsers", "front");
+        $v->assign("form", new FormBuilder($form));
 	}
 
 
@@ -81,4 +72,7 @@ class UsersController{
 		$v = new View("forgetPasswordUser", "front");
         $v->assign("form", new FormBuilder($form));
 	}
+
+	public function getDatabaseAction() {
+    }
 }

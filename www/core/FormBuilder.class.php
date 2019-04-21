@@ -5,7 +5,7 @@ class FormBuilder {
     protected $form;
     protected $data;
 
-    //TODO: Check the type of $form to be Form
+    //TODO: Check the type of $form to be Form.class
     public function __construct($form) {
         $this->setForm($form);
     }
@@ -61,8 +61,7 @@ class FormBuilder {
 
     public function make() {
         $this->isValid();
-        echo '<form '
-        .$this->getConfig().'> '
+        echo '<form '.$this->getConfig().'> '
         .$this->getField().
         '</form>';
     }

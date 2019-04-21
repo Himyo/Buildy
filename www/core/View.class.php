@@ -49,8 +49,6 @@ class View{
 
 	public function __destruct(){
 		extract($this->data);
-		$lala = ['ab'=>30];
-		extract($lala);
 		include $this->t;
 	}
 }

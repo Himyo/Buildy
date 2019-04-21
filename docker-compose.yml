@@ -11,27 +11,35 @@ services:
      - ./server/apache2.conf:/etc/apache2/apache2.conf
      - ./server/php.ini:/usr/local/etc/php/php.ini
     depends_on:
-     - database
+     - buildydb
 
-  database:
-    build: ./config/db
+  buildydb:
+    image: mariadb:10.3
     container_name: buildy-db
     ports :
       - "3306:3306"
-    env_file:
-    - ./config/env
     volumes:
       - ./db_data:/var/lib/mysql
+      - ./config/db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pabuildypa
+      - MYSQL_DATABASE=Buildy
+      - MYSQL_USER=buildy
+      - MYSQL_PASSWORD=buildy
     restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: buildy-admin
     depends_on:
-      - database
+      - buildydb
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
         - PMA_ARBITRARY=1
+        - MYSQL_ROOT_PASSWORD=pabuildypa
+        - MYSQL_DATABASE=Buildy
+        - MYSQL_USER=buildy
+        - MYSQL_PASSWORD=buildy
 
       
