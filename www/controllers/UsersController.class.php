@@ -5,80 +5,74 @@ class UsersController{
 	public function defaultAction(){
 		echo "users default";
 	}
-	
-	public function addAction(){
+
+	public function saveAction($template = "front"){
 		$user = new Users();
 		$form = $user->getRegisterForm();
-
-	
-		$v = new View("addUser", "front");
-		$v->assign("form", $form);
-		
-		
-	}
-
-	public function saveAction(){
-
-		$user = new Users();
-		$form = $user->getRegisterForm();
-
-		//Est ce qu'il y a des données dans POST ou GET($form["config"]["method"])
-		$method = strtoupper($form["config"]["method"]);
-		$data = $GLOBALS["_".$method];
-
+		$method = strtoupper($form->getMethod());
+		$data = $GLOBALS['_'.$method];
 		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			
-			$validator = new Validator($form,$data);
-			$form["errors"] = $validator->errors;
+			$form->addValidator($data);
+			if($form->isValid()) {
+				//TODO: Real user registration
+                $user->supply($data);
+                $user->save();
 
-			if(empty($errors)){
-				$user->setFirstname($data["firstname"]);	
-				$user->setLastname($data["lastname"]);
-				$user->setEmail($data["email"]);
-				$user->setPwd($data["pwd"]);
-				$user->save();
 			}
-
-			
-
 		}
-
-		$v = new View("addUser", "front");
-		$v->assign("form", $form);
-		
-		
+		//TODO: Take decision for action settings
+		$v = new View("saveUser", $template);
+		$v->assign("form", new FormBuilder($form));
 	}
 
 
-	public function loginAction(){
+	public function loginAction($template = "front") {
 
 		$user = new Users();
 		$form = $user->getLoginForm();
-
-		$method = strtoupper($form["config"]["method"]);
-		$data = $GLOBALS["_".$method];
-		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			
-			$validator = new Validator($form,$data);
-			$form["errors"] = $validator->errors;
-
-			if(empty($errors)){
-				$token = md5(substr(uniqid().time(), 4, 10)."");
-				
-
-			}
-
+        $method = "_".strtoupper($form->getMethod());
+        $data = $GLOBALS[$method];
+        if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
+			$form->addValidator($data);
+			if($form->isValid()) {
+				//TODO: Real user connection
+				$queryResult = $user->getOneBy($data);
+				if($queryResult) {
+//					$lastSessionToken  = $_SESSION['user']->getToken();
+//					if($lastSessionToken == $queryResult['token']) {
+                    session_start();
+                    $token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
+                    $user->setToken($token);
+                    $user->supply($data);
+                    $user->save();
+                    $_SESSION['user'] = $user;
+                    $_SESSION['loggedin'] = true;
+                    $v = new View("homepage", $template);
+                    $v->assign("user", $user);
+                }
+                else {
+                    die('Token exchange failed');
+                }
+            }
 		}
-	
-		$v = new View("loginUser", "front");
-			$v->assign("form", $form);
-		
+        $v = new View("loginUsers", "front");
+        $v->assign("form", new FormBuilder($form));
 	}
 
 
 	public function forgetPasswordAction(){
-	
+		$user = new Users();
+		$form = $user->getForgetPasswordForm();
+        $method = "_".strtoupper($form->getMethod());
+        $data = $GLOBALS[$method];
+        if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
+			//TODO: Mailing
+			var_dump($data);
+		}
 		$v = new View("forgetPasswordUser", "front");
-		
+        $v->assign("form", new FormBuilder($form));
 	}
+
+	public function getDatabaseAction() {
+    }
 }

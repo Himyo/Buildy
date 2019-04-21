@@ -1,11 +1,15 @@
 <?php
 
-class InputFields extends Field {
+class InputField extends Field {
     
 
     protected $minLength;
     protected $maxLength;
 
+    public function __construct($data = []) {
+        parent::__construct($data);
+    }
+    
     public function make() {
 
         $form = "";
@@ -14,7 +18,7 @@ class InputFields extends Field {
             '".$this->name."value='".$this->value."' ";
         
         if($this->maxLength >= $this->minLength +1){
-            $form .="maxlength='".$this->maxlength."' ";
+            $form .="maxlength='".$this->maxLength."' ";
         }
         if($this->minLength > 0){
             $form .="minlength='".$this->minLength."' ";
@@ -24,17 +28,17 @@ class InputFields extends Field {
     }
 
     public function setMinLength($x) {
-        $this->minlength = $x;
+        $this->minLength = $x;
     }
     public function setMaxLength($x) {
-        $this->maxlength = $x;
+        $this->maxLength = $x;
     }
 
     public function getMaxLength() {
-        return $this->maxlength;
+        return $this->maxLength;
     }
 
     public function getMinLength() {
-        return $this->minlength;
+        return $this->minLength;
     }
 }

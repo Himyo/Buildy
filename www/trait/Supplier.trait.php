@@ -7,6 +7,7 @@ trait Supplier {
             return;
         }
         //TODO test if work with low chara variable
+        //TODO refacto to cleaner method
         $methods = array_flip(get_class_methods(get_class($this)));
         foreach($data as $name => $value) {
             if(property_exists($this, $name)) {
@@ -21,13 +22,6 @@ trait Supplier {
 
 
     public function extract() {
-        $array = [];
-        $methods = get_class_methods(get_class($this));
-        foreach($methods as $method) {
-            if(substr($method, 0, 3) == "get") {
-                $array[lcfirst(substr($method, 3))] = $this->$method();
-            }
-        }
-        return $array;
+        return get_object_vars($this);
     }
 }

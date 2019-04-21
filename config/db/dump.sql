@@ -3,9 +3,6 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
 -- Schema buildy
@@ -21,7 +18,7 @@ USE `buildy` ;
 -- Table `buildy`.`Photo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Photo` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `path` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -32,11 +29,15 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Users` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `lastname` VARCHAR(45) NULL,
   `firstname` VARCHAR(45) NULL,
-  `login` VARCHAR(45) NULL,
+  `owner` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
   `password` VARCHAR(60) NULL,
+  `status` INT NULL,
+  `role` INT NULL,
+  `token` VARCHAR(60) NULL,
   `photo_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_members_photo1_idx` (`photo_id` ASC),
@@ -52,7 +53,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Games`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Games` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `created_at` VARCHAR(45) NULL,
   `updated_at` VARCHAR(45) NULL,
@@ -64,7 +65,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Releases`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Releases` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `games_id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `created_at` TIMESTAMP NULL,
@@ -82,7 +83,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Cards`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Cards` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
   `releases_id` INT NOT NULL,
@@ -114,7 +115,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Decks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Decks` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `created_at` TIMESTAMP NULL,
   `updated_at` TIMESTAMP NULL,
@@ -189,7 +190,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Tournements`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Tournements` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NULL,
   `ended_at` TIMESTAMP NULL,
   `name` VARCHAR(45) NULL,
@@ -254,7 +255,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Articles`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Articles` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `created_at` VARCHAR(45) NULL,
   `content` VARCHAR(45) NULL,
@@ -280,7 +281,7 @@ ENGINE = InnoDB;
 -- Table `buildy`.`Commentaires`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `buildy`.`Commentaires` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(45) NULL,
   `users_id` INT NOT NULL,
   `commentaires_id` INT NOT NULL,

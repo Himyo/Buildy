@@ -1,33 +1,32 @@
 <?php
+
 class Form {
 
+    use Supplier;
     // CONFIG
     protected $id;
     protected $method;
     protected $action;
-    protected $className;
-    protected $submitText;
+    protected $className = "class-form";
+    protected $submitText = "Confirm";
     protected $resetText;
+    protected $validator = null;
     
     // DATA 
     protected $fields;
 
-    public function __construct($slug, $data) {
-        //TODO Add id if neccesary
-        $method = Routing::getRoute($slug)["m"];
-        $this->setMethod("_".$method);
+    public function __construct($slug) {
+        $slugData = Routing::getRoute($slug);
+        $this->setMethod($slugData['method']);
         $this->setAction($slug);
-        foreach($data as $field) {
-            $placeholder = $field["placeholder"];
-            $fields[$placeholder] = new Field($field);
-        }
     }
 
 
-    public function addField($fields) {
-        $placeholder= $field->getPlaceholder();
-        $fields[$placeholder] = $field;
+    public function addField($field) {
+        $id = $field->getId();
+        $this->fields[$id] = $field;
     }
+    
     public function removeField($fieldName) {
         unset($this->fields[$fieldName]);
     }
@@ -41,15 +40,19 @@ class Form {
     }
 
     public function isValid() {
-        foreach($this->fields as $field){
-            if(!$field->isValid()){
-                return false;
-            }
+        if ($this->validator == null) {
+            return true;
         }
-        return true;
+        return $this->validator->isValid();
     }
 
+    public function addValidator($data) {
+        $this->validator = new Validator($this->fields, $data);
+    }
 
+    public function getErrors() {
+        return $this->validator->getError();
+    }
     public function getFields() {
         return $this->fields;
     }    
@@ -108,7 +111,7 @@ class Form {
     /**
      * Get the value of className
      */ 
-    public function getClassName()
+    public function getClassname()
     {
         return $this->className;
     }
