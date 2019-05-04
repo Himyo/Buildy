@@ -1,4 +1,8 @@
 <?php
+namespace Controller;
+
+use \Core\View;
+
 class PagesController{
 	
 	public function defaultAction(){
@@ -27,6 +31,6 @@ class PagesController{
 	public function articlesBackAction() {
 		$view = new View("articlesBack", "back");
 	}
-	
+    public function notFoundAction() {}
 
 }

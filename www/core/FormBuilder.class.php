@@ -1,4 +1,6 @@
 <?php
+namespace Lib;
+
 
 class FormBuilder {
 
@@ -6,7 +8,7 @@ class FormBuilder {
     protected $data;
 
     //TODO: Check the type of $form to be Form.class
-    public function __construct($form) {
+    public function __construct(Form $form) {
         $this->setForm($form);
     }
 
@@ -18,7 +20,7 @@ class FormBuilder {
         $this->form = $form;
     }
 
-    public function isValid() {
+    public function getErrors() {
         if(!$this->form->isValid()) {
             echo '<div class="alert alert-danger">
                     <ul>';
@@ -60,7 +62,7 @@ class FormBuilder {
     }
 
     public function make() {
-        $this->isValid();
+        $this->getErrors();
         echo '<form '.$this->getConfig().'> '
         .$this->getField().
         '</form>';

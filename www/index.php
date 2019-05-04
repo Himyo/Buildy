@@ -1,12 +1,14 @@
 <?php
 
-require "conf.inc.php";
 
 function myAutoloader($class){
-	$classPath = "core/".$class.".class.php";
-	$controllerPath = "controllers/".$class.".class.php";
-	$classModel = "models/".$class.".class.php";
-	$traitPath = "trait/".$class.".trait.php";
+    print_r($class.' ');
+    $classname = substr($class, strpos($class, '\\') +1);
+	$classPath = "core/".$classname.".class.php";
+	$controllerPath = "controllers/".$classname.".class.php";
+	$voPath = "VO/".$classname.".class.php";
+	$classModel = "models/".$classname.".class.php";
+	$traitPath = "trait/".$classname.".trait.php";
 	if(file_exists($classPath)) {
 		include $classPath;
 	}
@@ -19,8 +21,11 @@ function myAutoloader($class){
 	else if(file_exists($controllerPath)) {
 		include $controllerPath;
 	}
+    else if(file_exists($voPath)) {
+        include $voPath;
+    }
 	else {
-		echo '<br> Failed to load '.$class;
+		echo '<br> Failed to load '.$class.' classname '.$classname.'<br>';
 	}
 }
 //Cela veut dire que si j'essaye d'instancier une class qui n'existe pas
@@ -40,16 +45,19 @@ $slug = $_SERVER["REQUEST_URI"];
 $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
 
-$routes = Routing::getRoute($slug);
+$routes = Core\Routing::getRoute($slug);
 extract($routes);
 
+$container = [];
+$container += require './config/di.global.php';
+$container['config'] = require './config/db.global.php'; //config/db.global.php';
 
 //vérifier l'existence du fichier et de la class controller
 if( file_exists($controllerPath) ){
 	include $controllerPath;
-	if( class_exists($controller)){
+	if( class_exists('\\Controller\\'.$controller)){
 		//instancier dynamiquement le controller
-		$controllerObject = new $controller();
+		$controllerObject = $container['Controller\\'.$controller]($container);
 		//vérifier que la méthode (l'action) existe
 		if( method_exists($controllerObject, $action) ){
 			//appel dynamique de la méthode	

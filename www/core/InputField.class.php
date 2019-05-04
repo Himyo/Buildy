@@ -1,8 +1,8 @@
 <?php
+namespace Lib;
 
 class InputField extends Field {
     
-
     protected $minLength;
     protected $maxLength;
 

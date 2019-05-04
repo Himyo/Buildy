@@ -1,12 +1,17 @@
 <?php
+namespace Core;
+
+use \PDO;
+use \PDOException;
+
 class BaseSQL{
 	private $pdo;
 	private $table;
-	public function __construct(){
+	public function __construct($driver, $host, $name, $user, $pwd){
 		try{
-			$this->pdo = new PDO(DBDRIVER.":host=".DBHOST.";dbname=".DBNAME,DBUSER,DBPWD);
+			$this->pdo = new PDO($driver.":host=".$host.";dbname=".$name,$user,$pwd);
 			//$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}catch(Exception $e){
+		}catch(PDOException $e){
 			die("Erreur SQL : ".$e->getMessage());
 		}
 		$this->table = get_called_class();

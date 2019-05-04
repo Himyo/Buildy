@@ -1,30 +1,33 @@
 <?php
+namespace Core;
+
 class Routing{
 
 	public static $routeFile = "routes.yml";
 
-	public static function getRoute($slug){
+	public static function getRoute($slug)
+    {
 
-		// /creation_de_compte_allocine
-		//récuperer toutes les routes dans le fichier yml
-		$routes = yaml_parse_file(self::$routeFile);
-		if( isset($routes[$slug])){
-			if(empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])){
-				die("Il y a une erreur dans le fichier routes.yml");
-			}
-			$controller = ucfirst($routes[$slug]["controller"])."Controller";
-			$action = $routes[$slug]["action"]."Action";
-			$controllerPath = "controllers/".$controller.".class.php";
-			$method = $routes[$slug]["method"];
-		}else{
-			// TODO: Refacto
-			echo "No routes found:";
-			var_dump($slug);
-			return ["controller"=>null, "action"=>null,"controllerPath"=>null, "method"=>null];
-		}
-
-		return ["controller"=>$controller, "action"=>$action,"controllerPath"=>$controllerPath, "method"=>$method];
-	}
+        // /creation_de_compte_allocine
+        //récuperer toutes les routes dans le fichier yml
+        $routes = yaml_parse_file(self::$routeFile);
+        if (isset($routes[$slug])) {
+            if (empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])) {
+                die("Il y a une erreur dans le fichier routes.yml");
+            }
+            $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
+            $action = $routes[$slug]["action"] . "Action";
+            $controllerPath = "controllers/" . $controller . ".class.php";
+            $method = $routes[$slug]["method"];
+        } else {
+            // TODO: Refacto
+            return ["controller" => 'PagesController', "action" => 'notFoundAction',
+                "controllerPath" => 'controllers/PagesController', "method" => 'post'];
+        }
+        $t = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" => $method];
+        var_dump($t);
+        return $t;
+    }
 
 
 	public static function getSlug($c, $a){

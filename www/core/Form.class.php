@@ -1,4 +1,7 @@
 <?php
+namespace Lib;
+
+use \Core\Routing;
 
 class Form {
 
@@ -10,8 +13,7 @@ class Form {
     protected $className = "class-form";
     protected $submitText = "Confirm";
     protected $resetText;
-    protected $validator = null;
-    
+    protected $validator;
     // DATA 
     protected $fields;
 
@@ -19,10 +21,11 @@ class Form {
         $slugData = Routing::getRoute($slug);
         $this->setMethod($slugData['method']);
         $this->setAction($slug);
+        $this->validator = new Validator();
     }
 
 
-    public function addField($field) {
+    public function addField(Field $field) {
         $id = $field->getId();
         $this->fields[$id] = $field;
     }
@@ -40,14 +43,11 @@ class Form {
     }
 
     public function isValid() {
-        if ($this->validator == null) {
-            return true;
-        }
         return $this->validator->isValid();
     }
 
-    public function addValidator($data) {
-        $this->validator = new Validator($this->fields, $data);
+    public function validate($data) {
+        $this->validator->check($this->fields, $data);
     }
 
     public function getErrors() {
@@ -80,6 +80,11 @@ class Form {
     public function getMethod()
     {
         return $this->method;
+    }
+
+    // Method format for the global variable $GLOBALS
+    public function getGlobalMethod() {
+        return '_'.strtoupper($this->method);
     }
 
     /**

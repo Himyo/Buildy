@@ -1,6 +1,10 @@
 <?php
+namespace Core;
+
+use \Lib\Supplier;
 class View{
 
+    use Supplier;
 	public $v;
 	public $t;
 	public $data = [];
