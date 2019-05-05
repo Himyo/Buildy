@@ -14,7 +14,7 @@ class BaseSQL{
 		}catch(PDOException $e){
 			die("Erreur SQL : ".$e->getMessage());
 		}
-		$this->table = get_called_class();
+		$this->table = substr(get_called_class(), strpos(get_called_class(), '\\') +1);
 	}
 	public function setId($id){
 		$this->id = $id;
@@ -50,6 +50,7 @@ class BaseSQL{
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0)
 		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
 
+		echo 'SAVING <br />';
 		if( is_null($dataChild["id"])){
 			//INSERT
 			//array_keys($dataChild) -> [id, firstname, lastname, email]
@@ -59,6 +60,8 @@ class BaseSQL{
 			implode(",:", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
+			echo 'QUERY: '.$sql;
+			echo '<br /> INSERT STATUS: '.$queryStatus;
 			return $queryStatus;
 		}
 		else {
@@ -71,6 +74,7 @@ class BaseSQL{
 			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
+            echo 'INSERT UPDATE: '.$queryStatus;
 			return $queryStatus;
 		}
 	}

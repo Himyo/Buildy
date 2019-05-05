@@ -23,11 +23,9 @@ class UsersController{
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
 			$form->validate($data);
-			if(!$form->isValid()){
-				$errors = $form->getErrors();
-			}
-			else {
-				//TODO: Real user registration 
+			//TODO: Catch SQL Error
+			if($form->isValid()){
+				//TODO: Real user registration
 				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
 				$user->setToken($token);
 				$user->supply($data);
@@ -49,11 +47,9 @@ class UsersController{
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
 			$form->validate($data);
-			if(!$form->isValid()) {
-				$errors = $form->getErrors();
-			}
-			else {
-				//TODO: Real user connection 
+            //TODO: Catch SQL Error
+			if($form->isValid()) {
+				//TODO: Real user connection
 				$queryResult = $user->getOneBy($data);
 				if($queryResult) {
 					session_start();
@@ -81,7 +77,7 @@ class UsersController{
 		$user = $this->user;
 		$form = $user->getForgetPasswordForm();
 		$data = $GLOBALS[$form->getGlobalMethod()];
-		if($_SERVER['REQUEST_METHOD'] == $form->getMethod() && !empty($data)) {
+		if($_SERVER['REQUEST_METHOD'] == strtoupper($form->getMethod()) && !empty($data)) {
 			//TODO: Mailling
 			var_dump($data);
 		}

@@ -11,7 +11,7 @@ use \Lib\Supplier;
 class Users extends BaseSQL{
 
     use Supplier;
-	public $id;
+	public $id = null;
 	public $firstname;
 	public $lastname;
 	public $email;
