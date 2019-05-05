@@ -84,7 +84,7 @@ class Form {
 
     // Method format for the global variable $GLOBALS
     public function getGlobalMethod() {
-        return '_'.strtoupper($this->method);
+        return '_'.$this->method;
     }
 
     /**
