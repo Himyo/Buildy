@@ -49,8 +49,7 @@ class BaseSQL{
 		$dataObject = get_object_vars($this);
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0)
 		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
-
-		echo 'SAVING <br />';
+		
 		if( is_null($dataChild["id"])){
 			//INSERT
 			//array_keys($dataChild) -> [id, firstname, lastname, email]
