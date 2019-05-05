@@ -59,8 +59,6 @@ class BaseSQL{
 			implode(",:", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
-			echo 'QUERY: '.$sql;
-			echo '<br /> INSERT STATUS: '.$queryStatus;
 			return $queryStatus;
 		}
 		else {
@@ -73,7 +71,6 @@ class BaseSQL{
 			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
-            echo 'INSERT UPDATE: '.$queryStatus;
 			return $queryStatus;
 		}
 	}
