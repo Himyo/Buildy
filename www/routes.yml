@@ -40,6 +40,11 @@
   action: default
   method: "get"
 
+"/not_found":
+  controller: Pages
+  action: notFound
+  method: "post"
+
 "/add_users":
   controller: Users
   action: add

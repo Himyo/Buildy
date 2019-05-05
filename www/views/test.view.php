@@ -11,12 +11,12 @@
 <body>
     <h1>TEST</h1>
     <?php
-
-        $slug = Routing::getSlug('Users', 'register');
-        $f = new Form($slug);
-        echo ($f->getMethod());
-        echo '<br>';
-        echo gettype($f->getMethod());
+    $var = [0,1,2,3,"LALALALAL"];
+    $conf = [];
+    $conf += require('config/di.global.php');
+    echo '<pre>';
+    var_dump($conf);
+    echo '</pre>';
     ?>
 </body>
 </html>

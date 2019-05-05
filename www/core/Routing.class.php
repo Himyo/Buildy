@@ -5,6 +5,7 @@ class Routing{
 
 	public static $routeFile = "routes.yml";
 
+    // TODO: Refacto
 	public static function getRoute($slug)
     {
 
@@ -20,9 +21,8 @@ class Routing{
             $controllerPath = "controllers/" . $controller . ".class.php";
             $method = $routes[$slug]["method"];
         } else {
-            // TODO: Refacto
             return ["controller" => 'PagesController', "action" => 'notFoundAction',
-                "controllerPath" => 'controllers/PagesController', "method" => 'post'];
+                "controllerPath" => 'controllers/PagesController.class.php', "method" => 'post'];
         }
         $t = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" => $method];
         var_dump($t);

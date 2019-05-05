@@ -31,6 +31,8 @@ class PagesController{
 	public function articlesBackAction() {
 		$view = new View("articlesBack", "back");
 	}
-    public function notFoundAction() {}
+    public function notFoundAction() {
+	    $view = new View("notFound", "front");
+    }
 
 }
