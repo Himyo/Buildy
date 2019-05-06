@@ -1,0 +1,200 @@
+#!/bin/bash
+
+# By COUTROT, CABIATI, LIEGE, HARANG 2018 
+
+NC='\033[0m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+COMMAND=$1
+
+case $COMMAND in
+run)
+echo -e ${RED}'install'${NC}
+echo -e 'Enter your website domain (without www and http)'
+read domain
+read -p "Add 'www' alias for your website ? [y]es or [n]o" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo
+    echo -e "Creation for website ${bold} ${domain} ${NC} and ${bold} www.${domain} ${NC}"
+    myvar=1
+else
+	myvar=0
+    echo -e "Creation for website ${bold} ${domain} ${NC}"
+fi
+echo -e ${bold}'Where your website folder is on the server'${NC}
+read -e -p "Website root path:" path
+echo -e 'Admin of the website (ex : admin@mail.com) :'
+read admin
+filename="/etc/apache2/sites-available/${domain}.conf"
+pathquo='"'"$path"'"'
+touch $filename
+echo '<VirtualHost *:80>' > $filename
+echo "ServerAdmin ${admin}" >> $filename
+echo "ServerName ${domain}" >> $filename
+if [[ $myvar == 1 ]]
+then
+echo "ServerAlias www.${domain}" >> $filename
+fi
+echo "DocumentRoot ${path}" >> $filename
+echo 'Options FollowSymLinks' >> $filename
+echo '' >> $filename
+echo "<Directory ${path}>" >> $filename
+echo "AllowOverride All" >> $filename
+echo "Require all granted" >> $filename
+echo "</Directory>" >> $filename
+echo "ErrorLog /var/log/apache2/${domain}-error.log" >> $filename
+echo "CustomLog /var/log/apache2/${domain}-access.log combined" >> $filename
+echo "" >> $filename
+echo "</VirtualHost>" >> $filename
+a2ensite $domain &> /tmp/dump
+
+systemctl restart apache2 &> /tmp/dump
+read -p "Would you like to add ssl to your website ? [y]es or [n]o" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+echo
+echo "Generating ssl certificate for ${domain}"
+certbot certonly --break-my-certs --force-renew --staging --cert-name $domain --webroot --webroot-path $path --domain $domain  &> /tmp/dump
+filenamessl="/etc/apache2/sites-available/${domain}-ssl.conf"
+pathcert="/etc/letsencrypt/live/${domain}/fullchain.pem"
+pathkey="/etc/letsencrypt/live/${domain}/privkey.pem"
+touch $filenamessl
+echo "<VirtualHost *:443>" > $filenamessl
+echo "DocumentRoot ${path}" >> $filenamessl
+echo "ServerName ${domain}" >> $filenamessl
+if [[ $myvar == 1 ]]
+then
+echo "ServerAlias www.${domain}" >> $filenamessl
+fi
+echo "SSLEngine On" >> $filenamessl
+echo "SSLOptions +StrictRequire" >> $filenamessl
+echo "SSLCertificateFile ${pathcert}" >> $filenamessl
+echo "SSLCertificateKeyFile ${pathkey}" >> $filenamessl
+echo "SSLProtocol TLSv1" >> $filenamessl
+echo "<Directory ${path}>" >> $filenamessl
+echo "AllowOverride All" >> $filenamessl
+echo "Require all granted" >> $filenamessl
+echo "</Directory>" >> $filenamessl
+echo "</VirtualHost>" >> $filenamessl
+systemctl restart apache2 &> /tmp/dump
+fi
+echo
+echo -e "Everything is ok, you can know access your website on ${domain}"
+;;
+
+init)
+clear
+echo -e ${bold}'Apache-autobot : auto install for apache and certbot'${normal}
+apt-get -qq update &> /tmp/dump
+apt-get install -qq -y apache2 php7.0 mariadb-server &> /tmp/dump
+service apache2 restart &> /tmp/dump
+sudo apt-get install -qq -y python-certbot-apache &> /tmp/dump
+a2enmod ssl &> /tmp/dump
+echo ${bold}'Apache & Certbot successfuly installed'${NC}
+;;
+
+disable)
+clear
+echo -e ${RED}'Disable website from your apache server'${NC} 
+echo -e 'Enter your website domain (without www and http)'
+read domain
+a2dissite $domain &> /tmp/dump
+a2dissite "${domain}-ssl" &> /tmp/dump
+systemctl restart apache2 &> /tmp/dump
+;;
+
+enable)
+clear
+echo -e ${RED}'Enable a disabled website from your apache server'${NC} 
+echo -e 'Enter your website domain (without www and http)'
+read domain
+a2ensite $domain &> /tmp/dump
+a2ensite "${domain}-ssl" &> /tmp/dump
+systemctl restart apache2 &> /tmp/dump
+;;
+
+ssl)
+clear
+echo -e ${RED}'Enable ssl for existing website from your apache server'${NC}
+echo -e 'Enter your website domain (without www and http)'
+read domain
+read -p "Add 'www' alias in your ssl configuration ? [y]es or [n]o" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	myvar=1
+    echo '\n'
+    echo -e "Activating ssl for website ${bold} ${domain} ${NC} and ${bold} www.${domain} ${NC}"
+else
+	myvar=0
+    echo -e "Activating ssl for website ${bold} ${domain} ${NC}"
+fi
+echo -e ${bold}'Where your website folder is on the server'${NC}
+read -e -p "Website root path:" path
+echo "Generating ssl certificate for ${domain}"
+certbot certonly --break-my-certs --force-renew --staging --cert-name $domain --webroot --webroot-path $path --domain $domain  &> /tmp/dump
+filenamessl="/etc/apache2/sites-available/${domain}-ssl.conf"
+pathcert="/etc/letsencrypt/live/${domain}/fullchain.pem"
+pathkey="/etc/letsencrypt/live/${domain}/privkey.pem"
+touch $filenamessl
+echo "<VirtualHost *:443>" > $filenamessl
+echo "DocumentRoot ${path}" >> $filenamessl
+echo "ServerName ${domain}" >> $filenamessl
+if [[ $myvar == 1 ]]
+then
+echo "ServerAlias www.${domain}" >> $filenamessl
+fi
+echo "SSLEngine On" >> $filenamessl
+echo "SSLOptions +StrictRequire" >> $filenamessl
+echo "SSLCertificateFile ${pathcert}" >> $filenamessl
+echo "SSLCertificateKeyFile ${pathkey}" >> $filenamessl
+echo "SSLProtocol TLSv1" >> $filenamessl
+echo "<Directory ${path}>" >> $filenamessl
+echo "AllowOverride All" >> $filenamessl
+echo "Require all granted" >> $filenamessl
+echo "</Directory>" >> $filenamessl
+echo "</VirtualHost>" >> $filenamessl
+a2ensite "${domain}-ssl" &> /tmp/dump
+systemctl restart apache2 &> /tmp/dump
+;;
+
+infos)
+clear
+echo ${bold}'Apache infos :'${normal}
+echo -e ${CYAN} 
+systemctl status apache2 | grep 'running' 
+echo -e ${NC}
+echo -e "Enabled sites on your server :"
+echo
+for file in /etc/apache2/sites-enabled/*; do
+ 	if [[ ${file##*/} != "000-default.conf" ]] 
+  	then
+  	var=${file##*/}
+  	echo ${var%.*}
+  	fi
+done
+
+;;
+
+help)
+clear
+echo -e ${RED} ${bold}'Available commands :'${normal} ${NC}
+echo -e ${CYAN}'init'${NC}'\n Install apache and certbot automatically'
+echo -e ${CYAN}'run'${NC}'\n allow to run apache-autobot on specific website'
+echo -e ${CYAN}'disable'${NC} '\n disable a specific website from the server'
+echo -e ${CYAN}'enable'${NC} '\n enable a disabled website from the server'
+echo -e ${CYAN}'ssl'${NC} '\n activate SSL on specific website'
+echo -e ${CYAN}'infos'${NC} '\n Display various informations about your apache server'
+echo
+echo
+;;
+*) 
+clear
+echo 'Invalid argument'
+esac
+

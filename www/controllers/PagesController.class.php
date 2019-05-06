@@ -4,34 +4,67 @@ namespace Controller;
 use \Core\View;
 
 class PagesController{
-	
-	public function defaultAction(){
 
-		$v = new View("homepage", "back");
-	}
+    public function defaultAction(){
 
-	public function testAction() {
-		$v = new View("test", "back");
-	}
-
-	public function dashboardAction() {
-		$view = new View("dashboard", "back");
-	}
-
-	public function chartsAction() {
-		$view = new View("charts", "back");
-	}
-
-	//VIEWS DATABASE ADMIN
-	public function usersBackAction() {
-		$view = new View("usersBack", "back");
-	}
-
-	public function articlesBackAction() {
-		$view = new View("articlesBack", "back");
-	}
-    public function notFoundAction() {
-	    $view = new View("notFound", "front");
+    $view = new View("home", "back");
+        $view->assign("pseudo","prof");
     }
 
-}
+    public function notFoundAction() {
+        $view = new View("notFound", "front");
+    }
+
+    public function testAction() {
+        $view = new View("test", "back");
+    }
+
+    public function dashboardAction() {
+        $view = new View("dashboard", "back");
+    }
+
+    public function mySiteAction() {
+        $view = new View("mySite", "back");
+    }
+
+    public function addPageAction() {
+        $view = new View("addPage", "back");
+    }
+
+    public function modifyPageAction() {
+        $view = new View("modifyPage", "back");
+    }
+
+    public function contactAction() {
+        $view = new View("contact", "back");
+    }
+
+    public function legalAction() {
+        $view = new View("legal", "back");
+    }
+
+    //VIEWS DATABASE ADMIN
+    public function usersBackAction() {
+        $view = new View("usersBack", "back");
+    }
+
+    public function articlesBackAction() {
+    $view = new View("articlesBack", "back");
+    }
+
+    public function cardsBackAction() {
+    $view = new View("cardsBack", "back");
+    }
+
+    public function gamesBackAction() {
+    $view = new View("gamesBack", "back");
+    }
+
+    public function tournamentsBackAction() {
+    $view = new View("tournamentsBack", "back");
+    }
+
+
+
+
+    }
