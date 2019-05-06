@@ -1,5 +1,7 @@
 <?php
 //TODO make abstract class ?
+namespace Lib;
+
 class Field {
 
     use Supplier;

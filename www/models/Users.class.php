@@ -1,8 +1,17 @@
 <?php
+namespace Model;
+
+use \Core\BaseSQL;
+use \Core\Routing;
+use \Lib\Form;
+use \Lib\Field;
+use \Lib\InputField;
+use \Lib\Supplier;
+
 class Users extends BaseSQL{
 
     use Supplier;
-	public $id;
+	public $id = null;
 	public $firstname;
 	public $lastname;
 	public $email;
@@ -11,8 +20,8 @@ class Users extends BaseSQL{
 	public $status=0;
 	public $token = "-1";
 
-	public function __construct(){
-		parent::__construct();
+	public function __construct($driver, $host, $name, $user, $pwd){
+		parent::__construct($driver, $host, $name ,$user,$pwd);
 	}
 
 

@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `buildy`.`Users` (
   `status` INT NULL,
   `role` INT NULL,
   `token` VARCHAR(60) NULL,
-  `photo_id` INT NOT NULL,
+  `photo_id` INT NULL ,
   PRIMARY KEY (`id`),
   INDEX `fk_members_photo1_idx` (`photo_id` ASC),
   CONSTRAINT `fk_members_photo1`

@@ -1,11 +1,13 @@
 <?php
+namespace Lib;
 
 class Validator{
 
 	public $errors = [];
 	
-	public function __construct( $fields, $data ){
+	public function __construct(){}
 
+    public function check(Array $fields, Array $data) {
 		if(count($data) != count($fields)){
 			die("Tentative : faille XSS");
 		}

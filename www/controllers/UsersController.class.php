@@ -1,78 +1,87 @@
 <?php
+namespace Controller;
+
+use \Core\View;
+use \Model\Users;
+use \Lib\FormBuilder;
 
 class UsersController{
 
+	protected $user;
+
+	public function __construct(Users $user) {
+		$this->user = $user;
+	}
 	public function defaultAction(){
 		echo "users default";
 	}
 
-	public function saveAction($template = "front"){
-		$user = new Users();
-		$form = $user->getRegisterForm();
-		$method = strtoupper($form->getMethod());
-		$data = $GLOBALS['_'.$method];
-		if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			$form->addValidator($data);
-			if($form->isValid()) {
-				//TODO: Real user registration
-                $user->supply($data);
-                $user->save();
+	public function saveAction(){
 
+		$user = $this->user;
+		$form = $user->getRegisterForm();
+		$data = $GLOBALS[$form->getGlobalMethod()];
+		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
+			$form->validate($data);
+			//TODO: Catch SQL Error
+			if($form->isValid()){
+				//TODO: Real user registration
+				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
+				$user->setToken($token);
+				$user->supply($data);
+				$user->save();
+				session_start();
+				$_SESSION['user'] = $user;
 			}
 		}
 		//TODO: Take decision for action settings
-		$v = new View("saveUser", $template);
+		$v = new View("saveUser", "front");
 		$v->assign("form", new FormBuilder($form));
 	}
 
 
-	public function loginAction($template = "front") {
+	public function loginAction() {
 
-		$user = new Users();
+		$user = $this->user;
 		$form = $user->getLoginForm();
-        $method = "_".strtoupper($form->getMethod());
-        $data = $GLOBALS[$method];
-        if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			$form->addValidator($data);
+		$data = $GLOBALS[$form->getGlobalMethod()];
+		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
+			$form->validate($data);
+            //TODO: Catch SQL Error
 			if($form->isValid()) {
 				//TODO: Real user connection
 				$queryResult = $user->getOneBy($data);
 				if($queryResult) {
-//					$lastSessionToken  = $_SESSION['user']->getToken();
-//					if($lastSessionToken == $queryResult['token']) {
-                    session_start();
-                    $token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
-                    $user->setToken($token);
-                    $user->supply($data);
-                    $user->save();
-                    $_SESSION['user'] = $user;
-                    $_SESSION['loggedin'] = true;
-                    $v = new View("homepage", $template);
-                    $v->assign("user", $user);
-                }
-                else {
-                    die('Token exchange failed');
-                }
-            }
+					session_start();
+					$lastSessionToken  = $_SESSION['user']->getToken();
+					if($lastSessionToken == $queryResult['token']) {
+						$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
+						$user->setToken($token);
+						$user->supply($data);
+						$user->save();
+						$_SESSION['user'] = $user;
+						$_SESSION['loggedin'] = true;
+					}
+					else {
+						die('Token exchange failed');
+					}
+				}
+			}
 		}
-        $v = new View("loginUsers", "front");
-        $v->assign("form", new FormBuilder($form));
+		$v = new View("loginUser", "front");
+		$v->assign("form", new FormBuilder($form));
 	}
 
 
 	public function forgetPasswordAction(){
-		$user = new Users();
+		$user = $this->user;
 		$form = $user->getForgetPasswordForm();
-        $method = "_".strtoupper($form->getMethod());
-        $data = $GLOBALS[$method];
-        if( $_SERVER['REQUEST_METHOD']==$method && !empty($data) ){
-			//TODO: Mailing
+		$data = $GLOBALS[$form->getGlobalMethod()];
+		if($_SERVER['REQUEST_METHOD'] == strtoupper($form->getMethod()) && !empty($data)) {
+			//TODO: Mailling
 			var_dump($data);
 		}
 		$v = new View("forgetPasswordUser", "front");
         $v->assign("form", new FormBuilder($form));
 	}
-
-	public function getDatabaseAction() {
-    }
 }
