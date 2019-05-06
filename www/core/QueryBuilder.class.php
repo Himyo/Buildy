@@ -19,8 +19,16 @@ $SQL_FROMAT = [
         }
         return $format;
     },
-    'DELETE',
+    'DELETE' => function($items) {
+        $keys = array_keys($items);
+        $format = "";
+        foreach ($keys as $k) {
+            $format.= $k." = :".$k;
+        }
+        return $format;
+    },
 ];
+
 class QueryBuilder {
     private $pdo;
     private $query = "";
@@ -31,13 +39,21 @@ class QueryBuilder {
         $this->table = substr(get_called_class(), strpos(get_called_class(), '\\') +1);
     }
 
-    public function select($item){$this->query = "SELECT ".$item." FROM ".$this->table;}
-    public function delete($field, $item){$this->query = "DELETE FROM ".$this->table."WHERE ".$field."=".$item;}
-    public function insert($item){
-        $this->query = "INSERT ".$item." FROM ".$this->table;
+    public function select(array $items): void{
+        $this->query = "SELECT";
+        $this->items = $items;
     }
-    public function update($item){
-        $this->query = "UPDATE ".$this->table." SET ";
+    public function delete(array $items): void{
+        $this->query = "DELETE";
+        $this->items = $items;
+    }
+    public function insert(array $items): void{
+        $this->query = "INSERT";
+        $this->items = $items;
+    }
+        public function update(array $items): voidgi{
+        $this->query = "UPDATE";
+        $this->items = $items;
     }
 
     public function addItem($item){}
