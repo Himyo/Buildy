@@ -7,7 +7,7 @@ class PagesController{
 
     public function defaultAction(){
 
-    $view = new View("home", "back");
+    $view = new View("homepage", "back");
         $view->assign("pseudo","prof");
     }
 
