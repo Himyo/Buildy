@@ -12,7 +12,7 @@ class QueryBuilder {
         switch ($format) {
             case 'SELECT':
                 return function ($items) {
-                    $format = "(:" . implode(",:", $items) . ")";
+                    $format = "(" . implode(",", $items) . ")";
                     return $format;
                 };
                 break;
@@ -36,11 +36,7 @@ class QueryBuilder {
                 break;
             case 'DELETE':
                 return function ($items) {
-                    $keys = array_keys($items);
-                    $format = "";
-                    foreach ($keys as $k) {
-                        $format .= $k . " = :" . $k;
-                    }
+                    $format = "(" . implode(",", $items) . ")";
                     return $format;
                 };
                 break;
@@ -58,22 +54,19 @@ class QueryBuilder {
     }
 
     public function select(array $items): QueryBuilder{
-        $this->query = "SELECT";
         $this->items = ['SELECT' => $items];
         return $this;
     }
-    public function delete(array $items): QueryBuilder{
-        $this->query = "DELETE";
-        $this->items = ['DELETE' => $items];
+    public function delete(array $items, $opt=[]): QueryBuilder{
+        $this->items['DELETE'] = $opt;
+        $this->where($items);
         return $this;
     }
     public function insert(array $items): QueryBuilder{
-        $this->query = "INSERT INTO";
         $this->items = ['INSERT' => $items];
         return $this;
     }
         public function update(array $items): QueryBuilder {
-        $this->query = "UPDATE";
         $this->items = ['UPDATE' => $items];
         return $this;
     }
@@ -98,18 +91,23 @@ class QueryBuilder {
     }
 
     public function make(): QueryBuilder {
-        foreach ($this->items as $item) {
-            switch($item) {
+
+        foreach ($this->items as $keyword => $data) {
+            switch($keyword) {
                 case 'SELECT':
-                    $this->query.= " ".QueryBuilder::SQL_PARSER('SELECT')($this->items[item]);
+                    $this->query.= "SELECT ".QueryBuilder::SQL_PARSER('SELECT')($data)." FROM ".$this->table;
                     break;
                 case 'INSERT':
+                    $this->query.= "INSERT INTO TABLE ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
                     break;
                 case 'UPDATE':
+                    $this->query.= "UPDATE TABLE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
                     break;
                 case 'DELETE':
+                    $this->query.= "DELETE ".QueryBuilder::SQL_PARSER('DELETE')($data)." FROM ".$this->table;
                     break;
                 default:
+                    $this->query.= " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
                     break;
             }
         }
@@ -120,7 +118,20 @@ class QueryBuilder {
         $this->table = $table;
         return $this;
     }
-    public function join($item): QueryBuilder    {
+    public function join(QueryBuilder $join): QueryBuilder    {
+        $this->make();
+        $this->query.= " JOIN ".$join->make()->query();
+        foreach ($join->getItems() as $joinKeyword => $joinData) {
+            $this->items[$joinKeyword] = isset($this->items[$joinKeyword]) ? array_merge($this->items[$joinKeyword], $join->getItems()[$joinKeyword])
+                : $join->getItems()[$joinKeyword];
+        }
         return $this;
+    }
+
+    public function getItems(): array {
+        return $this->items;
+    }
+    public function query(): string {
+        return $this->query;
     }
 }
