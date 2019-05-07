@@ -46,7 +46,7 @@ class Form {
         return $this->validator->isValid();
     }
 
-    public function addValidator($data) {
+    public function validate($data) {
         $this->validator->check($this->fields, $data);
     }
 
