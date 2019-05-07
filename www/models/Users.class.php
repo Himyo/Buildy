@@ -13,7 +13,7 @@ class Users extends BaseSQL{
     use Supplier;
 	public $id = null;
 	public $firstname;
-	public $lastname;
+	public $lasname;
 	public $email;
 	public $password;
 	public $role=1;
@@ -54,7 +54,7 @@ class Users extends BaseSQL{
 	}
 	public function setId($id)
     {
-        $this->setId($id);
+		$this->setId($id);
     }
 
 

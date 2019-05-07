@@ -2,7 +2,6 @@
 
 
 function myAutoloader($class){
-    print_r($class.' ');
     $classname = substr($class, strpos($class, '\\') +1);
 	$classPath = "core/".$classname.".class.php";
 	$controllerPath = "controllers/".$classname.".class.php";

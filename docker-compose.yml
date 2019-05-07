@@ -23,7 +23,7 @@ services:
       - ./config/db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
       - MYSQL_ROOT_PASSWORD=pabuildypa
-      - MYSQL_DATABASE=Buildy
+      - MYSQL_DATABASE=buildy
       - MYSQL_USER=buildy
       - MYSQL_PASSWORD=buildy
     restart: always
@@ -38,7 +38,7 @@ services:
     environment:
         - PMA_ARBITRARY=1
         - MYSQL_ROOT_PASSWORD=pabuildypa
-        - MYSQL_DATABASE=Buildy
+        - MYSQL_DATABASE=buildy
         - MYSQL_USER=buildy
         - MYSQL_PASSWORD=buildy
 

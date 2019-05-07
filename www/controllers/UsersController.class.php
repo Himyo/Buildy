@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 
+use Core\QueryBuilder;
 use \Core\View;
 use \Model\Users;
 use \Lib\FormBuilder;
@@ -34,6 +35,8 @@ class UsersController{
 				$_SESSION['user'] = $user;
 			}
 		}
+		$query = new QueryBuilder();
+		$query->select([])->from('')->where([])->join('')->make();
 		//TODO: Take decision for action settings
 		$v = new View("saveUser", "front");
 		$v->assign("form", new FormBuilder($form));
