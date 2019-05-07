@@ -13,7 +13,7 @@ class Users extends BaseSQL{
     use Supplier;
 	public $id = null;
 	public $firstname;
-	public $lasname;
+	public $lastname;
 	public $email;
 	public $password;
 	public $role=1;

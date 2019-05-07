@@ -2,7 +2,6 @@
 namespace Lib;
 
 use \Core\Routing;
-use \Core\Validator;
 
 class Form {
 
@@ -14,8 +13,7 @@ class Form {
     protected $className = "class-form";
     protected $submitText = "Confirm";
     protected $resetText;
-    protected $validator = null;
-    
+    protected $validator;
     // DATA 
     protected $fields;
 
@@ -23,10 +21,11 @@ class Form {
         $slugData = Routing::getRoute($slug);
         $this->setMethod($slugData['method']);
         $this->setAction($slug);
+        $this->validator = new Validator();
     }
 
 
-    public function addField($field) {
+    public function addField(Field $field) {
         $id = $field->getId();
         $this->fields[$id] = $field;
     }
@@ -44,14 +43,11 @@ class Form {
     }
 
     public function isValid() {
-        if ($this->validator == null) {
-            return true;
-        }
         return $this->validator->isValid();
     }
 
     public function addValidator($data) {
-        $this->validator = new Validator($this->fields, $data);
+        $this->validator->check($this->fields, $data);
     }
 
     public function getErrors() {
@@ -78,6 +74,11 @@ class Form {
         $this->id = $id;
     }
 
+    // Method format for the global variable $GLOBALS
+    public function getGlobalMethod() {
+        return '_'.$this->method;
+    }
+
     /**
      * Get the value of method
      */ 
@@ -91,6 +92,7 @@ class Form {
      *
      */ 
     public function setMethod($method)
+
     {
         $this->method = $method;
     }
@@ -140,7 +142,7 @@ class Form {
     /**
      * Set the value of submitText
      *
-     */ 
+     */
     public function setSubmitText($submitText)
     {
         $this->submitText = $submitText;
