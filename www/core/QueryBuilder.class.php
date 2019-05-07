@@ -7,7 +7,7 @@ class QueryBuilder {
     private $items= [];
 
     public function __construct() {}
-  
+ //TODO: INNER/OUTER JOIN, LIKE, BETWEEN, IN, GROUP BY, EXISTS, HAVING, ALTER, DROP, CHECK
     public static function SQL_PARSER($format){
         switch ($format) {
             case 'SELECT':
