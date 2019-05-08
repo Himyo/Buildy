@@ -13,9 +13,6 @@
     <h1>TEST</h1>
     <?php
         $var = new \Core\QueryBuilder();
-        $var->select(['*'])->from('lala')->where(['bim' => 'bam'])->andWhere(['bom'=> 'bim'])->orWhere(['foo' => 'bar'])->make();
-        echo $var->query();
-//        print_r(['lala' => ['l',2,3,4,5]]);
     ?>
     </div>
 </body>

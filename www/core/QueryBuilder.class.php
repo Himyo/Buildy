@@ -7,7 +7,7 @@ class QueryBuilder {
     private $items= [];
 
     public function __construct() {}
- //TODO: INNER/OUTER JOIN, LIKE, BETWEEN, IN, GROUP BY, EXISTS, HAVING, ALTER, DROP, CHECK
+ //TODO: INNER/OUTER JOIN, LIKE, BETWEEN, EXISTS, HAVING, ALTER, DROP, CHECK
     public static function SQL_PARSER($format){
         switch ($format) {
             case 'SELECT':
@@ -89,6 +89,21 @@ class QueryBuilder {
         }
         return $this;
     }
+    
+    public function groupBy($items): QueryBuilder {
+        $this->items['GROUP BY'] = $items;
+        return $this;
+    }
+
+    public function orderBy($items): QueryBuilder {
+        $this->items['ORDER BY'] = $items;
+        return $this;
+    }
+
+    public function in($items): QueryBuilder {
+        $this->items['IN'] = $items;
+        return $this;
+    }
 
     public function make(): QueryBuilder {
 
@@ -120,18 +135,18 @@ class QueryBuilder {
     }
     public function join(QueryBuilder $join): QueryBuilder    {
         $this->make();
-        $this->query.= " JOIN ".$join->make()->query();
+        $this->query.= " JOIN ".$join->makeQuery()->getQuery();
         foreach ($join->getItems() as $joinKeyword => $joinData) {
             $this->items[$joinKeyword] = isset($this->items[$joinKeyword]) ? array_merge($this->items[$joinKeyword], $join->getItems()[$joinKeyword])
                 : $join->getItems()[$joinKeyword];
         }
         return $this;
     }
-
+    
     public function getItems(): array {
         return $this->items;
     }
-    public function query(): string {
+    public function getQuery(): string {
         return $this->query;
     }
 }
