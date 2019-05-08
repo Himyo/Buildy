@@ -1,7 +1,8 @@
 <?php
-namespace Core;
+namespace MVC\Core;
 
-use \Lib\Supplier;
+use MVC\Lib\Supplier;
+
 class View{
 
     use Supplier;

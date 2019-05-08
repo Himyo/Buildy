@@ -1,5 +1,5 @@
 <?php
-namespace Core;
+namespace MVC\Core;
 
 class Routing{
 
@@ -18,11 +18,11 @@ class Routing{
             }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
-            $controllerPath = "controllers/" . $controller . ".class.php";
+            $controllerPath = "Controllers/" . $controller . ".class.php";
             $method = $routes[$slug]["method"];
         } else {
             return ["controller" => 'PagesController', "action" => 'notFoundAction',
-                "controllerPath" => 'controllers/PagesController.class.php', "method" => 'post'];
+                "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
         }
         $t = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" => $method];
         var_dump($t);

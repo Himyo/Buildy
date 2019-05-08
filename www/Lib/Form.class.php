@@ -1,7 +1,7 @@
 <?php
-namespace Lib;
+namespace MVC\Lib;
 
-use \Core\Routing;
+ use MVC\Core\Routing;
 
 class Form {
 

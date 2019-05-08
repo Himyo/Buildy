@@ -1,5 +1,5 @@
 <?php
-namespace VO;
+namespace MVC\VO;
 
 class DbDriver {
     private $dbDriver = 'mysql';

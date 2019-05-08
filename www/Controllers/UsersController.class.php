@@ -1,10 +1,9 @@
 <?php
-namespace Controller;
+namespace MVC\Controllers;
 
-use \Core\QueryBuilder;
-use \Core\View;
-use \Model\Users;
-use \Lib\FormBuilder;
+ use MVC\Core\View;
+ use MVC\Models\Users;
+ use MVC\Lib\FormBuilder;
 
 class UsersController{
 

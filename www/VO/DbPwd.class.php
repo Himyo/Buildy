@@ -1,6 +1,6 @@
 <?php
 
-namespace VO;
+namespace MVC\VO;
 
 class DbPwd {
 
