@@ -1,6 +1,5 @@
 <?php
 namespace Core;
-
 class QueryBuilder {
     private $query = "";
     private $table;
@@ -12,15 +11,15 @@ class QueryBuilder {
         switch ($format) {
             case 'SELECT':
                 return function ($items) {
-                    $format = "(" . implode(",", $items) . ")";
+                    $format = "(" . implode(" ,", $items) . ")";
                     return $format;
                 };
                 break;
             case 'INSERT':
                 return function ($items) {
                     $keys = array_keys($items);
-                    $format = "(" . implode(",", $keys) . ") VALUES (:"
-                        . implode(",:", $keys) . ")";
+                    $format = "(" . implode(" ,", $keys) . ") VALUES ( :"
+                        .implode(" , :", $keys) . ")";
                     return $format;
                 };
                 break;
@@ -113,7 +112,7 @@ class QueryBuilder {
                     $this->query.= "SELECT ".QueryBuilder::SQL_PARSER('SELECT')($data)." FROM ".$this->table;
                     break;
                 case 'INSERT':
-                    $this->query.= "INSERT INTO TABLE ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
+                    $this->query.= "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
                     break;
                 case 'UPDATE':
                     $this->query.= "UPDATE TABLE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);

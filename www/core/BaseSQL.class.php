@@ -74,4 +74,10 @@ class BaseSQL{
 			return $queryStatus;
 		}
 	}
+
+	public function execute($query, $data) {
+		$request = $this->pdo->prepare($query);
+		$requestStatus = $request->execute($data);
+		return $requestStatus;
+	}
 }
