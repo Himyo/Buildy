@@ -43,6 +43,18 @@ class QueryBuilder {
                     return $format;
                 };
                 break;
+            case 'INSERT MANY':
+            //TODO: Clean this cancer
+                return function($items) {
+                    $keys = array_keys($items[0]);
+                    $format = "(" . implode(" ,", $keys) . ") VALUES ";
+                    foreach($items as $i => $value){
+                        $values.= "(".implode(',:'.$i, $items[$i])."),";
+                    }
+                    \trim($format, ",");
+                    return $format;
+                };
+                break;
             default:
                 return function ($items) {
                     $keys = array_keys($items);
@@ -69,7 +81,13 @@ class QueryBuilder {
         $this->items = ['INSERT' => $items];
         return $this;
     }
-        public function update(array $items): QueryBuilder {
+
+    public function insertMany(array $items): QueryBuilder{
+        $this->items = ['INSERT MANY' => $items];
+        return $this;
+    }
+
+    public function update(array $items): QueryBuilder {
         $this->items = ['UPDATE' => $items];
         return $this;
     }
@@ -117,19 +135,22 @@ class QueryBuilder {
         foreach ($this->items as $keyword => $data) {
             switch($keyword) {
                 case 'SELECT':
-                    $this->query.= "SELECT ".QueryBuilder::SQL_PARSER('SELECT')($data)." FROM ".$this->table;
+                    $this->query = "SELECT ".QueryBuilder::SQL_PARSER('SELECT')($data)." FROM ".$this->table;
                     break;
                 case 'INSERT':
-                    $this->query.= "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
+                    $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
                     break;
                 case 'UPDATE':
-                    $this->query.= "UPDATE TABLE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
+                    $this->query = "UPDATE TABLE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
                     break;
                 case 'DELETE':
-                    $this->query.= "DELETE ".QueryBuilder::SQL_PARSER('DELETE')($data)." FROM ".$this->table;
+                    $this->query = "DELETE ".QueryBuilder::SQL_PARSER('DELETE')($data)." FROM ".$this->table;
+                    break;
+                case 'INSERT MANY':
+                    $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT MANY')($data);
                     break;
                 default:
-                    $this->query.= " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
+                    $this->query = " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
                     break;
             }
         }
