@@ -88,9 +88,12 @@ class BaseSQL{
 		}
 	}
 
-	public function execute($query, $data) {
-		$request = $this->pdo->prepare($query);
-		$requestStatus = $request->execute($data);
-		return $requestStatus;
+	public function executeMany($querys, $data) {
+		foreach($querys as $n => $value){
+			$request = $this->pdo->prepare($querys[$n]);
+			$requestStatus = $request->execute($data[$n]);
+			echo $requestStatus." ".$n." ".$querys[$n]."<br />";
+			var_dump($data[$n]);
+		}
 	}
 }
