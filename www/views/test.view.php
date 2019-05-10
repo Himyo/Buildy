@@ -10,29 +10,47 @@
 </head>
 <body>
     <div class="page">
-    <h1>TEST</h1>
+    <h1>TEST</h2>
     <?php
         $url = 'https://api.magicthegathering.io/v1/sets';
-        // $file = file_get_contents($url);
-        $file = 'okokk';
-        file_put_contents(__DIR__."/data/releases.json",$file);
-        // $qb = new Core\QueryBuilder();
-        // $db = new Core\BaseSQL('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
-        // foreach($file['sets'] as $data) {
-        //     $items = [
-        //         'name' => $data['name'],
-        //         'release_date' => $data['releaseDate'],
-        //         'game_id' => 1,
-        //         'code' => $data['code']
-        //     ];
-        //     $query = $qb->insert($items)->from('Releases')->make()->getQuery();
-        //     if($db->execute($query, $items) != 1) {
-        //         echo $query;
-        //         echo '<pre>';
-        //         var_dump($items);
-        //         echo $items['name'].'<br />';
-        //     }
-        // }
+        $file = json_decode(file_get_contents(__DIR__."/../data/cards.json"), true);
+        $qb = new Core\QueryBuilder();
+        $db = new Core\BaseSQL('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
+        $qs = [];
+        $dt = [];
+        $i = 0;
+        foreach($file['sets'] as $data) {
+            $items = [
+                'name' => $data['name'],
+                'manaCost' => $data['manaCost'],
+                'colors' => $data['colors'],
+                'cmc' => $data['cmc'],
+
+                'supertype' => $data['supertypes'],
+                'subtype' => $data['subtypes'],
+                'type' => $data['types'],
+
+                'rarity' => $data['rarity'],
+                'set' => $data['set'],
+                'text' => $data['text'],
+                'power' => $data['power'],
+                'toughness' => $data['toughness'],
+                'layout' => $data['layout'],
+                'multiverseId' => $data['multiverseid'],
+                'imageUrl' => $data['imageUrl'],
+                'cardId' => $data['id'],
+                'multiverseId' => $data['multiverseid'],
+                'game_id' => 1,
+            ];
+
+            $query = $qb->insertMany($items)->from('Releases')->make()->getQuery();
+            $qs[$i] = $query;
+            $dt[$i] = $items;
+            $i++;
+        }
+        echo '<pre>';
+        echo $query;
+        // $db->execute($qs, $dt);
     ?>
     </div>
 </body>
