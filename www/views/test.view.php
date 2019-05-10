@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="page">
-    <h1>TEST</h1>
+    <h1>TEST</h2>
     <?php
 
         $var = "{10}{R}{R}{W}";
