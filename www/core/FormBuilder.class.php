@@ -30,7 +30,6 @@ class FormBuilder {
             echo '</ul></div>';
         }
     }
-
     public function setData($data) {
         $this->data = $data;
     }

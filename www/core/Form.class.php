@@ -74,6 +74,11 @@ class Form {
         $this->id = $id;
     }
 
+    // Method format for the global variable $GLOBALS
+    public function getGlobalMethod() {
+        return '_'.$this->method;
+    }
+
     /**
      * Get the value of method
      */ 
@@ -82,16 +87,12 @@ class Form {
         return $this->method;
     }
 
-    // Method format for the global variable $GLOBALS
-    public function getGlobalMethod() {
-        return '_'.$this->method;
-    }
-
     /**
      * Set the value of method
      *
      */ 
     public function setMethod($method)
+
     {
         $this->method = $method;
     }
@@ -141,7 +142,7 @@ class Form {
     /**
      * Set the value of submitText
      *
-     */ 
+     */
     public function setSubmitText($submitText)
     {
         $this->submitText = $submitText;

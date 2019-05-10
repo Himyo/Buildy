@@ -9,9 +9,11 @@
     <script src="main.js"></script>
 </head>
 <body>
+    <div class="page">
     <h1>TEST</h1>
     <?php
-    $var = [0,1,2,3,"LALALALAL"];
+        $var = new \Core\QueryBuilder();
     ?>
+    </div>
 </body>
 </html>
