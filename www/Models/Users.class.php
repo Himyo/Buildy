@@ -1,12 +1,12 @@
 <?php
-namespace Model;
+namespace MVC\Models;
 
-use \Core\BaseSQL;
-use \Core\Routing;
-use \Lib\Form;
-use \Lib\Field;
-use \Lib\InputField;
-use \Lib\Supplier;
+ use MVC\Core\BaseSQL;
+ use MVC\Core\Routing;
+ use MVC\Lib\Form;
+ use MVC\Lib\Field;
+ use MVC\Lib\InputField;
+ use MVC\Lib\Supplier;
 
 class Users extends BaseSQL{
 

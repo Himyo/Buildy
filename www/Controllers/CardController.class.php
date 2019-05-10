@@ -1,4 +1,4 @@
 <?php
-namespace Controller;
+namespace MVC\Controllers;
 
 class CardController {}

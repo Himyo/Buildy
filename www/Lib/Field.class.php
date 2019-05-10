@@ -1,6 +1,6 @@
 <?php
 //TODO make abstract class ?
-namespace Lib;
+namespace MVC\Lib;
 
 class Field {
 

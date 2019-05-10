@@ -1,5 +1,5 @@
 <?php
-namespace Core;
+namespace MVC\Core;
 
 class QueryBuilder {
     private $query = "";

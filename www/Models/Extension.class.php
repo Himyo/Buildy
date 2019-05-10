@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace MVC\Models;
 
 class Extension {
 

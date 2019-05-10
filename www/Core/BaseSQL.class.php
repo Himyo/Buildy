@@ -1,5 +1,5 @@
 <?php
-namespace Core;
+namespace MVC\Core;
 
 use \PDO;
 use \PDOException;

@@ -1,18 +1,18 @@
 <?php
 
-use \Core\BaseSQL;
+ use MVC\Core\BaseSQL;
 
-use \Model\Users;
-use \Model\Card;
-use \Controller\CardController;
-use \Controller\UsersController;
-use \Controller\PagesController;
+ use MVC\Models\Users;
+ use MVC\Models\Card;
+ use MVC\Controllers\CardController;
+ use MVC\Controllers\UsersController;
+ use MVC\Controllers\PagesController;
 
-use \VO\DbDriver;
-use \VO\DbHost;
-use \VO\DbName;
-use \VO\DbUser;
-use \VO\DbPwd;
+ use MVC\VO\DbDriver;
+ use MVC\VO\DbHost ;
+ use MVC\VO\DbName;
+ use MVC\VO\DbUser;
+ use MVC\VO\DbPwd;
 
 $container = [
     DbDriver::class => function($container) {
