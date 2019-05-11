@@ -7,7 +7,7 @@ namespace MVC\VO;
 class CardSet
 {
     private $setCode;
-    private $setName;
+    private $setId;
 
     public function __construct()
     {
