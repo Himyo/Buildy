@@ -30,14 +30,6 @@ $container = [
     DbPwd::class => function($container) {
         return new DbPwd($container['config']['db']['password']);
     },
-    Card::class => function($container) {
-        $DbDriver = $container[DbDriver::class]($container)->getDbDriver();
-        $DbHost = $container[DbHost::class]($container)->getHost();
-        $DbName = $container[DbName::class]($container)->getName();
-        $DbUser = $container[DbUser::class]($container)->getUser();
-        $DbPwd = $container[DbPwd::class]($container)->getPwd();
-        return new Card(new BaseSQL($DbDriver, $DbHost, $DbName, $DbUser, $DbPwd));
-    },
     Users::class => function($container) {
         $DbDriver = $container[DbDriver::class]($container)->getDbDriver();
         $DbHost = $container[DbHost::class]($container)->getHost();
@@ -53,8 +45,5 @@ $container = [
 	PagesController::class => function($container) {
         return new PagesController();
     },
-    CardController::class => function($container) {
-        return new CardController();
-    }
 ];
 return $container;

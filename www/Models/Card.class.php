@@ -1,39 +1,29 @@
 <?php
 namespace MVC\Models;
 use CardQueryBuilder;
+use MVC\Core\BaseSQL;
 
-class Card
+//TODO: Override save method for each VO to return query
+// merged and executed by Cardo
+
+//Maybe change save to an abstract method -> not a priority
+
+//Maybe do a Card QueryBuilder
+// would imply to probably do a <Entity> QueryBuilder
+class Card extends BaseSQL
 {
 
     private $id;
 
     private $cardIdentity;
-    private $multiverseId;
-    private $name;
-    private $alias; //to implode
-    private $imageUrl;
 
     private $cardProps;
-    private $toughness;
-    private $power;
-    private $rarity;
-    private $text;
-
 
     private $cardMana;
-    private $colors;
-    private $manaCost;
-    private $cmc;
 
     private $cardType;
-    private $superType;
-    private $types;
-    private $subTypes;
-    private $layout;
 
     private $cardSet;
-    private $setName;
-    private $extension;
 
     private $voRules;
 
@@ -46,4 +36,5 @@ class Card
         $this->cardSet = $cardSet;
         $this->cardType = $cardType;
     }
+
 }
