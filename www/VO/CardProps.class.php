@@ -8,11 +8,13 @@ class CardProps
 {
     private $toughness;
     private $power;
-    private $rarity;
     private $text;
 
-    public function __construct()
+    public function __construct(array $props)
     {
+        $this->toughness = $props['toughness'];
+        $this->power = $props['power'];
+        $this->text = $props['text'];
     }
 
 }
