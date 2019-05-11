@@ -14,42 +14,40 @@
     <?php
         $url = 'https://api.magicthegathering.io/v1/sets';
         $file = json_decode(file_get_contents(__DIR__."/../data/cards.json"), true);
-        $qb = new Core\QueryBuilder();
-        $db = new Core\BaseSQL('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
+        $qb = new MVC\Core\QueryBuilder();
+        $db = new MVC\Core\BaseSQL('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
         $qs = [];
         $dt = [];
         $i = 0;
         foreach($file['sets'] as $data) {
-            $items = [
-                'name' => $data['name'],
+            $mana = new \MVC\VO\CardMana([
                 'manaCost' => $data['manaCost'],
                 'colors' => $data['colors'],
-                'cmc' => $data['cmc'],
+                'cmc' => $data['cmc']]);
 
+            $type = new \MVC\VO\CardType([
                 'supertype' => $data['supertypes'],
                 'subtype' => $data['subtypes'],
-                'type' => $data['types'],
-
+                'layout' => $data['layout'],
                 'rarity' => $data['rarity'],
-                'set' => $data['set'],
+                'type' => $data['types']]);
+
+            $props = new \MVC\VO\CardProps([
                 'text' => $data['text'],
                 'power' => $data['power'],
-                'toughness' => $data['toughness'],
-                'layout' => $data['layout'],
-                'multiverseId' => $data['multiverseid'],
-                'imageUrl' => $data['imageUrl'],
-                'cardId' => $data['id'],
-                'multiverseId' => $data['multiverseid'],
-                'game_id' => 1,
-            ];
+                'toughness' => $data['toughness']]);
 
-            $query = $qb->insertMany($items)->from('Releases')->make()->getQuery();
-            $qs[$i] = $query;
-            $dt[$i] = $items;
-            $i++;
+            $identity = new \MVC\VO\CardIdentity([
+                'name' => $data['name'],
+                'alias' => array_slice($data['names'], 1),
+                'multiverseId' => $data['multiverseid'],
+                'imageUrl' => $data['imageUrl']]);
+
+            $set = new \MVC\VO\CardSet(['set' =>[$data['set']]]);
+
+            $card = new \MVC\Models\Card($identity, $props, $mana, $type, $set);
         }
         echo '<pre>';
-        echo $query;
         // $db->execute($qs, $dt);
     ?>
     </div>
