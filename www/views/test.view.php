@@ -10,9 +10,8 @@
 </head>
 <body>
     <div class="page">
-    <h1>TEST</h2>
+    <h1>TEST</h1>
     <?php
-
         $var = "{10}{R}{R}{W}";
         $var = str_replace('}', '', $var);
         $var = explode('{', $var);
