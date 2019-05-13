@@ -56,7 +56,7 @@ class Users {
 	}
 	public function setId($id)
     {
-		$this->setId($id);
+		$this->id = $id;
     }
 
 
