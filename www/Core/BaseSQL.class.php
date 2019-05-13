@@ -14,7 +14,7 @@ class BaseSQL{
 		}catch(PDOException $e){
 			die("Erreur SQL : ".$e->getMessage());
 		}
-		$this->table = substr(get_called_class(), strpos(get_called_class(), '\\') +1);
+        $this->table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
 	}
 	public function setId($id){
 		$this->id = $id;
@@ -22,9 +22,15 @@ class BaseSQL{
 		$this->getOneBy(["id"=>$id], true);
 		
 	}
+
+    public function getTable(): string {
+	    return $this->table;
+    }
+
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
 	public function getOneBy(array $where, $object = false){
+        $this->table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
 		// $where = ["id"=>$id, "email"=>"y.skrzypczyk@gmail.com"];
 		$sqlWhere = [];
 		foreach ($where as $key => $value) {
@@ -45,6 +51,7 @@ class BaseSQL{
 	}
 
 	public function save(){
+        $this->table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0 [pdo] => PDO Object ( ) [table] => Users )
 		$dataObject = get_object_vars($this);
 		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0)

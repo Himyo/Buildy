@@ -17,4 +17,12 @@ class CardProps
         $this->text = $props['text'];
     }
 
+    public function getAllProps(): array {
+        $result = [
+            'toughness' => $this->toughness,
+            'power' => $this->power,
+            'text' => $this->text,
+        ];
+        return $result;
+    }
 }

@@ -4,8 +4,9 @@
 namespace MVC\VO;
 
 
-class CardType
+class Type
 {
+    private $id;
     private $supertype;
     private $type;
     private $subtype;
@@ -19,5 +20,16 @@ class CardType
         $this->subtype = $type['subtype'];
         $this->layout = $type['layout'];
         $this->rarity = $type['rarity'];
+    }
+
+    public function getAllType(): array {
+        $result = [
+            'supertype' => $this->supertype,
+            'type' => $this->type,
+            'subtype' => $this->subtype,
+            'layout' => $this->layout,
+            'rarity' => $this->rarity,
+        ];
+        return $result;
     }
 }

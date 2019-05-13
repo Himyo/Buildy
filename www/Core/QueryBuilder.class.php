@@ -45,6 +45,7 @@ class QueryBuilder {
                 return function($items) {
                     $keys = array_keys($items[0]);
                     $format = "(" . implode(" ,", $keys) . ") VALUES ";
+                    $values = "";
                     foreach($items as $i => $value){
                         $values.= "(".implode(',:'.$i, $items[$i])."),";
                     }
@@ -156,7 +157,7 @@ class QueryBuilder {
     }
     public function join(QueryBuilder $join): QueryBuilder    {
         $this->make();
-        $this->query.= " JOIN ".$join->makeQuery()->getQuery();
+        $this->query.= " JOIN ".$join->make()->getQuery();
         foreach ($join->getItems() as $joinKeyword => $joinData) {
             $this->items[$joinKeyword] = isset($this->items[$joinKeyword]) ? array_merge($this->items[$joinKeyword], $join->getItems()[$joinKeyword])
                 : $join->getItems()[$joinKeyword];
