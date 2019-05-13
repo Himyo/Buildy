@@ -19,7 +19,6 @@ class Releases extends BaseSQL {
      * @param $id
      * @param $name
      * @param $releaseDate
-     * @param $border
      */
     public function __construct($id, $name, $releaseDate, $code) {
         $this->id = $id;
