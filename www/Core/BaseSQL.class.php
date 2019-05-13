@@ -33,6 +33,11 @@ class BaseSQL{
 		$this->getOneBy(["id"=>$id], true);
 		
 	}
+
+    public function getTable(): string {
+	    return $this->table;
+    }
+
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
 	public function getOneBy($class, array $where, $object = false){
@@ -56,6 +61,7 @@ class BaseSQL{
 		$query->execute( $where );
 		return $query->fetch();
 	}
+
 	public function save($class){
 	    $calledClass = get_class($class);
         $table = substr($calledClass, strrpos($calledClass, '\\') +1);

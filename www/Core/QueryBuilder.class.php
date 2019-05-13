@@ -48,6 +48,7 @@ class QueryBuilder {
                 return function($items) {
                     $keys = array_keys($items[0]);
                     $format = "(" . implode(" ,", $keys) . ") VALUES ";
+                    $values = "";
                     foreach($items as $i => $value){
                         $values.= "(".implode(',:'.$i, $items[$i])."),";
                     }
