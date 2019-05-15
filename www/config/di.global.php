@@ -1,6 +1,7 @@
 <?php
 
  use MVC\Core\BaseSQL;
+ use MVC\Core\QueryBuilder;
 
  use MVC\Models\Users;
  use MVC\Models\Card;

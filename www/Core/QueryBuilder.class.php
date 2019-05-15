@@ -21,6 +21,9 @@ class QueryBuilder {
                     $keys = array_keys($items);
                     $format = "(" . implode(",", $keys) . ") VALUES (:"
                         . implode(",:", $keys) . ")";
+                    if(isset($items['ADDITIONAL'])) {
+                        $format.= implode(",", $items["ADDITIONAL"]);
+                    }
                     return $format;
                 };
                 break;
@@ -68,6 +71,10 @@ class QueryBuilder {
     }
         public function update(array $items): QueryBuilder {
         $this->items = ['UPDATE' => $items];
+        return $this;
+    }
+    public function addInsert(array $items): QueryBuilder {
+        isset($this->items['ADDITIONAL']) ? array_push($this->items['ADDITIONAL'], $items) : $this->items['ADDITIONAL'] = $items;
         return $this;
     }
 

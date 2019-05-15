@@ -26,9 +26,9 @@ class BaseSQL{
         }
 	    return self::$instance;
     }
-    public function getTable() {
-        $table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
-	    return $table;
+
+    public function getTable($th) {
+	   echo get_class($th);
     }
 	public function setId($id){
 		$this->id = $id;
@@ -38,8 +38,9 @@ class BaseSQL{
 	}
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
-	public function getOneBy(array $where, $object = false){
-        $table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
+	public function getOneBy($class, array $where, $object = false){
+        $calledClass = get_class($class);
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
 		// $where = ["id"=>$id, "email"=>"y.skrzypczyk@gmail.com"];
 		$sqlWhere = [];
 		foreach ($where as $key => $value) {
@@ -59,16 +60,14 @@ class BaseSQL{
 		return $query->fetch();
 	}
 
-	public function save(){
-        $table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
-		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0 [pdo] => PDO Object ( ) [table] => Users )
-		$dataObject = get_object_vars($this);
-		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0)
+	public function save($class){
+	    $calledClass = get_class($class);
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+		$dataObject = get_object_vars($class);
 		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
 		
 		if( is_null($dataChild["id"])){
 			//INSERT
-			//array_keys($dataChild) -> [id, firstname, lastname, email]
             unset($dataChild["id"]) ;
 			$sql ="INSERT INTO ".$table." ( ".
 			implode(",", array_keys($dataChild) ) .") VALUES ( :". 
