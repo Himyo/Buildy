@@ -19,6 +19,7 @@ class UsersController{
 	public function saveAction(){
 
 		$user = $this->user;
+		echo $user->basesql->getTable();
 		$form = $user->getRegisterForm();
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
@@ -34,7 +35,6 @@ class UsersController{
 				$_SESSION['user'] = $user;
 			}
 		}
-		$query = new QueryBuilder();
 		//TODO: Take decision for action settings
 		$v = new View("saveUser", "front");
 		$v->assign("form", new FormBuilder($form));

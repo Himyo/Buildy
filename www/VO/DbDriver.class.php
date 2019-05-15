@@ -2,10 +2,10 @@
 namespace MVC\VO;
 
 class DbDriver {
-    private $dbDriver = 'mysql';
+    private $driver = 'mysql';
 
     public function __construct(string $driver) {
-        $this->dbDriver = $driver;
+        $this->driver = $driver;
     }
-    public function getDbDriver() {return $this->dbDriver;}
+    public function getDriver() {return $this->driver;}
 }

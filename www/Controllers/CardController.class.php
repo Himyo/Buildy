@@ -1,4 +1,13 @@
 <?php
 namespace MVC\Controllers;
 
-class CardController {}
+use MVC\Models\Card;
+
+class CardController {
+    private $card;
+
+    public function __construct(Card $card)
+    {
+        $this->card = $card;
+    }
+}
