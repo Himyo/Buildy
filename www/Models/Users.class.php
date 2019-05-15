@@ -20,10 +20,10 @@ class Users {
 	public $role=1;
 	public $status=0;
 	public $token = "-1";
-	public $queryBuilder;
+	public $basesql;
 
-	public function __construct(QueryBuilder $qb){
-	    $this->queryBuilder = $qb;
+	public function __construct(BaseSQL $bsql){
+	    $this->basesql = $bsql;
 	}
 
 
@@ -175,10 +175,10 @@ class Users {
 	}
 
 	public function save() {
-	    $this->queryBuilder->save($this);
+	    $this->basesql->save($this);
     }
-    public function getOneBy(array $where, $object = false) {
-	    $this->queryBuilder->getOneBy($this, $where, $object);
+    public function getOneBy(array $where, $object = false): array {
+	    $this->basesql->getOneBy($this, $where, $object);
     }
 }
 

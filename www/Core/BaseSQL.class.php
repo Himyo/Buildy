@@ -27,9 +27,6 @@ class BaseSQL{
 	    return self::$instance;
     }
 
-    public function getTable($th) {
-	   echo get_class($th);
-    }
 	public function setId($id){
 		$this->id = $id;
 		//va récupérer en base de données les élements pour alimenter l'objet
@@ -59,13 +56,14 @@ class BaseSQL{
 		$query->execute( $where );
 		return $query->fetch();
 	}
-
 	public function save($class){
 	    $calledClass = get_class($class);
         $table = substr($calledClass, strrpos($calledClass, '\\') +1);
 		$dataObject = get_object_vars($class);
-		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
-		
+		//TODO: Change this to a more consistent solution
+        unset($dataObject['basesql']);
+		$dataChild = array_diff_key($dataObject, get_class_vars($class));
+
 		if( is_null($dataChild["id"])){
 			//INSERT
             unset($dataChild["id"]) ;
