@@ -30,31 +30,29 @@ $container = [
     DbPwd::class => function($container) {
         return new DbPwd($container['config']['db']['password']);
     },
-    Card::class => function($container) {
-        $DbDriver = $container[DbDriver::class]($container)->getDbDriver();
+    BaseSQL::class => function($container) {
+        $DbDriver = $container[DbDriver::class]($container)->getDriver();
         $DbHost = $container[DbHost::class]($container)->getHost();
         $DbName = $container[DbName::class]($container)->getName();
         $DbUser = $container[DbUser::class]($container)->getUser();
         $DbPwd = $container[DbPwd::class]($container)->getPwd();
-        return new Card(new BaseSQL($DbDriver, $DbHost, $DbName, $DbUser, $DbPwd));
+        return BaseSQL::getConnection($DbDriver, $DbHost, $DbName, $DbUser, $DbPwd);
+    },
+    Card::class => function($container) {
+        return new Card($container[BaseSQL::class]($container));
     },
     Users::class => function($container) {
-        $DbDriver = $container[DbDriver::class]($container)->getDbDriver();
-        $DbHost = $container[DbHost::class]($container)->getHost();
-        $DbName = $container[DbName::class]($container)->getName();
-        $DbUser = $container[DbUser::class]($container)->getUser();
-        $DbPwd = $container[DbPwd::class]($container)->getPwd();
-        return new Users($DbDriver, $DbHost, $DbName, $DbUser, $DbPwd);
+        return new Users($container[BaseSQL::class]($container));
     },
-	UsersController::class => function($container) {
-		$usersModel = $container[Users::class]($container);
-		return new UsersController($usersModel);
-	},
-	PagesController::class => function($container) {
-        return new PagesController();
+    UsersController::class => function($container) {
+        $usersModel = $container[Users::class]($container);
+        return new UsersController($usersModel);
     },
     CardController::class => function($container) {
-        return new CardController();
+        return new CardController($container[Card::class]($container));
+    },
+    PagesController::class => function($container) {
+    return new PagesController();
     }
 ];
 return $container;

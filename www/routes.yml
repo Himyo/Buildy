@@ -59,7 +59,7 @@
   action: login
   method: "POST"
 
-"/forGET_password":
+"/forget_password":
   controller: Users
   action: forGETPassword
   method: "GET"

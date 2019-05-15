@@ -19,10 +19,10 @@ class Users {
 	public $role=1;
 	public $status=0;
 	public $token = "-1";
-	private $pdo;
+	public $basesql;
 
-	public function __construct(BaseSQL $pdo){
-	    $this->pdo = $pdo;
+	public function __construct(BaseSQL $basesql){
+	    $this->basesql = $basesql;
 	}
 
 
@@ -61,8 +61,7 @@ class Users {
 
     public function getRegisterForm(){
 		$slug = Routing::getSlug("Users", "save");
-
-		$firstname = new InputField ([ 
+		$firstname = new InputField ([
 			"type"=>"text",
 			"placeholder"=>"Votre Prénom", 
 			"required"=>true, 
@@ -129,7 +128,7 @@ class Users {
 
 	public function getLoginForm(){
 		$slug = Routing::getSlug("Users", "login");
-		
+
 		$email = new InputField ([
 			"type"=>"email",
 			"placeholder"=>"Votre email", 

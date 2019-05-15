@@ -8,26 +8,28 @@ class BaseSQL{
     private static $instance;
 	private $pdo;
 
-	public function __construct()
-    {
+	public function __construct(string $driver, string $host, string $name, string $user, string $pwd) {
         try{
-            $this->pdo = new PDO(DBDRIVER. ":host=" . DBHOST. ";dbname=" . DBNAME, DBUSER, DBPWD);
+            $this->pdo = new PDO($driver. ":host=" . $host. ";dbname=" . $name, $user, $pwd);
         }
         catch(PDOException $e) {
             echo 'The connection to PDO failed';
             $err = $e->getMessage() . "<br />";
-            file_put_contents('PDOErrors.txt', $err, FILE_APPEND);
+            echo $err;
             die();
         }
     }
 
-    public static function getConnection(): self{
+    public static function getConnection($driver, $host, $name, $user, $pwd): BaseSQL{
 	    if(!self::$instance) {
-	        self::$instance = new self();
+	        self::$instance = new self($driver, $host, $name, $user, $pwd);
         }
 	    return self::$instance;
     }
-
+    public function getTable() {
+        $table = substr(get_called_class(), strrpos(get_called_class(), '\\') +1);
+	    return $table;
+    }
 	public function setId($id){
 		$this->id = $id;
 		//va récupérer en base de données les élements pour alimenter l'objet
