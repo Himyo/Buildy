@@ -25,7 +25,6 @@ class Routing{
                 "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
         }
         $t = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" => $method];
-        var_dump($t);
         return $t;
     }
 

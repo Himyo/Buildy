@@ -2,6 +2,7 @@
 namespace MVC\Models;
 
  use MVC\Core\BaseSQL;
+ use MVC\Core\QueryBuilder;
  use MVC\Core\Routing;
  use MVC\Lib\Form;
  use MVC\Lib\Field;
@@ -19,10 +20,10 @@ class Users {
 	public $role=1;
 	public $status=0;
 	public $token = "-1";
-	public $basesql;
+	public $queryBuilder;
 
-	public function __construct(BaseSQL $basesql){
-	    $this->basesql = $basesql;
+	public function __construct(QueryBuilder $qb){
+	    $this->queryBuilder = $qb;
 	}
 
 
@@ -172,6 +173,13 @@ class Users {
 		$form->addField($email);
 		return $form;
 	}
+
+	public function save() {
+	    $this->queryBuilder->save($this);
+    }
+    public function getOneBy(array $where, $object = false) {
+	    $this->queryBuilder->getOneBy($this, $where, $object);
+    }
 }
 
 
