@@ -19,7 +19,6 @@ class UsersController{
 	public function saveAction(){
 
 		$user = $this->user;
-		echo "======".$user->basesql->getTable($this->user);
 		$form = $user->getRegisterForm();
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){

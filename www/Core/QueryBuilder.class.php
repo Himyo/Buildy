@@ -133,6 +133,7 @@ class QueryBuilder {
                     break;
             }
         }
+        $this->query.=";";
         return $this;
     }
 
@@ -142,6 +143,7 @@ class QueryBuilder {
     }
     public function join(QueryBuilder $join): QueryBuilder    {
         $this->make();
+        $this->query = trim($this->query, ';');
         $this->query.= " JOIN ".$join->makeQuery()->getQuery();
         foreach ($join->getItems() as $joinKeyword => $joinData) {
             $this->items[$joinKeyword] = isset($this->items[$joinKeyword]) ? array_merge($this->items[$joinKeyword], $join->getItems()[$joinKeyword])
