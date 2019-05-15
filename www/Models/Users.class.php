@@ -8,7 +8,7 @@ namespace MVC\Models;
  use MVC\Lib\InputField;
  use MVC\Lib\Supplier;
 
-class Users extends BaseSQL{
+class Users {
 
     use Supplier;
 	public $id = null;
@@ -19,9 +19,10 @@ class Users extends BaseSQL{
 	public $role=1;
 	public $status=0;
 	public $token = "-1";
+	private $pdo;
 
-	public function __construct($driver, $host, $name, $user, $pwd){
-		parent::__construct($driver, $host, $name ,$user,$pwd);
+	public function __construct(BaseSQL $pdo){
+	    $this->pdo = $pdo;
 	}
 
 
