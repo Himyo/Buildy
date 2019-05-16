@@ -61,5 +61,10 @@
 
 "/forget_password":
   controller: Users
-  action: forGETPassword
+  action: forgetPassword
   method: "GET"
+
+"/load_cards":
+  controller: Cards
+  action: download
+  method: "POST"

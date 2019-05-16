@@ -4,7 +4,7 @@ namespace MVC\Models;
 use MVC\Core\BaseSQL;
 use MVC\Lib\Supplier;
 
-class Releases extends BaseSQL {
+class Releases {
 
     use Supplier;
     private $id;
@@ -13,6 +13,7 @@ class Releases extends BaseSQL {
     private $releaseDate;
     private $gameId = 1;
 
+    public $basesql;
 
     /**
      * Set constructor.
@@ -20,7 +21,12 @@ class Releases extends BaseSQL {
      * @param $name
      * @param $releaseDate
      */
-    public function __construct($id, $name, $releaseDate, $code) {
+    public function __construct(BaseSQL $bsql)
+    {
+        $this->basesql = $bsql;
+    }
+
+    public function init($id, $name, $releaseDate, $code) {
         $this->id = $id;
         $this->name = $name;
         $this->releaseDate = $releaseDate;

@@ -4,6 +4,8 @@
 namespace MVC\VO;
 
 
+use MVC\Core\BaseSQL;
+
 class Type
 {
     private $id;
@@ -12,8 +14,14 @@ class Type
     private $subtype;
     private $layout;
     private $rarity;
+    public $basesql;
 
-    public function __construct(array $type)
+    public function __construct(BaseSQL $bsql)
+    {
+        $this->basesql = $bsql;
+    }
+
+    public function init(array $type)
     {
         $this->supertype = $type['supertype'];
         $this->type = $type['type'];

@@ -1,12 +1,12 @@
 <?php
 namespace MVC\Models;
+
 use CardQueryBuilder;
 use \MVC\Core\BaseSQL;
 use \MVC\VO\CardIdentity;
 use \MVC\VO\CardProps;
-use \MVC\VO\CardMana;
-use \MVC\VO\CardType;
-use \MVC\VO\CardSet;
+use MVC\VO\Mana;
+use MVC\VO\Type;
 
 //TODO: Override save method for each VO to return query
 // merged and executed by Cardo
@@ -15,31 +15,34 @@ use \MVC\VO\CardSet;
 
 //Maybe do a Card QueryBuilder
 // would imply to probably do a <Entity> QueryBuilder
-class Card extends BaseSQL
+class Card
 {
 
     private $id;
 
-    private $cardIdentity;
+    private $identity;
 
-    private $cardProps;
+    private $props;
 
-    private $cardMana;
+    private $mana;
 
-    private $cardType;
+    private $type;
 
-    private $cardSet;
+    private $release;
 
     private $voRules;
 
+    public $basesql;
 
-    public function __construct(CardIdentity $cardIdentity, CardProps $cardProps, CardMana $cardMana, CardType $cardType, CardSet $cardSet)
+
+    public function __construct(BaseSQL $bsql, CardIdentity $identity, CardProps $props, Mana $mana, Type $type, Releases $release)
     {
-        $this->cardIdentity = $cardIdentity;
-        $this->cardProps = $cardProps;
-        $this->cardMana = $cardMana;
-        $this->cardType = $cardType;
-        $this->cardSet = $cardSet;
+        $this->identity = $identity;
+        $this->props = $props;
+        $this->mana = $mana;
+        $this->type = $type;
+        $this->release = $release;
+        $this->basesql = $bsql;
     }
 
 }
