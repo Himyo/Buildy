@@ -10,4 +10,41 @@ class CardController {
     {
         $this->card = $card;
     }
+
+    public function load() {
+        $url = 'https://api.magicthegathering.io/v1/sets';
+        $file = json_decode(file_get_contents(__DIR__."/../data/cards.json"), true);
+        $qs = [];
+        $dt = [];
+        $i = 0;
+
+        foreach($file['sets'] as $data) {
+            $mana = new \MVC\VO\CardMana([
+                'manaCost' => $data['manaCost'],
+                'cmc' => $data['cmc']]);
+
+            $type = new \MVC\VO\CardType([
+                'supertype' => $data['supertypes'],
+                'subtype' => $data['subtypes'],
+                'layout' => $data['layout'],
+                'rarity' => $data['rarity'],
+                'type' => $data['types']]);
+
+            $props = new \MVC\VO\CardProps([
+                'text' => $data['text'],
+                'power' => $data['power'],
+                'toughness' => $data['toughness']]);
+
+            $identity = new \MVC\VO\CardIdentity([
+                'name' => $data['name'],
+                'alias' => array_slice($data['names'], 1),
+                'multiverseId' => $data['multiverseid'],
+                'imageUrl' => $data['imageUrl']]);
+
+            $set = new \MVC\VO\CardSet(['set' =>[$data['set']]]);
+
+            $card = new \MVC\Models\Card($identity, $props, $mana, $type, $set);
+        }
+
+    }
 }

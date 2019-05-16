@@ -3,6 +3,10 @@
  use MVC\Core\BaseSQL;
  use MVC\Core\QueryBuilder;
 
+ use MVC\Models\Mana;
+ use MVC\Models\Type;
+ use MVC\Models\Releases;
+
  use MVC\Models\Users;
  use MVC\Models\Card;
  use MVC\Controllers\CardController;
@@ -14,6 +18,8 @@
  use MVC\VO\DbName;
  use MVC\VO\DbUser;
  use MVC\VO\DbPwd;
+ use MVC\VO\CardIdentity;
+ use MVC\VO\CardProps;
 
 $container = [
     DbDriver::class => function($container) {
@@ -38,6 +44,21 @@ $container = [
         $DbUser = $container[DbUser::class]($container)->getUser();
         $DbPwd = $container[DbPwd::class]($container)->getPwd();
         return BaseSQL::getConnection($DbDriver, $DbHost, $DbName, $DbUser, $DbPwd);
+    },
+    Mana::class => function($container){
+        return new Mana($container[BaseSQL::class]($container));
+    },
+    Type::class => function($container){
+        return new Type($container[BaseSQL::class]($container));
+    },
+    Releases::class => function($container){
+        return new Releases($container[BaseSQL::class]($container));
+    },
+    CardIdentity::class => function($container){
+        return new CardIdentity();
+    },
+    CardProps::class => function($container){
+        return new CardProps();
     },
     Card::class => function($container) {
         return new Card($container[BaseSQL::class]($container));

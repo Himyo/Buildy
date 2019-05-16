@@ -2,6 +2,7 @@
 
 
 namespace MVC\VO;
+use MVC\Core\BaseSQL;
 use MVC\Core\QueryBuilder;
 
 class Mana
@@ -10,10 +11,11 @@ class Mana
     private $manaCost;
     private $cmc;
 
-    public function __construct(array $mana)
+    public $basesql;
+
+    public function __construct(BaseSQL $bsql)
     {
-        $this->manaCost = $mana['manaCost'];
-        $this->cmc = $mana['cmc'];
+        $this->basesql = $bsql;
     }
 
     //TODO: Insert the VO in the corresponding table if not
