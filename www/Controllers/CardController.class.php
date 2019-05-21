@@ -11,39 +11,51 @@ class CardController {
         $this->card = $card;
     }
 
-    public function load() {
-        $url = 'https://api.magicthegathering.io/v1/sets';
+    public function downloadAction() {
+        $url = 'https://api.magicthegathering.io/v1/cards';
         $file = json_decode(file_get_contents(__DIR__."/../data/cards.json"), true);
-        $qs = [];
-        $dt = [];
-        $i = 0;
+        echo 'Loading the cards';
+//TODO: Static method which get result of insert
+// put the result in a array, then execute
+// should cost less than feeding object
+        foreach($file['cards'] as $data) {
 
-        foreach($file['sets'] as $data) {
-            $mana = new \MVC\VO\CardMana([
+            $this->card->initMana([
                 'manaCost' => $data['manaCost'],
-                'cmc' => $data['cmc']]);
+                'cmc' => $data['cmc']
+            ], true);
 
-            $type = new \MVC\VO\CardType([
+            $this->card->initType([
                 'supertype' => $data['supertypes'],
                 'subtype' => $data['subtypes'],
                 'layout' => $data['layout'],
                 'rarity' => $data['rarity'],
-                'type' => $data['types']]);
+                'type' => $data['types']
+            ], true);
 
-            $props = new \MVC\VO\CardProps([
+            $this->card->initRelease([
+                'set' => $data['set'],
+                'setName' => $data['setName']
+            ], true);
+
+            $this->card->initLegalities([
+                'ruling' => $data['rulings']
+                ], true);
+
+            $this->card->props->supply([
                 'text' => $data['text'],
                 'power' => $data['power'],
-                'toughness' => $data['toughness']]);
+                'toughness' => $data['toughness']
+            ]);
 
-            $identity = new \MVC\VO\CardIdentity([
+            $this->card->identity->supply([
                 'name' => $data['name'],
-                'alias' => array_slice($data['names'], 1),
-                'multiverseId' => $data['multiverseid'],
-                'imageUrl' => $data['imageUrl']]);
+                'lore' => $data['flavor'],
+                'multiverse_id' => $data['multiverseid'],
+                'image_url' => $data['imageUrl'],
+            ]);
 
-            $set = new \MVC\VO\CardSet(['set' =>[$data['set']]]);
-
-            $card = new \MVC\Models\Card($identity, $props, $mana, $type, $set);
+            $this->card->save();
         }
 
     }

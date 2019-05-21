@@ -25,17 +25,20 @@ class Releases {
     {
         $this->basesql = $bsql;
     }
-
-    public function init($id, $name, $releaseDate, $code) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->releaseDate = $releaseDate;
-        $this->code = $code;
+    public function init(array $release , bool $set = false) {
+        $dbRelease = $this->basesql->findOne();
+        if(!$dbRelease) {
+            //TODO: Probably prevent multiple query
+            // Make transaction for execution
+            var_dump($release);
+            $this->basesql->insert($this, $release);
+            if($set) {
+                $this->id = $this->basesql->pdo->lastInsertId();
+            }
+        }
     }
 
-    public static function getReleaseId(): integer {
-        
+    public function getId(): integer {
+        return $this->id;
     }
-
-
 }

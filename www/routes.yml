@@ -65,6 +65,6 @@
   method: "GET"
 
 "/load_cards":
-  controller: Cards
+  controller: Card
   action: download
   method: "POST"

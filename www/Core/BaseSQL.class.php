@@ -4,9 +4,9 @@ namespace MVC\Core;
 use \PDO;
 use \PDOException;
 
-class BaseSQL{
+class BaseSQL {
     private static $instance;
-	private $pdo;
+	public $pdo;
 
 	public function __construct(string $driver, string $host, string $name, string $user, string $pwd) {
         try{
@@ -34,9 +34,6 @@ class BaseSQL{
 		
 	}
 
-    public function getTable(): string {
-	    return $this->table;
-    }
 
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
@@ -93,6 +90,22 @@ class BaseSQL{
 			return $queryStatus;
 		}
 	}
+
+	public function findOne($element = 1) {
+	    //TODO
+	   return false;
+    }
+	public function insert($class, $data) {
+        $calledClass = get_class($class);
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+
+	    $qb = QueryBuilder::getQueryBuilder();
+	    $query =  $qb->insert($data)->from($table)->make()->getQuery();
+        echo $query;
+//	    $stmt = $this->pdo->prepare($query);
+//	    $stmtStatus = $stmt->execute($data);
+//	    return $stmtStatus;
+    }
 
 	public function executeMany($querys, $data) {
 		foreach($querys as $n => $value){

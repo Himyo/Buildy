@@ -4,28 +4,32 @@
 namespace MVC\VO;
 
 
+use MVC\Lib\Supplier;
+
 class CardIdentity
 {
-    private $multiverseId;
+    use Supplier;
+    private $multiverse_id;
+    private $lore;
     private $name;
-    private $alias;
     private $game_id = 1;
-    private $imageUrl;
+    private $image_url;
 
-    public function __construct(CardIdentity $identity)
+    public function __construct(){}
+
+    public function _init(array $identity)
     {
-        $this->multiverseId = $identity['multiverseId'];
+        $this->multiverseId = $identity['multiverse_id'];
         $this->name = $identity['name'];
-        $this->alias = implode(', ', $identity['alias']);
-        $this->imageUrl = $identity['imageUrl'];
+        $this->image_url = $identity['imageUrl'];
     }
 
     public function getAllIdentity(): array {
         $result = [
-            'multiverseId' => $this->multiverseId,
+            'multiverse_id' => $this->multiverse_id,
             'name' => $this->name,
-            'alias' => $this->alias,
-            'imageUrl' => $this->imageUrl,
+            'image_url' => $this->image_url,
+            'game_id' => $this->game_id,
         ];
         return $result;
     }

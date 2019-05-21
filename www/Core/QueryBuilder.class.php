@@ -1,5 +1,6 @@
 <?php
-namespace Core;
+namespace MVC\Core;
+
 class QueryBuilder {
     private $query = "";
     private $table;
@@ -20,6 +21,7 @@ class QueryBuilder {
                     $keys = array_keys($items);
                     $format = "(" . implode(",", $keys) . ") VALUES (:"
                         . implode(",:", $keys) . ")";
+                    //TODO: Remove or figure out this part
                     if(isset($items['ADDITIONAL'])) {
                         $format.= implode(",", $items["ADDITIONAL"]);
                     }
@@ -47,11 +49,13 @@ class QueryBuilder {
                 return function($items) {
                     $keys = array_keys($items[0]);
                     $format = "(" . implode(" ,", $keys) . ") VALUES ";
-                    foreach($items as $i => $value){
-                        $values.= "(".implode(',:'.$i, $items[$i])."),";
+                    $values = "";
+                    foreach($items as $i => $values){
+                        $values .= "(".implode(',:'.$i, $items[$i])."),";
                     }
-                    \trim($format, ",");
-                    return $format;
+                    trim($values, ",");
+
+                    return $format.$values;
                 };
                 break;
             default:
@@ -177,5 +181,9 @@ class QueryBuilder {
     }
     public function getQuery(): string {
         return $this->query;
+    }
+
+    public static function getQueryBuilder(): self {
+        return new self();
     }
 }
