@@ -4,13 +4,18 @@
 namespace MVC\VO;
 
 
+use MVC\Lib\Supplier;
+
 class CardProps
 {
+    use Supplier;
     private $toughness;
     private $power;
     private $text;
 
-    public function __construct(array $props)
+    public function __construct(){}
+
+    public function init(array $props)
     {
         $this->toughness = $props['toughness'];
         $this->power = $props['power'];

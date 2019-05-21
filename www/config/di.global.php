@@ -3,14 +3,18 @@
  use MVC\Core\BaseSQL;
  use MVC\Core\QueryBuilder;
 
+ use MVC\VO\CardIdentity;
+ use MVC\VO\CardProps;
  use MVC\Models\Mana;
  use MVC\Models\Type;
  use MVC\Models\Releases;
-
- use MVC\Models\Users;
+ use MVC\Models\Legalities;
  use MVC\Models\Card;
  use MVC\Controllers\CardController;
+
+ use MVC\Models\Users;
  use MVC\Controllers\UsersController;
+
  use MVC\Controllers\PagesController;
 
  use MVC\VO\DbDriver;
@@ -18,10 +22,9 @@
  use MVC\VO\DbName;
  use MVC\VO\DbUser;
  use MVC\VO\DbPwd;
- use MVC\VO\CardIdentity;
- use MVC\VO\CardProps;
 
 $container = [
+    //Database
     DbDriver::class => function($container) {
         return new DbDriver($container['config']['db']['driver']);
     },
@@ -45,6 +48,13 @@ $container = [
         $DbPwd = $container[DbPwd::class]($container)->getPwd();
         return BaseSQL::getConnection($DbDriver, $DbHost, $DbName, $DbUser, $DbPwd);
     },
+    // Card
+    CardIdentity::class => function($container){
+        return new CardIdentity();
+    },
+    CardProps::class => function($container){
+        return new CardProps();
+    },
     Mana::class => function($container){
         return new Mana($container[BaseSQL::class]($container));
     },
@@ -54,15 +64,24 @@ $container = [
     Releases::class => function($container){
         return new Releases($container[BaseSQL::class]($container));
     },
-    CardIdentity::class => function($container){
-        return new CardIdentity();
-    },
-    CardProps::class => function($container){
-        return new CardProps();
+    Legalities::class => function($container){
+        return new Legalities($container[BaseSQL::class]($container));
     },
     Card::class => function($container) {
-        return new Card($container[BaseSQL::class]($container));
+        return new Card(
+            $container[BaseSQL::class]($container),
+            $container[CardIdentity::class]($container),
+            $container[CardProps::class]($container),
+            $container[Mana::class]($container),
+            $container[Type::class]($container),
+            $container[Releases::class]($container),
+            $container[Legalities::class]($container)
+            );
     },
+    CardController::class => function($container) {
+        return new CardController($container[Card::class]($container));
+    },
+    //Users
     Users::class => function($container) {
         return new Users($container[BaseSQL::class]($container));
     },
@@ -70,9 +89,7 @@ $container = [
         $usersModel = $container[Users::class]($container);
         return new UsersController($usersModel);
     },
-    CardController::class => function($container) {
-        return new CardController($container[Card::class]($container));
-    },
+    //Pages
     PagesController::class => function($container) {
     return new PagesController();
     }

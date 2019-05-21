@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MVC\VO;
+namespace MVC\Models;
 
 
 use MVC\Core\BaseSQL;
@@ -21,13 +21,18 @@ class Type
         $this->basesql = $bsql;
     }
 
-    public function init(array $type)
+    public function init(array $type, bool $set = false)
     {
-        $this->supertype = $type['supertype'];
-        $this->type = $type['type'];
-        $this->subtype = $type['subtype'];
-        $this->layout = $type['layout'];
-        $this->rarity = $type['rarity'];
+        $dbType = $this->basesql->findOne($type);
+        if(!$dbType) {
+            //TODO: Probaly prevent multiple query
+            // Make transaction for execution
+            var_dump($type);
+            $this->basesql->insert($this, $type);
+            if($set) {
+                $this->id = $this->basesql->pdo->lastInsertId();
+            }
+        }
     }
 
     public function getAllType(): array {
@@ -39,5 +44,9 @@ class Type
             'rarity' => $this->rarity,
         ];
         return $result;
+    }
+
+    public function getId(): integer {
+        return $this->id;
     }
 }
