@@ -78,7 +78,6 @@ $container = [
             $container[Legalities::class]($container)
             );
     },
-<<<<<<< HEAD
     CardController::class => function($container) {
         return new CardController($container[Cards::class]($container));
     },
@@ -94,7 +93,5 @@ $container = [
     PagesController::class => function($container) {
     return new PagesController();
     }
-=======
->>>>>>> a44a24ba3eaa28be02d61222d954ca87101decf6
 ];
 return $container;
