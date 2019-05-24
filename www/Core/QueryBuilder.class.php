@@ -6,7 +6,10 @@ class QueryBuilder {
     private $table;
     private $items= [];
 
-    public function __construct() {}
+    //TODO: Take only the data key and not the full data array;
+    public function __construct(string $table) {
+        $this->table = $table;
+    }
  //TODO: INNER/OUTER JOIN, LIKE, BETWEEN, EXISTS, HAVING, ALTER, DROP, CHECK
     public static function SQL_PARSER($format){
         switch ($format) {
@@ -15,6 +18,7 @@ class QueryBuilder {
                     $format = "(" . implode(" ,", $items) . ")";
                     return $format;
                 };
+            // Make transaction for execution
                 break;
             case 'INSERT':
                 return function ($items) {
@@ -58,6 +62,26 @@ class QueryBuilder {
                     return $format.$values;
                 };
                 break;
+            case 'AND WHERE':
+                return function($items) {
+                    $format = "";
+                    $keys = array_keys($items);
+                    foreach ($keys as $k) {
+                        $format .= " AND ".$k." = :".$k;
+                    }
+                    return $format;
+                };
+                break;
+            case 'OR WHERE':
+                return function($items) {
+                    $format = "";
+                    $keys = array_keys($items);
+                    foreach ($keys as $k) {
+                        $format .= " OR ".$k." = :".$k;
+                    }
+                    return $format;
+                };
+                break;
             default:
                 return function ($items) {
                     $keys = array_keys($items);
@@ -72,7 +96,7 @@ class QueryBuilder {
     }
 
     public function select(array $items): QueryBuilder{
-        $this->items = ['SELECT' => $items];
+        $this->items['SELECT'] = $items;
         return $this;
     }
     public function delete(array $items, $opt=[]): QueryBuilder{
@@ -101,19 +125,26 @@ class QueryBuilder {
 
     public function where($item): QueryBuilder {
         $this->items['WHERE'] = $item;
+
         return $this;
     }
 
     public function andWhere($item): QueryBuilder{
-        if(isset($this->items['WHERE'])){
-           $this->items['AND WHERE'] = isset($this->items['AND WHERE']) ? array_merge($this->items['AND WHERE'], $item) : $item;
+        if(!isset($this->items['WHERE'])) {
+            $this->items['WHERE'] = [array_keys($item)[0] => array_shift($item)];
+        }
+        foreach ($item as $key => $value) {
+            $this->items['AND WHERE'][$key] = $value;
         }
         return $this;
     }
 
     public function orWhere($item): QueryBuilder{
-        if(isset($this->items['WHERE'])){
-           $this->items['OR WHERE'] = isset($this->items['OR WHERE']) ? array_merge($this->items['OR WHERE'], $item) : $item;
+        if(!isset($this->items['WHERE'])) {
+            $this->items['WHERE'] = [array_keys($item)[0] => array_shift($item)];
+        }
+        foreach ($item as $key => $value) {
+            $this->items['OR WHERE'][$key] = $value;
         }
         return $this;
     }
@@ -152,8 +183,14 @@ class QueryBuilder {
                 case 'INSERT MANY':
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT MANY')($data);
                     break;
+                case 'AND WHERE':
+                    $this->query .= QueryBuilder::SQL_PARSER('AND WHERE')($data);
+                    break;
+                case 'OR WHERE':
+                    $this->query .= QueryBuilder::SQL_PARSER('OR WHERE')($data);
+                    break;
                 default:
-                    $this->query = " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
+                    $this->query .= " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
                     break;
             }
         }
@@ -183,7 +220,9 @@ class QueryBuilder {
         return $this->query;
     }
 
-    public static function getQueryBuilder(): self {
-        return new self();
+    public static function getQueryBuilder($class): self {
+        $calledClass = get_class($class)??$class;
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+        return new self($table);
     }
 }

@@ -26,19 +26,19 @@ class Releases {
         $this->basesql = $bsql;
     }
     public function init(array $release , bool $set = false) {
-        $dbRelease = $this->basesql->findOne();
+        $dbRelease = $this->basesql->findOne($this, $release);
         if(!$dbRelease) {
-            //TODO: Probably prevent multiple query
-            // Make transaction for execution
-            var_dump($release);
             $this->basesql->insert($this, $release);
             if($set) {
                 $this->id = $this->basesql->pdo->lastInsertId();
             }
         }
+        else {
+            $this->id = $dbRelease[0];
+        }
     }
 
-    public function getId(): integer {
+    public function getId() {
         return $this->id;
     }
 }

@@ -9,7 +9,7 @@
  use MVC\Models\Type;
  use MVC\Models\Releases;
  use MVC\Models\Legalities;
- use MVC\Models\Card;
+ use MVC\Models\Cards;
  use MVC\Controllers\CardController;
 
  use MVC\Models\Users;
@@ -67,8 +67,8 @@ $container = [
     Legalities::class => function($container){
         return new Legalities($container[BaseSQL::class]($container));
     },
-    Card::class => function($container) {
-        return new Card(
+    Cards::class => function($container) {
+        return new Cards(
             $container[BaseSQL::class]($container),
             $container[CardIdentity::class]($container),
             $container[CardProps::class]($container),
@@ -79,7 +79,7 @@ $container = [
             );
     },
     CardController::class => function($container) {
-        return new CardController($container[Card::class]($container));
+        return new CardController($container[Cards::class]($container));
     },
     //Users
     Users::class => function($container) {

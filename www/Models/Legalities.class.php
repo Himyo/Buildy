@@ -17,16 +17,32 @@ class Legalities
     }
 
     public function init(array $legalities, bool $set = false) {
-        $dbLegalities = $this->basesql->findOne($legalities);
+        $data = $this->parseLegalities($legalities);
+        $dbLegalities = $this->basesql->findOne($this, $data);
         if(!$dbLegalities) {
-            $this->basesql->insert($this, $legalities);
+            $this->basesql->insert($this, $data);
             if($set) {
-                $this->id = $this->basesql->lastInsertedId();
+//                $this->id = $this->basesql->lastInsertedId();
             }
+        }
+        else {
+            $this->id = $dbLegalities[0];
         }
     }
 
-    public function getId(): integer {
+    public function parseLegalities(array $legalities): array {
+        $result = [];
+        $acceptedFormat = ['legacy', 'modern', 'pauper', 'standard', 'vintage'];
+        foreach ($legalities['legalities'] as $key => $value) {
+            $format = strtolower($value["format"]);
+            if (in_array($format, $acceptedFormat)) {
+                $result[$format] = $value["legality"] == "Legal";
+            }
+        }
+        return $result;
+    }
+
+    public function getId() {
         return $this->id;
     }
 }
