@@ -4,33 +4,48 @@ namespace MVC\Core;
 use \PDO;
 use \PDOException;
 
-class BaseSQL{
-	private $pdo;
-	private $table;
-	public function __construct($driver, $host, $name, $user, $pwd){
-		try{
-			$this->pdo = new PDO($driver.":host=".$host.";dbname=".$name,$user,$pwd);
-			//$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}catch(PDOException $e){
-			die("Erreur SQL : ".$e->getMessage());
-		}
-		$this->table = substr(get_called_class(), strpos(get_called_class(), '\\') +1);
-	}
+class BaseSQL {
+    private static $instance;
+	public $pdo;
+
+	public function __construct(string $driver, string $host, string $name, string $user, string $pwd) {
+        try{
+            $this->pdo = new PDO($driver. ":host=" . $host. ";dbname=" . $name, $user, $pwd);
+        }
+        catch(PDOException $e) {
+            echo 'The connection to PDO failed';
+            $err = $e->getMessage() . "<br />";
+            echo $err;
+            die();
+        }
+    }
+
+    public static function getConnection($driver, $host, $name, $user, $pwd): BaseSQL{
+	    if(!self::$instance) {
+	        self::$instance = new self($driver, $host, $name, $user, $pwd);
+        }
+	    return self::$instance;
+    }
+
 	public function setId($id){
 		$this->id = $id;
 		//va récupérer en base de données les élements pour alimenter l'objet
 		$this->getOneBy(["id"=>$id], true);
 		
 	}
+
+
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
-	public function getOneBy(array $where, $object = false){
+	public function getOneBy($class, array $where, $object = false){
+        $calledClass = get_class($class);
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
 		// $where = ["id"=>$id, "email"=>"y.skrzypczyk@gmail.com"];
 		$sqlWhere = [];
 		foreach ($where as $key => $value) {
 			$sqlWhere[]=$key."=:".$key;
 		}
-		$sql = " SELECT * FROM ".$this->table." WHERE  ".implode(" AND ", $sqlWhere).";";
+		$sql = " SELECT * FROM ".$table." WHERE  ".implode(" AND ", $sqlWhere).";";
 		$query = $this->pdo->prepare($sql);
 		
 		if($object){
@@ -44,17 +59,18 @@ class BaseSQL{
 		return $query->fetch();
 	}
 
-	public function save(){
-		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0 [pdo] => PDO Object ( ) [table] => Users )
-		$dataObject = get_object_vars($this);
-		//Array ( [id] => [firstname] => Yves [lastname] => SKRZYPCZYK [email] => y.skrzypczyk@gmail.com [pwd] => $2y$10$tdmxlGf.zP.3dd7K/kRtw.jzYh2CnSbFuXaUkDNl3JtDJ05zCI7AG [role] => 1 [status] => 0)
-		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
-		
+	public function save($class){
+	    $calledClass = get_class($class);
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+		$dataObject = get_object_vars($class);
+		//TODO: Change this to a more consistent solution
+        unset($dataObject['basesql']);
+		$dataChild = array_diff_key($dataObject, get_class_vars($class));
+
 		if( is_null($dataChild["id"])){
 			//INSERT
-			//array_keys($dataChild) -> [id, firstname, lastname, email]
             unset($dataChild["id"]) ;
-			$sql ="INSERT INTO ".$this->table." ( ". 
+			$sql ="INSERT INTO ".$table." ( ".
 			implode(",", array_keys($dataChild) ) .") VALUES ( :". 
 			implode(",:", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
@@ -68,10 +84,41 @@ class BaseSQL{
 				if( $key != "id")
 				$sqlUpdate[]=$key."=:".$key;
 			}
-			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
+			$sql ="UPDATE ".$table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
 			return $queryStatus;
+		}
+	}
+
+	public function findOne($class, array $data) {
+	    $qb = QueryBuilder::getQueryBuilder($class);
+	    $query = $qb->select([0 =>'id'])->andWhere($data)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmt->execute($data);
+        return $stmt->fetch();
+    }
+	public function insert($class, $data) {
+        //TODO: Probably prevent multiple query
+        // Make transaction for execution
+
+        $qb = QueryBuilder::getQueryBuilder($class);
+	    $query =  $qb->insert($data)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute($data);
+	    return $stmtStatus;
+    }
+
+    public function lastInsertedId(){
+	    $res = $this->pdo->lastInsertId();
+	    return $res;
+    }
+	public function executeMany($querys, $data) {
+		foreach($querys as $n => $value){
+			$request = $this->pdo->prepare($querys[$n]);
+			$requestStatus = $request->execute($data[$n]);
+			echo $requestStatus." ".$n." ".$querys[$n]."<br />";
+			var_dump($data[$n]);
 		}
 	}
 }

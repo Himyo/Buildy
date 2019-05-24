@@ -2,13 +2,14 @@
 namespace MVC\Models;
 
  use MVC\Core\BaseSQL;
+ use MVC\Core\QueryBuilder;
  use MVC\Core\Routing;
  use MVC\Lib\Form;
  use MVC\Lib\Field;
  use MVC\Lib\InputField;
  use MVC\Lib\Supplier;
 
-class Users extends BaseSQL{
+class Users {
 
     use Supplier;
 	public $id = null;
@@ -19,9 +20,10 @@ class Users extends BaseSQL{
 	public $role=1;
 	public $status=0;
 	public $token = "-1";
+	public $basesql;
 
-	public function __construct($driver, $host, $name, $user, $pwd){
-		parent::__construct($driver, $host, $name ,$user,$pwd);
+	public function __construct(BaseSQL $bsql){
+	    $this->basesql = $bsql;
 	}
 
 
@@ -54,14 +56,13 @@ class Users extends BaseSQL{
 	}
 	public function setId($id)
     {
-		$this->setId($id);
+		$this->id = $id;
     }
 
 
     public function getRegisterForm(){
 		$slug = Routing::getSlug("Users", "save");
-
-		$firstname = new InputField ([ 
+		$firstname = new InputField ([
 			"type"=>"text",
 			"placeholder"=>"Votre Prénom", 
 			"required"=>true, 
@@ -128,7 +129,7 @@ class Users extends BaseSQL{
 
 	public function getLoginForm(){
 		$slug = Routing::getSlug("Users", "login");
-		
+
 		$email = new InputField ([
 			"type"=>"email",
 			"placeholder"=>"Votre email", 
@@ -172,6 +173,13 @@ class Users extends BaseSQL{
 		$form->addField($email);
 		return $form;
 	}
+
+	public function save() {
+	    $this->basesql->save($this);
+    }
+    public function getOneBy(array $where, $object = false): array {
+	    $this->basesql->getOneBy($this, $where, $object);
+    }
 }
 
 

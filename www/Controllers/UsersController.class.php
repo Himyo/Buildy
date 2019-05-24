@@ -34,7 +34,6 @@ class UsersController{
 				$_SESSION['user'] = $user;
 			}
 		}
-		$query = new QueryBuilder();
 		//TODO: Take decision for action settings
 		$v = new View("saveUser", "front");
 		$v->assign("form", new FormBuilder($form));

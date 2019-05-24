@@ -30,7 +30,7 @@
 
 "/mot_de_passe_oublie":
   controller: Users
-  action: forGETPassword
+  action: forgetPassword
   method: "GET"
 
 # ######################################## EN ######################################
@@ -59,7 +59,12 @@
   action: login
   method: "POST"
 
-"/forGET_password":
+"/forget_password":
   controller: Users
-  action: forGETPassword
+  action: forgetPassword
   method: "GET"
+
+"/load_cards":
+  controller: Card
+  action: download
+  method: "POST"

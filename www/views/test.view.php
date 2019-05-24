@@ -12,7 +12,18 @@
     <div class="page">
     <h1>TEST</h1>
     <?php
-        $var = new \Core\QueryBuilder();
+        $var = "{10}{R}{R}{W}";
+        $var = str_replace('}', '', $var);
+        $var = explode('{', $var);
+        echo 'a';
+        echo "R" > 4;
+        echo 'b';
+        echo (int) 'W/G';
+        echo '<pre>';
+        $user = new \MVC\Models\Users();
+        $user->getOneBy(['lala'=>31]);
+        echo $user->getTable();
+        // $db->execute($qs, $dt);
     ?>
     </div>
 </body>
