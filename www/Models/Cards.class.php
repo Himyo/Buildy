@@ -12,7 +12,7 @@ use \MVC\VO\CardProps;
 
 //Maybe do a Card QueryBuilder
 // would imply to probably do a <Entity> QueryBuilder
-class Card
+class Cards
 {
 
     private $id;
@@ -50,16 +50,16 @@ class Card
     }
 
     public function initMana(array $mana, bool $set) {
-        $this->mana->init($mana);
+        $this->mana->init($mana, $set);
     }
     public function initType(array $type, bool $set) {
-        $this->type->init($type);
+        $this->type->init($type, $set);
     }
     public function initRelease(array $release, bool $set) {
-        $this->release->init($release);
+        $this->release->init($release, $set);
     }
     public function initLegalities(array $legalities, bool $set) {
-        $this->legalities->init($legalities);
+        $this->legalities->init($legalities, $set);
     }
     public function save() {
         $data = [
@@ -69,8 +69,10 @@ class Card
             'mana_id' => $this->mana->getId(),
 
         ];
-        array_push($data, $this->identity->getAllIdentity());
-        array_push($data, $this->props->getAllProps());
+        $data = array_merge($data, $this->identity->getAllIdentity());
+        $data = array_merge($data, $this->props->getAllProps());
+        echo "<pre>";
+        var_dump($data);
         $this->basesql->insert($this, $data);
     }
 }

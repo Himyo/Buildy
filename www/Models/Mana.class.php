@@ -20,21 +20,24 @@ class Mana
 
 
     public function init(array $mana, bool $set = false) {
-        $dbMana = $this->basesql->findOne($mana['manaCost']);
+        $dbMana = $this->basesql->findOne($this, ['mana_cost' => $mana['mana_cost']]);
         if(!$dbMana) {
-            $parsedMana =  $this->parseManaCost($mana['manaCost']);
-            $data = [$parsedMana, $mana];
+            $parsedMana =  $this->parseManaCost($mana['mana_cost']);
+            $parsedMana['mana_cost'] = $mana['mana_cost'];
+            $parsedMana['cmc'] = $mana['cmc'];
             //TODO: Probably prevent multiple query
             // Make transaction for execution
-            var_dump($mana);
-            $this->basesql->insert($this, $data);
+            $this->basesql->insert($this, $parsedMana);
             if($set) {
                 $this->id = $this->basesql->pdo->lastInsertId();
             }
         }
+        else {
+            $this->id = $dbMana[0];
+        }
     }
 
-    public function parseManaCost($mC): array
+    public function parseManaCost(string $mC): array
     {
         $result = [
             'R' => 0,
@@ -42,7 +45,9 @@ class Mana
             'G' => 0,
             'W' => 0,
             'B' => 0,
-            'C' => 0
+            'C' => 0,
+            'X' => 0,
+            '' => 0
         ];
         $manaCost = $mC;
         $manaCost = trim($manaCost, '}');
@@ -66,27 +71,26 @@ class Mana
                 $result[$color]++;
             }
         }
-        $mapedResult = array_map(function($result) {
             return [
                 'red' => $result['R'],
                 'blue' => $result['U'],
                 'green' => $result['G'],
                 'white' => $result['W'],
                 'black' => $result['B'],
-                'colorless' => $result['C']
+                'colorless' => $result['C'],
+                'x' => $result['X'],
+                'void' => $result['']
             ];
-        }, $result);
-        return $mapedResult;
     }
 
-    public function findMana(): integer {
+    public function findMana() {
         $qb = QueryBuilder::getQueryBuilder();
         $qb->select(['id'])
-            ->where(['convert_mana_cost' => $this->cmc])
+            ->where(['cmc' => $this->cmc])
             ->andWhere(['mana_cost'=>$this->manaCost]);
     }
 
-    public function getId(): integer {
+    public function getId() {
         return $this->id;
     }
 }

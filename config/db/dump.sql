@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: buildydb
--- Generation Time: May 16, 2019 at 10:22 AM
+-- Generation Time: May 24, 2019 at 03:56 PM
 -- Server version: 10.3.14-MariaDB-1:10.3.14+maria~bionic
 -- PHP Version: 7.2.14
 
@@ -21,8 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `buildy`
 --
-CREATE SCHEMA IF NOT EXISTS `buildy` DEFAULT CHARACTER SET utf8;
-USE `buildy`
+
 -- --------------------------------------------------------
 
 --
@@ -67,47 +66,103 @@ CREATE TABLE `Ban_list` (
 
 CREATE TABLE `Cards` (
   `id` int(11) NOT NULL,
+  `image_url` varchar(250) NOT NULL DEFAULT 'none',
   `name` varchar(45) DEFAULT NULL,
-  `flavor` varchar(45) DEFAULT NULL,
+  `toughness` int(11) DEFAULT NULL,
+  `power` int(11) DEFAULT NULL,
+  `text` varchar(520) DEFAULT NULL,
+  `lore` varchar(250) DEFAULT NULL,
+  `ruling` varchar(520) DEFAULT NULL,
+  `multiverse_id` int(11) NOT NULL DEFAULT -1,
   `releases_id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL DEFAULT 1,
   `mana_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `legalities_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `Mana`
+-- Dumping data for table `Cards`
 --
 
-CREATE TABLE `Mana` (
-  `id` int(11) NOT NULL,
-  `white` int(11) NOT NULL DEFAULT 0,
-  `black` int(11) NOT NULL DEFAULT 0,
-  `blue` int(11) NOT NULL DEFAULT 0,
-  `green` int(11) NOT NULL DEFAULT 0,
-  `red` int(11) NOT NULL DEFAULT 0,
-  `colorless` int(11) NOT NULL DEFAULT 0,
-  `cmc` int(11) NOT NULL DEFAULT 0,
-  `mana_cost` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Type`
---
-
-CREATE TABLE `Type` (
-  `id` int(11) NOT NULL,
-  `supertype` varchar(75) DEFAULT NULL,
-  `type` varchar(75) DEFAULT NULL,
-  `subtype` varchar(75) DEFAULT NULL,
-  `layout` varchar(75) DEFAULT NULL,
-  `rarity` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `lore`, `ruling`, `multiverse_id`, `releases_id`, `game_id`, `mana_id`, `type_id`, `legalities_id`) VALUES
+(771, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130483&type=card', 'Abundance', 0, 0, 'If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.', '', 'This replacement effect replaces the draw, so nothing that triggers on a draw will trigger.', 130483, 4018, 1, 1, 1, 1),
+(772, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card', 'Academy Researchers', 2, 2, 'When Academy Researchers enters the battlefield, you may put an Aura card from your hand onto the battlefield attached to Academy Researchers.', 'They brandish their latest theories as warriors would wield weapons.', 'You canâ€™t put an Aura card from your hand onto the battlefield this way if that Aura canâ€™t legally enchant Academy Researchers. For example, you canâ€™t put an Aura with â€œenchant landâ€ or â€œenchant green creatureâ€ onto the battlefield attached to Academy Researchers (unless Academy Researchers somehow turned into a land or a green creature before the ability resolved).', 132072, 4018, 1, 2, 4, 1),
+(773, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129458&type=card', 'Adarkar Wastes', 0, 0, '{T}: Add {C}.\n{T}: Add {W} or {U}. Adarkar Wastes deals 1 damage to you.', '', 'none', 129458, 4018, 1, 3, 7, 1),
+(774, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135206&type=card', 'Afflict', 0, 0, 'Target creature gets -1/-1 until end of turn.\nDraw a card.', 'One rarely notices a heartbeat, save when it is stolen.', 'none', 135206, 4018, 1, 4, 8, 4),
+(775, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130525&type=card', 'Aggressive Urge', 0, 0, 'Target creature gets +1/+1 until end of turn.\nDraw a card.', 'The power of the wild, concentrated in a single charge.', 'If the target creature is an illegal target by the time Aggressive Urge tries to resolve, the spell doesnâ€™t resolve. You wonâ€™t draw a card.', 130525, 4018, 1, 5, 8, 5),
+(776, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135228&type=card', 'Agonizing Memories', 0, 0, 'Look at target player\'s hand and choose two cards from it. Put them on top of that player\'s library in any order.', 'In the aftermath of war, when the slaying is long done, the greatest miseries come home to roost.', 'none', 135228, 4018, 1, 6, 10, 1),
+(777, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129459&type=card', 'Air Elemental', 4, 4, 'Flying (This creature can\'t be blocked except by creatures with flying or reach.)', '\"The East Wind, an interloper in the dominions of Westerly Weather, is an impassive-faced tyrant with a sharp poniard held behind his back for a treacherous stab.\" â€”Joseph Conrad, The Mirror of the Sea', 'none', 129459, 4018, 1, 7, 11, 5),
+(778, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129913&type=card', 'Ambassador Laquatus', 3, 1, '{3}: Target player puts the top three cards of their library into their graveyard.', '\"Life is a game. The only thing that matters is whether you\'re a pawn or a player.\"', 'none', 129913, 4018, 1, 2, 13, 1),
+(779, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=134753&type=card', 'Anaba Bodyguard', 3, 2, 'First strike (This creature deals combat damage before creatures without first strike.)', '\"They who challenge a minotaur enjoy the taste of their own blood.\" â€”Mirri of the Weatherlight', 'none', 134753, 4018, 1, 9, 14, 4),
+(780, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130550&type=card', 'Ancestor\'s Chosen', 4, 4, 'First strike (This creature deals combat damage before creatures without first strike.)\nWhen Ancestor\'s Chosen enters the battlefield, you gain 1 life for each card in your graveyard.', '', 'none', 130550, 4018, 1, 10, 16, 1),
+(781, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129465&type=card', 'Angel of Mercy', 3, 3, 'Flying\nWhen Angel of Mercy enters the battlefield, you gain 3 life.', 'Every tear shed is a drop of immortality.', 'none', 129465, 4018, 1, 11, 18, 4),
+(782, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129466&type=card', 'Angel\'s Feather', 0, 0, 'Whenever a player casts a white spell, you may gain 1 life.', 'If taken, it cuts the hand that clutches it. If given, it heals the hand that holds it.', 'The ability triggers whenever any player, not just you, casts a white spell.', 129466, 4018, 1, 12, 20, 1),
+(783, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129711&type=card', 'Angelic Blessing', 0, 0, 'Target creature gets +3/+3 and gains flying until end of turn. (It can\'t be blocked except by creatures with flying or reach.)', 'Only the warrior who can admit mortal weakness will be bolstered by immortal strength.', 'none', 129711, 4018, 1, 13, 21, 4),
+(784, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129710&type=card', 'Angelic Chorus', 0, 0, 'Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.', 'The harmony of the glorious is a dirge to the wicked.', 'This does not trigger on a permanent being turned into a creature. That is just a permanent changing type, not something entering the battlefield.', 129710, 4018, 1, 14, 1, 1),
+(785, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129671&type=card', 'Angelic Wall', 4, 0, 'Defender (This creature can\'t attack.)\nFlying', '\"The Ancestor protects us in ways we can\'t begin to comprehend.\" â€”Mystic elder', 'none', 129671, 4018, 1, 15, 24, 4),
+(786, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130530&type=card', 'Arcane Teachings', 0, 0, 'Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +2/+2 and has \"{T}: This creature deals 1 damage to any target.\"', '', 'none', 130530, 4018, 1, 16, 26, 4),
+(787, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=106426&type=card', 'Arcanis the Omnipotent', 4, 3, '{T}: Draw three cards.\n{2}{U}{U}: Return Arcanis the Omnipotent to its owner\'s hand.', '\"Do not concern yourself with my origin, my race, or my ancestry. Seek my record in the pits, and then make your wager.\"', 'Arcanisâ€™s last ability can only be activated while itâ€™s on the battlefield.', 106426, 4018, 1, 17, 28, 1),
+(788, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=106525&type=card', 'Ascendant Evincar', 3, 3, 'Flying (This creature can\'t be blocked except by creatures with flying or reach.)\nOther black creatures get +1/+1.\nNonblack creatures get -1/-1.', 'His soul snared by an angel\'s curse, Crovax twisted heroism into its purest shadow.', 'If Ascendant Evincar stops being black, it gives itself -1/-1.', 106525, 4018, 1, 18, 29, 1),
+(789, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135194&type=card', 'Assassinate', 0, 0, 'Destroy target tapped creature.', '\"This is how wars are wonâ€”not with armies of soldiers but with a single knife blade, artfully placed.\" â€”Yurin, royal assassin', 'none', 135194, 4018, 1, 4, 21, 4),
+(790, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130976&type=card', 'Aura Graft', 0, 0, 'Gain control of target Aura that\'s attached to a permanent. Attach it to another permanent it can enchant.', '\"It\'s not really stealing. It\'s more like extended borrowing.\"', 'If there is no legal place to move the enchantment, then it doesnâ€™t move but you still control it.', 130976, 4018, 1, 20, 32, 1),
+(791, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132127&type=card', 'Aura of Silence', 0, 0, 'Artifact and enchantment spells your opponents cast cost {2} more to cast.\nSacrifice Aura of Silence: Destroy target artifact or enchantment.', 'Not all silences are easily broken.', 'Aura of Silence affects all opponents in a multiplayer game.', 132127, 4018, 1, 21, 33, 1),
+(792, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135249&type=card', 'Avatar of Might', 8, 8, 'If an opponent controls at least four more creatures than you, this spell costs {6} less to cast.\nTrample (This creature can deal excess combat damage to the player or planeswalker it\'s attacking.)', '', 'The converted mana cost of this card is still 8, even if you only pay {G}{G} to cast it.', 135249, 4018, 1, 22, 34, 1),
+(793, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129470&type=card', 'Aven Cloudchaser', 2, 2, 'Flying (This creature can\'t be blocked except by creatures with flying or reach.)\nWhen Aven Cloudchaser enters the battlefield, destroy target enchantment.', '', 'none', 129470, 4018, 1, 23, 36, 4),
+(794, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130985&type=card', 'Aven Fisher', 2, 2, 'Flying (This creature can\'t be blocked except by creatures with flying or reach.)\nWhen Aven Fisher dies, you may draw a card.', 'The same spears that catch their food today will defend their homes tomorrow.', 'none', 130985, 4018, 1, 24, 36, 4),
+(795, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129473&type=card', 'Aven Windreader', 3, 3, 'Flying (This creature can\'t be blocked except by creatures with flying or reach.)\n{1}{U}: Target player reveals the top card of their library.', '\"The tiniest ripple tells a story ten fathoms deep.\"', 'none', 129473, 4018, 1, 7, 40, 4),
+(796, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129477&type=card', 'Ballista Squad', 2, 2, '{X}{W}, {T}: Ballista Squad deals X damage to target attacking or blocking creature.', 'The perfect antidote for a tightly packed formation.', 'none', 129477, 4018, 1, 23, 42, 1),
+(797, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132106&type=card', 'Bandage', 0, 0, 'Prevent the next 1 damage that would be dealt to any target this turn.\nDraw a card.', 'Life is measured in inches. To a healer, every one of those inches is precious.', 'You draw the card when Bandage resolves, not when the damage is actually prevented.', 132106, 4018, 1, 27, 8, 4),
+(798, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129479&type=card', 'Battlefield Forge', 0, 0, '{T}: Add {C}.\n{T}: Add {R} or {W}. Battlefield Forge deals 1 damage to you.', '', 'The damage dealt to you is part of the second mana ability. It doesnâ€™t use the stack and canâ€™t be responded to.', 129479, 4018, 1, 3, 7, 1),
+(799, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135262&type=card', 'Beacon of Destruction', 0, 0, 'Beacon of Destruction deals 5 damage to any target. Shuffle Beacon of Destruction into its owner\'s library.', 'The Great Furnace\'s blessing is a spectacular sight, but the best view comes at a high cost.', 'If a Beacon is countered or doesnâ€™t resolve, itâ€™s put into its ownerâ€™s graveyard, not shuffled into the library.', 135262, 4018, 1, 29, 45, 1),
+(800, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130553&type=card', 'Beacon of Immortality', 0, 0, 'Double target player\'s life total. Shuffle Beacon of Immortality into its owner\'s library.', 'The cave floods with light. A thousand rays shine forth and meld into one.', 'If you double a negative life total, you do the real math. A life total of -10 becomes -20.', 130553, 4018, 1, 30, 45, 1),
+(801, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135270&type=card', 'Beacon of Unrest', 0, 0, 'Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner\'s library.', 'A vertical scream pierces the night air and echoes doom through the clouds.', 'If a Beacon is countered or doesnâ€™t resolve, itâ€™s put into its ownerâ€™s graveyard, not shuffled into the library.', 135270, 4018, 1, 31, 47, 1),
+(802, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=136279&type=card', 'Benalish Knight', 2, 2, 'Flash (You may cast this spell any time you could cast an instant.)\nFirst strike (This creature deals combat damage before creatures without first strike.)', '\"We called them \'armored lightning.\'\" â€”Gerrard of the Weatherlight', 'none', 136279, 4018, 1, 13, 48, 4),
+(803, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129906&type=card', 'Birds of Paradise', 1, 0, 'Flying\n{T}: Add one mana of any color.', '', 'none', 129906, 4018, 1, 33, 50, 1),
+(804, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135267&type=card', 'Blanchwood Armor', 0, 0, 'Enchant creature\nEnchanted creature gets +1/+1 for each Forest you control.', '', 'none', 135267, 4018, 1, 34, 26, 5),
+(805, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129484&type=card', 'Blaze', 0, 0, 'Blaze deals X damage to any target.', '', 'none', 129484, 4018, 1, 35, 10, 1),
+(806, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129709&type=card', 'Bloodfire Colossus', 6, 6, '{R}, Sacrifice Bloodfire Colossus: Bloodfire Colossus deals 6 damage to each creature and each player.', 'It took all its strength to contain the fire within.', 'none', 129709, 4018, 1, 36, 55, 1),
+(807, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130384&type=card', 'Bloodrock Cyclops', 3, 3, 'Bloodrock Cyclops attacks each combat if able.', '\"There are only fifty words in the cyclops language, and ten of them mean \'kill.\'\" â€”Ertai', 'There is no penalty if it canâ€™t attack.', 130384, 4018, 1, 16, 56, 4),
+(808, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129491&type=card', 'Bog Wraith', 3, 3, 'Swampwalk (This creature can\'t be blocked as long as defending player controls a Swamp.)', 'Knowing Takenuma Swamp to be dangerous, Hisata set wards to warn him of predators. He never imagined that his murderer would pass through them unhindered.', 'none', 129491, 4018, 1, 38, 57, 1),
+(809, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130534&type=card', 'Bogardan Firefiend', 1, 2, 'When Bogardan Firefiend dies, it deals 2 damage to target creature.', '\"The next one who tells me to relax and curl up by a fire is dead.\" â€”Mirri of the Weatherlight', 'You must pick a target creature, even if you are the only player with creatures on the battlefield.', 130534, 4018, 1, 16, 59, 4),
+(810, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129494&type=card', 'Boomerang', 0, 0, 'Return target permanent to its owner\'s hand.', 'Early Jamuraan hunters devised a weapon that would return to its source. Tolarian Aethermancers developed a spell that skipped the weapon entirely.', 'none', 129494, 4018, 1, 40, 8, 4),
+(811, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129495&type=card', 'Bottle Gnomes', 3, 1, 'Sacrifice Bottle Gnomes: You gain 3 life.', 'Reinforcements . . . or refreshments?', 'none', 129495, 4018, 1, 41, 61, 4),
+(812, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129496&type=card', 'Brushland', 0, 0, '{T}: Add {C}.\n{T}: Add {G} or {W}. Brushland deals 1 damage to you.', '', 'none', 129496, 4018, 1, 3, 7, 1),
+(813, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129882&type=card', 'Cancel', 0, 0, 'Counter target spell.', '', 'none', 129882, 4018, 1, 2, 8, 5),
+(814, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135185&type=card', 'Canopy Spider', 3, 1, 'Reach (This creature can block creatures with flying.)', 'It keeps the upper reaches of the forest free of every menace . . . except for the spider itself.', 'This card now uses the Reach keyword ability to enable the blocking of flying creatures. This works because a creature with flying can only be blocked by creatures with flying or reach.', 135185, 4018, 1, 5, 64, 4),
+(815, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129497&type=card', 'Caves of Koilos', 0, 0, '{T}: Add {C}.\n{T}: Add {W} or {B}. Caves of Koilos deals 1 damage to you.', '', 'The damage dealt to you is part of the second mana ability. It doesnâ€™t use the stack and canâ€™t be responded to.', 129497, 4018, 1, 3, 7, 1),
+(816, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135261&type=card', 'Cephalid Constable', 1, 1, 'Whenever Cephalid Constable deals combat damage to a player, return up to that many target permanents that player controls to their owner\'s hand.', 'Cephalids don\'t police people. They police loyalties.', 'none', 135261, 4018, 1, 2, 67, 1),
+(817, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135254&type=card', 'Chimeric Staff', 0, 0, '{X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.', 'The staff unraveled in a chaotic chorus of clanging, becoming an improbable beast of hissing blades.', 'A noncreature permanent that turns into a creature can attack, and its {T} abilities can be activated, only if its controller has continuously controlled that permanent since the beginning of their most recent turn. It doesnâ€™t matter how long the permanent has been a creature.', 135254, 4018, 1, 47, 68, 1),
+(818, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130554&type=card', 'Cho-Manno, Revolutionary', 2, 2, 'Prevent all damage that would be dealt to Cho-Manno, Revolutionary.', '\"Mercadia\'s masks can no longer hide the truth. Our day has come at last.\"', 'none', 130554, 4018, 1, 48, 69, 1),
+(819, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135279&type=card', 'Chromatic Star', 0, 0, '{1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.\nWhen Chromatic Star is put into a graveyard from the battlefield, draw a card.', '', 'none', 135279, 4018, 1, 49, 20, 4),
+(820, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135244&type=card', 'Citanul Flute', 0, 0, '{X}, {T}: Search your library for a creature card with converted mana cost X or less, reveal it, and put it into your hand. Then shuffle your library.', 'Each note of the flute mimics the call of a different beast.', 'X can be zero if you want.', 135244, 4018, 1, 50, 68, 1),
+(821, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130522&type=card', 'Civic Wayfinder', 2, 2, 'When Civic Wayfinder enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.', '\"These alleys are not safe. Come, I can guide you back to the market square.\"', 'none', 130522, 4018, 1, 34, 72, 4),
+(822, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129501&type=card', 'Clone', 0, 0, 'You may have Clone enter the battlefield as a copy of any creature on the battlefield.', '', 'If the chosen creature is copying something else (for example, if the chosen creature is another Clone), then your Clone enters the battlefield as whatever the chosen creature copied.', 129501, 4018, 1, 24, 73, 1),
+(823, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129804&type=card', 'Cloud Elemental', 3, 2, 'Flying\nCloud Elemental can block only creatures with flying.', 'The soratami surround their sky-castles with living clouds that serve as both sword and shield.', 'none', 129804, 4018, 1, 53, 74, 4),
+(824, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132069&type=card', 'Cloud Sprite', 1, 1, 'Flying (This creature can\'t be blocked except by creatures with flying or reach.)\nCloud Sprite can block only creatures with flying.', 'The delicate sprites carry messages for Saprazzans, but they refuse to land in Mercadia City\'s filthy markets.', 'none', 132069, 4018, 1, 54, 76, 4),
+(825, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129502&type=card', 'Coat of Arms', 0, 0, 'Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Goblin Warriors and a Goblin Shaman are on the battlefield, each gets +2/+2.)', '\"Hup, two, three, four, Dunno how to count no more.\"', 'If a creature has more than one creature type, and one of those types matches the creature you are calculating for, then count that creature. Only one type needs to match in order to get counted.', 129502, 4018, 1, 50, 68, 1),
+(826, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135268&type=card', 'Colossus of Sardia', 9, 9, 'Trample (This creature can deal excess combat damage to the player or planeswalker it\'s attacking.)\nColossus of Sardia doesn\'t untap during your untap step.\n{9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.', '', 'The ability that untaps it during your upkeep has been returned to an activated ability. There is no restriction on how many times it can be untapped during your upkeep with this ability.', 135268, 4018, 1, 56, 80, 1),
+(827, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130521&type=card', 'Commune with Nature', 0, 0, 'Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.', '', 'If you donâ€™t reveal a creature card, put all the revealed cards on the bottom of your library in any order.', 130521, 4018, 1, 33, 21, 4),
+(828, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135275&type=card', 'Composite Golem', 4, 4, 'Sacrifice Composite Golem: Add {W}{U}{B}{R}{G}.', 'An artificer\'s experiment in cross-material engineering found its own purpose as an interpreter between cultures.', 'none', 135275, 4018, 1, 58, 83, 1),
+(829, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130528&type=card', 'Condemn', 0, 0, 'Put target attacking creature on the bottom of its owner\'s library. Its controller gains life equal to its toughness.', '\"No doubt the arbiters would put you away, after all the documents are signed. But I will have justice now!\" â€”Alovnek, Boros guildmage', 'The affected creatureâ€™s last known existence on the battlefield is checked to determine its toughness.', 130528, 4018, 1, 27, 32, 1),
+(830, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130535&type=card', 'Cone of Flame', 0, 0, 'Cone of Flame deals 1 damage to any target, 2 damage to another target, and 3 damage to a third target.', '', 'Each of the three targets must be different. If there arenâ€™t three different legal targets available, you canâ€™t cast the spell.', 130535, 4018, 1, 29, 10, 1),
+(831, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129505&type=card', 'Consume Spirit', 0, 0, 'Spend only black mana on X.\nConsume Spirit deals X damage to any target and you gain X life.', '\"Your blood, your marrow, your spiritâ€”all are mine.\" â€”Mayvar, minion of Geth', 'The amount of life you gain is equal to the number chosen for X, not the amount of damage Consume Spirit deals (in case some of it is prevented).', 129505, 4018, 1, 61, 10, 4),
+(832, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129590&type=card', 'Contaminated Bond', 0, 0, 'Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.', '', 'none', 129590, 4018, 1, 62, 87, 4),
+(833, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=134757&type=card', 'Counsel of the Soratami', 0, 0, 'Draw two cards.', '\"Wisdom is not the counting of all the drops in a waterfall. Wisdom is learning why the water seeks the earth.\"', 'none', 134757, 4018, 1, 53, 21, 4),
+(834, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=134758&type=card', 'Crafty Pathmage', 1, 1, '{T}: Target creature with power 2 or less can\'t be blocked this turn.', 'Follow the pathmage â€”Otarian expression meaning \"escape quickly\"', 'If you increase the power of the targeted creature after the ability resolves, it still canâ€™t be blocked that turn.', 134758, 4018, 1, 53, 90, 4),
+(835, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130527&type=card', 'Craw Wurm', 4, 6, '', 'The most terrifying thing about the craw wurm is probably the horrible crashing sound it makes as it speeds through the forest. This noise is so loud it echoes through the trees and seems to come from all directions at once.', 'none', 130527, 4018, 1, 65, 91, 4),
+(836, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129512&type=card', 'Creeping Mold', 0, 0, 'Destroy target artifact, enchantment, or land.', 'Mold crept over the walls and into every crevice until the gleaming white stone strained and burst.', 'none', 129512, 4018, 1, 1, 10, 1),
+(837, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129480&type=card', 'Crucible of Worlds', 0, 0, 'You may play land cards from your graveyard.', 'Amidst the darkest ashes grow the strongest seeds.', 'Crucible of Worlds doesnâ€™t change the times when you can play those land cards. You can still play only one land per turn, and only during your main phase when you have priority and the stack is empty.', 129480, 4018, 1, 41, 68, 5),
+(838, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129514&type=card', 'Cruel Edict', 0, 0, 'Target opponent sacrifices a creature.', '\"Choose your next words carefully. They will be your last.\" â€”Phage the Untouchable', 'none', 129514, 4018, 1, 62, 10, 1),
+(839, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129909&type=card', 'Cryoclasm', 0, 0, 'Destroy target Plains or Island. Cryoclasm deals 3 damage to that land\'s controller.', 'The people of Terisiare had come to live on frozen fields as though on solid ground. Nothing reminded them of the difference more clearly than the rifts brought on by the Thaw.', 'none', 129909, 4018, 1, 16, 10, 1),
+(840, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129910&type=card', 'Deathmark', 0, 0, 'Destroy target green or white creature.', '\"I hope it\'s true that every snowflake is unique, because I never want to see one like this again. Now clean up that body.\" â€”Thangbrand Gyrdsson, Kjeldoran patrol', 'none', 129910, 4018, 1, 70, 10, 1),
+(841, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129521&type=card', 'Dehydration', 0, 0, 'Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature doesn\'t untap during its controller\'s untap step.', '', 'none', 129521, 4018, 1, 24, 87, 4),
+(842, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135223&type=card', 'Deluge', 0, 0, 'Tap all creatures without flying.', '\"From the sea came all life, and to the sea it will return. The sooner the better.\" â€”Emperor Aboshan', 'none', 135223, 4018, 1, 53, 32, 1),
+(843, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129522&type=card', 'Demolish', 0, 0, 'Destroy target artifact or land.', '\"Pound the steel until it fits. Doesn\'t work? Bash to bits.\" â€”Dwarven forging song', 'none', 129522, 4018, 1, 9, 21, 5),
+(844, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129523&type=card', 'Demon\'s Horn', 0, 0, 'Whenever a player casts a black spell, you may gain 1 life.', 'Its curve mimics the twists of life and death.', 'The ability triggers whenever any player, not just you, casts a black spell.', 129523, 4018, 1, 12, 20, 1),
+(845, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129524&type=card', 'Demystify', 0, 0, 'Destroy target enchantment.', '\"Illusion is a crutch for those with no grounding in reality.\" â€”Cho-Manno', 'none', 129524, 4018, 1, 27, 8, 5),
+(846, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135250&type=card', 'Denizen of the Deep', 11, 11, 'When Denizen of the Deep enters the battlefield, return each other creature you control to its owner\'s hand.', 'According to merfolk legend, a denizen of the deep swallows the horizon at the end of each day, bringing on the cold blanket of night.', 'none', 135250, 4018, 1, 76, 103, 1),
+(847, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129525&type=card', 'Diabolic Tutor', 0, 0, 'Search your library for a card and put that card into your hand. Then shuffle your library.', 'The best ideas often come from the worst minds.', 'none', 129525, 4018, 1, 6, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -121,21 +176,6 @@ CREATE TABLE `Commentaires` (
   `users_id` int(11) NOT NULL,
   `commentaires_id` int(11) NOT NULL,
   `articles_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Decks`
---
-
-CREATE TABLE `Decks` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `users_id` int(11) NOT NULL,
-  `games_id` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -198,6 +238,192 @@ CREATE TABLE `Legalities` (
   `pauper` tinyint(1) NOT NULL DEFAULT 0,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Legalities`
+--
+
+INSERT INTO `Legalities` (`standard`, `modern`, `legacy`, `vintage`, `pauper`, `id`) VALUES
+(0, 1, 1, 1, 0, 1),
+(0, 1, 1, 1, 0, 2),
+(0, 1, 1, 1, 0, 3),
+(0, 1, 1, 1, 1, 4),
+(1, 1, 1, 1, 1, 5),
+(0, 1, 1, 1, 0, 6),
+(1, 1, 1, 1, 0, 7),
+(0, 1, 1, 1, 0, 8),
+(0, 1, 1, 1, 1, 9),
+(0, 1, 1, 1, 0, 10),
+(0, 1, 1, 1, 1, 11),
+(0, 1, 1, 1, 0, 12),
+(0, 1, 1, 1, 1, 13),
+(0, 1, 1, 1, 0, 14),
+(0, 1, 1, 1, 1, 15),
+(0, 1, 1, 1, 1, 16),
+(0, 1, 1, 1, 0, 17),
+(0, 1, 1, 1, 0, 18),
+(0, 1, 1, 1, 1, 19),
+(0, 1, 1, 1, 0, 20),
+(0, 1, 1, 1, 0, 21),
+(0, 1, 1, 1, 0, 22),
+(0, 1, 1, 1, 1, 23),
+(0, 1, 1, 1, 1, 24),
+(0, 1, 1, 1, 1, 25),
+(0, 1, 1, 1, 0, 26),
+(0, 1, 1, 1, 1, 27),
+(0, 1, 1, 1, 0, 28),
+(0, 1, 1, 1, 0, 29),
+(0, 1, 1, 1, 0, 30),
+(0, 1, 1, 1, 0, 31),
+(0, 1, 1, 1, 1, 32),
+(0, 1, 1, 1, 0, 33),
+(1, 1, 1, 1, 0, 34),
+(0, 1, 1, 1, 0, 35),
+(0, 1, 1, 1, 0, 36),
+(0, 1, 1, 1, 1, 37),
+(0, 1, 1, 1, 0, 38),
+(0, 1, 1, 1, 1, 39),
+(0, 1, 1, 1, 1, 40),
+(0, 1, 1, 1, 1, 41),
+(0, 1, 1, 1, 0, 42),
+(1, 1, 1, 1, 1, 43),
+(0, 1, 1, 1, 1, 44),
+(0, 1, 1, 1, 0, 45),
+(0, 1, 1, 1, 0, 46),
+(0, 1, 1, 1, 0, 47),
+(0, 1, 1, 1, 0, 48),
+(0, 1, 1, 1, 1, 49),
+(0, 1, 1, 1, 0, 50),
+(0, 1, 1, 1, 1, 51),
+(0, 1, 1, 1, 0, 52),
+(0, 1, 1, 1, 1, 53),
+(0, 1, 1, 1, 1, 54),
+(0, 1, 1, 1, 0, 55),
+(0, 1, 1, 1, 0, 56),
+(0, 1, 1, 1, 1, 57),
+(0, 1, 1, 1, 0, 58),
+(0, 1, 1, 1, 0, 59),
+(0, 1, 1, 1, 0, 60),
+(0, 1, 1, 1, 1, 61),
+(0, 1, 1, 1, 1, 62),
+(0, 1, 1, 1, 1, 63),
+(0, 1, 1, 1, 1, 64),
+(0, 1, 1, 1, 1, 65),
+(0, 1, 1, 1, 0, 66),
+(1, 1, 1, 1, 0, 67),
+(0, 1, 1, 1, 0, 68),
+(0, 1, 1, 1, 0, 69),
+(0, 1, 1, 1, 0, 70),
+(0, 1, 1, 1, 1, 71),
+(0, 1, 1, 1, 0, 72),
+(1, 1, 1, 1, 1, 73),
+(0, 1, 1, 1, 0, 74),
+(1, 1, 1, 1, 1, 75),
+(0, 1, 1, 1, 0, 76),
+(0, 1, 1, 1, 0, 77);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Mana`
+--
+
+CREATE TABLE `Mana` (
+  `id` int(11) NOT NULL,
+  `white` int(11) NOT NULL DEFAULT 0,
+  `black` int(11) NOT NULL DEFAULT 0,
+  `blue` int(11) NOT NULL DEFAULT 0,
+  `green` int(11) NOT NULL DEFAULT 0,
+  `red` int(11) NOT NULL DEFAULT 0,
+  `colorless` int(11) NOT NULL DEFAULT 0,
+  `x` int(11) NOT NULL DEFAULT 0,
+  `void` int(11) NOT NULL DEFAULT 0,
+  `cmc` int(11) NOT NULL DEFAULT 0,
+  `mana_cost` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Mana`
+--
+
+INSERT INTO `Mana` (`id`, `white`, `black`, `blue`, `green`, `red`, `colorless`, `x`, `void`, `cmc`, `mana_cost`) VALUES
+(1, 0, 0, 0, 2, 0, 2, 0, 0, 4, '{2}{G}{G}'),
+(2, 0, 0, 2, 0, 0, 1, 0, 0, 3, '{1}{U}{U}'),
+(3, 0, 0, 0, 0, 0, 0, 0, 1, 0, ''),
+(4, 0, 1, 0, 0, 0, 2, 0, 0, 3, '{2}{B}'),
+(5, 0, 0, 0, 1, 0, 1, 0, 0, 2, '{1}{G}'),
+(6, 0, 2, 0, 0, 0, 2, 0, 0, 4, '{2}{B}{B}'),
+(7, 0, 0, 2, 0, 0, 3, 0, 0, 5, '{3}{U}{U}'),
+(8, 0, 0, 2, 0, 0, 1, 0, 0, 3, '{1}{U}{U}'),
+(9, 0, 0, 0, 0, 1, 3, 0, 0, 4, '{3}{R}'),
+(10, 2, 0, 0, 0, 0, 5, 0, 0, 7, '{5}{W}{W}'),
+(11, 1, 0, 0, 0, 0, 4, 0, 0, 5, '{4}{W}'),
+(12, 0, 0, 0, 0, 0, 2, 0, 0, 2, '{2}'),
+(13, 1, 0, 0, 0, 0, 2, 0, 0, 3, '{2}{W}'),
+(14, 2, 0, 0, 0, 0, 3, 0, 0, 5, '{3}{W}{W}'),
+(15, 1, 0, 0, 0, 0, 1, 0, 0, 2, '{1}{W}'),
+(16, 0, 0, 0, 0, 1, 2, 0, 0, 3, '{2}{R}'),
+(17, 0, 0, 3, 0, 0, 3, 0, 0, 6, '{3}{U}{U}{U}'),
+(18, 0, 2, 0, 0, 0, 4, 0, 0, 6, '{4}{B}{B}'),
+(19, 0, 1, 0, 0, 0, 2, 0, 0, 3, '{2}{B}'),
+(20, 0, 0, 1, 0, 0, 1, 0, 0, 2, '{1}{U}'),
+(21, 2, 0, 0, 0, 0, 1, 0, 0, 3, '{1}{W}{W}'),
+(22, 0, 0, 0, 2, 0, 6, 0, 0, 8, '{6}{G}{G}'),
+(23, 1, 0, 0, 0, 0, 3, 0, 0, 4, '{3}{W}'),
+(24, 0, 0, 1, 0, 0, 3, 0, 0, 4, '{3}{U}'),
+(25, 0, 0, 2, 0, 0, 3, 0, 0, 5, '{3}{U}{U}'),
+(26, 1, 0, 0, 0, 0, 3, 0, 0, 4, '{3}{W}'),
+(27, 1, 0, 0, 0, 0, 0, 0, 0, 1, '{W}'),
+(28, 0, 0, 0, 0, 0, 0, 0, 1, 0, ''),
+(29, 0, 0, 0, 0, 2, 3, 0, 0, 5, '{3}{R}{R}'),
+(30, 1, 0, 0, 0, 0, 5, 0, 0, 6, '{5}{W}'),
+(31, 0, 2, 0, 0, 0, 3, 0, 0, 5, '{3}{B}{B}'),
+(32, 1, 0, 0, 0, 0, 2, 0, 0, 3, '{2}{W}'),
+(33, 0, 0, 0, 1, 0, 0, 0, 0, 1, '{G}'),
+(34, 0, 0, 0, 1, 0, 2, 0, 0, 3, '{2}{G}'),
+(35, 0, 0, 0, 0, 1, 0, 1, 0, 1, '{X}{R}'),
+(36, 0, 0, 0, 0, 2, 6, 0, 0, 8, '{6}{R}{R}'),
+(37, 0, 0, 0, 0, 1, 2, 0, 0, 3, '{2}{R}'),
+(38, 0, 1, 0, 0, 0, 3, 0, 0, 4, '{3}{B}'),
+(39, 0, 0, 0, 0, 1, 2, 0, 0, 3, '{2}{R}'),
+(40, 0, 0, 2, 0, 0, 0, 0, 0, 2, '{U}{U}'),
+(41, 0, 0, 0, 0, 0, 3, 0, 0, 3, '{3}'),
+(42, 0, 0, 0, 0, 0, 0, 0, 1, 0, ''),
+(43, 0, 0, 2, 0, 0, 1, 0, 0, 3, '{1}{U}{U}'),
+(44, 0, 0, 0, 1, 0, 1, 0, 0, 2, '{1}{G}'),
+(45, 0, 0, 0, 0, 0, 0, 0, 1, 0, ''),
+(46, 0, 0, 2, 0, 0, 1, 0, 0, 3, '{1}{U}{U}'),
+(47, 0, 0, 0, 0, 0, 4, 0, 0, 4, '{4}'),
+(48, 2, 0, 0, 0, 0, 2, 0, 0, 4, '{2}{W}{W}'),
+(49, 0, 0, 0, 0, 0, 1, 0, 0, 1, '{1}'),
+(50, 0, 0, 0, 0, 0, 5, 0, 0, 5, '{5}'),
+(51, 0, 0, 0, 1, 0, 2, 0, 0, 3, '{2}{G}'),
+(52, 0, 0, 1, 0, 0, 3, 0, 0, 4, '{3}{U}'),
+(53, 0, 0, 1, 0, 0, 2, 0, 0, 3, '{2}{U}'),
+(54, 0, 0, 1, 0, 0, 0, 0, 0, 1, '{U}'),
+(55, 0, 0, 0, 0, 0, 5, 0, 0, 5, '{5}'),
+(56, 0, 0, 0, 0, 0, 9, 0, 0, 9, '{9}'),
+(57, 0, 0, 0, 1, 0, 0, 0, 0, 1, '{G}'),
+(58, 0, 0, 0, 0, 0, 6, 0, 0, 6, '{6}'),
+(59, 1, 0, 0, 0, 0, 0, 0, 0, 1, '{W}'),
+(60, 0, 0, 0, 0, 2, 3, 0, 0, 5, '{3}{R}{R}'),
+(61, 0, 1, 0, 0, 0, 1, 1, 0, 2, '{X}{1}{B}'),
+(62, 0, 1, 0, 0, 0, 1, 0, 0, 2, '{1}{B}'),
+(63, 0, 0, 1, 0, 0, 2, 0, 0, 3, '{2}{U}'),
+(64, 0, 0, 1, 0, 0, 2, 0, 0, 3, '{2}{U}'),
+(65, 0, 0, 0, 2, 0, 4, 0, 0, 6, '{4}{G}{G}'),
+(66, 0, 0, 0, 2, 0, 2, 0, 0, 4, '{2}{G}{G}'),
+(67, 0, 0, 0, 0, 0, 3, 0, 0, 3, '{3}'),
+(68, 0, 1, 0, 0, 0, 1, 0, 0, 2, '{1}{B}'),
+(69, 0, 0, 0, 0, 1, 2, 0, 0, 3, '{2}{R}'),
+(70, 0, 1, 0, 0, 0, 0, 0, 0, 1, '{B}'),
+(71, 0, 0, 1, 0, 0, 3, 0, 0, 4, '{3}{U}'),
+(72, 0, 0, 1, 0, 0, 2, 0, 0, 3, '{2}{U}'),
+(73, 0, 0, 0, 0, 1, 3, 0, 0, 4, '{3}{R}'),
+(74, 0, 0, 0, 0, 0, 2, 0, 0, 2, '{2}'),
+(75, 1, 0, 0, 0, 0, 0, 0, 0, 1, '{W}'),
+(76, 0, 0, 2, 0, 0, 6, 0, 0, 8, '{6}{U}{U}'),
+(77, 0, 2, 0, 0, 0, 2, 0, 0, 4, '{2}{B}{B}');
 
 -- --------------------------------------------------------
 
@@ -709,6 +935,131 @@ CREATE TABLE `Tournements` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Type`
+--
+
+CREATE TABLE `Type` (
+  `id` int(11) NOT NULL,
+  `supertype` varchar(75) DEFAULT NULL,
+  `type` varchar(75) DEFAULT NULL,
+  `subtype` varchar(75) DEFAULT NULL,
+  `layout` varchar(75) DEFAULT NULL,
+  `rarity` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Type`
+--
+
+INSERT INTO `Type` (`id`, `supertype`, `type`, `subtype`, `layout`, `rarity`) VALUES
+(1, '', 'Enchantment', '', 'normal', 'Rare'),
+(2, '', 'Enchantment', '', 'normal', 'Rare'),
+(3, '', 'Enchantment', '', 'normal', 'Rare'),
+(4, '', 'Creature', 'Human Wizard', 'normal', 'Uncommon'),
+(5, '', 'Enchantment', '', 'normal', 'Rare'),
+(6, '', 'Creature', 'Human Wizard', 'normal', 'Uncommon'),
+(7, '', 'Land', '', 'normal', 'Rare'),
+(8, '', 'Instant', '', 'normal', 'Common'),
+(9, '', 'Instant', '', 'normal', 'Common'),
+(10, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(11, '', 'Creature', 'Elemental', 'normal', 'Uncommon'),
+(12, '', 'Creature', 'Elemental', 'normal', 'Uncommon'),
+(13, 'Legendary', 'Creature', 'Merfolk Wizard', 'normal', 'Rare'),
+(14, '', 'Creature', 'Minotaur', 'normal', 'Common'),
+(15, '', 'Creature', 'Minotaur', 'normal', 'Common'),
+(16, '', 'Creature', 'Human Cleric', 'normal', 'Uncommon'),
+(17, '', 'Creature', 'Human Cleric', 'normal', 'Uncommon'),
+(18, '', 'Creature', 'Angel', 'normal', 'Uncommon'),
+(19, '', 'Creature', 'Angel', 'normal', 'Uncommon'),
+(20, '', 'Artifact', '', 'normal', 'Uncommon'),
+(21, '', 'Sorcery', '', 'normal', 'Common'),
+(22, '', 'Sorcery', '', 'normal', 'Common'),
+(23, '', 'Enchantment', '', 'normal', 'Rare'),
+(24, '', 'Creature', 'Wall', 'normal', 'Common'),
+(25, '', 'Creature', 'Wall', 'normal', 'Common'),
+(26, '', 'Enchantment', 'Aura', 'normal', 'Uncommon'),
+(27, '', 'Enchantment', 'Aura', 'normal', 'Uncommon'),
+(28, 'Legendary', 'Creature', 'Wizard', 'normal', 'Rare'),
+(29, 'Legendary', 'Creature', 'Vampire', 'normal', 'Rare'),
+(30, 'Legendary', 'Creature', 'Vampire', 'normal', 'Rare'),
+(31, '', 'Sorcery', '', 'normal', 'Common'),
+(32, '', 'Instant', '', 'normal', 'Uncommon'),
+(33, '', 'Enchantment', '', 'normal', 'Uncommon'),
+(34, '', 'Creature', 'Avatar', 'normal', 'Rare'),
+(35, '', 'Creature', 'Avatar', 'normal', 'Rare'),
+(36, '', 'Creature', 'Bird Soldier', 'normal', 'Common'),
+(37, '', 'Creature', 'Bird Soldier', 'normal', 'Common'),
+(38, '', 'Creature', 'Bird Soldier', 'normal', 'Common'),
+(39, '', 'Creature', 'Bird Soldier', 'normal', 'Common'),
+(40, '', 'Creature', 'Bird Soldier Wizard', 'normal', 'Common'),
+(41, '', 'Creature', 'Bird Soldier Wizard', 'normal', 'Common'),
+(42, '', 'Creature', 'Human Rebel', 'normal', 'Uncommon'),
+(43, '', 'Instant', '', 'normal', 'Common'),
+(44, '', 'Land', '', 'normal', 'Rare'),
+(45, '', 'Instant', '', 'normal', 'Rare'),
+(46, '', 'Instant', '', 'normal', 'Rare'),
+(47, '', 'Sorcery', '', 'normal', 'Rare'),
+(48, '', 'Creature', 'Human Knight', 'normal', 'Common'),
+(49, '', 'Creature', 'Human Knight', 'normal', 'Common'),
+(50, '', 'Creature', 'Bird', 'normal', 'Rare'),
+(51, '', 'Creature', 'Bird', 'normal', 'Rare'),
+(52, '', 'Enchantment', 'Aura', 'normal', 'Uncommon'),
+(53, '', 'Enchantment', 'Aura', 'normal', 'Uncommon'),
+(54, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(55, '', 'Creature', 'Giant', 'normal', 'Rare'),
+(56, '', 'Creature', 'Cyclops', 'normal', 'Common'),
+(57, '', 'Creature', 'Wraith', 'normal', 'Uncommon'),
+(58, '', 'Creature', 'Wraith', 'normal', 'Uncommon'),
+(59, '', 'Creature', 'Elemental Spirit', 'normal', 'Common'),
+(60, '', 'Instant', '', 'normal', 'Common'),
+(61, '', 'Artifact Creature', 'Gnome', 'normal', 'Uncommon'),
+(62, '', 'Land', '', 'normal', 'Rare'),
+(63, '', 'Instant', '', 'normal', 'Common'),
+(64, '', 'Creature', 'Spider', 'normal', 'Common'),
+(65, '', 'Creature', 'Spider', 'normal', 'Common'),
+(66, '', 'Land', '', 'normal', 'Rare'),
+(67, '', 'Creature', 'Cephalid Wizard', 'normal', 'Rare'),
+(68, '', 'Artifact', '', 'normal', 'Rare'),
+(69, 'Legendary', 'Creature', 'Human Rebel', 'normal', 'Rare'),
+(70, '', 'Artifact', '', 'normal', 'Uncommon'),
+(71, '', 'Artifact', '', 'normal', 'Rare'),
+(72, '', 'Creature', 'Elf Warrior Druid', 'normal', 'Common'),
+(73, '', 'Creature', 'Shapeshifter', 'normal', 'Rare'),
+(74, '', 'Creature', 'Elemental', 'normal', 'Common'),
+(75, '', 'Creature', 'Elemental', 'normal', 'Common'),
+(76, '', 'Creature', 'Faerie', 'normal', 'Common'),
+(77, '', 'Creature', 'Faerie', 'normal', 'Common'),
+(78, '', 'Artifact', '', 'normal', 'Rare'),
+(79, '', 'Artifact', '', 'normal', 'Rare'),
+(80, '', 'Artifact Creature', 'Golem', 'normal', 'Rare'),
+(81, '', 'Artifact Creature', 'Golem', 'normal', 'Rare'),
+(82, '', 'Sorcery', '', 'normal', 'Common'),
+(83, '', 'Artifact Creature', 'Golem', 'normal', 'Uncommon'),
+(84, '', 'Instant', '', 'normal', 'Uncommon'),
+(85, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(86, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(87, '', 'Enchantment', 'Aura', 'normal', 'Common'),
+(88, '', 'Enchantment', 'Aura', 'normal', 'Common'),
+(89, '', 'Sorcery', '', 'normal', 'Common'),
+(90, '', 'Creature', 'Human Wizard', 'normal', 'Common'),
+(91, '', 'Creature', 'Wurm', 'normal', 'Common'),
+(92, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(93, '', 'Artifact', '', 'normal', 'Rare'),
+(94, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(95, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(96, '', 'Sorcery', '', 'normal', 'Uncommon'),
+(97, '', 'Enchantment', 'Aura', 'normal', 'Common'),
+(98, '', 'Enchantment', 'Aura', 'normal', 'Common'),
+(99, '', 'Instant', '', 'normal', 'Uncommon'),
+(100, '', 'Sorcery', '', 'normal', 'Common'),
+(101, '', 'Artifact', '', 'normal', 'Uncommon'),
+(102, '', 'Instant', '', 'normal', 'Common'),
+(103, '', 'Creature', 'Serpent', 'normal', 'Rare'),
+(104, '', 'Sorcery', '', 'normal', 'Uncommon');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Users`
 --
 
@@ -752,14 +1103,6 @@ CREATE TABLE `Users_cards` (
 --
 
 --
--- Indexes for table `Articles`
---
-ALTER TABLE `Articles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_articles_photo1_idx` (`photo_id`),
-  ADD KEY `fk_articles_members1_idx` (`users_id`);
-
---
 -- Indexes for table `Articles_games`
 --
 ALTER TABLE `Articles_games`
@@ -782,18 +1125,6 @@ ALTER TABLE `Cards`
   ADD KEY `fk_cards_games1_idx` (`game_id`);
 
 --
--- Indexes for table `Mana`
---
-ALTER TABLE `Mana`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Type`
---
-ALTER TABLE `Type`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `Commentaires`
 --
 ALTER TABLE `Commentaires`
@@ -801,21 +1132,6 @@ ALTER TABLE `Commentaires`
   ADD KEY `fk_commentaires_members1_idx` (`users_id`),
   ADD KEY `fk_commentaires_commentaires1_idx` (`commentaires_id`),
   ADD KEY `fk_commentaires_article1_idx` (`articles_id`);
-
---
--- Indexes for table `Decks`
---
-ALTER TABLE `Decks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_decks_members1_idx` (`users_id`),
-  ADD KEY `fk_decks_games1_idx` (`games_id`),
-
---
--- Indexes for table `Decks_cards`
---
-ALTER TABLE `Decks_cards`
-  ADD KEY `fk_decks_card_decks1_idx` (`decks_id`),
-  ADD KEY `fk_decks_card_cards1_idx` (`cards_id`);
 
 --
 -- Indexes for table `Favoris`
@@ -838,6 +1154,12 @@ ALTER TABLE `Games`
 -- Indexes for table `Legalities`
 --
 ALTER TABLE `Legalities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Mana`
+--
+ALTER TABLE `Mana`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -868,56 +1190,25 @@ ALTER TABLE `Tournements`
   ADD KEY `fk_tournaments_games1_idx` (`games_id`);
 
 --
--- Indexes for table `Users`
+-- Indexes for table `Type`
 --
-ALTER TABLE `Users`
-  ADD PRIMARY KEY (`id`),
-
---
--- Indexes for table `Users_cards`
---
-ALTER TABLE `Users_cards`
-  ADD KEY `fk_member_card_members_idx` (`users_id`),
-  ADD KEY `fk_member_card_cards1_idx` (`cards_id`);
+ALTER TABLE `Type`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `Articles`
---
-ALTER TABLE `Articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `Cards`
 --
 ALTER TABLE `Cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Mana`
---
-ALTER TABLE `Mana`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Type`
---
-ALTER TABLE `Type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=848;
 
 --
 -- AUTO_INCREMENT for table `Commentaires`
 --
 ALTER TABLE `Commentaires`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Decks`
---
-ALTER TABLE `Decks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -930,7 +1221,13 @@ ALTER TABLE `Games`
 -- AUTO_INCREMENT for table `Legalities`
 --
 ALTER TABLE `Legalities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `Mana`
+--
+ALTER TABLE `Mana`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `Photo`
@@ -951,27 +1248,14 @@ ALTER TABLE `Tournements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT for table `Type`
 --
-ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `Type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `Articles`
---
-ALTER TABLE `Articles`
-  ADD CONSTRAINT `fk_articles_members1` FOREIGN KEY (`users_id`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-
---
--- Constraints for table `Articles_games`
---
-ALTER TABLE `Articles_games`
-  ADD CONSTRAINT `fk_articles_games_articles1` FOREIGN KEY (`articles_id`) REFERENCES `Articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_articles_games_games1` FOREIGN KEY (`games_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Ban_list`
@@ -988,63 +1272,16 @@ ALTER TABLE `Cards`
   ADD CONSTRAINT `fk_cards_release1` FOREIGN KEY (`releases_id`) REFERENCES `Releases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Commentaires`
---
-ALTER TABLE `Commentaires`
-  ADD CONSTRAINT `fk_commentaires_article1` FOREIGN KEY (`articles_id`) REFERENCES `Articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_commentaires_commentaires1` FOREIGN KEY (`commentaires_id`) REFERENCES `Commentaires` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_commentaires_members1` FOREIGN KEY (`users_id`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Decks`
---
-ALTER TABLE `Decks`
-  ADD CONSTRAINT `fk_decks_games1` FOREIGN KEY (`games_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_decks_members1` FOREIGN KEY (`users_id`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-
---
--- Constraints for table `Decks_cards`
---
-ALTER TABLE `Decks_cards`
-  ADD CONSTRAINT `fk_decks_card_cards1` FOREIGN KEY (`cards_id`) REFERENCES `Cards` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_decks_card_decks1` FOREIGN KEY (`decks_id`) REFERENCES `Decks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Favoris`
---
-ALTER TABLE `Favoris`
-  ADD CONSTRAINT `fk_favoris_articles1` FOREIGN KEY (`articles_id`) REFERENCES `Articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_favoris_cards1` FOREIGN KEY (`cards_id`) REFERENCES `Cards` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_favoris_decks1` FOREIGN KEY (`decks_id`) REFERENCES `Decks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_favoris_games1` FOREIGN KEY (`games_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_favoris_members1` FOREIGN KEY (`users_id`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_favoris_tournaments1` FOREIGN KEY (`tournaments_id`) REFERENCES `Tournements` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `Releases`
 --
 ALTER TABLE `Releases`
   ADD CONSTRAINT `fk_release_games1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Tournaments_members`
---
-ALTER TABLE `Tournaments_members`
-  ADD CONSTRAINT `fk_tournament_member_members1` FOREIGN KEY (`users_id`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tournament_member_tournaments1` FOREIGN KEY (`tournaments_id`) REFERENCES `Tournements` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `Tournements`
 --
 ALTER TABLE `Tournements`
   ADD CONSTRAINT `fk_tournaments_games1` FOREIGN KEY (`games_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Users_cards`
---
-ALTER TABLE `Users_cards`
-  ADD CONSTRAINT `fk_member_card_cards1` FOREIGN KEY (`cards_id`) REFERENCES `Cards` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_member_card_members` FOREIGN KEY (`users_id`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

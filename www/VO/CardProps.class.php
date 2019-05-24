@@ -23,11 +23,10 @@ class CardProps
     }
 
     public function getAllProps(): array {
-        $result = [
+        return [
             'toughness' => $this->toughness,
             'power' => $this->power,
             'text' => $this->text,
         ];
-        return $result;
     }
 }

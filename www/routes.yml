@@ -30,7 +30,7 @@
 
 "/mot_de_passe_oublie":
   controller: Users
-  action: forGETPassword
+  action: forgetPassword
   method: "GET"
 
 # ######################################## EN ######################################

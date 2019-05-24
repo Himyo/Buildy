@@ -1,12 +1,12 @@
 <?php
 namespace MVC\Controllers;
 
-use MVC\Models\Card;
+use MVC\Models\Cards;
 
 class CardController {
     private $card;
 
-    public function __construct(Card $card)
+    public function __construct(Cards $card)
     {
         $this->card = $card;
     }
@@ -20,37 +20,43 @@ class CardController {
 // should cost less than feeding object
         foreach($file['cards'] as $data) {
 
+            if(!isset($data['multiverseid']) || !isset($data['imageUrl']))
+            {
+                echo "<br />".$data['name'];
+                continue;
+            }
             $this->card->initMana([
-                'manaCost' => $data['manaCost'],
+                'mana_cost' => $data['manaCost']??"",
                 'cmc' => $data['cmc']
             ], true);
 
             $this->card->initType([
-                'supertype' => $data['supertypes'],
+                'supertype' =>  $data['supertypes'],
                 'subtype' => $data['subtypes'],
                 'layout' => $data['layout'],
                 'rarity' => $data['rarity'],
-                'type' => $data['types']
+                'type' =>$data['types']
             ], true);
 
             $this->card->initRelease([
-                'set' => $data['set'],
-                'setName' => $data['setName']
+                'code' => $data['set'],
+                'name' => $data['setName']
             ], true);
 
             $this->card->initLegalities([
-                'ruling' => $data['rulings']
+                'legalities' => $data['legalities']
                 ], true);
 
-            $this->card->props->supply([
-                'text' => $data['text'],
-                'power' => $data['power'],
-                'toughness' => $data['toughness']
+            $this->card->props->init([
+                'text' => $data['text']??"",
+                'power' => $data['power']??0,
+                'toughness' => $data['toughness']??0
             ]);
 
-            $this->card->identity->supply([
+            $this->card->identity->init([
                 'name' => $data['name'],
-                'lore' => $data['flavor'],
+                'lore' => $data['flavor']??"",
+                'ruling' => $data['rulings'],
                 'multiverse_id' => $data['multiverseid'],
                 'image_url' => $data['imageUrl'],
             ]);

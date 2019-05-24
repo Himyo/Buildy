@@ -91,22 +91,28 @@ class BaseSQL {
 		}
 	}
 
-	public function findOne($element = 1) {
-	    //TODO
-	   return false;
+	public function findOne($class, array $data) {
+	    $qb = QueryBuilder::getQueryBuilder($class);
+	    $query = $qb->select([0 =>'id'])->andWhere($data)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmt->execute($data);
+        return $stmt->fetch();
     }
 	public function insert($class, $data) {
-        $calledClass = get_class($class);
-        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+        //TODO: Probably prevent multiple query
+        // Make transaction for execution
 
-	    $qb = QueryBuilder::getQueryBuilder();
-	    $query =  $qb->insert($data)->from($table)->make()->getQuery();
-        echo $query;
-//	    $stmt = $this->pdo->prepare($query);
-//	    $stmtStatus = $stmt->execute($data);
-//	    return $stmtStatus;
+        $qb = QueryBuilder::getQueryBuilder($class);
+	    $query =  $qb->insert($data)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute($data);
+	    return $stmtStatus;
     }
 
+    public function lastInsertedId(){
+	    $res = $this->pdo->lastInsertId();
+	    return $res;
+    }
 	public function executeMany($querys, $data) {
 		foreach($querys as $n => $value){
 			$request = $this->pdo->prepare($querys[$n]);

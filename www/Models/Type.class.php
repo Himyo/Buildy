@@ -23,16 +23,26 @@ class Type
 
     public function init(array $type, bool $set = false)
     {
-        $dbType = $this->basesql->findOne($type);
+        $data = $this->parseType($type);
+        $dbType = $this->basesql->findOne($this, $data);
         if(!$dbType) {
             //TODO: Probaly prevent multiple query
             // Make transaction for execution
-            var_dump($type);
-            $this->basesql->insert($this, $type);
+            $this->basesql->insert($this, $data);
             if($set) {
                 $this->id = $this->basesql->pdo->lastInsertId();
             }
         }
+        else {
+            $this->id = $dbType[0];
+        }
+    }
+
+    public function parseType(array $type): array {
+        $type["supertype"] = implode(" ", $type["supertype"]);
+        $type["subtype"] = implode(" ", $type["subtype"]);
+        $type["type"] = implode(" ", $type["type"]);
+        return $type;
     }
 
     public function getAllType(): array {
@@ -46,7 +56,7 @@ class Type
         return $result;
     }
 
-    public function getId(): integer {
+    public function getId() {
         return $this->id;
     }
 }
