@@ -11,14 +11,14 @@ use \Lib\Supplier;
 class Users extends BaseSQL{
 
     use Supplier;
-	public $id = null;
-	public $firstname;
-	public $lastname;
-	public $email;
-	public $password;
-	public $role=1;
-	public $status=0;
-	public $token = "-1";
+	private $id = null;
+    private $firstname;
+    private $lastname;
+    private $email;
+    private $password;
+    private $role=1;
+    private $status=0;
+    private $token = "-1";
 
 	public function __construct($driver, $host, $name, $user, $pwd){
 		parent::__construct($driver, $host, $name ,$user,$pwd);
@@ -56,6 +56,50 @@ class Users extends BaseSQL{
     {
         $this->setId($id);
     }
+
+    /**
+     * @return null
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail() {
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword() {
+        return $this->password;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRole() {
+        return $this->role;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus() {
+        return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken() {
+        return $this->token;
+    }
+
+
 
 
     public function getRegisterForm(){

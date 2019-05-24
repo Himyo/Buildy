@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 
+use Core\Request;
 use \Core\View;
 use \Model\Users;
 use \Lib\FormBuilder;
@@ -26,12 +27,10 @@ class UsersController{
 			//TODO: Catch SQL Error
 			if($form->isValid()){
 				//TODO: Real user registration
-				$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
-				$user->setToken($token);
 				$user->supply($data);
 				$user->save();
-				session_start();
-				$_SESSION['user'] = $user;
+				//session_start();
+				//$_SESSION['token'] = $user->getToken();
 			}
 		}
 		//TODO: Take decision for action settings
@@ -51,20 +50,14 @@ class UsersController{
 			if($form->isValid()) {
 				//TODO: Real user connection
 				$queryResult = $user->getOneBy($data);
-				if($queryResult) {
+				if($queryResult && empty($user->getToken())) {
 					session_start();
-					$lastSessionToken  = $_SESSION['user']->getToken();
-					if($lastSessionToken == $queryResult['token']) {
-						$token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
-						$user->setToken($token);
-						$user->supply($data);
-						$user->save();
-						$_SESSION['user'] = $user;
-						$_SESSION['loggedin'] = true;
-					}
-					else {
-						die('Token exchange failed');
-					}
+                    $token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
+                    $user->setToken($token);
+                    $user->supply($data);
+                    $user->save();
+                    $_SESSION['token'] = $user->getToken();
+
 				}
 			}
 		}
@@ -84,4 +77,8 @@ class UsersController{
 		$v = new View("forgetPasswordUser", "front");
         $v->assign("form", new FormBuilder($form));
 	}
+
+	public function newLoginAction(Request $request) {
+        $user = $this->user;
+    }
 }

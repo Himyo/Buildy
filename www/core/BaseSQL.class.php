@@ -5,8 +5,10 @@ use \PDO;
 use \PDOException;
 
 class BaseSQL{
+
 	private $pdo;
 	private $table;
+
 	public function __construct($driver, $host, $name, $user, $pwd){
 		try{
 			$this->pdo = new PDO($driver.":host=".$host.";dbname=".$name,$user,$pwd);
@@ -16,12 +18,14 @@ class BaseSQL{
 		}
 		$this->table = substr(get_called_class(), strpos(get_called_class(), '\\') +1);
 	}
+
 	public function setId($id){
 		$this->id = $id;
 		//va récupérer en base de données les élements pour alimenter l'objet
 		$this->getOneBy(["id"=>$id], true);
 		
 	}
+
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
 	public function getOneBy(array $where, $object = false){
