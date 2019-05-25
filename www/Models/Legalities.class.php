@@ -6,23 +6,20 @@ namespace MVC\Models;
 
 use MVC\Core\BaseSQL;
 
-class Legalities
-{
+class Legalities extends BaseSQL {
     private $id;
-    public $basesql;
 
-    public function __construct(BaseSQL $bsql)
-    {
-        $this->basesql = $bsql;
+    public function __construct() {
+        parent::__construct();
     }
 
     public function init(array $legalities, bool $set = false) {
         $data = $this->parseLegalities($legalities);
-        $dbLegalities = $this->basesql->findOne($this, $data);
+        $dbLegalities = $this->findOne($data);
         if(!$dbLegalities) {
-            $this->basesql->insert($this, $data);
+            $this->insert($data);
             if($set) {
-//                $this->id = $this->basesql->lastInsertedId();
+                $this->id = $this->lastInsertedId();
             }
         }
         else {

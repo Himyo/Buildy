@@ -4,7 +4,7 @@ namespace MVC\Models;
 use MVC\Core\BaseSQL;
 use MVC\Lib\Supplier;
 
-class Releases {
+class Releases extends BaseSQL {
 
     use Supplier;
     private $id;
@@ -13,24 +13,22 @@ class Releases {
     private $releaseDate;
     private $gameId = 1;
 
-    public $basesql;
-
     /**
      * Set constructor.
      * @param $id
      * @param $name
      * @param $releaseDate
      */
-    public function __construct(BaseSQL $bsql)
-    {
-        $this->basesql = $bsql;
+    public function __construct() {
+        parent::__construct();
     }
+
     public function init(array $release , bool $set = false) {
-        $dbRelease = $this->basesql->findOne($this, $release);
+        $dbRelease = $this->findOne($release);
         if(!$dbRelease) {
-            $this->basesql->insert($this, $release);
+            $this->insert($release);
             if($set) {
-                $this->id = $this->basesql->pdo->lastInsertId();
+                $this->id = $this->lastInsertedId();
             }
         }
         else {

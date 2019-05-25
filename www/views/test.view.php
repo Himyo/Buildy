@@ -20,9 +20,7 @@
         echo 'b';
         echo (int) 'W/G';
         echo '<pre>';
-        $user = new \MVC\Models\Users();
-        $user->getOneBy(['lala'=>31]);
-        echo $user->getTable();
+
         // $db->execute($qs, $dt);
     ?>
     </div>

@@ -6,31 +6,28 @@ namespace MVC\Models;
 
 use MVC\Core\BaseSQL;
 
-class Type
-{
+class Type extends BaseSQL{
     private $id;
     private $supertype;
     private $type;
     private $subtype;
     private $layout;
     private $rarity;
-    public $basesql;
 
-    public function __construct(BaseSQL $bsql)
-    {
-        $this->basesql = $bsql;
+    public function __construct() {
+        parent::__construct();
     }
 
     public function init(array $type, bool $set = false)
     {
         $data = $this->parseType($type);
-        $dbType = $this->basesql->findOne($this, $data);
+        $dbType = $this->findOne($data);
         if(!$dbType) {
             //TODO: Probaly prevent multiple query
             // Make transaction for execution
-            $this->basesql->insert($this, $data);
+            $this->insert($data);
             if($set) {
-                $this->id = $this->basesql->pdo->lastInsertId();
+                $this->id = $this->lastInsertedId();
             }
         }
         else {

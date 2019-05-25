@@ -53,8 +53,6 @@ class View{
 
 
 	public function __destruct(){
-	    echo "<pre>";
-	    var_dump($this->data['form']);
 		extract($this->data);
 
 		include $this->t;

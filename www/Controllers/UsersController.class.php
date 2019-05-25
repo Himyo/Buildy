@@ -6,11 +6,12 @@ namespace MVC\Controllers;
  use MVC\Lib\FormBuilder;
  use MVC\Core\Request;
 
-class UsersController{
+class UsersController extends Controller {
 
 	protected $user;
 
 	public function __construct(Users $user) {
+
 		$this->user = $user;
 	}
 	public function defaultAction(){

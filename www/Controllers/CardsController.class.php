@@ -3,7 +3,7 @@ namespace MVC\Controllers;
 
 use MVC\Models\Cards;
 
-class CardController {
+class CardsController {
     private $card;
 
     public function __construct(Cards $card)
@@ -61,7 +61,16 @@ class CardController {
                 'image_url' => $data['imageUrl'],
             ]);
 
-            $this->card->save();
+            $data = [
+                'releases_id' => $this->card->getRelease()->getId(),
+                'type_id' => $this->card->getType()->getId(),
+                'legalities_id' => $this->card->getLegalities()->getId(),
+                'mana_id' => $this->card->getMana()->getId(),
+
+            ];
+            $data = array_merge($data, $this->card->identity->getAllIdentity());
+            $data = array_merge($data, $this->card->props->getAllProps());
+            $this->card->insert($data);
         }
 
     }

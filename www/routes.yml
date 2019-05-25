@@ -49,6 +49,7 @@
   controller: Users
   action: add
   method: "POST"
+
 "/register":
   controller: Users
   action: save
@@ -65,6 +66,6 @@
   method: "GET"
 
 "/load_cards":
-  controller: Card
+  controller: Cards
   action: download
   method: "POST"
