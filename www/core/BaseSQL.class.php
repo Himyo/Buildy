@@ -34,6 +34,7 @@ class BaseSQL {
 		
 	}
 
+
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
 	public function getOneBy($class, array $where, $object = false){
