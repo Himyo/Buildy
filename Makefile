@@ -6,7 +6,7 @@ DUMP_FILE=config/db/dump.sql
 DB_TARGET=buildy
 
 db-create:
-	docker start buildy-db
+	docker start ${DB_CONTAINER_NAME} 
 db-delete:
 	docker exec -i ${DB_CONTAINER_NAME} mysql -uroot -ppabuildypa mysql -e "${DROP_SQL_QUERY}"
 db-init:
