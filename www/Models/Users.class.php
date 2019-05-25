@@ -59,6 +59,50 @@ class Users {
 		$this->id = $id;
     }
 
+    /**
+     * @return null
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail() {
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword() {
+        return $this->password;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRole() {
+        return $this->role;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus() {
+        return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken() {
+        return $this->token;
+    }
+
+
+
 
     public function getRegisterForm(){
 		$slug = Routing::getSlug("Users", "save");

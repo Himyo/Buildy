@@ -24,8 +24,9 @@ class Routing{
             return ["controller" => 'PagesController', "action" => 'notFoundAction',
                 "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
         }
-        $t = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" => $method];
-        return $t;
+        $result = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
+            $method];
+        return $result;
     }
 
 
