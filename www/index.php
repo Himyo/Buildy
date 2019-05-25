@@ -28,6 +28,7 @@ $slug = $_SERVER["REQUEST_URI"];
 //pour palier aux paramètres GET
 $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
+MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 
 $routes = MVC\Core\Routing::getRoute($slug);
 extract($routes);

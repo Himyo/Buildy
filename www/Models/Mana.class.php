@@ -5,31 +5,27 @@ namespace MVC\Models;
 use MVC\Core\BaseSQL;
 use MVC\Core\QueryBuilder;
 
-class Mana
-{
+class Mana extends BaseSQL {
     private $id;
     private $manaCost;
     private $cmc;
 
-    public $basesql;
-
-    public function __construct(BaseSQL $bsql)
-    {
-        $this->basesql = $bsql;
+    public function __construct() {
+        parent::__construct();
     }
 
 
     public function init(array $mana, bool $set = false) {
-        $dbMana = $this->basesql->findOne($this, ['mana_cost' => $mana['mana_cost']]);
+        $dbMana = $this->findOne(['mana_cost' => $mana['mana_cost']]);
         if(!$dbMana) {
             $parsedMana =  $this->parseManaCost($mana['mana_cost']);
             $parsedMana['mana_cost'] = $mana['mana_cost'];
             $parsedMana['cmc'] = $mana['cmc'];
             //TODO: Probably prevent multiple query
             // Make transaction for execution
-            $this->basesql->insert($this, $parsedMana);
+            $this->insert($parsedMana);
             if($set) {
-                $this->id = $this->basesql->pdo->lastInsertId();
+                $this->id = $this->lastInsertedId();
             }
         }
         else {
@@ -84,7 +80,7 @@ class Mana
     }
 
     public function findMana() {
-        $qb = QueryBuilder::getQueryBuilder();
+        $qb = QueryBuilder::GetQueryBuilder($this);
         $qb->select(['id'])
             ->where(['cmc' => $this->cmc])
             ->andWhere(['mana_cost'=>$this->manaCost]);

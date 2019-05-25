@@ -37,14 +37,4 @@ class CardIdentity
             'game_id' => $this->game_id,
         ];
     }
-
-    public function getAllIdentity(): array {
-        $result = [
-            'multiverseId' => $this->multiverseId,
-            'name' => $this->name,
-            'alias' => $this->alias,
-            'imageUrl' => $this->imageUrl,
-        ];
-        return $result;
-    }
 }

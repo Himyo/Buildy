@@ -2,6 +2,7 @@
 namespace MVC\Models;
 
 use \MVC\Core\BaseSQL;
+use MVC\Lib\Supplier;
 use \MVC\VO\CardIdentity;
 use \MVC\VO\CardProps;
 
@@ -12,14 +13,47 @@ use \MVC\VO\CardProps;
 
 //Maybe do a Card QueryBuilder
 // would imply to probably do a <Entity> QueryBuilder
-class Cards
-{
+class Cards extends BaseSQL {
+
+    use Supplier;
 
     private $id;
 
     public $identity;
 
     public $props;
+
+    /**
+     * @return Mana
+     */
+    public function getMana(): Mana
+    {
+        return $this->mana;
+    }
+
+    /**
+     * @return Type
+     */
+    public function getType(): Type
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return Releases
+     */
+    public function getRelease(): Releases
+    {
+        return $this->release;
+    }
+
+    /**
+     * @return Legalities
+     */
+    public function getLegalities(): Legalities
+    {
+        return $this->legalities;
+    }
 
     private $mana;
 
@@ -29,10 +63,8 @@ class Cards
 
     private $legalities;
 
-    public $basesql;
 
-
-    public function __construct(BaseSQL $bsql,
+    public function __construct(
                                 CardIdentity $identity,
                                 CardProps $props,
                                 Mana $mana,
@@ -40,13 +72,13 @@ class Cards
                                 Releases $release,
                                 Legalities $legalities)
     {
+        parent::__construct();
         $this->identity = $identity;
         $this->props = $props;
         $this->mana = $mana;
         $this->type = $type;
         $this->release = $release;
         $this->legalities = $legalities;
-        $this->basesql = $bsql;
     }
 
     public function initMana(array $mana, bool $set) {
@@ -61,18 +93,5 @@ class Cards
     public function initLegalities(array $legalities, bool $set) {
         $this->legalities->init($legalities, $set);
     }
-    public function save() {
-        $data = [
-            'releases_id' => $this->release->getId(),
-            'type_id' => $this->type->getId(),
-            'legalities_id' => $this->legalities->getId(),
-            'mana_id' => $this->mana->getId(),
 
-        ];
-        $data = array_merge($data, $this->identity->getAllIdentity());
-        $data = array_merge($data, $this->props->getAllProps());
-        echo "<pre>";
-        var_dump($data);
-        $this->basesql->insert($this, $data);
-    }
 }

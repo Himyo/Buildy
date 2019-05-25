@@ -7,22 +7,32 @@ use \PDOException;
 class BaseSQL {
     private static $instance;
 	public $pdo;
+    public $table;
 
-	public function __construct(string $driver, string $host, string $name, string $user, string $pwd) {
-        try{
-            $this->pdo = new PDO($driver. ":host=" . $host. ";dbname=" . $name, $user, $pwd);
+	public function __construct(PDO $pdo = null) {
+        if (!self::$instance) {
+            $this->pdo = $pdo;
         }
-        catch(PDOException $e) {
-            echo 'The connection to PDO failed';
-            $err = $e->getMessage() . "<br />";
-            echo $err;
-            die();
+        else {
+            $this->pdo = self::$instance->pdo;
+
+            $calledClass = get_called_class();
+            $this->table = substr($calledClass, strrpos($calledClass, '\\') +1);
         }
     }
 
     public static function getConnection($driver, $host, $name, $user, $pwd): BaseSQL{
 	    if(!self::$instance) {
-	        self::$instance = new self($driver, $host, $name, $user, $pwd);
+	        try {
+                $pdo = new PDO($driver . ":host=" . $host . ";dbname=" . $name, $user, $pwd);
+            }
+            catch (PDOException $e) {
+            echo 'The connection to PDO failed';
+            $err = $e->getMessage() . "<br />";
+            echo $err;
+            die();
+        }
+	        self::$instance = new self($pdo);
         }
 	    return self::$instance;
     }
@@ -37,15 +47,13 @@ class BaseSQL {
 
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
-	public function getOneBy($class, array $where, $object = false){
-        $calledClass = get_class($class);
-        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+	public function getOneBy(array $where, $object = false){
 		// $where = ["id"=>$id, "email"=>"y.skrzypczyk@gmail.com"];
 		$sqlWhere = [];
 		foreach ($where as $key => $value) {
 			$sqlWhere[]=$key."=:".$key;
 		}
-		$sql = " SELECT * FROM ".$table." WHERE  ".implode(" AND ", $sqlWhere).";";
+		$sql = " SELECT * FROM ".$this->table." WHERE  ".implode(" AND ", $sqlWhere).";";
 		$query = $this->pdo->prepare($sql);
 		
 		if($object){
@@ -59,18 +67,13 @@ class BaseSQL {
 		return $query->fetch();
 	}
 
-	public function save($class){
-	    $calledClass = get_class($class);
-        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
-		$dataObject = get_object_vars($class);
-		//TODO: Change this to a more consistent solution
-        unset($dataObject['basesql']);
-		$dataChild = array_diff_key($dataObject, get_class_vars($class));
-
+	public function save(){
+		$dataObject = get_object_vars($this);
+		$dataChild = array_diff_key($dataObject, get_class_vars(get_class()));
 		if( is_null($dataChild["id"])){
 			//INSERT
             unset($dataChild["id"]) ;
-			$sql ="INSERT INTO ".$table." ( ".
+			$sql ="INSERT INTO ".$this->table." ( ".
 			implode(",", array_keys($dataChild) ) .") VALUES ( :". 
 			implode(",:", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
@@ -84,25 +87,33 @@ class BaseSQL {
 				if( $key != "id")
 				$sqlUpdate[]=$key."=:".$key;
 			}
-			$sql ="UPDATE ".$table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
+			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
 			return $queryStatus;
 		}
 	}
 
-	public function findOne($class, array $data) {
-	    $qb = QueryBuilder::getQueryBuilder($class);
+    public function findAll(): array {
+        $qb = QueryBuilder::GetQueryBuilder($this->table);
+        $query = $qb->selectAll();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+	public function findOne(array $data) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
 	    $query = $qb->select([0 =>'id'])->andWhere($data)->make()->getQuery();
 	    $stmt = $this->pdo->prepare($query);
 	    $stmt->execute($data);
         return $stmt->fetch();
     }
-	public function insert($class, $data) {
+	public function insert($data) {
         //TODO: Probably prevent multiple query
         // Make transaction for execution
 
-        $qb = QueryBuilder::getQueryBuilder($class);
+        $qb = QueryBuilder::GetQueryBuilder($this->table);
 	    $query =  $qb->insert($data)->make()->getQuery();
 	    $stmt = $this->pdo->prepare($query);
 	    $stmtStatus = $stmt->execute($data);
@@ -118,7 +129,6 @@ class BaseSQL {
 			$request = $this->pdo->prepare($querys[$n]);
 			$requestStatus = $request->execute($data[$n]);
 			echo $requestStatus." ".$n." ".$querys[$n]."<br />";
-			var_dump($data[$n]);
 		}
 	}
 }

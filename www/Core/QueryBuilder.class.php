@@ -1,6 +1,8 @@
 <?php
 namespace MVC\Core;
 
+use MongoDB\Driver\Query;
+
 class QueryBuilder {
     private $query = "";
     private $table;
@@ -98,6 +100,9 @@ class QueryBuilder {
     public function select(array $items): QueryBuilder{
         $this->items['SELECT'] = $items;
         return $this;
+    }
+    public function selectAll(): string {
+       return "SELECT * FROM ".$this->table.";";
     }
     public function delete(array $items, $opt=[]): QueryBuilder{
         $this->items['DELETE'] = $opt;
@@ -220,9 +225,7 @@ class QueryBuilder {
         return $this->query;
     }
 
-    public static function getQueryBuilder($class): self {
-        $calledClass = get_class($class)??$class;
-        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
-        return new self($table);
+    public static function GetQueryBuilder($class): self {
+        return new self($class);
     }
 }
