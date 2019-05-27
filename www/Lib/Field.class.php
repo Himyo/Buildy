@@ -9,7 +9,7 @@ class Field {
     protected $id;
     protected $type;
     protected $placeholder;
-    protected $classname = 'class-form-fields';
+    protected $classname = 'button-classic-success';
     protected $confirm;
     protected $required;
     protected $error;

@@ -35,11 +35,6 @@
 
 # ######################################## EN ######################################
 
-"/users":
-  controller: Users
-  action: default
-  method: "GET"
-
 "/not_found":
   controller: Pages
   action: notFound
@@ -48,11 +43,6 @@
 "/add_users":
   controller: Users
   action: add
-  method: "POST"
-
-"/register":
-  controller: Users
-  action: save
   method: "POST"
 
 "/connection":
@@ -69,3 +59,80 @@
   controller: Cards
   action: download
   method: "POST"
+
+"/about":
+  controller: Pages
+  action: about
+  method: "GET"
+
+"/legal":
+  controller: Pages
+  action: legal
+  method: "GET"
+
+"/dashboard":
+  controller: Pages
+  action: dashboard
+  method: "GET"
+
+"/mySite":
+  controller: Pages
+  action: mySite
+  method: "GET"
+
+"/page":
+  controller: Pages
+  action: page
+  method: "GET"
+
+"/modifyPage":
+  controller: Pages
+  action: modifyPage
+  method: "GET"
+
+"/addPage":
+  controller: Pages
+  action: addPage
+  method: "GET"
+
+"/articles":
+  controller: Articles
+  action: getArticlesView
+  method: "GET"
+
+"/cards":
+  controller: Cards
+  action: getCardsView
+  method: "GET"
+
+"/users":
+  controller: Users
+  action: getUsersView
+  method: "GET"
+
+"/tournaments":
+  controller: Tournaments
+  action: getTournamentsView
+  method: "GET"
+
+
+
+
+#################### FRONT ######################
+
+"/home":
+  controller: Pages
+  action: home
+  method: "GET"
+
+"/register":
+  controller: Users
+  action: getRegisterForm
+  method: "POST"
+
+"/saveUser":
+  controller: Users
+  action: save
+  mothod: "POST"
+
+################ NEW ################

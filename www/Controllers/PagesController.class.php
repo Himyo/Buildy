@@ -6,9 +6,11 @@ use MVC\Core\View;
 class PagesController{
 
     public function defaultAction(){
+        $view = new View("home", "back");
+    }
 
-    $view = new View("homepage", "back");
-        $view->assign("pseudo","prof");
+    public function homeAction() {
+        $view = new View("home", "front");
     }
 
     public function notFoundAction() {
@@ -16,7 +18,6 @@ class PagesController{
     }
 
     public function testAction() {
-
         $view = new View("test", "back");
         $view->assign('test', [1,2,3]);
     }
@@ -43,6 +44,10 @@ class PagesController{
 
     public function legalAction() {
         $view = new View("legal", "back");
+    }
+
+    public function pageAction() {
+        $view = new View("page", "back");
     }
 
     //VIEWS DATABASE ADMIN

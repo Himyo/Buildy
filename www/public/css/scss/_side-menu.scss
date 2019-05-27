@@ -1,47 +1,40 @@
 .side-menu {
-  background-color: #555555;
   display: flex;
-  flex: 1 0px;
-  flex-flow: column wrap;
-
-  i {
-    width: 20px;
-  }
+  flex-direction: column;
+  background-color: #0c2033;
+  opacity: 0.9;
+  min-width: 250px;
 
   a {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
-    padding: 10px 10px;
     text-decoration: none;
-    color: #cccccc;
+    color: #dddddd;
+    padding: 10px;
   }
 
   a:hover {
-    background-color: #333333;
+    background-color: #ffffff;
+    color: #0c2033;
+    border-right: 2px solid #0c2033;
   }
-}
 
-.menu-title {
-  background-color: #555555;
-  cursor: pointer;
-  display: flex;
-
-  a {
-    width: 100%;
+  p:hover {
+     background-color: #ffffff;
+     color: #0c2033;
   }
-}
 
-.dropdown {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  .side-menu-search {
+     width: 100%;
+     margin: 5px;
+     display: flex;
 
-  li {
-    color: #cccccc;
+     input {
+        width: 204px;
+        padding: 10px 0px;
+     }
 
-    a {
-      padding: 5px 5px 5px 15px;
-      display: flex;
-    }
+     button {
+        width: 34px;
+        cursor: pointer;
+     }
   }
 }

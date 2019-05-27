@@ -1,48 +1,51 @@
-@media (max-width: 850px) {
-  
-  .header img {
-    max-height: 60px;
-    flex-basis: 100%;
-    flex-flow: column wrap;
+@media screen and (max-width: 640px) {
+
+  .header-menu {
+     display: none;
   }
 
-  .menu-header {
-    flex-basis: 100%;
-    flex-flow: column wrap;
-
-    a {
-      width: 100%;
-      height: inherit;
-      display: flex;
-      justify-content: center;
-    }
+  .header-menu-640 {
+     display: flex;
   }
 
-  .menu-footer {
-    flex-basis: 100%;
-    flex-flow: column wrap;
-
-    a {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
+  .side-menu {
+     display: none;
   }
 
-  .content {
-    flex-basis: 100%;
-    flex-flow: column wrap;
+  .footer-menu {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 860px) {
+
+  .card-b {
+    align-items: center;
+    flex-direction: column;
   }
 
-  .connexion {
-    flex-flow: column wrap;
+  .card-c {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+
+  .card-d {
+    flex-direction: column;
   }
 
-  .left-connexion {
-    flex: 1 !important;
+  .card-d-inverse {
+    flex-direction: column;
   }
 
-  .right-connexion {
-    flex: 2 !important;
+  .left-card-d-inverse {
+    order: 1;
+  }
+
+  .right-card-d-inverse {
+    order: 2;
   }
 }

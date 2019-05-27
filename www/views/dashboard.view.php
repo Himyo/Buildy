@@ -1,6 +1,5 @@
-<div class="page">
+<div id="container" class="container">
     <div class="content">
-      <h1>Dashboard - Accueil</h1>
-
+        <h1>Dashboard</h1>
     </div>
 </div>

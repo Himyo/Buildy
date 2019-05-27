@@ -22,20 +22,13 @@ class Request {
      * @return mixed|string
      */
     public function get($name) {
+        $result = [];
         if (!empty($this->getArgs)) {
-            foreach ($this->getArgs as $key => $value) {
-                if ($key == $name) {
-                    return $value;
-                }
-            }
+            return $this->getArgs[$name];
         } else if (!empty($this->postArgs)) {
-            foreach ($this->postArgs as $key => $value) {
-                if ($key == $name) {
-                    return $value;
-                }
-            }
+            return $this->postArgs[$name];
         }
-        return null;
+        return $result;
     }
 
 

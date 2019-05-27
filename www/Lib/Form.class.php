@@ -10,7 +10,7 @@ class Form {
     protected $id;
     protected $method;
     protected $action;
-    protected $className = "class-form";
+    protected $className = "form-connexion";
     protected $submitText = "Confirm";
     protected $resetText;
     protected $validator;
