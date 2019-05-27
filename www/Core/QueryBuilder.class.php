@@ -1,14 +1,12 @@
 <?php
 namespace MVC\Core;
 
-use MongoDB\Driver\Query;
-
+//TODO: Take only the data key and not the full data array;
 class QueryBuilder {
     private $query = "";
     private $table;
     private $items= [];
 
-    //TODO: Take only the data key and not the full data array;
     public function __construct(string $table) {
         $this->table = $table;
     }
@@ -17,7 +15,7 @@ class QueryBuilder {
         switch ($format) {
             case 'SELECT':
                 return function ($items) {
-                    $format = "(" . implode(" ,", $items) . ")";
+                    $format = "" . implode(" ,", $items) . "";
                     return $format;
                 };
             // Make transaction for execution
@@ -25,8 +23,8 @@ class QueryBuilder {
             case 'INSERT':
                 return function ($items) {
                     $keys = array_keys($items);
-                    $format = "(" . implode(",", $keys) . ") VALUES (:"
-                        . implode(",:", $keys) . ")";
+                    $format = "(" . implode(", ", $keys) . ") VALUES (:"
+                        . implode(", :", $keys) . ")";
                     //TODO: Remove or figure out this part
                     if(isset($items['ADDITIONAL'])) {
                         $format.= implode(",", $items["ADDITIONAL"]);
@@ -39,8 +37,9 @@ class QueryBuilder {
                     $keys = array_keys($items);
                     $format = "";
                     foreach ($keys as $k) {
-                        $format .= $k . " = :" . $k;
+                        $format .= " ".$k . " = :" . $k." ,";
                     }
+                    $format = trim($format, ",");
                     return $format;
                 };
                 break;
@@ -57,7 +56,7 @@ class QueryBuilder {
                     $format = "(" . implode(" ,", $keys) . ") VALUES ";
                     $values = "";
                     foreach($items as $i => $values){
-                        $values .= "(".implode(',:'.$i, $items[$i])."),";
+                        $values .= "(".implode(', :'.$i, $items[$i])."),";
                     }
                     trim($values, ",");
 
@@ -106,7 +105,7 @@ class QueryBuilder {
     }
     public function delete(array $items, $opt=[]): QueryBuilder{
         $this->items['DELETE'] = $opt;
-        $this->where($items);
+        $this->orWhere($items);
         return $this;
     }
     public function insert(array $items): QueryBuilder{
@@ -180,10 +179,10 @@ class QueryBuilder {
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
                     break;
                 case 'UPDATE':
-                    $this->query = "UPDATE TABLE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
+                    $this->query = "UPDATE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
                     break;
                 case 'DELETE':
-                    $this->query = "DELETE ".QueryBuilder::SQL_PARSER('DELETE')($data)." FROM ".$this->table;
+                    $this->query = "DELETE FROM ".$this->table;
                     break;
                 case 'INSERT MANY':
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT MANY')($data);

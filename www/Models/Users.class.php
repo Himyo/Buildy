@@ -161,8 +161,8 @@ class Users extends BaseSQL{
 		]);
 
 		$form = new Form($slug);
-		$fields = [$firstname, $lastname, $email, $emailConfirm, $psw, $pswConfirm];
-//        $fields = [$firstname, $lastname, $email, $emailConfirm, $psw];
+//		$fields = [$firstname, $lastname, $email, $emailConfirm, $psw, $pswConfirm];
+        $fields = [$firstname, $lastname, $email, $emailConfirm, $psw];
 		foreach($fields as $field) {
 			$form->addField($field);
 		}

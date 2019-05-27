@@ -74,8 +74,8 @@ class BaseSQL {
 			//INSERT
             unset($dataChild["id"]) ;
 			$sql ="INSERT INTO ".$this->table." ( ".
-			implode(",", array_keys($dataChild) ) .") VALUES ( :". 
-			implode(",:", array_keys($dataChild) ) .")";
+			implode(", ", array_keys($dataChild) ) .") VALUES ( :".
+			implode(", :", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
 			return $queryStatus;
@@ -102,21 +102,53 @@ class BaseSQL {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function find(array $data): array {
+        $qb = QueryBuilder::GetQueryBuilder($this->table);
+        $query = $qb->select($data)->make()->getQuery();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function get($data): array {
+        $qb = QueryBuilder::GetQueryBuilder($this->table);
+        $query = $qb->select(['*'])->andWhere($data)->make()->getQuery();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($data);
+        return $stmt->fetch();
+    }
+
 	public function findOne(array $data) {
 	    $qb = QueryBuilder::GetQueryBuilder($this->table);
-	    $query = $qb->select([0 =>'id'])->andWhere($data)->make()->getQuery();
+	    $query = $qb->select(['id'])->andWhere($data)->make()->getQuery();
 	    $stmt = $this->pdo->prepare($query);
 	    $stmt->execute($data);
         return $stmt->fetch();
     }
-	public function insert($data) {
-        //TODO: Probably prevent multiple query
-        // Make transaction for execution
 
+	public function insert(array $data) {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
 	    $query =  $qb->insert($data)->make()->getQuery();
 	    $stmt = $this->pdo->prepare($query);
 	    $stmtStatus = $stmt->execute($data);
+	    return $stmtStatus;
+    }
+
+    public function delete(array $data) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query = $qb->delete($data)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute($data);
+	    return $stmtStatus;
+    }
+
+    public function edit(array $data, array $where) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query = $qb->update($data)->where($where)->make()->getQuery();
+	    foreach($where as $key => $value) {
+	        $data[$key] =  $value;
+        }
+        $stmt = $this->pdo->prepare($query);
+        $stmtStatus = $stmt->execute($data);
 	    return $stmtStatus;
     }
 

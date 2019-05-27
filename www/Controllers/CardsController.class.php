@@ -4,12 +4,12 @@ namespace MVC\Controllers;
 use MVC\Core\View;
 use MVC\Models\Cards;
 
-class CardsController {
-    private $card;
+class CardsController extends Controller{
+    protected $cards;
 
-    public function __construct(Cards $card)
+    public function __construct(Cards $cards)
     {
-        $this->card = $card;
+        $this->cards = $cards;
     }
 
     public function getCardsViewAction() {
@@ -30,12 +30,12 @@ class CardsController {
                 echo "<br />".$data['name'];
                 continue;
             }
-            $this->card->initMana([
+            $this->cards->initMana([
                 'mana_cost' => $data['manaCost']??"",
                 'cmc' => $data['cmc']
             ], true);
 
-            $this->card->initType([
+            $this->cards->initType([
                 'supertype' =>  $data['supertypes'],
                 'subtype' => $data['subtypes'],
                 'layout' => $data['layout'],
@@ -43,22 +43,22 @@ class CardsController {
                 'type' =>$data['types']
             ], true);
 
-            $this->card->initRelease([
+            $this->cards->initRelease([
                 'code' => $data['set'],
                 'name' => $data['setName']
             ], true);
 
-            $this->card->initLegalities([
+            $this->cards->initLegalities([
                 'legalities' => $data['legalities']
                 ], true);
 
-            $this->card->props->init([
+            $this->cards->props->init([
                 'text' => $data['text']??"",
                 'power' => $data['power']??0,
                 'toughness' => $data['toughness']??0
             ]);
 
-            $this->card->identity->init([
+            $this->cards->identity->init([
                 'name' => $data['name'],
                 'lore' => $data['flavor']??"",
                 'ruling' => $data['rulings'],
@@ -67,15 +67,15 @@ class CardsController {
             ]);
 
             $data = [
-                'releases_id' => $this->card->getRelease()->getId(),
-                'type_id' => $this->card->getType()->getId(),
-                'legalities_id' => $this->card->getLegalities()->getId(),
-                'mana_id' => $this->card->getMana()->getId(),
+                'releases_id' => $this->cards->getRelease()->getId(),
+                'type_id' => $this->cards->getType()->getId(),
+                'legalities_id' => $this->cards->getLegalities()->getId(),
+                'mana_id' => $this->cards->getMana()->getId(),
 
             ];
-            $data = array_merge($data, $this->card->identity->getAllIdentity());
-            $data = array_merge($data, $this->card->props->getAllProps());
-            $this->card->insert($data);
+            $data = array_merge($data, $this->cards->identity->getAllIdentity());
+            $data = array_merge($data, $this->cards->props->getAllProps());
+            $this->cards->insert($data);
         }
 
     }

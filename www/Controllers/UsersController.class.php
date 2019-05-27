@@ -9,19 +9,19 @@ namespace MVC\Controllers;
 
 class UsersController extends Controller {
 
-	protected $user;
-	protected $form;
+	protected $users;
+	protected $formId = [];
 
-	public function __construct(Users $user) {
-        session_start();
-		$this->user = $user;
+	public function __construct(Users $users) {
+
+		$this->users = $users;
 	}
 	public function getUsersViewAction(){
 		$view = new View("usersBack", "back");
 	}
 
 	public function getRegisterFormAction() {
-	    $user = $this->user;
+	    $user = $this->users;
         $_SESSION["form"] = $user->getRegisterForm();
         $view = new View("register", "back");
         $view->assign("form", new FormBuilder($user->getRegisterForm()));
@@ -50,17 +50,23 @@ class UsersController extends Controller {
 
 	public function ssaveAction(){
 
-		$user = $this->user;
-		$form = $user->getRegisterForm();
+		$users = $this->users;
+		$form = $users->getRegisterForm();
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
 			$form->validate($data);
+
 			if($form->isValid()){
-				//TODO: Real user registration
-				$user->supply($data);
-				$user->save();
-				session_start();
-				$_SESSION['token'] = $user->getToken();
+                unset($data['emailConfirm']);
+//                unset($data['passwordConfirm']);
+                echo 'VALID';
+				//TODO: Real users registration
+				$users->supply($data);
+				$users->save();
+				//session_start();
+				//$_SESSION['token'] = $users->getToken();
+                header('Location: /');
+                exit;
 			}
 		}
 		//TODO: Take decision for action settings
@@ -71,44 +77,54 @@ class UsersController extends Controller {
 
 	public function loginAction() {
 
-		$user = $this->user;
-		$form = $user->getLoginForm();
+		$users = $this->users;
+		$form = $users->getLoginForm();
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
 			$form->validate($data);
-            //TODO: Catch SQL Error
 			if($form->isValid()) {
-				//TODO: Real user connection
-				$queryResult = $user->getOneBy($data);
-				if($queryResult && empty($user->getToken())) {
+				$queryResult = $users->get($data);
+				if($queryResult && empty($users->getToken())) {
 					session_start();
-                    $token = password_hash(substr(uniqid().time(), 4, 10).$user->getFirstname(), PASSWORD_DEFAULT);
-                    $user->setToken($token);
-                    $user->supply($data);
-                    $user->save();
-                    $_SESSION['token'] = $user->getToken();
+                    $token = password_hash(substr(uniqid().time(), 4, 10).$users->getFirstname(), PASSWORD_DEFAULT);
+                    $users->setToken($token);
+                    $users->supply($data);
+                    $_SESSION['token'] = $users->getToken();
+                    $_SESSION['user'] = $users;
 
+                    header('Location: /');
+                    exit;
 				}
+				else {
+				    echo "Ooops, not account found for: ";
+				    var_dump($data);
+                }
 			}
 		}
-		$v = new View("loginUser", "front");
+		$v = new View("loginUser", "back");
 		$v->assign("form", new FormBuilder($form));
 	}
 
 
+    public function listAction($data = [], $editable = []) {
+        $data = ['id', 'lastname', 'firstname','email', 'status', 'role', 'photo_id'];
+        $editable =  ['status', 'role'];
+	    parent::listAction($data, $editable);
+    }
+
 	public function forgetPasswordAction(){
-		$user = $this->user;
-		$form = $user->getForgetPasswordForm();
+		$users = $this->users;
+		$form = $users->getForgetPasswordForm();
 		$data = $GLOBALS[$form->getGlobalMethod()];
 		if($_SERVER['REQUEST_METHOD'] == strtoupper($form->getMethod()) && !empty($data)) {
 			//TODO: Mailling
 			var_dump($data);
 		}
-		$v = new View("forgetPasswordUser", "front");
+		$v = new View("forgetPasswordUser", "back");
         $v->assign("form", new FormBuilder($form));
 	}
 
 	public function newLoginAction(Request $request) {
-        $user = $this->user;
+        $users = $this->users;
     }
 }

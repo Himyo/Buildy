@@ -30,7 +30,7 @@ $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
 MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 
-$routes = MVC\Core\Routing::getRoute($slug);
+$routes = substr_count($slug, '/') > 1 ? \MVC\Core\Routing::getCrudRoute($slug) : MVC\Core\Routing::getRoute($slug);
 extract($routes);
 
 $container = [];

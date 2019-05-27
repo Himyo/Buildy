@@ -1,15 +1,5 @@
-<div class="card card-login mx-auto mt-5">
-        <div class="card-header">Login</div>
-        <div class="card-body">
-          
-
-          
-          <?php $this->addComponent("form", $form);?>
-
-
-          <div class="text-center">
-            <a class="d-block small mt-3" href="<?php echo Routing::getSlug("Users","add");?>">Register an Account</a>
-            <a class="d-block small" href="<?php echo Routing::getSlug("Users","forgetPassword");?>">Forgot Password?</a>
-          </div>
-        </div>
-      </div>
+<div id="container" class="container">
+    <div class="content">
+        <?php $this->addComponent("form", $form);?>
+    </div>
+</div>

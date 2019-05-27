@@ -5,16 +5,13 @@ class Routing{
 
 	public static $routeFile = "routes.yml";
 
-    // TODO: Refacto
 	public static function getRoute($slug)
     {
-
-        // /creation_de_compte_allocine
-        //récuperer toutes les routes dans le fichier yml
         $routes = yaml_parse_file(self::$routeFile);
         if (isset($routes[$slug])) {
             if (empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])) {
-                die("Il y a une erreur dans le fichier routes.yml");
+                return ["controller" => 'PagesController', "action" => 'notFoundAction',
+                    "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
             }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
@@ -29,6 +26,30 @@ class Routing{
         return $result;
     }
 
+    public static function getCrudRoute($slug) {
+        $routes = yaml_parse_file(self::$routeFile);
+        $slugMethod = substr($slug, 0, strrpos($slug, "/"));
+        $controller = ucwords(substr($slug, strrpos($slug, "/") + 1))."Controller";
+        if( isset($routes[$slugMethod])) {
+            if(empty($routes[$slugMethod]["action"])) {
+                return ["controller" => 'PagesController', "action" => 'notFoundAction',
+                    "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
+            }
+            $controllerPath = "Controllers/" . $controller . ".class.php";
+            $action = $routes[$slugMethod]["action"] . "Action";
+            $method = $routes[$slugMethod]["method"];
+        } else {
+            return ["controller" => 'PagesController', "action" => 'notFoundAction',
+                "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
+        }
+        return ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
+            $method];
+    }
+
+    public static function getMethod($slug) {
+        $routes = yaml_parse_file(self::$routeFile);
+        return $routes[$slug]['method'];
+    }
 
 	public static function getSlug($c, $a){
 		$routes = yaml_parse_file(self::$routeFile);

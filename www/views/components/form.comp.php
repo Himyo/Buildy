@@ -4,6 +4,5 @@
         $config->setData($data);
 	}
     $config->make();
-
-
+?>
 

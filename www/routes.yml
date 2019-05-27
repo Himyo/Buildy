@@ -8,31 +8,6 @@
   action: test
   method: "GET"
 
-"/liste_des_utilisateurs":
-  controller: Users
-  action: default
-  method: "GET"
-
-"/ajouter_un_utilisateur":
-  controller: Users
-  action: add
-  method: "POST"
-
-"/enregister_un_utilisateur":
-  controller: Users
-  action: save
-  method: "POST"
-
-"/connexion":
-  controller: Users
-  action: login
-  method: "POST"
-
-"/mot_de_passe_oublie":
-  controller: Users
-  action: forgetPassword
-  method: "GET"
-
 # ######################################## EN ######################################
 
 "/not_found":
@@ -115,11 +90,6 @@
   action: getTournamentsView
   method: "GET"
 
-
-
-
-#################### FRONT ######################
-
 "/home":
   controller: Pages
   action: home
@@ -135,4 +105,17 @@
   action: save
   mothod: "POST"
 
-################ NEW ################
+"/list":
+  controller: ""
+  action: list
+  method: "GET"
+
+"/delete":
+  controller: ""
+  action: delete
+  method: "GET"
+
+"/edit":
+  controller: ""
+  action: edit
+  method: "GET"
