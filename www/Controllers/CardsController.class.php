@@ -1,6 +1,7 @@
 <?php
 namespace MVC\Controllers;
 
+use MVC\Core\View;
 use MVC\Models\Cards;
 
 class CardsController {
@@ -9,6 +10,10 @@ class CardsController {
     public function __construct(Cards $card)
     {
         $this->card = $card;
+    }
+
+    public function getCardsViewAction() {
+        $view = new View("cardsBack", "back");
     }
 
     public function downloadAction() {
@@ -72,6 +77,10 @@ class CardsController {
             $data = array_merge($data, $this->card->props->getAllProps());
             $this->card->insert($data);
         }
+
+    }
+
+    public function showCards() {
 
     }
 }

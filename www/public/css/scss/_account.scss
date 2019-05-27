@@ -1,0 +1,25 @@
+.account-title {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+.account-informations {
+  .username-info,
+  .email-info,
+  .password-info {
+     display: flex;
+     flex-direction: column;
+  }
+
+  .username-info input,
+  .email-info input,
+  .password-info input {
+     width: 300px;
+     margin-bottom: 20px;
+     padding: 5px;
+     border: 1px solid #ccc;
+     border-radius: 6px;
+  }
+}

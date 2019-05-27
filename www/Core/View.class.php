@@ -25,7 +25,7 @@ class View{
 	}
 
 	public function setTemplate($t){
-		$templatePath = "views/templates/".$t.".tpl.php";
+		$templatePath = "views/templates/".$t."/".$t.".tpl.php";
 		if( file_exists($templatePath)){
 			$this->t=$templatePath;
 		}else{
@@ -41,6 +41,7 @@ class View{
 		//form.mod.php
 		$componentPath = "views/components/".$component.".comp.php";
 		if( file_exists($componentPath)){
+		    extract(["config" => $config]);
 			include $componentPath;
 		}else{
 			die("Attention le fichier component n'existe pas ".$componentPath);
