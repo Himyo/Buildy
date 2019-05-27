@@ -17,7 +17,7 @@ abstract class Controller
         $databaseData['editable'] =  $editable;
         $databaseData['modelName'] = $modelName;
 
-        $view = new View('database', 'front');
+        $view = new View('database', 'back');
         $view->assign("data", $databaseData);
     }
 

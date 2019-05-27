@@ -21,7 +21,7 @@ class UsersController extends Controller {
 	}
 
 	public function getRegisterFormAction() {
-	    $user = $this->user;
+	    $user = $this->users;
         $_SESSION["form"] = $user->getRegisterForm();
         $view = new View("register", "back");
         $view->assign("form", new FormBuilder($user->getRegisterForm()));
@@ -101,7 +101,7 @@ class UsersController extends Controller {
                 }
 			}
 		}
-		$v = new View("loginUser", "front");
+		$v = new View("loginUser", "back");
 		$v->assign("form", new FormBuilder($form));
 	}
 
@@ -120,7 +120,7 @@ class UsersController extends Controller {
 			//TODO: Mailling
 			var_dump($data);
 		}
-		$v = new View("forgetPasswordUser", "front");
+		$v = new View("forgetPasswordUser", "back");
         $v->assign("form", new FormBuilder($form));
 	}
 

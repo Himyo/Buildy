@@ -14,10 +14,10 @@
             }
             echo "</tr>";
 
-            foreach ($config as $users) {
+            foreach ($config as $element) {
                 echo "<tr>";
                 echo '<form method="GET" id="edit" action="/edit/'.$modelName .'" >';
-                foreach ($users as $key => $value) {
+                foreach ($element as $key => $value) {
                     if($key == 'id'){
                         echo "<td> <input name='" . $key . "' value='" . $value . "' readonly></td>";
                         continue;
@@ -30,7 +30,7 @@
                     }
                 }
                 echo '<td><button type="submit" form="edit">Save</button></td></form>';
-                echo '<td><button type="submit" value="'.$users['id'].'" name="id" form="delete">Delete</button></td>';
+                echo '<td><button type="submit" value="'.$element['id'].'" name="id" form="delete">Delete</button></td>';
                 echo "</tr>";
             }
         ?>
