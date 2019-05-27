@@ -56,7 +56,7 @@ class FormBuilder {
                 class="'.$field->getClassname().'"
                 value="'.$data.'"><br>';
         }
-        $fieldsHtml .= '<input type="submit" class="btn btn-primary btn-block" value="Submit">';
+        $fieldsHtml .= '<button type="submit" class="btn btn-primary btn-block">Submit</button>';
         return $fieldsHtml;
     }
 

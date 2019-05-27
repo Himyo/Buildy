@@ -1064,7 +1064,7 @@ INSERT INTO `Type` (`id`, `supertype`, `type`, `subtype`, `layout`, `rarity`) VA
 --
 
 CREATE TABLE `Users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `lastname` varchar(45) DEFAULT NULL,
   `firstname` varchar(45) DEFAULT NULL,
   `owner` varchar(45) DEFAULT NULL,
@@ -1073,7 +1073,8 @@ CREATE TABLE `Users` (
   `status` int(11) DEFAULT NULL,
   `role` int(11) DEFAULT NULL,
   `token` varchar(60) DEFAULT NULL,
-  `photo_id` int(11) DEFAULT NULL
+  `photo_id` int(11) DEFAULT NULL,
+   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
