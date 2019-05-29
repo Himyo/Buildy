@@ -29,6 +29,11 @@ class Form {
         $id = $field->getId();
         $this->fields[$id] = $field;
     }
+    public function addFields(array $fields) {
+        foreach ($fields as $field) {
+            $this->addField($field);
+        }
+    }
     
     public function removeField($fieldName) {
         unset($this->fields[$fieldName]);
@@ -53,6 +58,11 @@ class Form {
     public function getErrors() {
         return $this->validator->getError();
     }
+
+    public function getField($fieldName) {
+        return $this->fields[$fieldName];
+    }
+
     public function getFields() {
         return $this->fields;
     }    

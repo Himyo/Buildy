@@ -9,6 +9,9 @@
  use MVC\Models\Cards;
  use MVC\Controllers\CardsController;
 
+ use MVC\Models\Articles;
+ use MVC\Controllers\ArticlesController;
+
  use MVC\Models\Users;
  use MVC\Controllers\UsersController;
 
@@ -48,7 +51,13 @@ $container = [
     CardsController::class => function($container) {
         return new CardsController($container[Cards::class]($container));
     },
-
+    //Articles
+    Articles::class => function($container) {
+        return new Articles();
+    },
+    ArticlesController::class => function($container) {
+        return new ArticlesController($container[Articles::class]($container));
+    },
     //Users
     Users::class => function($container) {
         return new Users();

@@ -8,8 +8,6 @@
   action: test
   method: "GET"
 
-# ######################################## EN ######################################
-
 "/not_found":
   controller: Pages
   action: notFound
@@ -70,40 +68,45 @@
   action: addPage
   method: "GET"
 
-"/articles":
-  controller: Articles
-  action: getArticlesView
-  method: "GET"
 
 "/cards":
   controller: Cards
   action: getCardsView
   method: "GET"
 
-"/users":
-  controller: Users
-  action: getUsersView
-  method: "GET"
-
-"/tournaments":
-  controller: Tournaments
-  action: getTournamentsView
-  method: "GET"
 
 "/home":
   controller: Pages
   action: home
   method: "GET"
 
+
+"/saveUser":
+  controller: Users
+  action: save
+  method: "POST"
+########################################## MODELS READ ROUTES #############################
+"/articles":
+  controller: Articles
+  action: getArticlesView
+  method: "GET"
+
+"/tournaments":
+  controller: Tournaments
+  action: getTournamentsView
+  method: "GET"
+########################################## MODELS WRITE ROUTES ############################
 "/register":
   controller: Users
   action: getRegisterForm
   method: "POST"
 
-"/saveUser":
-  controller: Users
-  action: save
-  mothod: "POST"
+"/write_article":
+  controller: Articles
+  action: getArticleForm
+  method: "POST"
+
+########################################## CRUD ROUTES #############################
 
 "/list/{!}":
   controller: ""
@@ -119,3 +122,9 @@
   controller: ""
   action: edit
   method: "GET"
+
+"/update":
+  controller: ""
+  action: update
+  method: POST
+

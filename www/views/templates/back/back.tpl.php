@@ -12,7 +12,6 @@
 <body>
     <main>
         <?php include "header.php"; ?>
-        <?php include "header_640.php"; ?>
         <div id="main-container" class="main-container">
             <?php
             if (\MVC\Core\Routing::getSlug("Pages", "mySite") === $_SERVER['REQUEST_URI']):
