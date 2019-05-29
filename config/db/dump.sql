@@ -598,6 +598,12 @@ ALTER TABLE `Users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 

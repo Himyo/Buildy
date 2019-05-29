@@ -10,14 +10,11 @@
   action: getSite
   method: "GET"
 
-"/component":
   controller: Pages
   action: component
   method: "GET"
 
 "/not_found":
-  controller: Pages
-  action: notFound
   method: "POST"
 
 "/page/{?}":
