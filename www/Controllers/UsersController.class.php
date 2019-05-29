@@ -102,6 +102,7 @@ class UsersController extends Controller {
 	    parent::listAction($data, $editable);
     }
 
+
 	public function forgetPasswordAction(){
 		$users = $this->users;
 		$form = $users->getForgetPasswordForm();

@@ -2,22 +2,21 @@
 namespace MVC\Controllers;
 
 use MVC\Core\View;
+use MVC\Lib\FormBuilder;
 use MVC\Models\Articles;
 
 class ArticlesController extends Controller {
 
-    private $article;
+    protected $articles;
 
-    /**
-     * ArticlesController constructor.
-     * @param $article
-     */
-    public function __construct(Articles $article) {
-        $this->article = $article;
+
+    public function __construct(Articles $articles) {
+        $this->articles = $articles;
     }
 
-
-    public function getArticlesViewAction() {
-        $view = new View("tournamentsBack", "back");
+    public function getArticleFormAction() {
+        $article = $this->articles;
+        $view = new View('write', 'back');
+        $view->assign("form" , new FormBuilder($article->articleForm()));
     }
 }

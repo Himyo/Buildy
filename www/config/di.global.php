@@ -12,16 +12,6 @@
  use MVC\Models\Articles;
  use MVC\Controllers\ArticlesController;
 
- use MVC\Models\Comments;
- use MVC\Controllers\CommentsController;
-
- use MVC\Models\Tournaments;
- use MVC\Controllers\TournamentsController;
-
- use MVC\Models\Decks;
- use MVC\Controllers\DecksController;
-
-
  use MVC\Models\Users;
  use MVC\Controllers\UsersController;
 
@@ -70,7 +60,13 @@ $container = [
     CardsController::class => function($container) {
         return new CardsController($container[Cards::class]($container));
     },
-
+    //Articles
+    Articles::class => function($container) {
+        return new Articles();
+    },
+    ArticlesController::class => function($container) {
+        return new ArticlesController($container[Articles::class]($container));
+    },
     //Users
     Users::class => function($container) {
         return new Users();

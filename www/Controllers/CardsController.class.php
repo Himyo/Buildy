@@ -1,6 +1,7 @@
 <?php
 namespace MVC\Controllers;
 
+use MVC\Core\Routing;
 use MVC\Core\View;
 use MVC\Models\Cards;
 
@@ -10,10 +11,6 @@ class CardsController extends Controller{
     public function __construct(Cards $cards)
     {
         $this->cards = $cards;
-    }
-
-    public function defaultAction() {
-        $view = new View("cards", "back");
     }
 
     public function downloadAction() {
@@ -80,7 +77,9 @@ class CardsController extends Controller{
 
     }
 
-    public function showCards() {
-
+    public function getCardsViewAction() {
+        $cards = $this->cards->findAll();
+        $view = new View("cards", "back");
+        $view->assign("cards", $cards) ;
     }
 }

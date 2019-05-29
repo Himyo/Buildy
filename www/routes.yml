@@ -10,12 +10,10 @@
   action: getSite
   method: "GET"
 
-######## ADMIN #######
-
-"/dashboard/admin/users":
-  controller: AdminUsers
-  action: default
-  method: "GET"
+"/not_found":
+  controller: Pages
+  action: notFound
+  method: "POST"
 
 "/dashboard/admin/cards":
   controller: AdminCards
@@ -212,37 +210,45 @@
   action: addPage
   method: "GET"
 
-"/site/page/{id}/delete":
-  controller: Pages
-  action: addPage
+
+"/cards":
+  controller: Cards
+  action: getCardsView
   method: "GET"
 
-#########################
+
+"/home":
+  controller: Pages
+  action: home
+  method: "GET"
+
+
+"/saveUser":
+  controller: Users
+  action: save
+  method: "POST"
+########################################## MODELS READ ROUTES #############################
+"/articles":
+  controller: Articles
+  action: getArticlesView
+  method: "GET"
 
 "/test":
   controller: Test
   action: default
   method: "GET"
-
-"/not_found":
-  controller: Pages
-  action: notFound
-  method: "GET"
-
-"/load_cards":
-  controller: Cards
-  action: download
+########################################## MODELS WRITE ROUTES ############################
+"/register":
+  controller: Users
+  action: getRegisterForm
   method: "POST"
 
-"/about":
-  controller: Home
-  action: getAbout
-  method: "GET"
+"/write_article":
+  controller: Articles
+  action: getArticleForm
+  method: "POST"
 
-"/legal":
-  controller: Home
-  action: getLegal
-  method: "GET"
+########################################## CRUD ROUTES #############################
 
 "/list/{!}":
   controller: ""
@@ -258,3 +264,9 @@
   controller: ""
   action: edit
   method: "GET"
+
+"/update":
+  controller: ""
+  action: update
+  method: POST
+
