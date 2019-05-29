@@ -4,7 +4,11 @@
         <div class="index-title">
             <h1>Cards</h1>
             <h2>Search for your favorite cards here</h2>>
-            <?php var_dump($cards)?>
+            <?php
+                foreach($cards as $card) {
+                    $this->addComponent('card', $card);
+                }
+            ?>
         </div>
     </div>
 </div>

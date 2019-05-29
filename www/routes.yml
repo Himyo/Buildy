@@ -126,43 +126,9 @@
   action: default
   method: "GET"
 
-"/cards/{id}":
-  controller: Cards
-  action: getDetail
-  method: "GET"
-
-######## TOURNAMENTS #######
-
-"/tournaments":
-  controller: Tournaments
-  action: getAll
-  method: "GET"
-
-"/tournaments/{id}":
-  controller: Tournaments
-  action: getSingle
-  method: "GET"
-
-"/tournaments/myTournaments":
-  controller: Tournaments
-  action: getMyTournaments
-  method: "GET"
-
-"/tournaments/create":
-  controller: Tournaments
-  action: getCreate
-  method: "GET"
-
-"/tournaments/save":
-  controller: Tournaments
-  action: save
-  method: "POST"
-
-######## DECK #######
-
-"/decks/create":
-  controller: Decks
-  action: getCreate
+"/about":
+  controller: Pages
+  action: about
   method: "GET"
 
 "/decks/{user}":

@@ -78,7 +78,18 @@ class CardsController extends Controller{
     }
 
     public function getCardsViewAction() {
-        $cards = $this->cards->findAll();
+        $cards = $this->cards->findJoin(
+            [
+                'Cards.id', 'Cards.image_url',
+                'Cards.name', 'Cards.toughness',
+                'Cards.power', 'Mana.mana_cost',
+                'Mana.cmc', 'Releases.name'
+            ],
+            [
+                'Mana' => ['Mana.id', 'Cards.mana_id'],
+                'Releases' => ['Releases.id', 'Cards.releases_id']
+            ]
+        );
         $view = new View("cards", "back");
         $view->assign("cards", $cards) ;
     }

@@ -83,6 +83,15 @@ class QueryBuilder {
                     return $format;
                 };
                 break;
+            case 'JOIN':
+                return function($items) {
+                  $format = "";
+                  $keys = array_keys($items);
+                  foreach ($keys as $key) {
+                      $format.= " JOIN ".$key ." ON ".$items[$key][0]." = ".$items[$key][1];
+                  }
+                  return $format;
+                };
             default:
                 return function ($items) {
                     $keys = array_keys($items);
@@ -130,6 +139,11 @@ class QueryBuilder {
     public function where($item): QueryBuilder {
         $this->items['WHERE'] = $item;
 
+        return $this;
+    }
+
+    public function innerJoin($items): QueryBuilder {
+        $this->items['JOIN'] =  $items;
         return $this;
     }
 
@@ -184,6 +198,9 @@ class QueryBuilder {
                 case 'DELETE':
                     $this->query = "DELETE FROM ".$this->table;
                     break;
+                case 'JOIN':
+                    $this->query .= ' '.QueryBuilder::SQL_PARSER('JOIN')($data);
+                    break;
                 case 'INSERT MANY':
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT MANY')($data);
                     break;
@@ -206,17 +223,8 @@ class QueryBuilder {
         $this->table = $table;
         return $this;
     }
-    public function join(QueryBuilder $join): QueryBuilder    {
-        $this->make();
-        $this->query = trim($this->query, ';');
-        $this->query.= " JOIN ".$join->makeQuery()->getQuery();
-        foreach ($join->getItems() as $joinKeyword => $joinData) {
-            $this->items[$joinKeyword] = isset($this->items[$joinKeyword]) ? array_merge($this->items[$joinKeyword], $join->getItems()[$joinKeyword])
-                : $join->getItems()[$joinKeyword];
-        }
-        return $this;
-    }
-    
+
+
     public function getItems(): array {
         return $this->items;
     }

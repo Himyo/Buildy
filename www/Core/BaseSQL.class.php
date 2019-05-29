@@ -147,11 +147,11 @@ class BaseSQL {
         return $stmt->fetch();
     }
     public function findJoin(array $data, array $join) {
-        $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $query = $qb->select($data)->innerJoin($join)->make()->getQuery();
-        $stmt = $this->pdo->prepare($query);
-        $stmtStatus = $stmt->execute();
-        return $stmt->fetchAll();
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query = $qb->select($data)->innerJoin($join)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute();
+	    return $stmt->fetchAll();
     }
 
     public function insert(array $data) {
@@ -182,40 +182,15 @@ class BaseSQL {
     }
 
     public function lastInsertedId(){
-        $res = $this->pdo->lastInsertId();
-        return $res;
+	    $res = $this->pdo->lastInsertId();
+	    return $res;
     }
 
-    public function insertMany(array $data) {
-        $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $parsedData = $this->insertManyParse($data);
-        $flat = Utils::flattenArray($parsedData);
-        $query =  $qb->insertMany($parsedData)->make()->getQuery();
-        $stmt = $this->pdo->prepare($query);
-        $stmtStatus = $stmt->execute($flat);
-
-        return $stmtStatus;
-    }
-    public function executeMany($querys, $data) {
-        foreach($querys as $n => $value){
-            $request = $this->pdo->prepare($querys[$n]);
-            $requestStatus = $request->execute($data[$n]);
-            echo $requestStatus." ".$n." ".$querys[$n]."<br />";
-        }
-    }
-
-    public function insertManyParse(array $data): array {
-        $preparedData = [];
-        $keys = array_keys($data[0]);
-        $tmp = $data[0];
-        unset($data[0]);
-        $preparedData[0] = $tmp;
-        foreach($data as $i => $values) {
-            foreach($keys as $key) {
-                $preparedData[$i][$i.$key] = $values[$key];
-            }
-        }
-        return $preparedData;
-    }
-
+	public function executeMany($querys, $data) {
+		foreach($querys as $n => $value){
+			$request = $this->pdo->prepare($querys[$n]);
+			$requestStatus = $request->execute($data[$n]);
+			echo $requestStatus." ".$n." ".$querys[$n]."<br />";
+		}
+	}
 }
