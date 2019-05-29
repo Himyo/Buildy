@@ -124,6 +124,13 @@ class BaseSQL {
 	    $stmt->execute($data);
         return $stmt->fetch();
     }
+    public function findJoin(array $data, array $join) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query = $qb->select($data)->innerJoin($join)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute();
+	    return $stmt->fetchAll();
+    }
 
 	public function insert(array $data) {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
@@ -156,6 +163,7 @@ class BaseSQL {
 	    $res = $this->pdo->lastInsertId();
 	    return $res;
     }
+
 	public function executeMany($querys, $data) {
 		foreach($querys as $n => $value){
 			$request = $this->pdo->prepare($querys[$n]);

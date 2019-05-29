@@ -28,11 +28,6 @@
   action: forgetPassword
   method: "GET"
 
-"/load_cards":
-  controller: Cards
-  action: download
-  method: "POST"
-
 "/about":
   controller: Pages
   action: about
