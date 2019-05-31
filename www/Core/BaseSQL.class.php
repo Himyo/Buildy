@@ -6,8 +6,8 @@ use \PDOException;
 
 class BaseSQL {
     private static $instance;
-	public $pdo;
-    public $table;
+	private $pdo;
+    private $table;
 
 	public function __construct(PDO $pdo = null) {
         if (!self::$instance) {
@@ -25,14 +25,14 @@ class BaseSQL {
 	    if(!self::$instance) {
 	        try {
                 $pdo = new PDO($driver . ":host=" . $host . ";dbname=" . $name, $user, $pwd);
+                self::$instance = new self($pdo);
             }
             catch (PDOException $e) {
             echo 'The connection to PDO failed';
             $err = $e->getMessage() . "<br />";
             echo $err;
             die();
-        }
-	        self::$instance = new self($pdo);
+            }
         }
 	    return self::$instance;
     }
@@ -45,6 +45,17 @@ class BaseSQL {
 	}
 
 
+	public static function ALL(array $data = ['*'], array $where = []) {
+        $calledClass = get_called_class();
+        $table = substr($calledClass, strrpos($calledClass, '\\') +1);
+        $instance = self::$instance;
+        $instance->setTable($table);
+        $data = $instance->findAndWhere($data, $where);
+        return $data;
+    }
+    public function setTable($table) {
+	    $this->table = $table;
+    }
 	// $where -> tableau pour créer notre requête sql
 	// $object -> si vrai aliment l'objet $this sinon retourn un tableau
 	public function getOneBy(array $where, $object = false){
@@ -109,12 +120,13 @@ class BaseSQL {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function get($data): array {
+    public function findAndWhere(array $data = ["*"], array $where = []): array {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $query = $qb->select(['*'])->andWhere($data)->make()->getQuery();
+        $query = $qb->select($data)->andWhere($where)->make()->getQuery();
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute($data);
-        return $stmt->fetch();
+        $stmt->execute($where);
+        var_dump($query);
+        return $stmt->fetchAll();
     }
 
 	public function findOne(array $data) {

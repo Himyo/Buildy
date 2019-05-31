@@ -25,6 +25,9 @@ class PagesController{
         $view->assign('test', [1,2,3]);
     }
 
+    public function componentAction() {
+        $view = new View('component', "back");
+    }
     public function dashboardAction() {
         $view = new View("dashboard", "back");
     }

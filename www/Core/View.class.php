@@ -41,7 +41,7 @@ class View{
 		//form.mod.php
 		$componentPath = "views/components/".$component.".comp.php";
 		if( file_exists($componentPath)){
-		    extract(["config" => $config]);
+		    extract([$component => $config]);
 			include $componentPath;
 		}else{
 			die("Attention le fichier component n'existe pas ".$componentPath);

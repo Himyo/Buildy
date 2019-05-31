@@ -83,7 +83,7 @@ class CardsController extends Controller{
                 'Cards.id', 'Cards.image_url',
                 'Cards.name', 'Cards.toughness',
                 'Cards.power', 'Mana.mana_cost',
-                'Mana.cmc', 'Releases.name'
+                'Mana.cmc', 'Releases.code'
             ],
             [
                 'Mana' => ['Mana.id', 'Cards.mana_id'],
