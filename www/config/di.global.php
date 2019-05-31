@@ -9,6 +9,9 @@
  use MVC\Models\Cards;
  use MVC\Controllers\CardsController;
 
+ use MVC\Models\Decks;
+ use MVC\Controllers\DecksController;
+
  use MVC\Models\Articles;
  use MVC\Controllers\ArticlesController;
 
@@ -59,6 +62,13 @@ $container = [
     },
     CardsController::class => function($container) {
         return new CardsController($container[Cards::class]($container));
+    },
+    //Decks
+    Decks::class => function($container) {
+        return new Decks();
+    },
+    DecksController::class => function($container) {
+        return new DecksController($container[Decks::class]($container));
     },
     //Articles
     Articles::class => function($container) {

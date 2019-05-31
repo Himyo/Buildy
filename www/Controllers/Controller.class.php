@@ -9,6 +9,7 @@ use MVC\Core\View;
 
 abstract class Controller
 {
+
     public function listAction(array $data = ['*'], $editable = []) {
         $class = get_called_class();
         $modelName = substr($class, 0, strlen($class)-strlen('Controller'));

@@ -1,16 +1,16 @@
 <article>
     <div class="container">
         <div class="view">
-            <?php
-                echo "<img src='".$config['image_url']."' 
-                alt='".$config['name']."'>";
-            ?>
-        </div>
         <span>
             <h5>
-                <?php echo $config['name']?>
-                <?php echo $config['mana_cost']?>
+                <?php echo $card['name']?>
             </h5>
+            <p><?php echo $card['mana_cost']?></p>
+            <p><?php echo $card['code']?></p>
         </span>
+        <?php
+        echo "<img src='".$card['image_url']."' 
+                alt='".$card['name']."' >";
+        ?>
     </div>
 </article>

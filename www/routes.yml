@@ -10,6 +10,11 @@
   action: getSite
   method: "GET"
 
+"/component":
+  controller: Pages
+  action: component
+  method: "GET"
+
 "/not_found":
   controller: Pages
   action: notFound
@@ -176,13 +181,6 @@
   action: addPage
   method: "GET"
 
-
-"/cards":
-  controller: Cards
-  action: getCardsView
-  method: "GET"
-
-
 "/home":
   controller: Pages
   action: home
@@ -199,9 +197,14 @@
   action: getArticlesView
   method: "GET"
 
-"/test":
-  controller: Test
-  action: default
+"/cards":
+  controller: Cards
+  action: getCardsView
+  method: "GET"
+
+"/tournaments":
+  controller: Tournaments
+  action: getTournamentsView
   method: "GET"
 ########################################## MODELS WRITE ROUTES ############################
 "/register":
@@ -209,10 +212,20 @@
   action: getRegisterForm
   method: "POST"
 
-"/write_article":
+"/writeArticle":
   controller: Articles
-  action: getArticleForm
+  action: getArticlesForm
   method: "POST"
+
+"/createDeck":
+  controller: Decks
+  action: getDecksForm
+  method: "POST"
+
+  "/fillDeck":
+    controller: Decks
+    action: getLegalCards
+    method: "POST"
 
 ########################################## CRUD ROUTES #############################
 

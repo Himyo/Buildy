@@ -1,20 +1,20 @@
      <table>
         <?php
-        $modelName = $config['modelName'];
-        $editable = $config['editable'];
+        $modelName = $database['modelName'];
+        $editable = $database['editable'];
         $editable = array_flip($editable);
-        unset($config['modelName']);
-        unset($config['editable']);
+        unset($database['modelName']);
+        unset($database['editable']);
 
         echo '<form method="GET" id="delete" action="/delete/'.$modelName.'" ></form>';
-        $keys = array_keys($config[0]);
+        $keys = array_keys($database[0]);
             echo "<tr>";
             foreach ($keys as $key) {
                 echo "<th>".ucwords($key)."</th>";
             }
             echo "</tr>";
 
-            foreach ($config as $element) {
+            foreach ($database as $element) {
                 echo "<tr>";
                 echo '<form method="GET" id="edit" action="/edit/'.$modelName .'" >';
                 foreach ($element as $key => $value) {

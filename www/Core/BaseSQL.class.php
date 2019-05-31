@@ -29,10 +29,10 @@ class BaseSQL {
                 self::$instance = new self($pdo);
             }
             catch (PDOException $e) {
-                echo 'The connection to PDO failed';
-                $err = $e->getMessage() . "<br />";
-                echo $err;
-                die();
+            echo 'The connection to PDO failed';
+            $err = $e->getMessage() . "<br />";
+            echo $err;
+            die();
             }
         }
         return self::$instance;
@@ -128,7 +128,8 @@ class BaseSQL {
         $query = $qb->select($data)->andWhere($where)->make()->getQuery();
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($where);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($query);
+        return $stmt->fetchAll();
     }
 
     public function findOrWhere(array $data = ['*'], array $where = []):  array  {

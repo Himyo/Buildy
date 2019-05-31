@@ -42,7 +42,7 @@ class FormBuilder {
         return ' id="'.$id.'" action="'.$action.'" method="'.$method.'" class="'.$class.'" ';
     }
 
-    public function getField() {
+    public function makeFields() {
         $fieldsHtml = "";
         foreach($this->form->getFields() as $field) {
             if($field->getType() === 'password') { unset($this->data[$field->getId()]); }
@@ -63,7 +63,7 @@ class FormBuilder {
     public function make() {
         $this->getErrors();
         echo '<form '.$this->getConfig().'> '
-        .$this->getField().
+        .$this->makeFields().
         '</form>';
     }
 }

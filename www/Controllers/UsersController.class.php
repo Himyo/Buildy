@@ -73,7 +73,7 @@ class UsersController extends Controller {
 		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
 			$form->validate($data);
 			if($form->isValid()) {
-				$queryResult = $users->get($data);
+				$queryResult = $users->findAndWhere(["*"], $data);
 				if($queryResult && empty($users->getToken())) {
 					session_start();
                     $token = password_hash(substr(uniqid().time(), 4, 10).$users->getFirstname(), PASSWORD_DEFAULT);

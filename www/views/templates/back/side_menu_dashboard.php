@@ -17,8 +17,9 @@
             <a class="padding-10" href="/dashboard/admin/comments"> <p><i class="fas fa-chart-line"></i>Gestion des commentaires</p></a>
         </div>
     </div>
-    <a href="/gestion/articles" id="Articles"> Gestion des articles</a>
-    <a href="/gestion/cards" id="Cards"> Gestion des cartes</a>
-    <a href="/gestion/tournaments" id="Tournaments"> Gestion des tournois</a>
+    <a href="/articles" id="Articles"> Gestion des articles</a>
+    <a href="/cards" id="Cards"> Gestion des cartes</a>
+    <a href="/decks" id="Decks"> Gestion des decks</a>
+    <a href="/tournaments" id="Tournaments"> Gestion des tournois</a>
     <a href="/stats"><p><i class="fas fa-chart-line"></i> Statistiques</p></a>
 </nav>

@@ -148,6 +148,10 @@ class QueryBuilder {
     }
 
     public function andWhere($item): QueryBuilder{
+        if(empty($item)) {
+            return $this;
+        }
+
         if(!isset($this->items['WHERE'])) {
             $this->items['WHERE'] = [array_keys($item)[0] => array_shift($item)];
         }
@@ -158,6 +162,9 @@ class QueryBuilder {
     }
 
     public function orWhere($item): QueryBuilder{
+        if(empty($item)) {
+            return $this;
+        }
         if(!isset($this->items['WHERE'])) {
             $this->items['WHERE'] = [array_keys($item)[0] => array_shift($item)];
         }
