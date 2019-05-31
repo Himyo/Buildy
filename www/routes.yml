@@ -14,6 +14,11 @@
   action: component
   method: "GET"
 
+"/component":
+  controller: Pages
+  action: component
+  method: "GET"
+
 "/not_found":
   method: "POST"
 
@@ -232,6 +237,11 @@
   controller: Decks
   action: getSaveConfirmation
   method: "POST"
+
+  "/fillDeck":
+    controller: Decks
+    action: getLegalCards
+    method: "POST"
 
 ########################################## CRUD ROUTES #############################
 
