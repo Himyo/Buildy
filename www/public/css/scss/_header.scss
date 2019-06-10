@@ -1,64 +1,8 @@
-header {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+#header-640 {
+  display: none
+}
 
-  .header-menu {
-    display: flex;
-    align-items: center;
-    background-color: #0c2033;
-    opacity: 0.9;
-    justify-content: flex-start;
-    height: 60px;
-
-    a {
-      text-decoration: none;
-      color: #dddddd;
-      padding: 10px;
-      display: flex;
-    }
-
-    a:first-child {
-      padding: 0;
-    }
-
-    img {
-      min-width: 250px;
-    }
-
-    a:last-child {
-      margin-left: auto;
-    }
-  }
-
-  .header-menu-640 {
-    display: none;
-    align-items: center;
-    background-color: #0c2033;
-    opacity: 0.9;
-    justify-content: space-between;
-    height: 60px;
-
-    a {
-      text-decoration: none;
-      color: #dddddd;
-      padding: 10px;
-    }
-
-    a:first-child {
-      padding: 0;
-    }
-
-    img {
-      display: flex;
-      min-width: 250px;
-    }
-
-    i {
-      color: #ddd;
-      cursor: pointer;
-      font-size: 26px;
-      margin-right: 20px;
-    }
-  }
+#header img,
+#header-640 img {
+  display: flex;
 }

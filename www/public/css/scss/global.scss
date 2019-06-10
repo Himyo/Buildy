@@ -1,27 +1,22 @@
-@import "_colors.scss";
-@import "_font.scss";
+@import '_colors.scss';
+@import '_font.scss';
 
-@import "_main.scss";
+@import '_main.scss';
+@import '_buildy-main.scss';
 
-@import "_header.scss";
-@import "_footer.scss";
-@import "_side-menu.scss";
+@import '_header.scss';
+@import '_side-menu.scss';
 
-@import "_media_queries.scss";
+@import '_media_queries.scss';
 
-@import "_account.scss";
-@import "_connexion.scss";
-@import "_database.scss";
-@import "_page.scss";
-@import "_contact.scss";
-@import "_legal.scss";
-
-@import "_title.scss";
-@import "_button.scss";
-@import "_card.scss";
-@import "_chatbox.scss";
-@import "_form.scss";
-@import "_pagination.scss";
-@import "_search.scss";
-@import "_slider.scss";
-@import "_modal.scss";
+@import '_title.scss';
+@import '_button.scss';
+@import '_label.scss';
+@import '_card.scss';
+@import '_chatbox.scss';
+@import '_form.scss';
+@import '_list.scss';
+@import '_pagination.scss';
+@import '_search.scss';
+@import '_slider.scss';
+@import '_modal.scss';
