@@ -6,14 +6,17 @@ namespace MVC\Models;
 use MVC\Core\BaseSQL;
 use MVC\Lib\Form;
 use MVC\Lib\InputField;
+use MVC\Lib\Supplier;
 
 class Decks extends BaseSQL {
 
+    use Supplier;
+
     private $id;
     private $name;
-    private $legalities_id;
-    private $users_id;
-    private $image_url;
+    private $legalitiesId;
+    private $usersId;
+    private $imageUrl;
 
     public function __construct() {
         parent::__construct();

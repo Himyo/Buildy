@@ -1,7 +1,9 @@
 <?php
 namespace MVC\Models;
 
+use \PDO;
 use \MVC\Core\BaseSQL;
+use MVC\Core\QueryBuilder;
 use MVC\Lib\Supplier;
 use \MVC\VO\CardIdentity;
 use \MVC\VO\CardProps;
@@ -79,6 +81,19 @@ class Cards extends BaseSQL {
         $this->type = $type;
         $this->release = $release;
         $this->legalities = $legalities;
+    }
+    public static function ALL(array $column =['*'], array $where = ['']) {
+        $instance = self::$instance;
+        $instance->setTable('Cards');
+        $qb = QueryBuilder::GetQueryBuilder('Cards');
+        $query = $qb->select($column)->innerJoin([
+            'Mana' => ['Mana.id', 'Cards.mana_id'],
+            'Releases' => ['Releases.id', 'Cards.releases_id']
+        ])->orWhere($where)->make()->getQuery();
+        $stmt = $instance->pdo->prepare($query);
+        $stmt->execute($where);
+        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
     public function initMana(array $mana, bool $set) {

@@ -7,7 +7,7 @@ use \PDOException;
 
 class BaseSQL {
     protected static $instance;
-    protected $pdo;
+	protected $pdo;
     private $table;
 
     public function __construct(PDO $pdo = null) {
@@ -86,27 +86,27 @@ class BaseSQL {
         if( is_null($dataChild["id"])){
             //INSERT
             unset($dataChild["id"]) ;
-            $sql ="INSERT INTO ".$this->table." ( ".
-                implode(", ", array_keys($dataChild) ) .") VALUES ( :".
-                implode(", :", array_keys($dataChild) ) .")";
-            $query = $this->pdo->prepare($sql);
-            $queryStatus = $query->execute( $dataChild );
-            $this->id = $this->lastInsertedId();
-            return $queryStatus;
-        }
-        else {
-            //UPDATE
-            $sqlUpdate = [];
-            foreach ($dataChild as $key => $value) {
-                if( $key != "id")
-                    $sqlUpdate[]=$key."=:".$key;
-            }
-            $sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
-            $query = $this->pdo->prepare($sql);
-            $queryStatus = $query->execute( $dataChild );
-            return $queryStatus;
-        }
-    }
+			$sql ="INSERT INTO ".$this->table." ( ".
+			implode(", ", array_keys($dataChild) ) .") VALUES ( :".
+			implode(", :", array_keys($dataChild) ) .")";
+			$query = $this->pdo->prepare($sql);
+			$queryStatus = $query->execute( $dataChild );
+			$this->id = $this->lastInsertedId();
+			return $queryStatus;
+		}
+		else {
+			//UPDATE
+			$sqlUpdate = [];
+			foreach ($dataChild as $key => $value) {
+				if( $key != "id")
+				$sqlUpdate[]=$key."=:".$key;
+			}
+			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
+			$query = $this->pdo->prepare($sql);
+			$queryStatus = $query->execute( $dataChild );
+			return $queryStatus;
+		}
+	}
 
     public function findAll(): array {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
@@ -128,8 +128,7 @@ class BaseSQL {
         $query = $qb->select($data)->andWhere($where)->make()->getQuery();
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($where);
-        var_dump($query);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function findOrWhere(array $data = ['*'], array $where = []):  array  {
@@ -187,6 +186,12 @@ class BaseSQL {
 	    return $res;
     }
 
+    public function insertMany(array $data) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query =  $qb->insertMany($data)->make()->getQuery();
+	    var_dump($query);
+
+    }
 	public function executeMany($querys, $data) {
 		foreach($querys as $n => $value){
 			$request = $this->pdo->prepare($querys[$n]);
