@@ -238,10 +238,15 @@
   action: getSaveConfirmation
   method: "POST"
 
-  "/fillDeck":
-    controller: Decks
-    action: getLegalCards
-    method: "POST"
+"/fillDeck":
+  controller: Decks
+  action: getLegalCards
+  method: "GET"
+
+"/saveDeck":
+  controller: Decks
+  action: getSaveConfirmation
+  method: "POST"
 
 ########################################## CRUD ROUTES #############################
 
