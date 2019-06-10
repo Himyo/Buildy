@@ -3,9 +3,9 @@
     <div class="column">
       <div class="space-10"></div>
       <nav class="col-100-center">
-        <a class="padding-10" href="about.php"><p>A propos</p></a>
-        <a class="padding-10" href="legal.php"><p>Mentions légales</p></a>
-        <a class="padding-10" href="contact.php"><p>Contacts</p></a>
+        <a class="padding-10" href="/about"><p>A propos</p></a>
+        <a class="padding-10" href="/legal"><p>Mentions légales</p></a>
+        <a class="padding-10" href="/contact"><p>Contacts</p></a>
       </nav>
       <div class="space-10"></div>
       <nav class="col-100-center">

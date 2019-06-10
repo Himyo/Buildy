@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Connexion</title>
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Montserrat|Quicksand" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
     <div class="width100">
       <div class="buildy-grid-v-center height-100">
         <div class="col-50-center height-100 blue-buildy-bg lightgrey-font">
@@ -48,6 +37,3 @@
         </div>
       </div>
     </div>
-    <?php include 'footer.php'; ?>
-  </body>
-</html>
