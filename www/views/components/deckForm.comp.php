@@ -12,11 +12,11 @@
                 method='".$method."'
                 class='".$class."'
             >
-            <input type='checkbox' name='standard' value='0' >Standard
-            <input type='checkbox' name='pauper' value='0' >Pauper
-            <input type='checkbox' name='modern' value='0' > Modern
-            <input type='checkbox' name='legacy' value='0' > Legacy
-            <input type='checkbox' name='vintage' value='0' > Vintage 
+            <input type='checkbox' name='legalities[]' value='standard' >Standard
+            <input type='checkbox' name='legalities[]' value='pauper' >Pauper
+            <input type='checkbox' name='legalities[]' value='modern' > Modern
+            <input type='checkbox' name='legalities[]' value='legacy' > Legacy
+            <input type='checkbox' name='legalities[]' value='vintage' > Vintage 
             ";
         echo "<div>";
         echo "<input

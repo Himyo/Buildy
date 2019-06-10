@@ -5,8 +5,8 @@ use \PDO;
 use \PDOException;
 
 class BaseSQL {
-    private static $instance;
-	private $pdo;
+    protected static $instance;
+	protected $pdo;
     private $table;
 
 	public function __construct(PDO $pdo = null) {
@@ -53,6 +53,7 @@ class BaseSQL {
         $data = $instance->findAndWhere($data, $where);
         return $data;
     }
+
     public function setTable($table) {
 	    $this->table = $table;
     }
@@ -89,6 +90,7 @@ class BaseSQL {
 			implode(", :", array_keys($dataChild) ) .")";
 			$query = $this->pdo->prepare($sql);
 			$queryStatus = $query->execute( $dataChild );
+			$this->id = $this->lastInsertedId();
 			return $queryStatus;
 		}
 		else {
@@ -125,8 +127,15 @@ class BaseSQL {
         $query = $qb->select($data)->andWhere($where)->make()->getQuery();
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($where);
-        var_dump($query);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findOrWhere(array $data = ['*'], array $where = []):  array  {
+        $qb = QueryBuilder::GetQueryBuilder($this->table);
+        $query = $qb->select($data)->orWhere($where)->make()->getQuery();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($where);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 	public function findOne(array $data) {
@@ -176,6 +185,12 @@ class BaseSQL {
 	    return $res;
     }
 
+    public function insertMany(array $data) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query =  $qb->insertMany($data)->make()->getQuery();
+	    var_dump($query);
+
+    }
 	public function executeMany($querys, $data) {
 		foreach($querys as $n => $value){
 			$request = $this->pdo->prepare($querys[$n]);
