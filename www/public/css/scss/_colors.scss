@@ -1,3 +1,18 @@
-$background: #eeeeee;
+$color-buildy: #0c2033;
+$background-content: #eeeeee;
+$white: #fff;
 $grey: #333333;
-$lightgrey: #555555;
+$lightgrey-font: #555555;
+$darkgrey: #555555;
+
+.blue-buildy-bg {
+  background-color: $color-buildy;
+}
+
+.lightgrey-font {
+  color: $lightgrey-font;
+}
+
+.white-font {
+  color: $white;
+}

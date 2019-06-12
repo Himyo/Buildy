@@ -3,7 +3,7 @@
             <div class="content">
               <div class="space-15"></div>
               <div class="buildy-grid-v-center col-100-center">
-                <h1 class="title-h1">A propos</h1>
+                <h1 class="title-h1">Statistiques</h1>
               </div>
               <div class="space-40"></div>
             </div>

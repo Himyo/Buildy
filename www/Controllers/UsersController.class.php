@@ -48,33 +48,6 @@ class UsersController extends Controller {
         $view->assign("user", $user);
     }
 
-	public function ssaveAction(){
-
-		$users = $this->users;
-		$form = $users->getRegisterForm();
-		$data = $GLOBALS[$form->getGlobalMethod()];
-		if( $_SERVER['REQUEST_METHOD']==$form->getMethod() && !empty($data) ){
-			$form->validate($data);
-
-			if($form->isValid()){
-                unset($data['emailConfirm']);
-//                unset($data['passwordConfirm']);
-                echo 'VALID';
-				//TODO: Real users registration
-				$users->supply($data);
-				$users->save();
-				//session_start();
-				//$_SESSION['token'] = $users->getToken();
-                header('Location: /');
-                exit;
-			}
-		}
-		//TODO: Take decision for action settings
-		$v = new View("register", "front");
-		$v->assign("form", new FormBuilder($form));
-	}
-
-
 	public function loginAction() {
 
 		$users = $this->users;
