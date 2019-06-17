@@ -243,7 +243,7 @@
   action: getLegalCards
   method: "GET"
 
-"/saveDeck":
+"/savedeck":
   controller: Decks
   action: getSaveConfirmation
   method: "POST"
