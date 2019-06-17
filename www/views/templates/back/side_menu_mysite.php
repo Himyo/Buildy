@@ -10,4 +10,5 @@
             <a class="padding-10" href="/site/page"><p><i class="fas fa-chart-line"></i> Gestion des pages</p></a>
         </div>
     </div>
-</div>
+    <a href="/page"><p><i class="fas fa-chart-line"></i> Gestion des pages</p></a>
+</nav>

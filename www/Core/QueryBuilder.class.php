@@ -50,15 +50,14 @@ class QueryBuilder {
                 };
                 break;
             case 'INSERT MANY':
-            //TODO: Clean this cancer
                 return function($items) {
                     $keys = array_keys($items[0]);
                     $format = "(" . implode(" ,", $keys) . ") VALUES ";
                     $values = "";
-                    foreach($items as $i => $values){
-                        $values .= "(".implode(', :'.$i, $items[$i])."),";
+                    foreach($items as $i => $item) {
+                        $values .= "(:". implode(", :", array_keys($items[$i])) . "),";
                     }
-                    trim($values, ",");
+                    $values = trim($values, ",");
 
                     return $format.$values;
                 };
@@ -238,6 +237,7 @@ class QueryBuilder {
     public function getQuery(): string {
         return $this->query;
     }
+
 
     public static function GetQueryBuilder($class): self {
         return new self($class);

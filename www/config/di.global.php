@@ -9,6 +9,9 @@
  use MVC\Models\Cards;
  use MVC\Controllers\CardsController;
 
+use MVC\Models\Tournaments;
+use MVC\Controllers\TournamentsController;
+
  use MVC\Models\Decks;
  use MVC\Controllers\DecksController;
 
@@ -70,6 +73,14 @@ $container = [
     DecksController::class => function($container) {
         return new DecksController($container[Decks::class]($container));
     },
+    //Tournaments
+    Tournaments::class => function($container) {
+        return new Tournaments();
+    },
+    TournamentsController::class => function($container) {
+    return new TournamentsController($container[Tournaments::class]($container));
+
+},
     //Articles
     Articles::class => function($container) {
         return new Articles();
