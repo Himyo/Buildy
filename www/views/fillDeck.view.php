@@ -12,7 +12,7 @@
             }
             foreach ($data['cards'][0] as $card) {
                 $this->addComponent('card', $card);
-                echo "<input type='checkbox' name=cards[]['cards_id'] value='{$card['id']}'> Add <br>";
+                echo "<input type='checkbox' name=cards[][cards_id] value={$card['id']}> Add <br>";
             }
             ?>
             <input type='submit' value='Submit'>

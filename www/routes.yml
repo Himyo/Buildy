@@ -48,7 +48,7 @@
   action: dashboard
   method: "GET"
 
-"/mySite":
+"/mysite":
   controller: Pages
   action: mySite
   method: "GET"
@@ -58,12 +58,12 @@
   action: page
   method: "GET"
 
-"/modifyPage":
+"/modifypage":
   controller: Pages
   action: modifyPage
   method: "GET"
 
-"/addPage":
+"/addpage":
   controller: Pages
   action: addPage
   method: "GET"
@@ -74,7 +74,7 @@
   method: "GET"
 
 
-"/saveUser":
+"/saveuser":
   controller: Users
   action: save
   method: "POST"
@@ -99,22 +99,27 @@
   action: getRegisterForm
   method: "POST"
 
-"/writeArticle":
+"/writearticle":
   controller: Articles
   action: getArticlesForm
   method: "POST"
 
-"/createDeck":
+"/createtournaments":
+  controller: Tournaments
+  action: getTournamentsForm
+  method: "GET"
+
+"/createdeck":
   controller: Decks
   action: getDecksForm
   method: "GET"
 
-"/fillDeck":
+"/filldeck":
   controller: Decks
   action: getLegalCards
   method: "GET"
 
-"/saveDeck":
+"/savedeck":
   controller: Decks
   action: getSaveConfirmation
   method: "POST"

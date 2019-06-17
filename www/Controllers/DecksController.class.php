@@ -78,11 +78,12 @@ class DecksController extends Controller {
 //            $this->decks->insert($deck);
 //            $deckId = $this->decks->lastInsertedId();
             $decksId = 2;
-            foreach($data['cards'] as $key => $values) {
-                $data['cards'][$key]['decks_id'] = $decksId;
+            foreach($data['cards'] as $i => $values) {
+                $data['cards'][$i]['decks_id'] = $decksId;
             }
-            var_dump($data['cards']);
+            $this->decks->setTable('Decks_cards');
             $this->decks->insertMany($data['cards']);
+            $this->decks->setTable('Decks');
         }
     }
 

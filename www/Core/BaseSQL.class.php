@@ -1,6 +1,7 @@
 <?php
 namespace MVC\Core;
 
+use MVC\Utils\Utils;
 use \PDO;
 use \PDOException;
 
@@ -10,7 +11,7 @@ class BaseSQL {
     private $table;
 
 	public function __construct(PDO $pdo = null) {
-        if (!self::$instance) {
+        if (!self::$instance && $pdo !== null) {
             $this->pdo = $pdo;
         }
         else {
@@ -187,9 +188,13 @@ class BaseSQL {
 
     public function insertMany(array $data) {
 	    $qb = QueryBuilder::GetQueryBuilder($this->table);
-	    $query =  $qb->insertMany($data)->make()->getQuery();
-	    var_dump($query);
+	    $parsedData = $this->insertManyParse($data);
+        $flat = Utils::flattenArray($parsedData);
+        $query =  $qb->insertMany($parsedData)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute($flat);
 
+        return $stmtStatus;
     }
 	public function executeMany($querys, $data) {
 		foreach($querys as $n => $value){
@@ -198,4 +203,19 @@ class BaseSQL {
 			echo $requestStatus." ".$n." ".$querys[$n]."<br />";
 		}
 	}
+
+    public function insertManyParse(array $data): array {
+        $preparedData = [];
+        $keys = array_keys($data[0]);
+        $tmp = $data[0];
+        unset($data[0]);
+        $preparedData[0] = $tmp;
+        foreach($data as $i => $values) {
+            foreach($keys as $key) {
+                $preparedData[$i][$i.$key] = $values[$key];
+            }
+        }
+        return $preparedData;
+    }
+
 }

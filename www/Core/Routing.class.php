@@ -8,6 +8,7 @@ class Routing{
 	public static function getRoute($slug)
     {
         $routes = yaml_parse_file(self::$routeFile);
+        $slug = strtolower($slug);
         if (isset($routes[$slug])) {
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
@@ -68,6 +69,7 @@ class Routing{
     }
 
     public static function getCrudRoute($slug) {
+        $slug = strtolower($slug);
         $routes = yaml_parse_file(self::$routeFile);
         $slugMethod = substr($slug, 0, strrpos($slug, "/"));
         $controller = ucwords(substr($slug, strrpos($slug, "/") + 1))."Controller";
@@ -88,6 +90,7 @@ class Routing{
     }
 
     public static function getMethod($slug) {
+        $slug = strtolower($slug);
         $routes = yaml_parse_file(self::$routeFile);
         return $routes[$slug]['method'];
     }

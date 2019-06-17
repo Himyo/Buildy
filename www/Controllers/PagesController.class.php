@@ -53,7 +53,9 @@ class PagesController{
     }
 
     public function pageAction() {
+        $array = [2,4,4,4,555,5,6];
         $view = new View("page", "back");
+        $view->assign('users', $array);
     }
 
     //VIEWS DATABASE ADMIN
