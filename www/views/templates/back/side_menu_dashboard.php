@@ -19,7 +19,8 @@
     </div>
     <a href="/articles" id="Articles"> Gestion des articles</a>
     <a href="/cards" id="Cards"> Gestion des cartes</a>
-    <a href="/decks" id="Decks"> Gestion des decks</a>
-    <a href="/tournaments" id="Tournaments"> Gestion des tournois</a>
-    <a href="/stats"><p><i class="fas fa-chart-line"></i> Statistiques</p></a>
+    <br>
+    <br>
+    <a href="/createdeck" id="Articles"> Cree un Deck</a>
+    <a href="/writearticle" id="Articles"> Ecrire des articles</a>
 </nav>

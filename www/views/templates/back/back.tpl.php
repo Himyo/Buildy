@@ -13,10 +13,10 @@
         <?php include "header.php"; ?>
         <div id="main-container" class="main-container">
             <?php
-            if (strpos($_SERVER['REQUEST_URI'], '/site') !== false):
-            include "side_menu_mysite.php";
-            elseif (strpos($_SERVER['REQUEST_URI'], '/dashboard') !== false):
-            include "side_menu_dashboard.php";
+            if (\MVC\Core\Routing::getSlug("Pages", "mySite") === $_SERVER['REQUEST_URI']):
+                include "side_menu_dashboard.php";
+            else:
+                include "side_menu_mysite.php";
             endif;
             ?>
 

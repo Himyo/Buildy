@@ -5,19 +5,16 @@
         </div>
         <div class="index-header">
             <div class="add-colLeft">
-                <h4>Liste des pages (15)</h4>
+                <h4>Liste des pages <?php echo "(".sizeof($pages).")" ?> </h4>
                 <div class="page-list">
                     <ul>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
-                        <li>index.php</li>
+                        <?php
+                            $size = sizeof($pages);
+                            for($i = 0 ; $i < $size ; ++$i){
+                                    $slug = $pages[$i]["slug"];
+                                    echo "<li><a href='{$slug}' onClick='editpage(`".$slug."`)'> {$pages[$i]['title']} </a></li>";
+                            }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -25,8 +22,10 @@
                 <div class="">
                     <h4>Ajouter une page</h4>
                     <div class="add-page">
-                        <input type="text" name="" value="" placeholder="Nom de la page">
-                        <input type="submit" name="" value="Ajouter">
+                       <form method="POST" action="/addpage">
+                            <input type="text" name="title" placeholder="Nom de la page">
+                            <input type="submit" name="" value="Ajouter">
+                       </form>
                     </div>
                 </div>
             </div>
@@ -54,11 +53,15 @@
 
             <div class="index-body-center">
                 <button id="btn-body-center-modal" onclick="openmodal()">Voir la page</button>
-                <iframe src="database.php" height="800"></iframe>
+                <div id="iframe-display" height="800" width="800">
+                    <?php
+                        var_dump($_SERVER['REQUEST_URI']);
+                    ?>
+                </div>
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closemodal()">&times;</span>
-                        <iframe src="database.php" height="800"></iframe>
+                        <div id="iframe-display" src="#" width="800" height="800"></div>
                     </div>
                 </div>
             </div>

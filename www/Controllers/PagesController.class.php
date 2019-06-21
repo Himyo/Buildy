@@ -1,9 +1,18 @@
 <?php
 namespace MVC\Controllers;
 
-use MVC\Core\View;
 
-class PagesController extends Controller {
+use MVC\Core\View;
+use MVC\Models\Pages;
+
+class PagesController extends Controller{
+
+    protected $pages;
+
+    public function __construct(Pages $pages)
+    {
+        $this->pages = $pages;
+    }
 
     public function defaultAction(){
         $view = new View("home", "back");
@@ -37,11 +46,22 @@ class PagesController extends Controller {
     }
 
     public function addPageAction() {
-        $view = new View("addPage", "back");
+        $data = $GLOBALS['_POST'];
+        if($_SERVER["REQUEST_METHOD"] == "POST" && isset($data['title'])) {
+            $pageInfo =
+                [
+                    'title' => $data['title'],
+                    'slug' => "/{$data['title']}",
+                    'created_at' => date('Y-m-d'),
+                ];
+            $this->pages->insert($pageInfo);
+        }
+        header('Location: /page');
     }
 
-    public function modifyPageAction() {
-        $view = new View("modifyPage", "back");
+    public function pageAction() {
+        $view = new View("page", "back");
+        $view->assign('pages', Pages::All());
     }
 
     public function contactAction() {
@@ -52,13 +72,8 @@ class PagesController extends Controller {
         $view = new View("legal", "back");
     }
 
-    public function pageAction() {
-        $array = [2,4,4,4,555,5,6];
-        $view = new View("page", "back");
-        $view->assign('users', $array);
-    }
-
-    public function testPageAction() {
-        $view = new View("testPage", "back");
+    //VIEWS DATABASE ADMIN
+    public function usersBackAction() {
+        $view = new View("usersBack", "back");
     }
 }

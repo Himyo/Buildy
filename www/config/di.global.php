@@ -80,13 +80,17 @@ $container = [
     TournamentsController::class => function($container) {
     return new TournamentsController($container[Tournaments::class]($container));
 
-},
+    },
+    \MVC\Controllers\DashboardController::class => function($container) {
+        return new \MVC\Controllers\DashboardController();
+    },
     //Articles
     Articles::class => function($container) {
         return new Articles();
     },
     ArticlesController::class => function($container) {
-        return new ArticlesController($container[Articles::class]($container));
+        $articlesModel = $container[Articles::class]($container);
+        return new ArticlesController($articlesModel);
     },
     //Users
     Users::class => function($container) {
@@ -97,6 +101,9 @@ $container = [
         return new UsersController($usersModel);
     },
     //Pages
+    Pages::class => function($container) {
+        return new Pages();
+    },
     PagesController::class => function($container) {
         return new PagesController();
     },

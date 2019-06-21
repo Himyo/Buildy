@@ -156,14 +156,14 @@
   action: default
   method: "GET"
 
-"/modifypage":
-  controller: Pages
-  action: modifyPage
-  method: "GET"
-
 "/addpage":
   controller: Pages
   action: addPage
+  method: "GET"
+
+"/editpage":
+  controller: Pages
+  action: editPage
   method: "GET"
 
 "/home":
