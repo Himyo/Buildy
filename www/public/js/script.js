@@ -37,3 +37,7 @@ function addStyle(id) {
       alert(getId);
    }
 }
+
+function editpage(slug) {
+    document.getElementById('iframe-display').src = `editpage/${slug}`;
+}

@@ -97,8 +97,4 @@ class UsersController extends Controller {
 		$v = new View("forgetPasswordUser", "back");
         $v->assign("form", new FormBuilder($form));
 	}
-
-	public function newLoginAction(Request $request) {
-        $users = $this->users;
-    }
 }

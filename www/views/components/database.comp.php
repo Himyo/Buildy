@@ -7,7 +7,7 @@
         unset($database['editable']);
 
         echo '<form method="GET" id="delete" action="/delete/'.$modelName.'" ></form>';
-        $keys = array_keys($database[0]);
+        $keys = sizeof($database) == 0 ? ["No Data Found"]: array_keys($database[0]);
             echo "<tr>";
             foreach ($keys as $key) {
                 echo "<th>".ucwords($key)."</th>";

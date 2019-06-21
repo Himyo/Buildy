@@ -46,12 +46,12 @@ class BaseSQL {
 	}
 
 
-	public static function ALL(array $data = ['*'], array $where = []) {
+	public static function ALL(array $column = ['*'], array $where = []) {
         $calledClass = get_called_class();
         $table = substr($calledClass, strrpos($calledClass, '\\') +1);
         $instance = self::$instance;
         $instance->setTable($table);
-        $data = $instance->findAndWhere($data, $where);
+        $data = $where == [] ? $instance->find($column) : $instance->findAndWhere($column, $where);
         return $data;
     }
 
