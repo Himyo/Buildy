@@ -161,7 +161,7 @@
   action: addPage
   method: "GET"
 
-"/editpage":
+"/modifypage":
   controller: Pages
   action: editPage
   method: "GET"

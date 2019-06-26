@@ -10,7 +10,6 @@
             <a class="padding-10" href="/site/page"><p><i class="fas fa-chart-line"></i> Gestion des pages</p></a>
         </div>
     </div>
-    <a href="/page"><p><i class="fas fa-chart-line"></i> Gestion des pages</p></a>
     <a href="/list/cards"><p><i class="fas fa-chart-line"></i> Gestion des Cards</p></a>
     <a href="/list/users"><p><i class="fas fa-chart-line"></i> Gestion des Users</p></a>
     <a href="/list/articles"><p><i class="fas fa-chart-line"></i> Gestion des Articles</p></a>

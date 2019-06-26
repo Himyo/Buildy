@@ -78,11 +78,7 @@ $container = [
         return new Tournaments();
     },
     TournamentsController::class => function($container) {
-    return new TournamentsController($container[Tournaments::class]($container));
-
-    },
-    \MVC\Controllers\DashboardController::class => function($container) {
-        return new \MVC\Controllers\DashboardController();
+        return new TournamentsController($container[Tournaments::class]($container));
     },
     //Articles
     Articles::class => function($container) {
