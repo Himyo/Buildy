@@ -9,21 +9,57 @@ class Routing{
     {
         $routes = yaml_parse_file(self::$routeFile);
         if (isset($routes[$slug])) {
-            if (empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])) {
-                return ["controller" => 'HomeController', "action" => 'notFoundAction',
-                    "controllerPath" => 'Controllers/HomeController.class.php', "method" => 'post'];
-            }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
             $controllerPath = "Controllers/" . $controller . ".class.php";
             $method = $routes[$slug]["method"];
-        } else {
-            return ["controller" => 'HomeController', "action" => 'notFoundAction',
-                "controllerPath" => 'Controllers/HomeController.class.php', "method" => 'post'];
+            $result = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
+                $method];
+            return $result;
         }
-        $result = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
-            $method];
-        return $result;
+    }
+
+    public static function getParametrableRoute($slug){
+	    $routes = yaml_parse_file(self::$routeFile);
+	    $routesSlugs = array_keys($routes);
+	    $slug = trim($slug, '/');
+        $slugToCompare = explode("/", $slug)[0];
+        $matchedSlug = "";
+	   for($i = 0 ; $i < sizeof($routesSlugs) ; ++$i) {
+           $routeSlug = trim($routesSlugs[$i], '/');
+	       $routeSlug = explode('/', $routeSlug)[0];
+	       if($slugToCompare == $routeSlug) {
+	           $matchedSlug = $routesSlugs[$i];
+	           break;
+           }
+       }
+	   if($matchedSlug) {
+           $slugParameters = explode('/', $slug);
+           $slugParametersNumber = sizeof($slugParameters) - 1;
+           $matchedSlugParametersNumber = sizeof(explode('!', $matchedSlug)) -1;
+           $hasOptional = sizeof(explode('?', $matchedSlug)) -1 > 0;
+
+           $valid = $slugParametersNumber == $matchedSlugParametersNumber;
+           $validWithOptional = ($slugParametersNumber >= $matchedSlugParametersNumber) && $hasOptional;
+
+           if($valid || $validWithOptional) {
+               $controller = ucfirst($routes[$matchedSlug]["controller"])."Controller";
+               $action = $routes[$matchedSlug]["action"]."Action";
+               $controllerPath = "Controllers/".$controller."class.php";
+               $method = $routes[$matchedSlug]["method"];
+               return
+                   [
+                       "controller" => $controller,
+                       "action" => $action,
+                       "controllerPath" => $controllerPath,
+                       "method" => $method
+                   ];
+           }
+       }
+        return [
+            "info" => [$slug, $slugToCompare, $matchedSlug] ,
+            "controller" => 'PagesController', "action" => 'notFoundAction',
+            "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
     }
 
     public static function getCrudRoute($slug) {
@@ -64,7 +100,6 @@ class Routing{
 					return $slug;
 				}
 		}
-
 		return null;
 
 	}

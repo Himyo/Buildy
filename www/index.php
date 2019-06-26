@@ -23,7 +23,13 @@ $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
 MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 
-$routes = MVC\Core\Routing::getRoute($slug);
+use MVC\Core\Routing;
+
+//$routes = substr_count($slug, '/') > 1 ?
+//    Routing::getCrudRoute($slug) :
+//    Routing::getRoute($slug);
+
+$routes = Routing::getRoute($slug)?? Routing::getParametrableRoute($slug);
 extract($routes);
 
 $container = [];
