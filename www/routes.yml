@@ -244,13 +244,17 @@
   action: getLegal
   method: "GET"
 
-"/contact":
-  controller: Home
-  action: getContact
+"/list/{!}":
+  controller: ""
+  action: list
   method: "GET"
 
-"/test/page":
-  controller: Pages
-  action: testPage
+"/delete/{!}":
+  controller: ""
+  action: delete
   method: "GET"
 
+"/edit/{!}":
+  controller: ""
+  action: edit
+  method: "GET"
