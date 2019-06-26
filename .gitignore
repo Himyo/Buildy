@@ -6,3 +6,4 @@ db_data/
 node_modules/
 www/public/css/global.css
 www/public/css/global.css.map
+config/db/
