@@ -47,6 +47,8 @@ class Routing{
 
            if($valid || $validWithOptional) {
                $controller = $routes[$matchedSlug]["controller"] == "" ? $slugParameters[1] : $routes[$matchedSlug]["controller"];
+
+
                $controller = ucfirst($controller)."Controller";
                $action = $routes[$matchedSlug]["action"]."Action";
                $method = $routes[$matchedSlug]["method"];
