@@ -11,11 +11,12 @@ class Routing{
         if (isset($routes[$slug])) {
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
-            $controllerPath = "Controllers/" . $controller . ".class.php";
             $method = $routes[$slug]["method"];
-            $result = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
-                $method];
-            return $result;
+            return [
+                "controller" => $controller,
+                "action" => $action,
+                "method" => $method
+            ];
         }
     }
 
@@ -35,7 +36,8 @@ class Routing{
        }
 	   if($matchedSlug) {
            $slugParameters = explode('/', $slug);
-           $slugParametersNumber = sizeof($slugParameters) - 1;
+           unset($slugParameters[0]);
+           $slugParametersNumber = sizeof($slugParameters);
            $matchedSlugParametersNumber = sizeof(explode('!', $matchedSlug)) -1;
            $hasOptional = sizeof(explode('?', $matchedSlug)) -1 > 0;
 
@@ -44,22 +46,25 @@ class Routing{
 
            if($valid || $validWithOptional) {
                $controller = $routes[$matchedSlug]["controller"] == "" ? $slugParameters[1] : $routes[$matchedSlug]["controller"];
+
+
                $controller = ucfirst($controller)."Controller";
                $action = $routes[$matchedSlug]["action"]."Action";
-               $controllerPath = "Controllers/".$controller."class.php";
                $method = $routes[$matchedSlug]["method"];
+
+               $_POST[$controller][$action] = $slugParameters;
                return
                    [
                        "controller" => $controller,
                        "action" => $action,
-                       "controllerPath" => $controllerPath,
-                       "method" => $method
+                       "method" => $method,
                    ];
            }
        }
         return [
-            "controller" => 'PagesController', "action" => 'notFoundAction',
-            "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
+            "controller" => 'PagesController',
+            "action" => 'notFoundAction',
+            "method" => 'post'];
     }
 
     public static function getCrudRoute($slug) {

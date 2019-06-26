@@ -197,7 +197,7 @@
   action: getFriendDeck
   method: "GET"
 
-"/pages/{!}":
+"/pages/{?}":
   controller: Pages
   action: default
   method: "GET"
