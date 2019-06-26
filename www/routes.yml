@@ -55,7 +55,7 @@
   action: mySite
   method: "GET"
 
-"/page":
+"/pages/{!}":
   controller: Pages
   action: page
   method: "GET"
