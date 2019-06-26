@@ -35,7 +35,7 @@ use MVC\Core\Routing;
 //    Routing::getCrudRoute($slug) :
 //    Routing::getRoute($slug);
 
-$routes = Routing::getRoute($slug)?? Routing::getParametrableRoute($slug);
+$routes = Routing::getRoute($slug) ?? Routing::getParametrableRoute($slug);
 
 extract($routes);
 
@@ -52,8 +52,11 @@ else {
     $controllerPath = "Controllers/PagesController.class.php";
     $action = "noControllerFoundAction";
     $method = "post";
+    $parameters = false;
 }
 
+var_dump($_POST);
+die();
 if (method_exists($controllerObject, $action)) {
 	$controllerObject->$action();
 }
