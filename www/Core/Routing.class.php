@@ -43,7 +43,8 @@ class Routing{
            $validWithOptional = ($slugParametersNumber >= $matchedSlugParametersNumber) && $hasOptional;
 
            if($valid || $validWithOptional) {
-               $controller = ucfirst($routes[$matchedSlug]["controller"])."Controller";
+               $controller = $routes[$matchedSlug]["controller"] == "" ? $slugParameters[1] : $routes[$matchedSlug]["controller"];
+               $controller = ucfirst($controller)."Controller";
                $action = $routes[$matchedSlug]["action"]."Action";
                $controllerPath = "Controllers/".$controller."class.php";
                $method = $routes[$matchedSlug]["method"];
@@ -57,7 +58,6 @@ class Routing{
            }
        }
         return [
-            "info" => [$slug, $slugToCompare, $matchedSlug] ,
             "controller" => 'PagesController', "action" => 'notFoundAction',
             "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
     }

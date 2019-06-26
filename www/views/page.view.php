@@ -1,4 +1,4 @@
-<div id="container" class="container">
+<div i    }d="container" class="container">
     <div class="content">
         <div class="index-title">
             <h3>Gestion des pages</h3>

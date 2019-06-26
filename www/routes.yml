@@ -105,17 +105,17 @@
   action: save
   mothod: "POST"
 
-"/list":
+"/list/{!}":
   controller: ""
   action: list
   method: "GET"
 
-"/delete":
+"/delete/{!}":
   controller: ""
   action: delete
   method: "GET"
 
-"/edit":
+"/edit/{!}":
   controller: ""
   action: edit
   method: "GET"

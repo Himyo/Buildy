@@ -16,6 +16,9 @@ class PagesController{
     public function notFoundAction() {
         $view = new View("notFound", "front");
     }
+    public function noControllerFoundAction() {
+        $view = new View("noControllerFound", "front");
+    }
 
     public function testAction() {
         $view = new View("test", "back");
