@@ -55,8 +55,6 @@ else {
     $parameters = false;
 }
 
-var_dump($_POST);
-die();
 if (method_exists($controllerObject, $action)) {
 	$controllerObject->$action();
 }
