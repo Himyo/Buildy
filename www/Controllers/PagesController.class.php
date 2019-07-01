@@ -61,7 +61,12 @@ class PagesController extends Controller{
 
     public function pageAction() {
         $view = new View("page", "back");
-        $view->assign('pages', Pages::All());
+        $uriParameters = $_POST['PagesController']['pageAction'];
+        $parameters = $uriParameters ?? 0;
+        $allPages = Pages::ALL();
+
+        $view->assign('pages', $allPages);
+        $view->assign('id', $parameters);
     }
 
     public function contactAction() {
@@ -76,4 +81,21 @@ class PagesController extends Controller{
     public function usersBackAction() {
         $view = new View("usersBack", "back");
     }
+
+    public function articlesBackAction() {
+    $view = new View("articlesBack", "back");
+    }
+
+    public function cardsBackAction() {
+    $view = new View("cardsBack", "back");
+    }
+
+    public function gamesBackAction() {
+    $view = new View("gamesBack", "back");
+    }
+
+    public function tournamentsBackAction() {
+    $view = new View("tournamentsBack", "back");
+    }
+
 }

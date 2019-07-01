@@ -12,7 +12,7 @@
                             $size = sizeof($pages);
                             for($i = 0 ; $i < $size ; ++$i){
                                     $slug = $pages[$i]["slug"];
-                                    echo "<li><a href='{$slug}' onClick='editpage(`".$slug."`)'> {$pages[$i]['title']} </a></li>";
+                                    echo "<li><a href='page/{$pages[$i]['id']}'> {$pages[$i]['title']} </a></li>";
                             }
                         ?>
                     </ul>
@@ -35,18 +35,6 @@
                 <h4>Elements</h4>
                 <div class="snippet-list">
                     <p>Container</p>
-                    <p>Jumbotron</p>
-                    <p>Table</p>
-                    <p>Card</p>
-                    <p>Button</p>
-                    <p>Image</p>
-                    <p>Alert</p>
-                    <p>Navbar</p>
-                    <p>Text input</p>
-                    <p>Select input</p>
-                    <p>Text area</p>
-                    <p>Radio button</p>
-                    <p>Checkbox</p>
                     <p>Pagination</p>
                 </div>
             </div>
@@ -55,13 +43,15 @@
                 <button id="btn-body-center-modal" onclick="openmodal()">Voir la page</button>
                 <div id="iframe-display" height="800" width="800">
                     <?php
-                        var_dump($_SERVER['REQUEST_URI']);
+
+                        echo $pages[intval($id)]['content'];
                     ?>
                 </div>
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closemodal()">&times;</span>
-                        <div id="iframe-display" src="#" width="800" height="800"></div>
+                        <div id="iframe-display" width="800" height="800">
+                        </div>
                     </div>
                 </div>
             </div>

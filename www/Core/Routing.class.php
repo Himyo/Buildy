@@ -21,7 +21,7 @@ class Routing{
         }
     }
 
-    public static function getParametrableRoute($slug){
+    public static function getParametrableRoute($slug) {
 	    $routes = yaml_parse_file(self::$routeFile);
 	    $routesSlugs = array_keys($routes);
 	    $slug = trim($slug, '/');
@@ -47,7 +47,6 @@ class Routing{
 
            if($valid || $validWithOptional) {
                $controller = $routes[$matchedSlug]["controller"] == "" ? $slugParameters[1] : $routes[$matchedSlug]["controller"];
-
 
                $controller = ucfirst($controller)."Controller";
                $action = $routes[$matchedSlug]["action"]."Action";
