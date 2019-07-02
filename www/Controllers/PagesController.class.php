@@ -62,7 +62,7 @@ class PagesController extends Controller{
     public function pageAction() {
         $view = new View("page", "back");
         $uriParameters = $_POST['PagesController']['pageAction'];
-        $parameters = $uriParameters ?? 0;
+        $parameters = $uriParameters[1] ?? 0;
         $allPages = Pages::ALL();
 
         $view->assign('pages', $allPages);
