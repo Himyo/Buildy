@@ -16,13 +16,6 @@ function autoload($class) {
 }
 spl_autoload_register("autoload");
 
-//Récuperer l'url apres le nom de domaine
-//Utilisation d'une variable SUPER GLOBALE
-//Accessible partout, commenence par $_ et en majuscule
-//c'est toujours un tableau
-//Elle est créée par le serveur et alimenté par le serveur
-//Vous ne pouvez que la consulter
-
 $slug = $_SERVER["REQUEST_URI"];
 
 //pour palier aux paramètres GET
@@ -30,7 +23,7 @@ $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
 MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 
-$routes = substr_count($slug, '/') > 1 ? \MVC\Core\Routing::getCrudRoute($slug) : MVC\Core\Routing::getRoute($slug);
+$routes = MVC\Core\Routing::getRoute($slug);
 extract($routes);
 
 $container = [];

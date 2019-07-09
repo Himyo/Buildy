@@ -1,33 +1,234 @@
+######## HOME #######
+
 "/":
+  controller: Home
+  action: default
+  method: "GET"
+
+"/site":
+  controller: Home
+  action: getSite
+  method: "GET"
+
+######## ADMIN #######
+
+"/dashboard/admin/users":
+  controller: AdminUsers
+  action: default
+  method: "GET"
+
+"/dashboard/admin/cards":
+  controller: AdminCards
+  action: default
+  method: "GET"
+
+"/dashboard/admin/tournaments":
+  controller: AdminTournaments
+  action: default
+  method: "GET"
+
+"/dashboard/admin/articles":
+  controller: AdminArticles
+  action: default
+  method: "GET"
+
+"/dashboard/admin/articles/{id}/comments":
+  controller: AdminComments
+  action: default
+  method: "GET"
+
+######## DASHBOARD #######
+
+"/dashboard":
+  controller: Dashboard
+  action: default
+  method: "GET"
+
+"/dashboard/stats":
+  controller: Dashboard
+  action: getStats
+  method: "GET"
+
+######## USER #######
+
+"/register":
+  controller: Users
+  action: getRegister
+  method: "GET"
+
+"/login":
+  controller: Users
+  action: getLogin
+  method: "GET"
+
+"/forgotPassword":
+  controller: Users
+  action: getForgotPassword
+  method: "GET"
+
+"/profile":
+  controller: Users
+  action: getProfile
+  method: "GET"
+
+"/saveUser":
+  controller: Users
+  action: save
+  method: "POST"
+
+"/connectUser":
+  controller: Users
+  action: connect
+  method: "POST"
+
+######## ARTICLES #######
+
+"/blog":
+  controller: Articles
+  action: getAll
+  method: "GET"
+
+"/blog/news":
+  controller: Articles
+  action: getRecent
+  method: "GET"
+
+"/blog/create":
+  controller: Articles
+  action: getCreate
+  method: "GET"
+
+"/blog/myArticles":
+  controller: Articles
+  action: getMyArticles
+  method: "GET"
+
+"/blog/save":
+  controller: Articles
+  action: save
+  method: "POST"
+
+######## COMMENTS #######
+
+"/blog/articles/{id}/comments":
+  controller: Comments
+  action: default
+  method: "GET"
+
+"/blog/articles/{id}/comments/create":
+  controller: Comments
+  action: create
+  method: "GET"
+
+
+######## CARDS #######
+
+"/cards":
+  controller: Cards
+  action: default
+  method: "GET"
+
+"/cards/{id}":
+  controller: Cards
+  action: getDetail
+  method: "GET"
+
+######## TOURNAMENTS #######
+
+"/tournaments":
+  controller: Tournaments
+  action: getAll
+  method: "GET"
+
+"/tournaments/{id}":
+  controller: Tournaments
+  action: getSingle
+  method: "GET"
+
+"/tournaments/myTournaments":
+  controller: Tournaments
+  action: getMyTournaments
+  method: "GET"
+
+"/tournaments/create":
+  controller: Tournaments
+  action: getCreate
+  method: "GET"
+
+"/tournaments/save":
+  controller: Tournaments
+  action: save
+  method: "POST"
+
+######## DECK #######
+
+"/decks/create":
+  controller: Decks
+  action: getCreate
+  method: "GET"
+
+"/decks/{user}":
+  controller: Decks
+  action: getAll
+  method: "GET"
+
+"/decks/myDecks":
+  controller: Decks
+  action: getMyDecks
+  method: "GET"
+
+"/decks/myDecks/{id}":
+   controller: Decks
+   action: getDetail
+   method: "POST"
+
+"/decks/save":
+  controller: Decks
+  action: save
+  method: "POST"
+
+"/decks/delete":
+  controller: Decks
+  action: delete
+  method: "POST"
+
+"/decks/{user}/{deckId}":
+  controller: Decks
+  action: getFriendDeck
+  method: "GET"
+
+######## PAGES #######
+
+"/site/page":
   controller: Pages
   action: default
   method: "GET"
 
-"/test":
+"/site/page/{id}":
   controller: Pages
-  action: test
+  action: modifyPage
   method: "GET"
 
-# ######################################## EN ######################################
+"/site/page/add":
+  controller: Pages
+  action: addPage
+  method: "GET"
+
+"/site/page/{id}/delete":
+  controller: Pages
+  action: addPage
+  method: "GET"
+
+#########################
+
+"/test":
+  controller: Test
+  action: default
+  method: "GET"
 
 "/not_found":
   controller: Pages
   action: notFound
-  method: "POST"
-
-"/add_users":
-  controller: Users
-  action: add
-  method: "POST"
-
-"/connection":
-  controller: Users
-  action: login
-  method: "POST"
-
-"/forget_password":
-  controller: Users
-  action: forgetPassword
   method: "GET"
 
 "/load_cards":
@@ -36,86 +237,22 @@
   method: "POST"
 
 "/about":
-  controller: Pages
-  action: about
+  controller: Home
+  action: getAbout
   method: "GET"
 
 "/legal":
+  controller: Home
+  action: getLegal
+  method: "GET"
+
+"/contact":
+  controller: Home
+  action: getContact
+  method: "GET"
+
+"/test/page":
   controller: Pages
-  action: legal
+  action: testPage
   method: "GET"
 
-"/dashboard":
-  controller: Pages
-  action: dashboard
-  method: "GET"
-
-"/mySite":
-  controller: Pages
-  action: mySite
-  method: "GET"
-
-"/page":
-  controller: Pages
-  action: page
-  method: "GET"
-
-"/modifyPage":
-  controller: Pages
-  action: modifyPage
-  method: "GET"
-
-"/addPage":
-  controller: Pages
-  action: addPage
-  method: "GET"
-
-"/articles":
-  controller: Articles
-  action: getArticlesView
-  method: "GET"
-
-"/cards":
-  controller: Cards
-  action: getCardsView
-  method: "GET"
-
-"/users":
-  controller: Users
-  action: getUsersView
-  method: "GET"
-
-"/tournaments":
-  controller: Tournaments
-  action: getTournamentsView
-  method: "GET"
-
-"/home":
-  controller: Pages
-  action: home
-  method: "GET"
-
-"/register":
-  controller: Users
-  action: getRegisterForm
-  method: "POST"
-
-"/saveUser":
-  controller: Users
-  action: save
-  mothod: "POST"
-
-"/list":
-  controller: ""
-  action: list
-  method: "GET"
-
-"/delete":
-  controller: ""
-  action: delete
-  method: "GET"
-
-"/edit":
-  controller: ""
-  action: edit
-  method: "GET"

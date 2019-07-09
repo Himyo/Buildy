@@ -10,16 +10,16 @@ class Routing{
         $routes = yaml_parse_file(self::$routeFile);
         if (isset($routes[$slug])) {
             if (empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])) {
-                return ["controller" => 'PagesController', "action" => 'notFoundAction',
-                    "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
+                return ["controller" => 'HomeController', "action" => 'notFoundAction',
+                    "controllerPath" => 'Controllers/HomeController.class.php', "method" => 'post'];
             }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
             $controllerPath = "Controllers/" . $controller . ".class.php";
             $method = $routes[$slug]["method"];
         } else {
-            return ["controller" => 'PagesController', "action" => 'notFoundAction',
-                "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
+            return ["controller" => 'HomeController', "action" => 'notFoundAction',
+                "controllerPath" => 'Controllers/HomeController.class.php', "method" => 'post'];
         }
         $result = ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
             $method];

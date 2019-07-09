@@ -16,9 +16,26 @@ class UsersController extends Controller {
 
 		$this->users = $users;
 	}
+
+	// VIEWS
 	public function getUsersViewAction(){
 		$view = new View("usersBack", "back");
 	}
+
+    public function getRegisterViewAction() {
+	    $view = new View("register", "back");
+    }
+
+    public function getLoginViewAction() {
+	    $view = new View("login", "back");
+    }
+
+    public function getForgetPasswordViewAction() {
+	    $view = new View("forgetPassword", "back");
+    }
+
+    // ACTIONS
+
 
 	public function getRegisterFormAction() {
 	    $user = $this->users;
@@ -96,8 +113,4 @@ class UsersController extends Controller {
 		$v = new View("forgetPasswordUser", "back");
         $v->assign("form", new FormBuilder($form));
 	}
-
-	public function newLoginAction(Request $request) {
-        $users = $this->users;
-    }
 }

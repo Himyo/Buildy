@@ -1,6 +1,6 @@
 .chatbox {
   display: flex;
-  border: 1px solid #777777;
+  border: 1px solid $lightgrey-font;
 }
 
 .chatbox-shadow {
@@ -10,7 +10,7 @@
 
 .chatbox-round {
   display: flex;
-  border: 1px solid #777777;
+  border: 1px solid $lightgrey-font;
   border-radius: 6px;
 }
 

@@ -1,7 +1,7 @@
 /* LABEL */
 
 .label-classic {
-  color: #777;
+  color: $lightgrey-font;
 }
 
 
@@ -10,4 +10,5 @@
 .label-input-column-classic {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
