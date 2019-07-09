@@ -8,7 +8,7 @@
   }
 
   .pagination-classic-active {
-    background-color: $lightgrey-font;
+    background-color: #777777;
   }
 }
 
@@ -25,7 +25,7 @@
   }
 
   .pagination-round-active {
-    background-color: $lightgrey-font;
+    background-color: #777777;
   }
 }
 
@@ -36,12 +36,12 @@
 
   a {
     color: black;
-    border: 1px solid $lightgrey-font;
+    border: 1px solid #777777;
     padding: 8px 15px;
     text-decoration: none;
   }
 
   .pagination-border-active {
-    background-color: $lightgrey-font;
+    background-color: #777777;
   }
 }

@@ -1,12 +1,12 @@
 .table-classic {
-   background-color: $white;
-   border: 2px solid $lightgrey-font-3;
+   background-color: #ffffff;
+   border: 2px solid #ccc;
    padding: 5px;
-   box-shadow: 3px 3px 2px $lightgrey-font;
+   box-shadow: 3px 3px 2px #777777;
    border-collapse: collapse;
 
    thead {
-      border-bottom: 2px solid $lightgrey-font-4;
+      border-bottom: 2px solid #bbbbbb;
    }
 
    th {
@@ -14,11 +14,11 @@
    }
 
    tr {
-      border-bottom: 1px solid $lightgrey-font-4;
+      border-bottom: 1px solid #bbbbbb;
    }
 
    tbody tr:nth-child(odd) {
-     background-color: $lightgrey-font-2;
+     background-color: #ddd;
    }
 
    td {
@@ -33,14 +33,14 @@
    }
 
    .look-table-classic {
-      color: $table-classic;
+      color: #0f64ba;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
    }
 
    .edit-table-classic {
-      color: $edit-table-classic;
+      color: #ff6815;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
@@ -48,14 +48,14 @@
 
    .check-table-classic {
       text-align: center;
-      color: $check-table-classic;
+      color: #28a745;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
    }
 
    .delete-table-classic {
-      color: $delete-table-classic;
+      color: #d0151c;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
@@ -75,28 +75,28 @@
 
 
 .table-color {
-   background-color: $white;
-   border: 2px solid $lightgrey-font-3;
+   background-color: #ffffff;
+   border: 2px solid #ccc;
    padding: 5px;
-   box-shadow: 3px 3px 2px $lightgrey-font;
+   box-shadow: 3px 3px 2px #777777;
    border-collapse: collapse;
 
    th {
      padding: 8px;
-     background-color: $table-blue;
-     color: $white;
+     background-color: #324960;
+     color: #fff;
    }
 
    th:nth-child(odd) {
-     background-color: $table-blue-2;
+     background-color: #4fc3a1;
    }
 
    tbody tr:nth-child(odd) {
-     background-color: $background-content;
+     background-color: #EEEEEE;
    }
 
    tr {
-      border-bottom: 1px solid $lightgrey-font-4;
+      border-bottom: 1px solid #bbbbbb;
    }
 
    td {
@@ -112,14 +112,14 @@
    }
 
    .look-table-color {
-      color: $table-classic;
+      color: #0f64ba;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
    }
 
    .edit-table-color {
-      color: $edit-table-classic;
+      color: #ff6815;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
@@ -127,14 +127,14 @@
 
    .check-table-color {
       text-align: center;
-      color: $check-table-classic;
+      color: #28a745;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
    }
 
    .delete-table-color {
-      color: $delete-table-classic;
+      color: #d0151c;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
@@ -154,15 +154,15 @@
 
 
 .table-blue {
-  background-color: $white;
-  border: 2px solid $table-blue;
+  background-color: #ffffff;
+  border: 2px solid #324960;
   padding: 5px;
   border-collapse: collapse;
 
    th {
      padding: 8px;
-     background-color: $table-blue;
-     color: $white;
+     background-color: #324960;
+     color: #fff;
    }
 
    tbody tr:nth-child(odd) {
@@ -175,7 +175,7 @@
      padding-left: 10px;
      padding-right: 10px;
      text-align: center;
-     border-right: 1px solid $table-blue;
+     border-right: 1px solid #324960;
    }
 
    i {
@@ -183,14 +183,14 @@
    }
 
    .look-table-blue {
-      color: $table-classic;
+      color: #0f64ba;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
    }
 
    .edit-table-blue {
-      color: $edit-table-classic;
+      color: #ff6815;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
@@ -198,14 +198,14 @@
 
    .check-table-blue {
       text-align: center;
-      color: $check-table-classic;
+      color: #28a745;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;
    }
 
    .delete-table-blue {
-      color: $delete-table-classic;
+      color: #d0151c;
       font-size: 20px;
       padding-top: 0px;
       padding-bottom: 0px;

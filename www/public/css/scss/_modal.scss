@@ -11,15 +11,15 @@
  background-color: rgba(0,0,0,0.4);
 
  .modal-content {
-    background-color: $white;
+    background-color: #fefefe;
     margin: auto;
     padding: 20px;
-    border: 1px solid $lightgrey-font;
+    border: 1px solid #888;
     width: 80%;
     margin-top: 20px;
 
     .close {
-     color: $lightgrey-font-3;
+     color: #aaa;
      float: right;
      font-size: 28px;
      font-weight: bold;

@@ -1,5 +1,5 @@
 .button-classic {
-  background-color: $lightgrey-font;
+  background-color: #777777;
   border: none;
   border-radius: 8px;
   color: white;
@@ -18,7 +18,7 @@
 }
 
 .button-classic-succes {
-  background-color: $green-succes;
+  background-color: #4caf50;
   border: none;
   border-radius: 8px;
   color: white;
@@ -37,7 +37,7 @@
 }
 
 .button-classic-error {
-  background-color: $red-error;
+  background-color: #f44336;
   border: none;
   border-radius: 8px;
   color: white;
@@ -55,7 +55,7 @@
 }
 
 .button-classic-warning {
-  background-color: $yellow-warning;
+  background-color: #ffaa00;;
   border: none;
   border-radius: 8px;
   color: white;
@@ -73,9 +73,9 @@
 }
 
 .button-outline {
-  border: 1px solid $lightgrey-font;
+  border: 1px solid #777777;
   border-radius: 8px;
-  color: $lightgrey-font;
+  color: #777777;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -90,9 +90,9 @@
 }
 
 .button-outline-succes {
-  border: 1px solid $green-succes;
+  border: 1px solid #4caf50;
   border-radius: 8px;
-  color: $green-succes;
+  color: #4caf50;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -107,9 +107,9 @@
 }
 
 .button-outline-error {
-  border: 1px solid $red-error;
+  border: 1px solid #f44336;
   border-radius: 8px;
-  color: $red-error;
+  color: #f44336;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -124,9 +124,9 @@
 }
 
 .button-outline-warning {
-  border: 1px solid $yellow-warning;
+  border: 1px solid #ffaa00;
   border-radius: 8px;
-  color: $yellow-warning;
+  color: #ffaa00;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -141,7 +141,7 @@
 }
 
 .button-square {
-  background-color: $lightgrey-font;
+  background-color: #777777;
   border: none;
   color: white;
   padding: 10px 28px;
@@ -158,7 +158,7 @@
 }
 
 .button-square-succes {
-  background-color: $green-succes;
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 10px 28px;
@@ -175,7 +175,7 @@
 }
 
 .button-square-error {
-  background-color: $red-error;
+  background-color: #f44336;
   border: none;
   color: white;
   padding: 10px 28px;
@@ -192,7 +192,7 @@
 }
 
 .button-square-warning {
-  background-color: $yellow-warning;
+  background-color: #ffaa00;
   border: none;
   color: white;
   padding: 10px 28px;
@@ -209,8 +209,8 @@
 }
 
 .button-square-outline {
-  border: 1px solid $lightgrey-font;
-  color: $lightgrey-font;
+  border: 1px solid #777777;
+  color: #777777;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -225,8 +225,8 @@
 }
 
 .button-square-outline-succes {
-  border: 1px solid $green-succes;
-  color: $green-succes;
+  border: 1px solid #4caf50;
+  color: #4caf50;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -241,8 +241,8 @@
 }
 
 .button-square-outline-error {
-  border: 1px solid $red-error;
-  color: $red-error;
+  border: 1px solid #f44336;
+  color: #f44336;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -257,8 +257,8 @@
 }
 
 .button-square-outline-warning {
-  border: 1px solid $yellow-warning;
-  color: $yellow-warning;
+  border: 1px solid #ffaa00;
+  color: #ffaa00;
   padding: 10px 28px;
   text-align: center;
   font-size: 16px;
@@ -273,7 +273,7 @@
 }
 
 .button-classic-b {
-  background-color: $lightgrey-font;
+  background-color: #777777;
   border: none;
   border-radius: 8px;
   color: black;
@@ -292,7 +292,7 @@
 }
 
 .button-classic-succes-b {
-  background-color: $green-succes;
+  background-color: #4caf50;
   border: none;
   border-radius: 8px;
   color: black;
@@ -311,7 +311,7 @@
 }
 
 .button-classic-error-b {
-  background-color: $red-error;
+  background-color: #f44336;
   border: none;
   border-radius: 8px;
   color: black;
@@ -329,7 +329,7 @@
 }
 
 .button-classic-warning-b {
-  background-color: $yellow-warning;
+  background-color: #ffaa00;
   border: none;
   border-radius: 8px;
   color: black;
@@ -347,7 +347,7 @@
 }
 
 .button-square-b {
-  background-color: $lightgrey-font;
+  background-color: #777777;
   border: none;
   color: black;
   padding: 10px 28px;
@@ -364,7 +364,7 @@
 }
 
 .button-square-succes-b {
-  background-color: $green-succes;
+  background-color: #4caf50;
   border: none;
   color: black;
   padding: 10px 28px;
@@ -381,7 +381,7 @@
 }
 
 .button-square-error-b {
-  background-color: $red-error;
+  background-color: #f44336;
   border: none;
   color: black;
   padding: 10px 28px;
@@ -398,7 +398,7 @@
 }
 
 .button-square-warning-b {
-  background-color: $yellow-warning;
+  background-color: #ffaa00;
   border: none;
   color: black;
   padding: 10px 28px;

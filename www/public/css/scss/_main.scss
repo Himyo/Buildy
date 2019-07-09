@@ -1,7 +1,7 @@
 /* MAIN */
 
 body {
-  color: $grey-font;
+  color: #555555;
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
@@ -14,7 +14,7 @@ p {
 
 a {
   text-decoration: none;
-  color: $lightgrey-font-3;
+  color: #dddddd;
 }
 
 #container {
@@ -27,8 +27,8 @@ a {
 .container span i {
    font-size: 18px;
    padding: 10px;
-   color: $white;
-   background-color: $input-border;
+   color: #fff;
+   background-color: #243647;
 }
 
 .main-container {
