@@ -217,7 +217,6 @@ CREATE TABLE `Favoris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `Legalities`
 --
@@ -680,6 +679,7 @@ ALTER TABLE `Type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
+
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
