@@ -12,15 +12,26 @@
             >";
 
         echo "<div>";
+        $categories = $optional["categories"];
+        echo "<select name='categories_id' id='categories_id'>";
+        foreach ($categories as $categorie) {
+            $id = $categorie['id'];
+            $name = $categorie['name'];
+            echo "<option value='{$id}'>".ucfirst($name)."</option>";
+        }
+        echo "</select>";
+
         echo '<input
                 type="'.$title->getType().'"
                 name="'.$title->getId().'"
                 placeholder="'.$title->getPlaceholder().'"
                 id="'.$title->getId().'"
-                class="'.$title->getClassname().'">';
+                class="'.$title->getClassname().'"
+                >';
 
-    echo "</div>";
-    echo "<div>";
+        echo "</div>";
+
+        echo "<div>";
         echo  '<textarea
                 type="'.$content->getType().'"
                 name="'.$content->getId().'"
@@ -28,9 +39,10 @@
                 cols="50"
                 placeholder="'.$content->getPlaceholder().'"
                 id="'.$content->getId().'"
-                class="'.$content->getClassname().'"></textarea>';
+                class="'.$content->getClassname().'">
+            </textarea>';
 
-    echo "</div>";
+        echo "</div>";
         echo '<button type="submit" class="btn btn-primary btn-block">Submit</button>';
         echo "</form>";
     ?>

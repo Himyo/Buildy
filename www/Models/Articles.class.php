@@ -15,6 +15,7 @@ class Articles extends BaseSQL {
     public $content;
     public $created_at;
     public $users_id;
+    public $categories_id;
 
     public function __construct()
     {

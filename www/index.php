@@ -18,13 +18,13 @@ spl_autoload_register("autoload");
 
 $slug = $_SERVER["REQUEST_URI"];
 
-//pour palier aux paramètres GET
+//pour palier aux parametres GET
 $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
 MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 use MVC\Core\Routing;
 
-$routes = Routing::getRoute($slug) ?? Routing::getParametrableRoute($slug);
+$routes = Routing::getRoute($slug);
 extract($routes);
 
 $container = [];

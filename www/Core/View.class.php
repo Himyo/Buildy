@@ -37,11 +37,12 @@ class View{
 
 	//$modal = form //"views/modals/form.mod.php"
 	//$config = [ ..... ]
-	public function addComponent($component, $config){
+	public function addComponent($component, $config, array $opt = []){
 		//form.mod.php
 		$componentPath = "views/components/".$component.".comp.php";
 		if( file_exists($componentPath)){
 		    extract([$component => $config]);
+		    extract(["optional" => $opt]);
 			include $componentPath;
 		}else{
 			die("Attention le fichier component n'existe pas ".$componentPath);

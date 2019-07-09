@@ -3,7 +3,9 @@
         <div class="index-title">
             <h1>Article</h1>
             <h2>Draft your Articles here</h2>
-            <?php $this->addComponent("articleForm", $form); ?>
+            <?php
+                $this->addComponent("articleForm", $form, ["categories" => $categories]);
+            ?>
         </div>
     </div>
 </div>

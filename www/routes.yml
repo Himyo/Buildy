@@ -143,7 +143,7 @@
   method: "GET"
 
 "/about":
-  controller: Pages
+  tontroller: Pages
   action: about
   method: "GET"
 
@@ -253,20 +253,25 @@
 "/list/{!}":
   controller: ""
   action: list
-  method: "GET"
+  method: "POST"
 
 "/delete/{!}":
   controller: ""
   action: delete
-  method: "GET"
+  method: "POST"
 
 "/edit/{!}":
   controller: ""
   action: edit
-  method: "GET"
+  method: "POST"
 
-"/update":
+"/create/{!}":
+  controller: ""
+  action: edit
+  method: "POST"
+
+"/update/{!}":
   controller: ""
   action: update
-  method: POST
+  method: "POST"
 

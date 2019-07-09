@@ -19,6 +19,9 @@ class Routing{
                 "method" => $method
             ];
         }
+        else {
+            return self::getParametrableRoute($slug);
+        }
     }
 
     public static function getParametrableRoute($slug) {
@@ -91,7 +94,8 @@ class Routing{
     public static function getMethod($slug) {
         $slug = strtolower($slug);
         $routes = yaml_parse_file(self::$routeFile);
-        return $routes[$slug]['method'];
+        $method = $routes[$slug]['method'];
+        return $method ?? "GET";
     }
 
 	public static function getSlug($c, $a){

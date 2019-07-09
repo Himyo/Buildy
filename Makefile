@@ -28,6 +28,8 @@ db-clean:
 	make db-create
 	sleep 5
 	make db-init
+db-access:
+	docker exec -it ${DB_CONTAINER_NAME} mysql -uroot -ppabuildypa ${DB_TARGET} 
 
 stopAll:
 	docker stop $$(docker ps -qa)
@@ -40,6 +42,5 @@ start:
 	ifneq(docker ps -af name=${DB_CONTAINER_NAME}, ${DB_CONTAINER_NAME})
 		make stopAll
 		make start
-		make db-init
 	endif
 

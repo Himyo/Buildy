@@ -5,10 +5,10 @@ namespace MVC\Models;
 
 use MVC\Core\BaseSQL;
 
-class Categories extends BaseSQL {
+class Role extends BaseSQL {
 
     protected $id;
-    protected $name;
+    protected $right;
 
     public function __construct() {
         parent::__construct();
