@@ -1,4 +1,4 @@
-    <table>
+     <table>
         <?php
         $modelName = $config['modelName'];
         $editable = $config['editable'];

@@ -11,12 +11,11 @@
 <body>
     <main>
         <?php include "header.php"; ?>
-        <?php include "header_640.php"; ?>
         <div id="main-container" class="main-container">
             <?php
-            if (\MVC\Core\Routing::getSlug("Pages", "mySite") === $_SERVER['REQUEST_URI']):
+            if (strpos($_SERVER['REQUEST_URI'], '/site') !== false):
             include "side_menu_mysite.php";
-            else:
+            elseif (strpos($_SERVER['REQUEST_URI'], '/dashboard') !== false):
             include "side_menu_dashboard.php";
             endif;
             ?>

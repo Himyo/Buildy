@@ -12,8 +12,8 @@ class CardsController extends Controller{
         $this->cards = $cards;
     }
 
-    public function getCardsViewAction() {
-        $view = new View("cardsBack", "back");
+    public function defaultAction() {
+        $view = new View("cards", "back");
     }
 
     public function downloadAction() {

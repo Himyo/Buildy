@@ -9,8 +9,30 @@
  use MVC\Models\Cards;
  use MVC\Controllers\CardsController;
 
+ use MVC\Models\Articles;
+ use MVC\Controllers\ArticlesController;
+
+ use MVC\Models\Comments;
+ use MVC\Controllers\CommentsController;
+
+ use MVC\Models\Tournaments;
+ use MVC\Controllers\TournamentsController;
+
+ use MVC\Models\Decks;
+ use MVC\Controllers\DecksController;
+
+
  use MVC\Models\Users;
  use MVC\Controllers\UsersController;
+
+ use MVC\Controllers\HomeController;
+ use MVC\Controllers\AdminArticlesController;
+ use MVC\Controllers\AdminCardsController;
+ use MVC\Controllers\AdminDecksController;
+ use MVC\Controllers\AdminTournamentsController;
+ use MVC\Controllers\AdminCommentsController;
+ use MVC\Controllers\AdminUsersController;
+ use MVC\Controllers\DashboardController;
 
  use MVC\Controllers\PagesController;
 
@@ -59,7 +81,95 @@ $container = [
     },
     //Pages
     PagesController::class => function($container) {
-    return new PagesController();
+        return new PagesController();
+    },
+
+    //Home
+    HomeController::class => function($container) {
+        return new HomeController();
+    },
+
+    //Articles
+    Articles::class => function($container) {
+        return new Articles();
+    },
+    ArticlesController::class => function($container) {
+        $articlesModel = $container[Articles::class]($container);
+        return new ArticlesController($articlesModel);
+    },
+
+    //Comments
+    Comments::class => function($container) {
+        return new Comments();
+    },
+    CommentsController::class => function($container) {
+        $commentsModel = $container[Comments::class]($container);
+        return new CommentsController($commentsModel);
+    },
+
+    //Decks
+    Decks::class => function($container) {
+        return new Decks();
+    },
+    DecksController::class => function($container) {
+        $decksModel = $container[Decks::class]($container);
+        return new DecksController($decksModel);
+    },
+
+    //Tournaments
+    Tournaments::class => function($container) {
+        return new Tournaments();
+    },
+    TournamentsController::class => function($container) {
+        $tournamentsModel = $container[Tournaments::class]($container);
+        return new TournamentsController($tournamentsModel);
+    },
+
+    //ADMIN
+
+    //Dashboard
+    DashboardController::class => function($container) {
+        return new DashboardController();
+    },
+
+    //Admin Users
+    AdminUsersController::class => function($container) {
+        $usersModel = $container[Users::class]($container);
+        return new AdminUsersController($usersModel);
+    },
+
+    //Admin Articles
+    AdminArticlesController::class => function($container) {
+        $articlesModel = $container[Articles::class]($container);
+        return new AdminArticlesController($articlesModel);
+    },
+
+    //Admin Comments
+    AdminCommentsController::class => function($container) {
+        $commentsModel = $container[Comments::class]($container);
+        return new AdminCommentsController($commentsModel);
+    },
+
+    //Admin Tournaments
+    AdminTournamentsController::class => function($container) {
+        $tournamentsModel = $container[Tournaments::class]($container);
+        return new AdminTournamentsController($tournamentsModel);
+    },
+
+    //Admin Decks
+    AdminDecksController::class => function($container) {
+        $decksModel = $container[Decks::class]($container);
+        return new AdminDecksController($decksModel);
+    },
+
+    //Admin Cards
+    AdminCardsController::class => function($container) {
+        $cardsModel = $container[Cards::class]($container);
+        return new AdminCardsController($cardsModel);
     }
+
+
+
+
 ];
 return $container;
