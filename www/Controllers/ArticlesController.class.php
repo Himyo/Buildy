@@ -6,18 +6,31 @@ use MVC\Models\Articles;
 
 class ArticlesController extends Controller {
 
-    private $article;
+    protected $articles;
 
-    /**
-     * ArticlesController constructor.
-     * @param $article
-     */
-    public function __construct(Articles $article) {
-        $this->article = $article;
+
+    public function __construct(Articles $articles) {
+        $this->articles = $articles;
     }
 
+    public function getArticlesFormAction() {
+        $article = $this->articles;
+        $view = new View('writeArticle', 'back');
+        $view->assign("form" ,$article->articleForm());
+    }
 
     public function getArticlesViewAction() {
-        $view = new View("tournamentsBack", "back");
+        $articles =  $this->articles->findJoin(
+            [
+                'Articles.id', 'Articles.title',
+                'Articles.created_at', 'Articles.content',
+                'Users.firstname', 'Users.lastname',
+                'Users.email'
+            ],
+            ['Users'=> ['Users.id','Articles.users_id']
+            ]
+        );
+        $view = new View('articles', 'back');
+        $view->assign('articles', $articles);
     }
 }

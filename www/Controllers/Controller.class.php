@@ -9,6 +9,7 @@ use MVC\Core\View;
 
 abstract class Controller
 {
+
     public function listAction(array $data = ['*'], $editable = []) {
         $class = get_called_class();
         $modelName = substr($class, 0, strlen($class)-strlen('Controller'));
@@ -49,5 +50,23 @@ abstract class Controller
            $this->$modelName->edit($data, ['id' => $id]);
         }
         header('Location: /list/'.$modelName);
+    }
+
+    public function createAction() {
+        $method = Routing::getMethod('/create');
+        $data = $GLOBALS['_'.$method];
+
+        $class = get_called_class();
+        $modelName = substr($class, 0, strlen($class) - strlen('Controller'));
+        $modelName = lcfirst(substr($modelName, strrpos($modelName, '\\') + 1));
+
+
+        if($_SERVER['REQUEST_METHOD'] == $method && !empty($data)) {
+            //TODO: Auth object to stock id an send it with the form
+            $data['users_id'] = 2;
+            $this->$modelName->insert($data);
+        }
+        header('Location: /list/'.$modelName);
+
     }
 }

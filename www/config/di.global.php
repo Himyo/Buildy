@@ -9,22 +9,21 @@
  use MVC\Models\Cards;
  use MVC\Controllers\CardsController;
 
- use MVC\Models\Articles;
- use MVC\Controllers\ArticlesController;
-
- use MVC\Models\Comments;
- use MVC\Controllers\CommentsController;
-
- use MVC\Models\Tournaments;
- use MVC\Controllers\TournamentsController;
+use MVC\Models\Tournaments;
+use MVC\Controllers\TournamentsController;
 
  use MVC\Models\Decks;
  use MVC\Controllers\DecksController;
 
+ use MVC\Models\Articles;
+ use MVC\Controllers\ArticlesController;
 
  use MVC\Models\Users;
  use MVC\Controllers\UsersController;
 
+ use MVC\Models\Pages;
+ use MVC\Controllers\PagesController;
+ 
  use MVC\Controllers\HomeController;
  use MVC\Controllers\AdminArticlesController;
  use MVC\Controllers\AdminCardsController;
@@ -34,7 +33,6 @@
  use MVC\Controllers\AdminUsersController;
  use MVC\Controllers\DashboardController;
 
- use MVC\Controllers\PagesController;
 
 
 $container = [
@@ -70,7 +68,28 @@ $container = [
     CardsController::class => function($container) {
         return new CardsController($container[Cards::class]($container));
     },
-
+    //Decks
+    Decks::class => function($container) {
+        return new Decks();
+    },
+    DecksController::class => function($container) {
+        return new DecksController($container[Decks::class]($container));
+    },
+    //Tournaments
+    Tournaments::class => function($container) {
+        return new Tournaments();
+    },
+    TournamentsController::class => function($container) {
+        return new TournamentsController($container[Tournaments::class]($container));
+    },
+    //Articles
+    Articles::class => function($container) {
+        return new Articles();
+    },
+    ArticlesController::class => function($container) {
+        $articlesModel = $container[Articles::class]($container);
+        return new ArticlesController($articlesModel);
+    },
     //Users
     Users::class => function($container) {
         return new Users();
@@ -80,8 +99,12 @@ $container = [
         return new UsersController($usersModel);
     },
     //Pages
+    Pages::class => function($container) {
+        return new Pages();
+    },
     PagesController::class => function($container) {
-        return new PagesController();
+        $pages = $container[Pages::class]($container);
+        return new PagesController($pages);
     },
 
     //Home

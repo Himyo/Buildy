@@ -10,11 +10,19 @@
   action: getSite
   method: "GET"
 
-######## ADMIN #######
+"/component":
+  controller: Pages
+  action: component
+  method: "GET"
 
-"/dashboard/admin/users":
-  controller: AdminUsers
-  action: default
+"/not_found":
+  controller: Pages
+  action: notFound
+  method: "POST"
+
+"/page/{?}":
+  controller: Pages
+  action: page
   method: "GET"
 
 "/dashboard/admin/cards":
@@ -128,43 +136,9 @@
   action: default
   method: "GET"
 
-"/cards/{id}":
-  controller: Cards
-  action: getDetail
-  method: "GET"
-
-######## TOURNAMENTS #######
-
-"/tournaments":
-  controller: Tournaments
-  action: getAll
-  method: "GET"
-
-"/tournaments/{id}":
-  controller: Tournaments
-  action: getSingle
-  method: "GET"
-
-"/tournaments/myTournaments":
-  controller: Tournaments
-  action: getMyTournaments
-  method: "GET"
-
-"/tournaments/create":
-  controller: Tournaments
-  action: getCreate
-  method: "GET"
-
-"/tournaments/save":
-  controller: Tournaments
-  action: save
-  method: "POST"
-
-######## DECK #######
-
-"/decks/create":
-  controller: Decks
-  action: getCreate
+"/about":
+  controller: Pages
+  action: about
   method: "GET"
 
 "/decks/{user}":
@@ -177,82 +151,106 @@
   action: getMyDecks
   method: "GET"
 
-"/decks/myDecks/{id}":
-   controller: Decks
-   action: getDetail
-   method: "POST"
+"/mysite":
+  controller: Pages
+  action: mySite
+  method: "GET"
 
-"/decks/save":
-  controller: Decks
+"/pages/{?}":
+  controller: Pages
+  action: default
+  method: "GET"
+
+"/addpage":
+  controller: Pages
+  action: addPage
+  method: "GET"
+
+"/modifypage":
+  controller: Pages
+  action: editPage
+  method: "GET"
+
+"/home":
+  controller: Pages
+  action: home
+  method: "GET"
+
+
+"/saveuser":
+  controller: Users
   action: save
   method: "POST"
-
-"/decks/delete":
-  controller: Decks
-  action: delete
-  method: "POST"
-
-"/decks/{user}/{deckId}":
-  controller: Decks
-  action: getFriendDeck
+########################################## MODELS READ ROUTES #############################
+"/articles":
+  controller: Articles
+  action: getArticlesView
   method: "GET"
 
-######## PAGES #######
-
-"/site/page":
-  controller: Pages
-  action: default
-  method: "GET"
-
-"/site/page/{id}":
-  controller: Pages
-  action: modifyPage
-  method: "GET"
-
-"/site/page/add":
-  controller: Pages
-  action: addPage
-  method: "GET"
-
-"/site/page/{id}/delete":
-  controller: Pages
-  action: addPage
-  method: "GET"
-
-#########################
-
-"/test":
-  controller: Test
-  action: default
-  method: "GET"
-
-"/not_found":
-  controller: Pages
-  action: notFound
-  method: "GET"
-
-"/load_cards":
+"/cards":
   controller: Cards
-  action: download
+  action: getCardsView
+  method: "GET"
+
+"/decks":
+  controller: Decks
+  action: getDecksView
+  method: "GET"
+
+"/tournaments":
+  controller: Tournaments
+  action: getTournamentsView
+  method: "GET"
+########################################## MODELS WRITE ROUTES ############################
+"/register":
+  controller: Users
+  action: getRegisterForm
   method: "POST"
 
-"/about":
-  controller: Home
-  action: getAbout
+"/writearticle":
+  controller: Articles
+  action: getArticlesForm
+  method: "POST"
+
+"/createtournaments":
+  controller: Tournaments
+  action: getTournamentsForm
   method: "GET"
 
-"/legal":
-  controller: Home
-  action: getLegal
+"/createdeck":
+  controller: Decks
+  action: getDecksForm
   method: "GET"
 
-"/contact":
-  controller: Home
-  action: getContact
+"/filldeck":
+  controller: Decks
+  action: getLegalCards
   method: "GET"
 
-"/test/page":
-  controller: Pages
-  action: testPage
+"/savedeck":
+  controller: Decks
+  action: getSaveConfirmation
+  method: "POST"
+
+########################################## CRUD ROUTES #############################
+
+"/list/{!}":
+  controller: ""
+  action: list
   method: "GET"
+
+"/delete/{!}":
+  controller: ""
+  action: delete
+  method: "GET"
+
+"/edit/{!}":
+  controller: ""
+  action: edit
+  method: "GET"
+
+"/update":
+  controller: ""
+  action: update
+  method: POST
 

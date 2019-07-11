@@ -2,22 +2,20 @@
 namespace MVC\Controllers;
 
 use MVC\Core\View;
+use MVC\Lib\FormBuilder;
 use MVC\Models\Tournaments;
 
-class TournamentsController {
+class TournamentsController extends Controller {
 
-    private $tournament;
+    protected $tournaments;
 
-    /**
-     * TournamentsController constructor.
-     * @param $tournament
-     */
     public function __construct(Tournaments $tournament) {
-        $this->tournament = $tournament;
+        $this->tournaments =  $tournament;
     }
 
-
-    public function getTournamentsViewAction() {
-        $view = new View("tournamentsBack", "back");
+    public function getTournamentsFormAction() {
+        $form = $this->tournaments->tournamentsForm();
+        $view = new View('createTournament');
+        $view->assign("form", new FormBuilder($form));
     }
 }

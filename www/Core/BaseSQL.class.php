@@ -7,10 +7,10 @@ use \PDOException;
 
 class BaseSQL {
     protected static $instance;
-    protected $pdo;
+	protected $pdo;
     private $table;
 
-    public function __construct(PDO $pdo = null) {
+	public function __construct(PDO $pdo = null) {
         if (!self::$instance && $pdo !== null) {
             $this->pdo = $pdo;
         }
@@ -29,10 +29,10 @@ class BaseSQL {
                 self::$instance = new self($pdo);
             }
             catch (PDOException $e) {
-                echo 'The connection to PDO failed';
-                $err = $e->getMessage() . "<br />";
-                echo $err;
-                die();
+            echo 'The connection to PDO failed';
+            $err = $e->getMessage() . "<br />";
+            echo $err;
+            die();
             }
         }
         return self::$instance;
@@ -46,12 +46,12 @@ class BaseSQL {
     }
 
 
-    public static function ALL(array $data = ['*'], array $where = []) {
+	public static function ALL(array $column = ['*'], array $where = []) {
         $calledClass = get_called_class();
         $table = substr($calledClass, strrpos($calledClass, '\\') +1);
         $instance = self::$instance;
         $instance->setTable($table);
-        $data = $instance->findAndWhere($data, $where);
+        $data = $where == [] ? $instance->find($column) : $instance->findAndWhere($column, $where);
         return $data;
     }
 
@@ -86,27 +86,27 @@ class BaseSQL {
         if( is_null($dataChild["id"])){
             //INSERT
             unset($dataChild["id"]) ;
-            $sql ="INSERT INTO ".$this->table." ( ".
-                implode(", ", array_keys($dataChild) ) .") VALUES ( :".
-                implode(", :", array_keys($dataChild) ) .")";
-            $query = $this->pdo->prepare($sql);
-            $queryStatus = $query->execute( $dataChild );
-            $this->id = $this->lastInsertedId();
-            return $queryStatus;
-        }
-        else {
-            //UPDATE
-            $sqlUpdate = [];
-            foreach ($dataChild as $key => $value) {
-                if( $key != "id")
-                    $sqlUpdate[]=$key."=:".$key;
-            }
-            $sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
-            $query = $this->pdo->prepare($sql);
-            $queryStatus = $query->execute( $dataChild );
-            return $queryStatus;
-        }
-    }
+			$sql ="INSERT INTO ".$this->table." ( ".
+			implode(", ", array_keys($dataChild) ) .") VALUES ( :".
+			implode(", :", array_keys($dataChild) ) .")";
+			$query = $this->pdo->prepare($sql);
+			$queryStatus = $query->execute( $dataChild );
+			$this->id = $this->lastInsertedId();
+			return $queryStatus;
+		}
+		else {
+			//UPDATE
+			$sqlUpdate = [];
+			foreach ($dataChild as $key => $value) {
+				if( $key != "id")
+				$sqlUpdate[]=$key."=:".$key;
+			}
+			$sql ="UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id";
+			$query = $this->pdo->prepare($sql);
+			$queryStatus = $query->execute( $dataChild );
+			return $queryStatus;
+		}
+	}
 
     public function findAll(): array {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
@@ -147,11 +147,11 @@ class BaseSQL {
         return $stmt->fetch();
     }
     public function findJoin(array $data, array $join) {
-        $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $query = $qb->select($data)->innerJoin($join)->make()->getQuery();
-        $stmt = $this->pdo->prepare($query);
-        $stmtStatus = $stmt->execute();
-        return $stmt->fetchAll();
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $query = $qb->select($data)->innerJoin($join)->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute();
+	    return $stmt->fetchAll();
     }
 
     public function insert(array $data) {
@@ -182,27 +182,27 @@ class BaseSQL {
     }
 
     public function lastInsertedId(){
-        $res = $this->pdo->lastInsertId();
-        return $res;
+	    $res = $this->pdo->lastInsertId();
+	    return $res;
     }
 
     public function insertMany(array $data) {
-        $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $parsedData = $this->insertManyParse($data);
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    $parsedData = $this->insertManyParse($data);
         $flat = Utils::flattenArray($parsedData);
         $query =  $qb->insertMany($parsedData)->make()->getQuery();
-        $stmt = $this->pdo->prepare($query);
-        $stmtStatus = $stmt->execute($flat);
+	    $stmt = $this->pdo->prepare($query);
+	    $stmtStatus = $stmt->execute($flat);
 
         return $stmtStatus;
     }
-    public function executeMany($querys, $data) {
-        foreach($querys as $n => $value){
-            $request = $this->pdo->prepare($querys[$n]);
-            $requestStatus = $request->execute($data[$n]);
-            echo $requestStatus." ".$n." ".$querys[$n]."<br />";
-        }
-    }
+	public function executeMany($querys, $data) {
+		foreach($querys as $n => $value){
+			$request = $this->pdo->prepare($querys[$n]);
+			$requestStatus = $request->execute($data[$n]);
+			echo $requestStatus." ".$n." ".$querys[$n]."<br />";
+		}
+	}
 
     public function insertManyParse(array $data): array {
         $preparedData = [];

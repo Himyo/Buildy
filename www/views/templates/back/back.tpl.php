@@ -13,11 +13,7 @@
         <?php include "header.php"; ?>
         <div id="main-container" class="main-container">
             <?php
-            if (strpos($_SERVER['REQUEST_URI'], '/site') !== false):
-            include "side_menu_mysite.php";
-            elseif (strpos($_SERVER['REQUEST_URI'], '/dashboard') !== false):
-            include "side_menu_dashboard.php";
-            endif;
+                include "side_menu_mysite.php";
             ?>
 
             <?php include $this->v; ?>
