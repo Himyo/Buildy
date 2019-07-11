@@ -20,6 +20,11 @@
   action: notFound
   method: "POST"
 
+"/page/{?}":
+  controller: Pages
+  action: page
+  method: "GET"
+
 "/dashboard/admin/cards":
   controller: AdminCards
   action: default

@@ -23,9 +23,5 @@
         <a class="padding-10" href="/articles"><p><i class="fas fa-chart-line"></i> Liste des Articles</p></a>
         <a class="padding-10" href="/decks"><p><i class="fas fa-chart-line"></i> Liste des Decks</p></a>
     </div>
-    <a href="/list/cards"><p><i class="fas fa-chart-line"></i> Gestion des Cards</p></a>
-    <a href="/list/users"><p><i class="fas fa-chart-line"></i> Gestion des Users</p></a>
-    <a href="/list/articles"><p><i class="fas fa-chart-line"></i> Gestion des Articles</p></a>
-    <a href="/list/decks"><p><i class="fas fa-chart-line"></i> Gestion des Decks</p></a>
-    <a href="/list/tournaments"><p><i class="fas fa-chart-line"></i> Gestion des Tournois</p></a>
-</nav>
+  </div>
+</div>

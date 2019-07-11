@@ -1,4 +1,4 @@
-     <table>
+    <table>
         <?php
         $modelName = $database['modelName'];
         $editable = $database['editable'];

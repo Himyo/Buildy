@@ -21,6 +21,9 @@ use MVC\Controllers\TournamentsController;
  use MVC\Models\Users;
  use MVC\Controllers\UsersController;
 
+ use MVC\Models\Pages;
+ use MVC\Controllers\PagesController;
+ 
  use MVC\Controllers\HomeController;
  use MVC\Controllers\AdminArticlesController;
  use MVC\Controllers\AdminCardsController;
@@ -30,7 +33,6 @@ use MVC\Controllers\TournamentsController;
  use MVC\Controllers\AdminUsersController;
  use MVC\Controllers\DashboardController;
 
- use MVC\Controllers\PagesController;
 
 
 $container = [
@@ -101,7 +103,8 @@ $container = [
         return new Pages();
     },
     PagesController::class => function($container) {
-        return new PagesController();
+        $pages = $container[Pages::class]($container);
+        return new PagesController($pages);
     },
 
     //Home
