@@ -5,7 +5,7 @@
             <h1>Cards</h1>
             <h2>Search for your favorite cards here</h2>
             <?php
-                if(empty(!$cards)) {
+                if(!empty($cards)) {
                     foreach ($cards as $card) {
                         $this->addComponent('card', $card);
                     }

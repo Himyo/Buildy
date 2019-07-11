@@ -87,5 +87,18 @@ class DecksController extends Controller {
         }
     }
 
+    public function getDecksViewAction() {
+        $decks = $this->decks->findJoin(
+            [
+                'Decks.id', 'Decks.name', 'Decks.upvotes',
+                'Decks.image_url',
+                'Decks.downvotes', 'Decks.users_id'
+            ],
+            ['Users' => 'Users.email', 'Decks.users_id']
+        );
+        $view = new View('decks', 'back');
+        $view->assign('decks', $decks);
+    }
+
 
 }

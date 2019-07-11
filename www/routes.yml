@@ -187,6 +187,11 @@
   action: getCardsView
   method: "GET"
 
+"/decks":
+  controller: Decks
+  action: getDecksView
+  method: "GET"
+
 "/tournaments":
   controller: Tournaments
   action: getTournamentsView

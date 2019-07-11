@@ -4,13 +4,13 @@
             <h1>Articles</h1>
             <h2>Search for your favorite articles here</h2>
             <?php
-            if(!empty($articles)) {
-                foreach ($articles as $article) {
-                    $this->addComponent('article', $article);
+            if(!empty($decks)) {
+                foreach ($decks as $deck) {
+                    $this->addComponent('deck', $deck);
                 }
             }
             else {
-                echo "<h3>No Articles found in the BDD</h3>";
+                echo "<h3>No Decks found in the BDD</h3>";
             }
             ?>
         </div>

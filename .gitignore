@@ -7,4 +7,4 @@ node_modules/
 www/public/
 www/public/css/global.css
 www/public/css/global.css.map
-config/db/
+config/db/tables/
