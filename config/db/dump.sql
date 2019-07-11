@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: buildydb
--- Generation Time: May 28, 2019 at 07:59 PM
+-- Generation Time: Jul 11, 2019 at 12:31 PM
 -- Server version: 10.3.14-MariaDB-1:10.3.14+maria~bionic
 -- PHP Version: 7.2.14
 
@@ -33,18 +33,9 @@ CREATE TABLE `Articles` (
   `title` varchar(45) DEFAULT NULL,
   `created_at` varchar(45) DEFAULT current_timestamp(),
   `content` varchar(45) DEFAULT NULL,
-  `users_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Articles_games`
---
-
-CREATE TABLE `Articles_games` (
-  `games_id` int(11) NOT NULL DEFAULT 1,
-  `articles_id` int(11) NOT NULL
+  `users_id` int(11) NOT NULL,
+  `categories_id` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -64,11 +55,30 @@ CREATE TABLE `Cards` (
   `ruling` varchar(520) DEFAULT NULL,
   `multiverse_id` int(11) NOT NULL DEFAULT -1,
   `releases_id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL DEFAULT 1,
   `mana_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `legalities_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Categories`
+--
+
+CREATE TABLE `Categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Categories`
+--
+
+INSERT INTO `Categories` (`id`, `name`) VALUES
+(1, 'dump'),
+(2, 'test'),
+(3, 'editable');
 
 -- --------------------------------------------------------
 
@@ -83,6 +93,20 @@ CREATE TABLE `Commentaires` (
   `commentaires_id` int(11) NOT NULL,
   `articles_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Decks`
+--
+
+CREATE TABLE `Decks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `upvotes` int(11) NOT NULL,
+  `downvotes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -103,24 +127,10 @@ CREATE TABLE `Decks_cards` (
 
 CREATE TABLE `Favoris` (
   `users_id` int(11) NOT NULL,
-  `cards_id` int(11) NOT NULL,
-  `articles_id` int(11) NOT NULL,
-  `games_id` int(11) NOT NULL DEFAULT 1,
-  `decks_id` int(11) NOT NULL,
-  `tournaments_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Games`
---
-
-CREATE TABLE `Games` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `created_at` varchar(45) DEFAULT NULL,
-  `updated_at` varchar(45) DEFAULT NULL
+  `cards_id` int(11) DEFAULT NULL,
+  `articles_id` int(11) DEFAULT NULL,
+  `decks_id` int(11) DEFAULT NULL,
+  `tournaments_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -178,10 +188,35 @@ CREATE TABLE `Photo` (
 
 CREATE TABLE `Releases` (
   `id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL DEFAULT 1,
   `name` varchar(45) DEFAULT NULL,
   `release_date` varchar(25) DEFAULT NULL,
   `code` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Roles`
+--
+
+CREATE TABLE `Roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Tournaments`
+--
+
+CREATE TABLE `Tournaments` (
+  `id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `ended_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `nb_contenders` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -200,22 +235,6 @@ CREATE TABLE `Tournaments_members` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tournaments`
---
-
-CREATE TABLE `Tournaments` (
-  `id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `ended_at` timestamp NULL DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `description` varchar(45) DEFAULT NULL,
-  `nb_contenders` int(11) DEFAULT NULL,
-  `games_id` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Type`
 --
 
@@ -225,7 +244,7 @@ CREATE TABLE `Type` (
   `type` varchar(75) DEFAULT NULL,
   `subtype` varchar(75) DEFAULT NULL,
   `layout` varchar(75) DEFAULT NULL,
-  `rarity` varchar(15) NOT NULL
+  `rarity` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -238,13 +257,12 @@ CREATE TABLE `Users` (
   `id` int(11) NOT NULL,
   `lastname` varchar(45) DEFAULT NULL,
   `firstname` varchar(45) DEFAULT NULL,
-  `owner` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `role` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `role` int(11) NOT NULL DEFAULT 0,
   `token` varchar(60) DEFAULT NULL,
-  `photo_id` int(11) DEFAULT NULL
+  `photo_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -266,22 +284,21 @@ CREATE TABLE `Users_cards` (
 -- Indexes for table `Articles`
 --
 ALTER TABLE `Articles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Articles_games`
---
-ALTER TABLE `Articles_games`
-  ADD KEY `fk_articles_games_games1_idx` (`games_id`),
-  ADD KEY `fk_articles_games_articles1_idx` (`articles_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_articles_categories1_idx` (`categories_id`);
 
 --
 -- Indexes for table `Cards`
 --
 ALTER TABLE `Cards`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_cards_release1_idx` (`releases_id`),
-  ADD KEY `fk_cards_games1_idx` (`game_id`);
+  ADD KEY `fk_cards_release1_idx` (`releases_id`);
+
+--
+-- Indexes for table `Categories`
+--
+ALTER TABLE `Categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Commentaires`
@@ -293,21 +310,20 @@ ALTER TABLE `Commentaires`
   ADD KEY `fk_commentaires_article1_idx` (`articles_id`);
 
 --
+-- Indexes for table `Decks`
+--
+ALTER TABLE `Decks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `Favoris`
 --
 ALTER TABLE `Favoris`
   ADD KEY `fk_favoris_members1_idx` (`users_id`),
   ADD KEY `fk_favoris_cards1_idx` (`cards_id`),
   ADD KEY `fk_favoris_articles1_idx` (`articles_id`),
-  ADD KEY `fk_favoris_games1_idx` (`games_id`),
-  ADD KEY `fk_favoris_decks1_idx` (`decks_id`),
+  ADD KEY `fk_favoris_decks1` (`decks_id`),
   ADD KEY `fk_favoris_tournaments1_idx` (`tournaments_id`);
-
---
--- Indexes for table `Games`
---
-ALTER TABLE `Games`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Legalities`
@@ -331,8 +347,13 @@ ALTER TABLE `Photo`
 -- Indexes for table `Releases`
 --
 ALTER TABLE `Releases`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_release_games1_idx` (`game_id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Tournaments`
+--
+ALTER TABLE `Tournaments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Tournaments_members`
@@ -340,13 +361,6 @@ ALTER TABLE `Releases`
 ALTER TABLE `Tournaments_members`
   ADD KEY `fk_tournament_member_members1_idx` (`users_id`),
   ADD KEY `fk_tournament_member_tournaments1_idx` (`tournaments_id`);
-
---
--- Indexes for table `Tournaments`
---
-ALTER TABLE `Tournaments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tournaments_games1_idx` (`games_id`);
 
 --
 -- Indexes for table `Type`
@@ -377,15 +391,21 @@ ALTER TABLE `Cards`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `Categories`
+--
+ALTER TABLE `Categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `Commentaires`
 --
 ALTER TABLE `Commentaires`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Games`
+-- AUTO_INCREMENT for table `Decks`
 --
-ALTER TABLE `Games`
+ALTER TABLE `Decks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -438,23 +458,8 @@ ALTER TABLE `Users`
 -- Constraints for table `Cards`
 --
 ALTER TABLE `Cards`
-  ADD CONSTRAINT `fk_cards_games1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_cards_release1` FOREIGN KEY (`releases_id`) REFERENCES `Releases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Releases`
---
-ALTER TABLE `Releases`
-  ADD CONSTRAINT `fk_release_games1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `Tournaments`
---
-ALTER TABLE `Tournaments`
-  ADD CONSTRAINT `fk_tournaments_games1` FOREIGN KEY (`games_id`) REFERENCES `Games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
-
-INSERT INTO Games (`id`, `name`) VALUES (1, "MAGIC: THE GATHERING");
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
