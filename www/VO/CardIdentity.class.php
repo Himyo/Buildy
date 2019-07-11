@@ -13,7 +13,6 @@ class CardIdentity
     private $lore;
     private $name;
     private $ruling;
-    private $game_id = 1;
     private $image_url;
 
     public function __construct(){}
@@ -34,7 +33,6 @@ class CardIdentity
             'lore' => $this->lore,
             'ruling' => $this->ruling,
             'image_url' => $this->image_url,
-            'game_id' => $this->game_id,
         ];
     }
 }
