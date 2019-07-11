@@ -90,7 +90,11 @@
   method: "POST"
 
 ######## ARTICLES #######
-
+"download":
+  controller: Cards
+  action: download
+  method: "POST"
+  
 "/blog":
   controller: Articles
   action: getAll
