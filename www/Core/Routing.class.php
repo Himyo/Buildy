@@ -55,7 +55,7 @@ class Routing{
                $action = $routes[$matchedSlug]["action"]."Action";
                $method = $routes[$matchedSlug]["method"];
 
-               $_POST[$controller][$action] = $slugParameters;
+               $GLOBALS[$controller][$action] = $slugParameters;
                return
                    [
                        "controller" => $controller,
@@ -95,7 +95,7 @@ class Routing{
         $slug = strtolower($slug);
         $routes = yaml_parse_file(self::$routeFile);
         $method = $routes[$slug]['method'];
-        return $method ?? "GET";
+        return $method ?? "POST";
     }
 
 	public static function getSlug($c, $a){

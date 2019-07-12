@@ -107,8 +107,27 @@ class BaseSQL {
 			return $queryStatus;
 		}
 	}
+    public function customQuery($query, array $data) {
+	   $stmt = $this->pdo->prepare($query);
+	   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    public function findAll(): array {
+    public function executeSql(array $querys) {
+	    $qb = QueryBuilder::GetQueryBuilder($this->table);
+	    foreach ($querys as $command => $data) {
+	        $qb = $qb->$command($data);
+        }
+	    $query = $qb->make()->getQuery();
+	    $stmt = $this->pdo->prepare($query);
+	    $stmt->execute($qb->getData());
+	    var_dump($query);
+        var_dump($stmt->errorInfo());
+	    die();
+	    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findAll(): array
+    {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
         $query = $qb->selectAll();
         $stmt = $this->pdo->prepare($query);
@@ -146,9 +165,10 @@ class BaseSQL {
         $stmt->execute($data);
         return $stmt->fetch();
     }
+
     public function findJoin(array $data, array $join) {
 	    $qb = QueryBuilder::GetQueryBuilder($this->table);
-	    $query = $qb->select($data)->innerJoin($join)->make()->getQuery();
+	    $query = $qb->select($data)->where(['state'=>'ACCEPTED'])->innerJoin($join)->make()->getQuery();
 	    $stmt = $this->pdo->prepare($query);
 	    $stmtStatus = $stmt->execute();
 	    return $stmt->fetchAll();

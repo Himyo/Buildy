@@ -37,7 +37,7 @@ abstract class Controller
     }
 
     public function editAction() {
-        $method = Routing::getMethod('/edit');
+        $method = Routing::getMethod('/edit/{!}');
         $data = $GLOBALS['_'.$method];
 
         $class = get_called_class();
@@ -53,7 +53,7 @@ abstract class Controller
     }
 
     public function createAction() {
-        $method = Routing::getMethod('/create');
+        $method = Routing::getMethod('/create/{!}');
         $data = $GLOBALS['_'.$method];
 
         $class = get_called_class();

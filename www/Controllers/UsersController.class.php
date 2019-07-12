@@ -97,8 +97,8 @@ class UsersController extends Controller {
 
 
     public function listAction($data = [], $editable = []) {
-        $data = ['id', 'lastname', 'firstname','email', 'status', 'role', 'photo_id'];
-        $editable =  ['status', 'role'];
+        $data = ['id', 'lastname', 'firstname','email', 'state', 'role', 'photo_id'];
+        $editable =  ['state', 'role'];
 	    parent::listAction($data, $editable);
     }
 

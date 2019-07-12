@@ -6,6 +6,7 @@ class QueryBuilder {
     private $query = "";
     private $table;
     private $items= [];
+    private $data = [];
 
     public function __construct(string $table) {
         $this->table = $table;
@@ -196,27 +197,34 @@ class QueryBuilder {
                     $this->query = "SELECT ".QueryBuilder::SQL_PARSER('SELECT')($data)." FROM ".$this->table;
                     break;
                 case 'INSERT':
+                    $this->data += $data;
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
                     break;
                 case 'UPDATE':
+                    $this->data += $data;
                     $this->query = "UPDATE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
                     break;
                 case 'DELETE':
+                    $this->data += $data;
                     $this->query = "DELETE FROM ".$this->table;
                     break;
                 case 'JOIN':
                     $this->query .= ' '.QueryBuilder::SQL_PARSER('JOIN')($data);
                     break;
                 case 'INSERT MANY':
+                    $this->data += $data;
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT MANY')($data);
                     break;
                 case 'AND WHERE':
+                    $this->data += $data;
                     $this->query .= QueryBuilder::SQL_PARSER('AND WHERE')($data);
                     break;
                 case 'OR WHERE':
+                    $this->data += $data;
                     $this->query .= QueryBuilder::SQL_PARSER('OR WHERE')($data);
                     break;
                 default:
+                    $this->data += $data;
                     $this->query .= " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
                     break;
             }
@@ -237,7 +245,9 @@ class QueryBuilder {
     public function getQuery(): string {
         return $this->query;
     }
-
+    public function getData(): array {
+        return $this->data;
+    }
 
     public static function GetQueryBuilder($class): self {
         return new self($class);

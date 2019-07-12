@@ -22,19 +22,28 @@ class ArticlesController extends Controller {
     }
 
     public function getArticlesViewAction() {
-        $articles =  $this->articles->findJoin(
+        $querys =
             [
-                'Articles.id', 'Articles.title',
-                'Articles.created_at', 'Articles.content',
-                'Categories.name',
-                'Users.firstname', 'Users.lastname',
-                'Users.email'
-            ],
-            [
-                'Users'=> ['Users.id','Articles.users_id'],
-                'Categories'=> ['Categories.id','Articles.categories_id']
-            ]
-        );
+            'select' =>
+                [
+                    'Articles.id', 'Articles.title',
+                    'Articles.created_at', 'Articles.content',
+                    'Categories.name',
+                    'Users.firstname', 'Users.lastname',
+                    'Users.email'
+                ],
+            'innerJoin' =>
+                [
+                    'Users'=> ['Users.id','Articles.users_id'],
+                    'Categories'=> ['Categories.id','Articles.categories_id']
+                ],
+            'where' =>
+                [
+                    'Articles.state' => 'ACCEPTED'
+                ]
+            ];
+
+        $articles = $this->articles->executeSql($querys);
         $view = new View('articles', 'back');
         $view->assign('articles', $articles);
     }
