@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: buildydb
--- Generation Time: Jul 11, 2019 at 03:25 PM
+-- Generation Time: Jul 13, 2019 at 08:53 AM
 -- Server version: 10.3.14-MariaDB-1:10.3.14+maria~bionic
 -- PHP Version: 7.2.14
 
@@ -31,12 +31,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `Articles` (
   `id` int(11) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
-  `created_at` varchar(45) DEFAULT current_timestamp(),
-  `content` varchar(45) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `content` longtext DEFAULT NULL,
   `users_id` int(11) NOT NULL,
   `categories_id` varchar(50) DEFAULT NULL,
-  `state` varchar(50) DEFAULT NULL
+  `state` varchar(8) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `Articles`
+--
+
+INSERT INTO `Articles` (`id`, `title`, `created_at`, `content`, `users_id`, `categories_id`, `state`) VALUES
+(1, 'Article_foo', '2019-07-12 12:24:46', 'barbarbabrbabrbabrbabr', 1, '2', 'ACCEPTED'),
+(2, 'Article_foo', '2019-07-12 12:24:49', 'barbarbabrbabrbabrbabr', 1, '2', 'ACCEPTED');
 
 -- --------------------------------------------------------
 
@@ -65,7 +75,6 @@ CREATE TABLE `Cards` (
 --
 
 INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `lore`, `ruling`, `multiverse_id`, `releases_id`, `mana_id`, `type_id`, `legalities_id`) VALUES
-(1, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130483&type=card', 'Abundance', 0, 0, 'If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.', '', 'This replacement effect replaces the draw, so nothing that triggers on a draw will trigger.', 130483, 1, 1, 1, 1),
 (2, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=132072&type=card', 'Academy Researchers', 2, 2, 'When Academy Researchers enters the battlefield, you may put an Aura card from your hand onto the battlefield attached to Academy Researchers.', 'They brandish their latest theories as warriors would wield weapons.', 'You canâ€™t put an Aura card from your hand onto the battlefield this way if that Aura canâ€™t legally enchant Academy Researchers. For example, you canâ€™t put an Aura with â€œenchant landâ€ or â€œenchant green creatureâ€ onto the battlefield attached to Academy Researchers (unless Academy Researchers somehow turned into a land or a green creature before the ability resolved).', 132072, 1, 2, 2, 1),
 (3, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129458&type=card', 'Adarkar Wastes', 0, 0, '{T}: Add {C}.\n{T}: Add {W} or {U}. Adarkar Wastes deals 1 damage to you.', '', 'none', 129458, 1, 3, 3, 1),
 (4, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135206&type=card', 'Afflict', 0, 0, 'Target creature gets -1/-1 until end of turn.\nDraw a card.', 'One rarely notices a heartbeat, save when it is stolen.', 'none', 135206, 1, 4, 4, 2),
@@ -174,7 +183,8 @@ CREATE TABLE `Commentaires` (
   `content` varchar(45) DEFAULT NULL,
   `users_id` int(11) NOT NULL,
   `commentaires_id` int(11) NOT NULL,
-  `articles_id` int(11) NOT NULL
+  `articles_id` int(11) NOT NULL,
+  `state` varchar(8) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -217,6 +227,7 @@ CREATE TABLE `Favoris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `Legalities`
 --
@@ -326,6 +337,13 @@ CREATE TABLE `Pages` (
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Pages`
+--
+
+INSERT INTO `Pages` (`id`, `slug`, `content`, `title`, `created_at`, `updated_at`) VALUES
+(1, '/ffefe', 'LOREM IPSUM\r\n<h1>SUPER LOREM IPSUM</h1>', 'ffefe', '2019-07-11 15:29:07', '2019-07-11 15:27:46');
+
 -- --------------------------------------------------------
 
 --
@@ -381,7 +399,21 @@ CREATE TABLE `Tournaments` (
   `ended_at` timestamp NULL DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
-  `nb_contenders` int(11) DEFAULT NULL
+  `nb_contenders` int(11) DEFAULT NULL,
+  `state` varchar(8) NOT NULL DEFAULT 'ACCEPTED'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Tournaments_members`
+--
+
+CREATE TABLE `Tournaments_members` (
+  `users_id` int(11) NOT NULL,
+  `tournaments_id` int(11) NOT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -475,11 +507,21 @@ CREATE TABLE `Users` (
   `firstname` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `state` varchar(8) NOT NULL DEFAULT 'ACCEPTED',
   `role` int(11) NOT NULL DEFAULT 0,
   `token` varchar(60) DEFAULT NULL,
   `photo_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`id`, `lastname`, `firstname`, `email`, `password`, `state`, `role`, `token`, `photo_id`) VALUES
+(1, 'Test', 'first', 't@t.com', 'abc', 'ACCEPTED', 0, NULL, 0),
+(2, 'ttt', 'foo', 'foo@f.com', 'foobar', 'ACCEPTED', 0, NULL, 0),
+(3, 'Test', 'first', 't@t.com', 'abc', 'ACCEPTED', 0, NULL, 0),
+(4, 'ttt', 'foo', 'foo@f.com', 'foobar', 'ACCEPTED', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -587,12 +629,6 @@ ALTER TABLE `Tournaments_members`
 --
 -- Indexes for table `Type`
 --
-ALTER TABLE `Type`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Users`
---
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`id`);
 
@@ -610,7 +646,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Articles`
 --
 ALTER TABLE `Articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Cards`
@@ -652,7 +688,7 @@ ALTER TABLE `Mana`
 -- AUTO_INCREMENT for table `Pages`
 --
 ALTER TABLE `Pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Photo`
@@ -679,11 +715,10 @@ ALTER TABLE `Type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
-
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -695,8 +730,6 @@ ALTER TABLE `Users`
 ALTER TABLE `Cards`
   ADD CONSTRAINT `fk_cards_release1` FOREIGN KEY (`releases_id`) REFERENCES `Releases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
-
-INSERT INTO Games (`id`, `name`) VALUES (1, "MAGIC: THE GATHERING");
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

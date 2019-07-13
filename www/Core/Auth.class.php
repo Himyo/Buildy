@@ -1,65 +1,37 @@
 <?php
 
 namespace MVC\Core;
-use MVC\Model\Users;
+use MVC\Models\Users;
 
 class Auth {
 
-    private $id;
-    private $lastname;
-    private $firstname;
-    private $email;
-    private $token;
+    protected static $instance;
+
+    protected $user;
 
     /**
      * Auth constructor.
      * @param $token
      */
-    public function __construct(Users $user) {
-        if (!isset($_SESSION["token"])) {
-            die("AUCUN UTILISATEUR CONNECTE");
-        } else {
-            $this->token = $_SESSION["token"];
-        }
-        $this->id = $user->getId();
-        $this->lastname = $user->getLastname();
-        $this->firstname = $user->getFirstname();
-        $this->email = $user->getEmail();
+    public function __construct(Users $user = null) {
+       if(!self::$instance && $user !== null) {
+           $this->user = $user;
+       }
     }
 
-    /**
-     * @return null
-     */
-    public function getId() {
-        return $this->id;
+    public static function init(Users $user){
+       if(!self::$instance) {
+           self::$instance = new self($user);
+       }
+       return self::$instance;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLastname() {
-        return $this->lastname;
+    public static function User() {
+        return self::$instance->user;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFirstname() {
-        return $this->firstname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail() {
-        return $this->email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getToken() {
-        return $this->token;
+    public static function destroy(){
+        self::$instance = null;
     }
 
 }
