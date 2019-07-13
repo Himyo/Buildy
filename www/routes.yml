@@ -92,8 +92,7 @@
 "/dashboard/admin/pages":
   controller: AdminPages
   action: default
-  method: "GET"
-
+  
 "/dashboard/admin/pages/delete":
   controller: AdminPages
   action: deletePage

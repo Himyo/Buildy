@@ -41,7 +41,6 @@ else {
     $controllerPath = "Controllers/PagesController.class.php";
     $action = "noControllerFoundAction";
     $method = "post";
-    $parameters = false;
 }
 
 if (method_exists($controllerObject, $action)) {
