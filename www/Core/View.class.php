@@ -10,7 +10,7 @@ class View{
 	public $t;
 	public $data = [];
 
-	public function __construct($v, $t="back"){
+	public function __construct($v, $t){
 		$this->setView($v);
 		$this->setTemplate($t);
 	}
@@ -27,7 +27,7 @@ class View{
 	public function setTemplate($t){
 		$templatePath = "views/templates/".$t."/".$t.".tpl.php";
 		if( file_exists($templatePath)){
-			$this->t=$templatePath;
+			$this->t = $templatePath;
 		}else{
 			die("Attention le fichier template n'existe pas ".$templatePath);
 		}

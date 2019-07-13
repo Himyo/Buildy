@@ -13,10 +13,9 @@ class ArticlesController extends Controller {
         $this->articles = $articles;
     }
 
-    public function getArticlesFormAction() {
-        $article = $this->articles;
-        $view = new View('writeArticle', 'back');
-        $view->assign("form" ,$article->articleForm());
+    /*public function defaultAction() {
+        $article = Articles::ALL();
+        //TODO RENDRE LA PAGE
     }
 
     public function getArticlesViewAction() {
@@ -32,5 +31,5 @@ class ArticlesController extends Controller {
         );
         $view = new View('articles', 'back');
         $view->assign('articles', $articles);
-    }
+    }*/
 }

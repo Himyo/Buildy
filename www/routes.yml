@@ -5,48 +5,106 @@
   action: default
   method: "GET"
 
-"/site":
-  controller: Home
-  action: getSite
+"/mysite/page":
+  controller: Pages
+  action: default
   method: "GET"
 
-"/component":
+"/mysite/page/edit":
   controller: Pages
-  action: component
+  action: detail
   method: "GET"
 
-"/not_found":
+"/mysite":
   controller: Pages
-  action: notFound
+  action: mySite
+  method: "GET"
+
+"/mysite/cards":
+  controller: Cards
+  action: backCards
+  method: "GET"
+
+"/download":
+  controller: AdminCards
+  action: download
   method: "POST"
 
-"/page/{?}":
-  controller: Pages
-  action: page
-  method: "GET"
 
+
+################### ADMIN CRUDS ###################
+
+### CARDS ###
 "/dashboard/admin/cards":
   controller: AdminCards
   action: default
   method: "GET"
 
+### TOURNAMENTS ###
 "/dashboard/admin/tournaments":
   controller: AdminTournaments
   action: default
   method: "GET"
 
+"/dashboard/admin/tournaments/delete":
+  controller: AdminTournaments
+  action: deleteTournament
+  method: "POST"
+
+"/dashboard/admin/tournaments/save":
+  controller: AdminTournaments
+  action: saveTournament
+  method: "POST"
+
+### ARTICLES ###
 "/dashboard/admin/articles":
   controller: AdminArticles
   action: default
   method: "GET"
 
-"/dashboard/admin/articles/{id}/comments":
-  controller: AdminComments
+"/dashboard/admin/articles/delete":
+  controller: AdminArticles
+  action: deleteArticle
+  method: "POST"
+
+"/dashboard/admin/articles/save":
+  controller: AdminArticles
+  action: saveArticle
+  method: "POST"
+
+### USERS ###
+"/dashboard/admin/users":
+  controller: AdminUsers
   action: default
   method: "GET"
 
-######## DASHBOARD #######
+"/dashboard/admin/users/delete":
+  controller: AdminUsers
+  action: deleteUser
+  method: "POST"
 
+"/dashboard/admin/users/save":
+  controller: AdminUsers
+  action: saveUser
+  method: "POST"
+
+### PAGES ###
+"/dashboard/admin/pages":
+  controller: AdminPages
+  action: default
+  method: "GET"
+
+"/dashboard/admin/pages/delete":
+  controller: AdminPages
+  action: deletePage
+  method: "POST"
+
+"/dashboard/admin/pages/save":
+  controller: AdminPages
+  action: savePage
+  method: "POST"
+
+######## DASHBOARD #######
 "/dashboard":
   controller: Dashboard
   action: default
@@ -57,200 +115,45 @@
   action: getStats
   method: "GET"
 
-######## USER #######
 
-"/register":
-  controller: Users
-  action: getRegister
-  method: "GET"
+######################### FRONT SITE #########################
 
-"/login":
-  controller: Users
-  action: getLogin
-  method: "GET"
-
-"/forgotPassword":
-  controller: Users
-  action: getForgotPassword
-  method: "GET"
-
-"/profile":
-  controller: Users
-  action: getProfile
-  method: "GET"
-
-"/saveUser":
-  controller: Users
-  action: save
-  method: "POST"
-
-"/connectUser":
-  controller: Users
-  action: connect
-  method: "POST"
-
-######## ARTICLES #######
-
-"/blog":
-  controller: Articles
-  action: getAll
-  method: "GET"
-
-"/blog/news":
-  controller: Articles
-  action: getRecent
-  method: "GET"
-
-"/blog/create":
-  controller: Articles
-  action: getCreate
-  method: "GET"
-
-"/blog/myArticles":
-  controller: Articles
-  action: getMyArticles
-  method: "GET"
-
-"/blog/save":
-  controller: Articles
-  action: save
-  method: "POST"
-
-######## COMMENTS #######
-
-"/blog/articles/{id}/comments":
-  controller: Comments
+"/site":
+  controller: Site
   action: default
   method: "GET"
 
-"/blog/articles/{id}/comments/create":
-  controller: Comments
-  action: create
-  method: "GET"
-
-
-######## CARDS #######
-
-"/cards":
+"/site/cards":
   controller: Cards
-  action: default
+  action: frontCards
   method: "GET"
 
-"/about":
+"/site/page":
   controller: Pages
-  action: about
+  action: getPage
   method: "GET"
 
-"/decks/{user}":
-  controller: Decks
-  action: getAll
+"/site/register":
+  controller: Users
+  action: getRegisterView
   method: "GET"
 
-"/decks/myDecks":
-  controller: Decks
-  action: getMyDecks
+"/site/login":
+  controller: Users
+  action: getLoginView
   method: "GET"
 
-"/mysite":
-  controller: Pages
-  action: mySite
-  method: "GET"
-
-"/pages/{?}":
-  controller: Pages
-  action: default
-  method: "GET"
-
-"/addpage":
-  controller: Pages
-  action: addPage
-  method: "GET"
-
-"/modifypage":
-  controller: Pages
-  action: editPage
-  method: "GET"
-
-"/home":
-  controller: Pages
-  action: home
-  method: "GET"
-
-
-"/saveuser":
+"/site/save":
   controller: Users
   action: save
   method: "POST"
-########################################## MODELS READ ROUTES #############################
-"/articles":
-  controller: Articles
-  action: getArticlesView
-  method: "GET"
 
-"/cards":
-  controller: Cards
-  action: getCardsView
-  method: "GET"
-
-"/decks":
-  controller: Decks
-  action: getDecksView
-  method: "GET"
-
-"/tournaments":
-  controller: Tournaments
-  action: getTournamentsView
-  method: "GET"
-########################################## MODELS WRITE ROUTES ############################
-"/register":
+"/site/connexion":
   controller: Users
-  action: getRegisterForm
+  action: connexion
   method: "POST"
 
-"/writearticle":
-  controller: Articles
-  action: getArticlesForm
+"/site/deconnexion":
+  controller: Users
+  action: deconnexion
   method: "POST"
-
-"/createtournaments":
-  controller: Tournaments
-  action: getTournamentsForm
-  method: "GET"
-
-"/createdeck":
-  controller: Decks
-  action: getDecksForm
-  method: "GET"
-
-"/filldeck":
-  controller: Decks
-  action: getLegalCards
-  method: "GET"
-
-"/savedeck":
-  controller: Decks
-  action: getSaveConfirmation
-  method: "POST"
-
-########################################## CRUD ROUTES #############################
-
-"/list/{!}":
-  controller: ""
-  action: list
-  method: "GET"
-
-"/delete/{!}":
-  controller: ""
-  action: delete
-  method: "GET"
-
-"/edit/{!}":
-  controller: ""
-  action: edit
-  method: "GET"
-
-"/update":
-  controller: ""
-  action: update
-  method: POST
-

@@ -13,9 +13,4 @@ class TournamentsController extends Controller {
         $this->tournaments =  $tournament;
     }
 
-    public function getTournamentsFormAction() {
-        $form = $this->tournaments->tournamentsForm();
-        $view = new View('createTournament');
-        $view->assign("form", new FormBuilder($form));
-    }
 }

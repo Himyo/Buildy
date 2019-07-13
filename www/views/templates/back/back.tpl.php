@@ -12,14 +12,19 @@
     <main>
         <?php include "header.php"; ?>
         <div id="main-container" class="main-container">
+
             <?php
-                include "side_menu_mysite.php";
+            if (strpos($_SERVER['REQUEST_URI'], '/mysite') !== false):
+            include "side_menu_mysite.php";
+            elseif (strpos($_SERVER['REQUEST_URI'], '/dashboard') !== false):
+            include "side_menu_dashboard.php";
+            else: include "side_menu.php";
+            endif;
             ?>
 
             <?php include $this->v; ?>
 
         </div>
-        <?php include "footer.php"; ?>
     </main>
 </body>
 </html>

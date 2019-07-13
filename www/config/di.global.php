@@ -32,8 +32,8 @@ use MVC\Controllers\TournamentsController;
  use MVC\Controllers\AdminCommentsController;
  use MVC\Controllers\AdminUsersController;
  use MVC\Controllers\DashboardController;
-
-
+use MVC\Controllers\SiteController;
+use MVC\Controllers\AdminPagesController;
 
 $container = [
     // Card
@@ -148,6 +148,11 @@ $container = [
         return new TournamentsController($tournamentsModel);
     },
 
+    //SITE
+    SiteController::class => function($container) {
+        return new SiteController();
+    },
+
     //ADMIN
 
     //Dashboard
@@ -189,6 +194,11 @@ $container = [
     AdminCardsController::class => function($container) {
         $cardsModel = $container[Cards::class]($container);
         return new AdminCardsController($cardsModel);
+    },
+
+    AdminPagesController::class => function($container) {
+        $pagesModel = $container[Pages::class]($container);
+        return new AdminPagesController($pagesModel);
     }
 
 

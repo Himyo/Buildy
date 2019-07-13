@@ -15,6 +15,8 @@ class AdminDecksController extends Controller {
 
 
     public function defaultAction() {
+        $decks = Decks::ALL();
         $view = new View("decksBack", "back");
+        $view->assign('decks', $decks);
     }
 }
