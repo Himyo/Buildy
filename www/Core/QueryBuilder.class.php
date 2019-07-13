@@ -173,7 +173,11 @@ class QueryBuilder {
         }
         return $this;
     }
-    
+
+    public function whereAnon($item): QueryBuilder {
+        $this->items['WHEREANON'] = $item;
+        return $this;
+    }
     public function groupBy($items): QueryBuilder {
         $this->items['GROUP BY'] = $items;
         return $this;
@@ -222,6 +226,11 @@ class QueryBuilder {
                 case 'OR WHERE':
                     $this->data += $data;
                     $this->query .= QueryBuilder::SQL_PARSER('OR WHERE')($data);
+                    break;
+                case 'WHEREANON':
+                    $key = array_keys($data)[0];
+                    $this->data += ['anon' => $data[$key]];
+                    $this->query .= " WHERE ".$key." = :anon";
                     break;
                 default:
                     $this->data += $data;

@@ -27,8 +27,8 @@ class ArticlesController extends Controller {
             'select' =>
                 [
                     'Articles.id', 'Articles.title',
-                    'Articles.created_at', 'Articles.content',
-                    'Categories.name',
+                    'Articles.created_at','Articles.state',
+                    'Articles.content', 'Categories.name',
                     'Users.firstname', 'Users.lastname',
                     'Users.email'
                 ],
@@ -37,7 +37,7 @@ class ArticlesController extends Controller {
                     'Users'=> ['Users.id','Articles.users_id'],
                     'Categories'=> ['Categories.id','Articles.categories_id']
                 ],
-            'where' =>
+            'whereAnon' =>
                 [
                     'Articles.state' => 'ACCEPTED'
                 ]

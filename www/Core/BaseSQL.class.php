@@ -120,9 +120,6 @@ class BaseSQL {
 	    $query = $qb->make()->getQuery();
 	    $stmt = $this->pdo->prepare($query);
 	    $stmt->execute($qb->getData());
-	    var_dump($query);
-        var_dump($stmt->errorInfo());
-	    die();
 	    return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
