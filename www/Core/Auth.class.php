@@ -5,6 +5,7 @@ use MVC\Model\Users;
 
 class Auth {
 
+    
     private $id;
     private $lastname;
     private $firstname;
@@ -26,6 +27,8 @@ class Auth {
         $this->firstname = $user->getFirstname();
         $this->email = $user->getEmail();
     }
+
+
 
     /**
      * @return null

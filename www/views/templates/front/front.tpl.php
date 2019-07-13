@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
+<html lang="en" dir="ltr">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-      <link rel="stylesheet" href="../../../public/css/scss/global.css">
-      <link rel="stylesheet" href="../../../public/css/main.css">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../public/css/global.css">
+    <script type="text/javascript" src="../../../public/js/script.js"></script>
+</head>
+<body>
+  <main>
+        <?php include "header.php"; ?>
+        <div id="main-container" class="main-container">
 
-  </head>
-  <body>
+            <?php 
+            include $this->v; 
+            ?>
 
-  <div class="main">
+        </div>
+  </main>
 
-      <?php include 'header.php';  ?>
-
-      <?php include $this->v; ?>
-
-      <?php include 'footer.php'; ?>
-
-  </div>
-
-  </body>
+</body>
 
 </html>

@@ -18,26 +18,129 @@ class UsersController extends Controller {
 	}
 
 	// VIEWS
-	public function getUsersViewAction(){
-		$view = new View("usersBack", "back");
-	}
 
     public function getRegisterViewAction() {
-	    $view = new View("register", "back");
+	    $view = new View("register", "front");
     }
 
     public function getLoginViewAction() {
-	    $view = new View("login", "back");
-    }
-
-    public function getForgetPasswordViewAction() {
-	    $view = new View("forgetPassword", "back");
+	    $view = new View("login", "front");
     }
 
     // ACTIONS
 
+	public function saveAction() {
+		$data = [];
 
-	public function getRegisterFormAction() {
+        //MODIFY
+        if (!empty($_POST['id'])) {
+
+            if (!empty($_POST['name'])) {
+                $data += ['name' => $_POST['name']];
+            }
+
+            if (!empty($_POST['firstname'])) {
+                $data += ['firstname' => $_POST['firstname']];
+            }
+
+            if (!empty($_POST['lastname'])) {
+                $data += ['lastname' => $_POST['lastname']];
+            }
+
+            if (!empty($_POST['email'])) {
+                $data += ['email' => $_POST['email']];
+            }
+
+            if (!empty($_POST['pwd'])) {
+                $data += ['password' => crypt($_POST['pwd'], "yuAhFz628HZ328bz")];
+            }
+
+            $data += ['status' => 1];
+            
+            $data += ['role' => 1];
+            
+            $data += ['photo_id' => 0];
+            
+            $this->users->edit($data, ['id' => $_POST['id']]);
+            header('Location: /site');
+
+        //CREATE
+        } elseif (empty($_POST['id']) && !empty($_POST['firstname']) 
+                    && !empty($_POST['lastname']) 
+                    && !empty($_POST['email']) 
+                    && !empty($_POST['pwd']) 
+					&& !empty($_POST['pwd2'])) {
+				
+			//TODO VERIFIER QUE L'EMAIL N'EXISTE PAS
+			
+			if ($_POST['pwd'] != $_POST['pwd2']) {
+				header('Location: /site/register');
+			}
+
+            $data = [
+                'firstname' => $_POST['firstname'],
+                'lastname' => $_POST['lastname'],
+                'email' => $_POST['email'],
+                'password' => password_hash($_POST['pwd'], PASSWORD_BCRYPT),
+                'status' => 1,
+                'role' => 1,
+                'photo_id' => 0
+            ];
+
+            $this->users->insert($data);
+            header('Location: /site');
+        } else {
+            //TODO RETURN ERROR
+            header('Location: /site/register');
+        }
+	}
+
+	public function connexionAction() {
+		$user = $this->users->findAndWhere(["*"], ['email' => $_POST['email']]);
+		if (!empty($user)) {
+			if (password_verify($_POST['pwd'], $user[0]['password'])) {
+				$usr = [
+					'id' => $user[0]['id'],
+					'firstname' => $user[0]['firstname'],
+					'lastname' => $user[0]['lastname'],
+					'email' => $user[0]['email']
+				];
+	
+				$_SESSION['user'] = $usr;
+	
+				header('Location: /site');
+			} else {
+				header('Location: /site/login');
+			}
+		} else {
+			header('Location: /site/login');
+		}
+	}
+
+	public function deconnexionAction() {
+		unset($_SESSION['user']);
+		header('Location: /site');
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*public function getRegisterFormAction() {
 	    $user = $this->users;
         $_SESSION["form"] = $user->getRegisterForm();
         $view = new View("register", "back");
@@ -113,5 +216,5 @@ class UsersController extends Controller {
 		}
 		$v = new View("forgetPasswordUser", "back");
         $v->assign("form", new FormBuilder($form));
-	}
+	}*/
 }

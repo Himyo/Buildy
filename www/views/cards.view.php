@@ -1,19 +1,19 @@
-
 <div id="container" class="container">
     <div class="content">
-        <div class="index-title">
-            <h1>Cards</h1>
-            <h2>Search for your favorite cards here</h2>
-            <?php
-                if(!empty($cards)) {
-                    foreach ($cards as $card) {
-                        $this->addComponent('card', $card);
+        <h1>Liste des cartes</h1>
+        <div class="list-card-classic">
+            <div class="list-card-classic-content">
+                <?php
+                    if(!empty($cards)) {
+                        foreach ($cards as $card) {
+                            $this->addComponent('card', $card);
+                        }
                     }
-                }
-                else {
-                    echo "<h3>No Card found in the BDD</h3>";
-                }
-            ?>
+                    else {
+                        echo "<h3>No Card found in the BDD</h3>";
+                    }
+                ?>
+            </div>
         </div>
     </div>
 </div>
