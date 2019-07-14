@@ -1,6 +1,16 @@
 <?php
 namespace MVC\Models;
 
-class Comments {
+use MVC\Core\BaseSQL;
+
+class Comments extends BaseSQL {
+
+    /**
+     * Comments constructor.
+     */
+    public function __construct() {
+        parent::__construct();
+    }
+
 
 }

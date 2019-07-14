@@ -1,5 +1,12 @@
 <div id="container-user" class="container">
-    <div class="content">
+    <div class="content" id="mainContent">
+      <?php
+        if (isset($content)) {
+            if ($content['slug'] == $_SERVER['REQUEST_URI']) {
+                echo $content['content'];
+            }
+        }
+        ?>
       <div class="space-40"></div>
       <div id="website-preview" class="buildy-grid-v-center column" style="border: 1px solid">
         <div id="dropper" class="dropper">

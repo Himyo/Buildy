@@ -61,16 +61,22 @@ class PagesController extends Controller{
         $view->assign('id', $parameters);
     }
 
-
-    
+    public function insertContentAction() {
+        if (isset($_POST['id']) && isset($_POST['content'])) {
+            if (!empty($_POST['content'])) {
+                $data = ['content' => $_POST['content']];
+                $this->pages->edit($data, ['id' => $_POST['id']]);
+            }
+        }
+    }
 
     //PROTOTYPE 4H DU MAT
-    public function getPage() {
+    public function displayAction() {
         $pages = Pages::ALL();
         foreach ($pages as $key => $value) {
-            if ($value['slug'] == $_REQUEST['URI']) {
-                $view = new View('page', 'front');
-                $view->assign('page', $value);
+            if ($value['slug'] == $_SERVER['REQUEST_URI']) {
+                $view = new View('main', 'front');
+                $view->assign('content', $value);
             }
         }
     }

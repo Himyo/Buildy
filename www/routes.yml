@@ -88,10 +88,43 @@
   action: saveUser
   method: "POST"
 
+### DECKS ###
+"/dashboard/admin/decks":
+  controller: AdminDecks
+  action: default
+  method: "GET"
+
+"/dashboard/admin/decks/delete":
+  controller: AdminDecks
+  action: deleteDeck
+  method: "POST"
+
+"/dashboard/admin/decks/save":
+  controller: AdminDecks
+  action: saveDeck
+  method: "POST"
+
+### COMMENTS ###
+"/dashboard/admin/comments":
+  controller: AdminComments
+  action: default
+  method: "GET"
+
+"/dashboard/admin/comments/delete":
+  controller: AdminComments
+  action: deleteComment
+  method: "POST"
+
+"/dashboard/admin/comments/save":
+  controller: AdminComments
+  action: saveComment
+  method: "POST"
+
 ### PAGES ###
 "/dashboard/admin/pages":
   controller: AdminPages
   action: default
+  method: "GET"
   
 "/dashboard/admin/pages/delete":
   controller: AdminPages
@@ -156,3 +189,21 @@
   controller: Users
   action: deconnexion
   method: "POST"
+
+"/mysite/page/edit/insert":
+  controller: Pages
+  action: insertContent
+  method: "POST"
+
+################## DYNAMIQUE PAGES #######################
+
+/site/articles:
+  controller: Pages
+  action: display
+  method: GET
+
+/site/deck:
+  controller: Pages
+  action: display
+  method: GET
+

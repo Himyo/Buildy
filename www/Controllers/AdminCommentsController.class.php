@@ -6,16 +6,21 @@ use MVC\Models\Comments;
 
 class AdminCommentsController extends Controller {
 
-    private $comment;
+    private $comments;
 
     /**
      * AdminCommentsController constructor.
-     * @param $comment
+     * @param $comments
      */
-    public function __construct($comment) { $this->comment = $comment; }
+    public function __construct($comments) { $this->comments = $comments; }
 
 
     public function defaultAction() {
+
+        var_dump($this->comments);
+        die();
+        $comments = Comments::ALL();
         $view = new View("commentsBack", "back");
+        $view->assign('comments', $comments);
     }
 }
