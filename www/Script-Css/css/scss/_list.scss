@@ -1,0 +1,60 @@
+/* LIST */
+
+.list-card-classic {
+  background-color: #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background-image: url("img/bg-list-card.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .list-card-classic-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  img {
+    padding: 10px;
+    width: calc(372px / 3);
+    height: calc(500px / 3);
+    transition: 0.5s;
+  }
+
+  img:hover {
+    width: calc(372px / 2);
+    height: calc(500px / 2);
+  }
+}
+
+
+
+
+.list-deck-classic {
+  background-color: #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background-image: url("img/bg-list-card.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .list-deck-classic-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  img {
+    padding: 10px;
+    width: calc(372px / 3);
+    height: calc(500px / 3);
+    transition: 0.5s;
+  }
+
+  img:hover {
+    width: calc(372px / 2);
+    height: calc(500px / 2);
+  }
+}
