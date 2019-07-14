@@ -1,14 +1,16 @@
 <div id="container" class="container">
     <div class="content">
-        <br>
-        <button class="button-classic-succes" id="saveInsert">SAUVEGARDER</button>
-        <br>
-        <div style="border: 1px solid">
-            <?php include "templates/front/header.php"; ?>
-            <?php include "main.view.php"; ?>
-        </div>
+      <div class="space-40"></div>
+      <button class="button-classic-succes" id="saveInsert">SAUVEGARDER</button>
+      <div style="border: 1px solid">
+          <?php include "templates/front/header.php"; ?>
+          <?php include "main.view.php"; ?>
+      </div>
     </div>
 </div>
+<?php include 'templates/back/side_menu_right.php'; ?>
+
+<script src="/public/js/dragAndDrop.js" type="text/javascript"></script>
 
 <script>
     $('#saveInsert').click(function() {

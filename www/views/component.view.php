@@ -368,34 +368,34 @@ Aliquam sagittis nisi ac luctus rhoncus.
                         <div class="right-card-d-1">
                             <h4>Card-d-1</h4>
                             <p>
-Nullam rhoncus facilisis finibus. Proin sed accumsan mauris.
-Etiam in eros nec neque finibus facilisis. Quisque placerat gravida vulputate.
-Cras vitae vestibulum lacus, sed varius metus.
-Vivamus in porttitor purus, nec scelerisque purus.
-In aliquet tortor eu nisi volutpat imperdiet.
-Aliquam sagittis nisi ac luctus rhoncus.
+                              Nullam rhoncus facilisis finibus. Proin sed accumsan mauris.
+                              Etiam in eros nec neque finibus facilisis. Quisque placerat gravida vulputate.
+                              Cras vitae vestibulum lacus, sed varius metus.
+                              Vivamus in porttitor purus, nec scelerisque purus.
+                              In aliquet tortor eu nisi volutpat imperdiet.
+                              Aliquam sagittis nisi ac luctus rhoncus.
                             </p>
                         </div>
                         <div class="right-card-d-2">
                             <h4>Card-d-2</h4>
                             <p>
-Nullam rhoncus facilisis finibus. Proin sed accumsan mauris.
-Etiam in eros nec neque finibus facilisis. Quisque placerat gravida vulputate.
-Cras vitae vestibulum lacus, sed varius metus.
-Vivamus in porttitor purus, nec scelerisque purus.
-In aliquet tortor eu nisi volutpat imperdiet.
-Aliquam sagittis nisi ac luctus rhoncus.
+                              Nullam rhoncus facilisis finibus. Proin sed accumsan mauris.
+                              Etiam in eros nec neque finibus facilisis. Quisque placerat gravida vulputate.
+                              Cras vitae vestibulum lacus, sed varius metus.
+                              Vivamus in porttitor purus, nec scelerisque purus.
+                              In aliquet tortor eu nisi volutpat imperdiet.
+                              Aliquam sagittis nisi ac luctus rhoncus.
                             </p>
                         </div>
                         <div class="right-card-d-3">
                             <h4>Card-d-3</h4>
                             <p>
-Nullam rhoncus facilisis finibus. Proin sed accumsan mauris.
-Etiam in eros nec neque finibus facilisis. Quisque placerat gravida vulputate.
-Cras vitae vestibulum lacus, sed varius metus.
-Vivamus in porttitor purus, nec scelerisque purus.
-In aliquet tortor eu nisi volutpat imperdiet.
-Aliquam sagittis nisi ac luctus rhoncus.
+                              Nullam rhoncus facilisis finibus. Proin sed accumsan mauris.
+                              Etiam in eros nec neque finibus facilisis. Quisque placerat gravida vulputate.
+                              Cras vitae vestibulum lacus, sed varius metus.
+                              Vivamus in porttitor purus, nec scelerisque purus.
+                              In aliquet tortor eu nisi volutpat imperdiet.
+                              Aliquam sagittis nisi ac luctus rhoncus.
                             </p>
                         </div>
                         <div class="right-card-img-right-btn">
