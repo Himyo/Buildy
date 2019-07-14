@@ -16,7 +16,7 @@
                     <td><?= $value['id'] ?></td>
                     <td><?= $value['title'] ?></td>
                     <td><?= $value['slug'] ?></td>
-                    <td><?= $value['content'] ?></td>
+                    <td><?= htmlentities($value['content']) ?></td>
                     <td><?= $value['created_at'] ?></td>
                     <td><?= $value['updated_at'] ?></td>
                     <td>

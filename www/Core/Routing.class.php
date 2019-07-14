@@ -5,8 +5,7 @@ class Routing{
 
 	public static $routeFile = "routes.yml";
 
-	public static function getRoute($slug)
-    {
+	public static function getRoute($slug) {
         $routes = yaml_parse_file(self::$routeFile);
         $slug = strtolower($slug);
         if (isset($routes[$slug])) {
@@ -110,6 +109,15 @@ class Routing{
 		return null;
 
 	}
+
+    public static function addSlug($slug, $action, $method){
+        $newRoute = [$slug => ["controller" => "Pages", "action" => $action, "method" => $method]];
+        $newRouteYAML = yaml_emit($newRoute, YAML_ANY_ENCODING, YAML_LN_BREAK);
+
+        $newRouteYAML = substr($newRouteYAML, 4);
+        $newRouteYAML = substr($newRouteYAML, 0, -4);
+        file_put_contents(self::$routeFile, $newRouteYAML."\n", FILE_APPEND);
+    }
 
 }
 
