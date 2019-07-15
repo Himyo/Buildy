@@ -1,0 +1,437 @@
+/* SPACE BOTTOM */
+
+.space-100 {
+  margin-bottom: 100px;
+}
+
+.space-80 {
+  margin-bottom: 80px;
+}
+
+.space-60 {
+  margin-bottom: 60px;
+}
+
+.space-50 {
+  margin-bottom: 50px;
+}
+
+.space-40 {
+  margin-bottom: 40px;
+}
+
+.space-30 {
+  margin-bottom: 30px;
+}
+
+.space-20 {
+  margin-bottom: 20px;
+}
+
+.space-15 {
+  margin-bottom: 15px;
+}
+
+.space-10 {
+  margin-bottom: 10px;
+}
+
+.space-5 {
+  margin-bottom: 5px;
+}
+
+
+/* MARGIN */
+
+.margin-10 {
+  margin: 10px;
+}
+
+.margin-left-10 {
+  margin-right: 10px;
+}
+
+.margin-right-10 {
+  margin-right: 10px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+
+/* PADDING */
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+
+/* GRID */
+
+.buildy-grid-v-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.buildy-grid-v-center {
+  display: flex;
+  align-items: center;
+}
+
+.buildy-grid-v-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+
+/* FLEX DIRECTION */
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+
+/* COLUMN 100% */
+
+.col-100-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.col-100-center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.col-100-space-a {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.col-100-space-b {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.col-100-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* COLUMN 90% */
+
+.col-90-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
+}
+
+.col-90-center {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+
+.col-90-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+}
+
+
+/* COLUMN 80% */
+
+.col-80-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 80%;
+}
+
+.col-80-center {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.col-80-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+}
+
+
+/* COLUMN 75% */
+
+.col-75-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 75%;
+}
+
+.col-75-center {
+  display: flex;
+  justify-content: center;
+  width: 75%;
+}
+
+.col-75-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 75%;
+}
+
+
+/* COLUMN 70% */
+
+.col-70-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 70%;
+}
+
+.col-70-center {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
+
+.col-70-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 70%;
+}
+
+
+/* COLUMN 66% */
+
+.col-66-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 66%;
+}
+
+.col-66-center {
+  display: flex;
+  justify-content: center;
+  width: 66%;
+}
+
+.col-66-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 66%;
+}
+
+
+/* COLUMN 60% */
+
+.col-60-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 60%;
+}
+
+.col-60-center {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+.col-60-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
+}
+
+
+/* COLUMN 50% */
+
+.col-50-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.col-50-center {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.col-50-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+
+/* COLUMN 40% */
+
+.col-40-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 40%;
+}
+
+.col-40-center {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.col-40-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+}
+
+
+/* COLUMN 33% */
+
+.col-33-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 33%;
+}
+
+.col-33-center {
+  display: flex;
+  justify-content: center;
+  width: 33%;
+}
+
+.col-33-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 33%;
+}
+
+
+/* COLUMN 30% */
+
+.col-30-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 30%;
+}
+
+.col-30-center {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+}
+
+.col-30-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+
+/* COLUMN 25% */
+
+.col-25 {
+  display: flex;
+  width: 25%;
+}
+
+.col-25-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 25%;
+}
+
+.col-25-center {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+}
+
+.col-25-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 25%;
+}
+
+
+/* COLUMN 20% */
+
+.col-20-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 20%;
+}
+
+.col-20-center {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+
+.col-20-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 20%;
+}
+
+
+/* COLUMN 15% */
+
+.col-15-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 15%;
+}
+
+.col-15-center {
+  display: flex;
+  justify-content: center;
+  width: 15%;
+}
+
+.col-15-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 15%;
+}
+
+
+/* COLUMN 10% */
+
+.col-10-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 10%;
+}
+
+.col-10-center {
+  display: flex;
+  justify-content: center;
+  width: 10%;
+}
+
+.col-10-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 10%;
+}
