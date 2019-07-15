@@ -5,7 +5,7 @@
         <h1 class="title-h1">CRUD USERS</h1>
       </div>
       <div class="space-40"></div>
-      <div class="col-100-center">
+      <div class="width-100" style="overflow-x: scroll">
         <table class="table-blue">
             <thead>
               <tr class="title-table-blue">

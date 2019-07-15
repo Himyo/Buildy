@@ -2,6 +2,7 @@
 namespace MVC\Controllers;
 
 
+use MVC\Core\Routing;
 use MVC\Core\View;
 use MVC\Models\Pages;
 
@@ -37,28 +38,35 @@ class PagesController extends Controller{
         $view = new View("mySite", "back");
     }
 
-    /*public function addPageAction() {
-        $data = $GLOBALS['_POST'];
-        if($_SERVER["REQUEST_METHOD"] == "POST" && isset($data['title'])) {
-            $pageInfo =
-                [
-                    'title' => $data['title'],
-                    'slug' => "/{$data['title']}",
-                    'created_at' => date('Y-m-d'),
+    public function addViewAction() {
+        $view = new View("addPage", "back");
+    }
+
+    public function saveAction() {
+        $data = [];
+
+        if (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['slug']) && !empty($_POST['content'])) {
+
+            $page = $this->pages->findOrWhere(['*'], ['title' => $_POST['title'], 'slug' => $_POST['slug']]);
+
+            if (!empty($page)) {
+                header('Location: /mysite/addpage');
+            } else {
+                $data += [
+                    'title' => $_POST['title'],
+                    'slug' => "/site".$_POST['slug'],
+                    'content' => $_POST['content'],
+                    'created_at' => date('Y-m-d')
                 ];
-            $this->pages->insert($pageInfo);
+
+                $this->pages->insert($data);
+                Routing::addSlug("/site".$_POST['slug'], "display", "GET");
+                header('Location: /mysite/addpage');
+            }
+        } else {
+            //TODO RETURN ERROR
+            header('Location: /mysite/addpage');
         }
-        header('Location: /page');
-    }*/
-
-    public function pageAction() {
-        $view = new View("page", "back");
-        $uriParameters = $_POST['PagesController']['pageAction'];
-        $parameters = $uriParameters[1] ?? 0;
-        $allPages = Pages::ALL();
-
-        $view->assign('pages', $allPages);
-        $view->assign('id', $parameters);
     }
 
     public function insertContentAction() {
@@ -70,7 +78,7 @@ class PagesController extends Controller{
         }
     }
 
-    //PROTOTYPE 4H DU MAT
+    // LA METHOD MAGIQUE DE 4H DU TAM
     public function displayAction() {
         $pages = Pages::ALL();
         foreach ($pages as $key => $value) {

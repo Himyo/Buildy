@@ -82,7 +82,6 @@ class UsersController extends Controller {
                 'lastname' => $_POST['lastname'],
                 'email' => $_POST['email'],
                 'password' => password_hash($_POST['pwd'], PASSWORD_BCRYPT),
-                'status' => 1,
                 'role' => 1,
                 'photo_id' => 0
             ];
@@ -103,7 +102,9 @@ class UsersController extends Controller {
 					'id' => $user[0]['id'],
 					'firstname' => $user[0]['firstname'],
 					'lastname' => $user[0]['lastname'],
-					'email' => $user[0]['email']
+					'email' => $user[0]['email'],
+                    'role' => $user[0]['role'],
+                    'status' => $user[0]['status']
 				];
 	
 				$_SESSION['user'] = $usr;

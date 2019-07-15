@@ -1,10 +1,10 @@
 <div class="col-50-center column">
   <div class="buildy-grid-v-center col-100-center column">
-    <p class="title-h3">Ajouter / modifier un tournois</p>
-    <span>Entrer l'id du tournois pour le modifier</span>
+    <p class="title-h3">Ajouter / modifier un page</p>
+    <span>Entrer l'id de la page pour le modifier</span>
   </div>
   <div class="space-20"></div>
-  <form class="form-classic border-classic-radius" action="/dashboard/admin/tournaments/save" method="post">
+  <form class="form-classic border-classic-radius" action="/dashboard/admin/pages/save" method="post">
     <div class="col-100-space-a">
       <div class="col-33-center">
         <div class="label-input-column-classic padding-20">
@@ -21,7 +21,7 @@
       <div class="col-33-center">
         <div class="label-input-column-classic padding-20">
           <label class="label-classic" for="slug">Slug :</label>
-          <input class="input-classic" id="slug" type="text" name="slug"></input>
+          <input class="input-classic" id="slug" type="text" name="slug">
         </div>
       </div>
     </div>
@@ -42,28 +42,3 @@
     <div class="space-20"></div>
   </form>
 </div>
-
-
-<form action="/dashboard/admin/pages/save" method="post" class="form-classic">
-    <div>
-        <label for="id">ID :</label>
-        <input id="id" type="number" name="id">
-    </div>
-    <div>
-        <label for="title">Title :</label>
-        <input id="title" type="text" name="title">
-    </div>
-    <br>
-    <div>
-        <label for="slug">Slug :</label>
-        <input id="slug" type="text" name="slug"></input>
-    </div>
-    <br>
-    <div>
-        <label for="content">Content :</label>
-        <textarea id="content" name="content"></textarea>
-    </div>
-    <div>
-        <input type="submit" value="Submit">
-    </div>
-</form>

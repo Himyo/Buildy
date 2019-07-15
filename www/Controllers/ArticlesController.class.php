@@ -6,30 +6,38 @@ use MVC\Models\Articles;
 
 class ArticlesController extends Controller {
 
-    protected $articles;
-
+    private $articles;
 
     public function __construct(Articles $articles) {
         $this->articles = $articles;
     }
 
-    /*public function defaultAction() {
-        $article = Articles::ALL();
-        //TODO RENDRE LA PAGE
+    public function saveAction() {
+        if (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+
+            if (!isset($_SESSION['user']['id'])) {
+                //TODO RETURN ERROR
+                header('Location: /site');
+            }
+
+            $data = [
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+                'users_id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 1,
+                'created_at' => date('Y-m-d'),
+                'categories_id' => $_POST['category']
+            ];
+
+            $this->articles->insert($data);
+            header('Location: /site');
+        } else {
+            //TODO RETURN ERROR
+            header("location:javascript://history.go(-1)");
+        }
     }
 
-    public function getArticlesViewAction() {
-        $articles =  $this->articles->findJoin(
-            [
-                'Articles.id', 'Articles.title',
-                'Articles.created_at', 'Articles.content',
-                'Users.firstname', 'Users.lastname',
-                'Users.email'
-            ],
-            ['Users'=> ['Users.id','Articles.users_id']
-            ]
-        );
-        $view = new View('articles', 'back');
-        $view->assign('articles', $articles);
-    }*/
+    public function getAllArticlesAction() {
+            $articles = Articles::ALL();
+            echo json_encode($articles);
+    }
 }

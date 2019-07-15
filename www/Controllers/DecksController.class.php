@@ -10,8 +10,6 @@ use MVC\Models\Cards;
 use MVC\Models\Decks;
 use MVC\Models\Legalities;
 
-
-//TODO: Fix Validator
 class DecksController extends Controller {
 
     protected $decks;
@@ -20,84 +18,27 @@ class DecksController extends Controller {
         $this->decks = $decks;
     }
 
-    public function getDecksFormAction() {
-        $deck = $this->decks;
-        $view = new View('createDeck', 'back');
-        $view->assign("form", $deck->deckForm());
-    }
+    public function saveAction() {
+        if (empty($_POST['id']) && !empty($_POST['name'])) {
 
-    public function getLegalCardsAction() {
-        $data = $GLOBALS['_GET'];
-        if($_SERVER['REQUEST_METHOD'] === 'GET' && (isset($data['legalities']) && isset($data['name']))){
-            $legalities = [];
-            foreach ($data['legalities'] as $key => $value){
-               $legalities[$value] = 1;
+            if (!isset($_SESSION['user']['id'])) {
+                //TODO RETURN ERROR
+                header('Location: /site');
             }
-            $name = $data['name'];
-//          $users_id = Auth::ID();
-            //TODO: Find better method than serialize array in bdd
-            $legalitiesId = Legalities::ALL(['id'], $legalities)[0]["id"];
 
-            $cards = Cards::ALL(
-                [
-                    'Cards.id', 'Cards.image_url',
-                    'Cards.name', 'Cards.toughness',
-                    'Cards.power', 'Mana.mana_cost',
-                    'Cards.legalities_id',
-                    'Mana.cmc', 'Releases.code'
-                ],
-                [
-                    'legalities_id' => $legalitiesId
-                ]);
-
-            $deckData = [
-                'deck' => [
-                    'name' => $name,
-                    'legalities_id' => $legalitiesId,
-                ],
-                'cards' => [
-                    $cards
-                ]
+            $data = [
+                'name' => $_POST['name'],
+                'users_id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 1,
+                'upvotes' => 0,
+                'downvotes' => 0
             ];
-        }
-        $view = new View('fillDeck', 'back');
-        $view->assign('data', $deckData);
-    }
 
-    public function getSaveConfirmationAction() {
-        $method = Routing::getMethod('/saveDeck');
-        $data = $GLOBALS["_".$method];
-        if($_SERVER['REQUEST_METHOD'] == $method && !empty($data)) {
-            $deck = [
-                'name' => $data['name'],
-                'legalities_id' => $data['legalities_id'],
-                'users_id' => 2
-                // TODO: Auth object
-                // users_id' => Auth::ID()
-            ];
-//            $this->decks->insert($deck);
-//            $deckId = $this->decks->lastInsertedId();
-            $decksId = 2;
-            foreach($data['cards'] as $i => $values) {
-                $data['cards'][$i]['decks_id'] = $decksId;
-            }
-            $this->decks->setTable('Decks_cards');
-            $this->decks->insertMany($data['cards']);
-            $this->decks->setTable('Decks');
+            $this->decks->insert($data);
+            header('Location: /site');
+        } else {
+            //TODO RETURN ERROR
+            header("location:javascript://history.go(-1)");
         }
-    }
-
-    public function getDecksViewAction() {
-        $decks = $this->decks->findJoin(
-            [
-                'Decks.id', 'Decks.name', 'Decks.upvotes',
-                'Decks.image_url',
-                'Decks.downvotes', 'Decks.users_id'
-            ],
-            ['Users' => 'Users.email', 'Decks.users_id']
-        );
-        $view = new View('decks', 'back');
-        $view->assign('decks', $decks);
     }
 
 

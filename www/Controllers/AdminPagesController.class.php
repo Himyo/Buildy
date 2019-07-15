@@ -70,7 +70,7 @@ class AdminPagesController extends Controller {
                 ];
     
                 $this->pages->insert($data);
-                Routing::addSlug($_POST['slug'], "display", "GET");
+                Routing::addSlug("/site".$_POST['slug'], "display", "GET");
                 header('Location: /dashboard/admin/pages');
             }
         } else {
@@ -78,8 +78,5 @@ class AdminPagesController extends Controller {
             header('Location: /dashboard/admin/pages');
         }
     }
-
-
-
 
 }

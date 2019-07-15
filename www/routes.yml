@@ -15,6 +15,21 @@
   action: detail
   method: "GET"
 
+"/mysite/page/edit/insert":
+  controller: Pages
+  action: insertContent
+  method: "POST"
+
+"/mysite/addpage":
+  controller: Pages
+  action: addView
+  method: "GET"
+
+"/mysite/page/save":
+  controller: Pages
+  action: save
+  method: "POST"
+
 "/mysite":
   controller: Pages
   action: mySite
@@ -23,6 +38,23 @@
 "/mysite/cards":
   controller: Cards
   action: backCards
+  method: "GET"
+
+########### LEGAL CONTACT ABOUT ##############
+
+"/mysite/legal":
+  controller: Home
+  action: getLegal
+  method: "GET"
+
+"/mysite/contact":
+  controller: Home
+  action: getContact
+  method: "GET"
+
+"/mysite/about":
+  controller: Home
+  action: getAbout
   method: "GET"
 
 "/download":
@@ -190,20 +222,29 @@
   action: deconnexion
   method: "POST"
 
-"/mysite/page/edit/insert":
-  controller: Pages
-  action: insertContent
+"/site/article/save":
+  controller: Articles
+  action: save
   method: "POST"
+
+"/site/tournament/save":
+  controller: Tournaments
+  action: save
+  method: "POST"
+
+"/site/deck/save":
+  controller: Decks
+  action: save
+  method: "POST"
+
+"/site/articles/get":
+  controller: Articles
+  action: getAllArticles
+  method: "GET"
+
+
 
 ################## DYNAMIQUE PAGES #######################
 
-/site/articles:
-  controller: Pages
-  action: display
-  method: GET
 
-/site/deck:
-  controller: Pages
-  action: display
-  method: GET
 

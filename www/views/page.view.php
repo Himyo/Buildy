@@ -15,11 +15,12 @@
                 <input class="button-classic-succes" type="submit" value="Editer">
               </div>
               <div class="col-75-center">
-                <iframe src="" width="100%" height="400"></iframe>
+                  <div width="100%" height="400"><?= $value['content']; ?></div>
               </div>
             </div>
           </div>
         </form>
       <?php endforeach; ?>
+        <div class="space-100"></div>
     </div>
 </div>

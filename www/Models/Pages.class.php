@@ -6,8 +6,7 @@ namespace MVC\Models;
 
 use MVC\Core\BaseSQL;
 
-class Pages extends BaseSQL
-{
+class Pages extends BaseSQL {
 
     protected $id;
     protected $title;

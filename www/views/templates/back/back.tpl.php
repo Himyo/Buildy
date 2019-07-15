@@ -27,6 +27,7 @@
             <?php include $this->v; ?>
 
         </div>
+        <?php include "footer.php"; ?>
     </main>
 </body>
 </html>
