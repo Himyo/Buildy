@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../../../public/css/global.css">
+    <script type="text/javascript" src="../../../public/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../public/vendor/chart.js/Chart.js"></script>
     <script type="text/javascript" src="../../../public/js/script.js"></script>
 </head>
 <body>
@@ -25,7 +27,7 @@
             <?php include $this->v; ?>
 
         </div>
+        <?php include "footer.php"; ?>
     </main>
 </body>
 </html>
-

@@ -6,13 +6,13 @@ use MVC\Models\Tournaments;
 
 class AdminTournamentsController extends Controller {
 
-    private $tournament;
+    private $tournaments;
 
     /**
      * AdminTournamentsController constructor.
-     * @param $tournament
+     * @param $tournaments
      */
-    public function __construct($tournament) { $this->tournament = $tournament; }
+    public function __construct($tournaments) { $this->tournaments = $tournaments; }
 
 
     public function defaultAction() {
@@ -23,7 +23,7 @@ class AdminTournamentsController extends Controller {
 
     public function deleteTournamentAction() {
         if (isset($_POST['id'])) {
-            $this->tournament->delete(['id' => $_POST['id']]);
+            $this->tournaments->delete(['id' => $_POST['id']]);
             header('Location: /dashboard/admin/tournaments');
         } else {
             //TODO RENVOYER L'ERROR
@@ -48,7 +48,7 @@ class AdminTournamentsController extends Controller {
                 $data += ['nb_contenders' => $_POST['nb_contenders']];
             }
             
-            $this->tournament->edit($data, ['id' => $_POST['id']]);
+            $this->tournaments->edit($data, ['id' => $_POST['id']]);
             header('Location: /dashboard/admin/tournaments');
 
         //CREATE
@@ -61,7 +61,7 @@ class AdminTournamentsController extends Controller {
                 'created_at' => date('Y-m-d')
             ];
 
-            $this->tournament->insert($data);
+            $this->tournaments->insert($data);
             header('Location: /dashboard/admin/tournaments');
         } else {
             //TODO RETURN ERROR

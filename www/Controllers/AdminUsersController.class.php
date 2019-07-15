@@ -10,7 +10,7 @@ class AdminUsersController extends Controller {
 
     /**
      * AdminUsersController constructor.
-     * @param $user
+     * @param $users
      */
     public function __construct(Users $users) { $this->users = $users; }
 
@@ -81,7 +81,6 @@ class AdminUsersController extends Controller {
                     && !empty($_POST['status']) 
                     && !empty($_POST['role']) 
                     && !empty($_POST['photo_id'])) {
-                
 
             $data = [
                 'firstname' => $_POST['firstname'],

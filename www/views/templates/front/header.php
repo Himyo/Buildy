@@ -1,16 +1,23 @@
-<header id="header" class="buildy-grid-v-center blue-buildy-bg lightgrey-font">
-  <div class="buildy-grid-v-center margin-right-10">
-    <a href="/site"><img src="https://via.placeholder.com/250x60" alt="header-logo"></a>
-  </div>
-  <div class="buildy-grid-v-center margin-right-10">
-    <a class="margin-right-10" href="#"><p>Hello</p></a>
-    <a class="margin-right-10" href="/site/cards"><p>Voir les cartes</p></a>
+<header id="header" class="buildy-grid-v-center yellow-buildy-bg lightgrey-font" style="box-shadow: 0px 5px 5px #525374;">
+    <div class="buildy-grid-v-center margin-right-10">
+        <a href="/site"><img src="https://fireteam.fr/wp-content/uploads/2019/04/magic-the-gathering.png" alt="header-logo" style="width: 250px; height: 50px"></a>
+    </div>
+    <div class="buildy-grid-v-center margin-right-10">
+        <a class="margin-right-10" href="/site/cards"><p style="color: #0c2033">Voir&nbsp;les&nbsp;cartes</p></a>
+    </div>
     <?php if(isset($_SESSION['user'])): ?>
-      <a class="margin-left-10" href="/site/profile"><p>Bonjour, <?= ucfirst($_SESSION['user']['firstname']) ?></p></a>
-      <a class="margin-left-10" href="/site/deconnexion"><p>Se déconnecter</p></a>
+        <div class="buildy-grid-v-center col-100-end margin-right-10">
+            <a class="margin-left-10" href="/site/profile"><p style="color: #0c2033">Bonjour, <?= ucfirst($_SESSION['user']['firstname']) ?></p></a>
+            <a class="margin-left-10" href="/site/deconnexion"><p style="color: #0c2033">Se déconnecter</p></a>
+
+            <?php if($_SESSION['user']['role']): ?>
+                <a class="margin-left-10" href="/"><p style="color: #0c2033">Accès Admin</p></a>
+            <?php endif; ?>
+        </div>
     <?php else: ?>
-      <a class="margin-left-10" href="/site/login"><p>Se connecter</p></a>
-      <a class="margin-left-10" href="/site/register"><p>S'inscrire</p></a>
+        <div class="buildy-grid-v-center col-100-end margin-right-10">
+            <a class="margin-left-10" href="/site/login"><p style="color: #0c2033">Se connecter</p></a>
+            <a class="margin-left-10" href="/site/register"><p style="color: #0c2033">S'inscrire</p></a>
+        </div>
     <?php endif; ?>
-  </div>
 </header>

@@ -24,6 +24,12 @@ a {
    justify-content: center;
 }
 
+#container-user {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+}
+
 .container span i {
    font-size: 18px;
    padding: 10px;
@@ -47,6 +53,15 @@ a {
   min-height: calc(100vh - 148px);
 }
 
-.min-height-250 {
+.min-width-250 {
+  width: 250px;
   min-width: 250px;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.space-around {
+  justify-content: space-around;
 }

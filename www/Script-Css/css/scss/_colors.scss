@@ -4,6 +4,7 @@ $white: #fff;
 $grey: #333333;
 $lightgrey-font: #555555;
 $darkgrey: #555555;
+$greyfont: #dddddd;
 
 .blue-buildy-bg {
   background-color: $color-buildy;
@@ -15,4 +16,8 @@ $darkgrey: #555555;
 
 .white-font {
   color: $white;
+}
+
+.grey-font {
+  color: $greyfont;
 }

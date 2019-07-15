@@ -4,3 +4,9 @@
   border-right: 2px solid #0c2033;
   transition: 1s;
 }
+
+#menu-right-scroll {
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+}

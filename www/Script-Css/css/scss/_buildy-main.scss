@@ -55,11 +55,23 @@
   margin-right: 10px;
 }
 
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
 
 /* PADDING */
 
 .padding-10 {
   padding: 10px;
+}
+
+.padding-20 {
+  padding: 20px;
 }
 
 
@@ -337,6 +349,11 @@
 
 
 /* COLUMN 25% */
+
+.col-25 {
+  display: flex;
+  width: 25%;
+}
 
 .col-25-start {
   display: flex;

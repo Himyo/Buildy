@@ -1,6 +1,8 @@
 <?php
 
- use MVC\VO\CardIdentity;
+use MVC\Controllers\CommentsController;
+use MVC\Models\Comments;
+use MVC\VO\CardIdentity;
  use MVC\VO\CardProps;
  use MVC\Models\Mana;
  use MVC\Models\Type;
@@ -68,20 +70,7 @@ $container = [
     CardsController::class => function($container) {
         return new CardsController($container[Cards::class]($container));
     },
-    //Decks
-    Decks::class => function($container) {
-        return new Decks();
-    },
-    DecksController::class => function($container) {
-        return new DecksController($container[Decks::class]($container));
-    },
-    //Tournaments
-    Tournaments::class => function($container) {
-        return new Tournaments();
-    },
-    TournamentsController::class => function($container) {
-        return new TournamentsController($container[Tournaments::class]($container));
-    },
+
     //Articles
     Articles::class => function($container) {
         return new Articles();
@@ -110,15 +99,6 @@ $container = [
     //Home
     HomeController::class => function($container) {
         return new HomeController();
-    },
-
-    //Articles
-    Articles::class => function($container) {
-        return new Articles();
-    },
-    ArticlesController::class => function($container) {
-        $articlesModel = $container[Articles::class]($container);
-        return new ArticlesController($articlesModel);
     },
 
     //Comments
@@ -157,7 +137,13 @@ $container = [
 
     //Dashboard
     DashboardController::class => function($container) {
-        return new DashboardController();
+    $usersModel = $container[Users::class]($container);
+    $articlesModel = $container[Articles::class]($container);
+    $tournamentsModel = $container[Tournaments::class]($container);
+    $decksModel = $container[Decks::class]($container);
+    $pagesModel = $container[Pages::class]($container);
+    $cardsModel = $container[Cards::class]($container);
+        return new DashboardController($usersModel, $articlesModel, $tournamentsModel, $decksModel, $pagesModel, $cardsModel);
     },
 
     //Admin Users
@@ -196,6 +182,7 @@ $container = [
         return new AdminCardsController($cardsModel);
     },
 
+    //Admin Pages
     AdminPagesController::class => function($container) {
         $pagesModel = $container[Pages::class]($container);
         return new AdminPagesController($pagesModel);

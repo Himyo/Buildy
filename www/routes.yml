@@ -15,6 +15,21 @@
   action: detail
   method: "GET"
 
+"/mysite/page/edit/insert":
+  controller: Pages
+  action: insertContent
+  method: "POST"
+
+"/mysite/addpage":
+  controller: Pages
+  action: addView
+  method: "GET"
+
+"/mysite/page/save":
+  controller: Pages
+  action: save
+  method: "POST"
+
 "/mysite":
   controller: Pages
   action: mySite
@@ -23,6 +38,23 @@
 "/mysite/cards":
   controller: Cards
   action: backCards
+  method: "GET"
+
+########### LEGAL CONTACT ABOUT ##############
+
+"/mysite/legal":
+  controller: Home
+  action: getLegal
+  method: "GET"
+
+"/mysite/contact":
+  controller: Home
+  action: getContact
+  method: "GET"
+
+"/mysite/about":
+  controller: Home
+  action: getAbout
   method: "GET"
 
 "/download":
@@ -88,10 +120,43 @@
   action: saveUser
   method: "POST"
 
+### DECKS ###
+"/dashboard/admin/decks":
+  controller: AdminDecks
+  action: default
+  method: "GET"
+
+"/dashboard/admin/decks/delete":
+  controller: AdminDecks
+  action: deleteDeck
+  method: "POST"
+
+"/dashboard/admin/decks/save":
+  controller: AdminDecks
+  action: saveDeck
+  method: "POST"
+
+### COMMENTS ###
+"/dashboard/admin/comments":
+  controller: AdminComments
+  action: default
+  method: "GET"
+
+"/dashboard/admin/comments/delete":
+  controller: AdminComments
+  action: deleteComment
+  method: "POST"
+
+"/dashboard/admin/comments/save":
+  controller: AdminComments
+  action: saveComment
+  method: "POST"
+
 ### PAGES ###
 "/dashboard/admin/pages":
   controller: AdminPages
   action: default
+  method: "GET"
   
 "/dashboard/admin/pages/delete":
   controller: AdminPages
@@ -156,3 +221,30 @@
   controller: Users
   action: deconnexion
   method: "POST"
+
+"/site/article/save":
+  controller: Articles
+  action: save
+  method: "POST"
+
+"/site/tournament/save":
+  controller: Tournaments
+  action: save
+  method: "POST"
+
+"/site/deck/save":
+  controller: Decks
+  action: save
+  method: "POST"
+
+"/site/articles/get":
+  controller: Articles
+  action: getAllArticles
+  method: "GET"
+
+
+
+################## DYNAMIQUE PAGES #######################
+
+
+
