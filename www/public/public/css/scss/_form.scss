@@ -1,0 +1,53 @@
+.form {
+  margin-left: 10px;
+  display: flex;
+  flex: 1 0px;
+
+  form {
+    display: flex;
+    flex-flow: column wrap;
+    border: 1px solid #555555;
+    padding: 15px;
+  }
+
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #555555;
+  }
+
+  .input-form:focus {
+    border: 2px solid #555555;
+  }
+
+  textarea:focus {
+    border: 2px solid #555555;
+  }
+}
+
+.form-shadow {
+  margin-left: 10px;
+  display: flex;
+  flex: 1 0px;
+
+  form {
+    display: flex;
+    flex-flow: column wrap;
+    box-shadow: 0 0 4px black;
+    padding: 15px;
+  }
+
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #555555;
+  }
+
+  .input-form:focus {
+    border: 2px solid #555555;
+  }
+
+  textarea:focus {
+    border: 2px solid #555555;
+  }
+}
