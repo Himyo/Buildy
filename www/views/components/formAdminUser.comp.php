@@ -51,7 +51,11 @@
       <div class="col-50-center">
         <div class="label-input-column-classic padding-20">
           <label class="label-classic" for="status">Status :</label>
-          <input class="input-classic" id="status" type="text" name="status">
+          <select name="status" id="status">
+            <option value="PENDING" >PENDING</option>
+            <option value="ACCEPTED">ACCEPTED</option>
+            <option value="DENIED">DENIED</option>
+          </select>
         </div>
       </div>
       <div class="col-50-center">

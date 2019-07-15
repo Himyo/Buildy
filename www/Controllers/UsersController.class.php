@@ -71,10 +71,14 @@ class UsersController extends Controller {
                     && !empty($_POST['pwd']) 
 					&& !empty($_POST['pwd2'])) {
 				
-			//TODO VERIFIER QUE L'EMAIL N'EXISTE PAS
+			$emails = array_flip(Users::ALL(['email']));
+			
+			if(!isset($emails[$_POST['email']])) {
+				header('Location: /site/register?error=emailnotunique');
+			}
 			
 			if ($_POST['pwd'] != $_POST['pwd2']) {
-				header('Location: /site/register');
+				header('Location: /site/register?error=pwdmatching');
 			}
 
             $data = [
@@ -89,22 +93,21 @@ class UsersController extends Controller {
             $this->users->insert($data);
             header('Location: /site');
         } else {
-            //TODO RETURN ERROR
-            header('Location: /site/register');
+            header('Location: /site/register?error=missingfield');
         }
 	}
 
 	public function connexionAction() {
-		$user = $this->users->findAndWhere(["*"], ['email' => $_POST['email']]);
+		$user = $this->users->findAndWhere(["*"], ['email' => $_POST['email'], 'status' => 'ACCEPTED'])[0];
 		if (!empty($user)) {
-			if (password_verify($_POST['pwd'], $user[0]['password'])) {
+			if (password_verify($_POST['pwd'], $user['password'])) {
 				$usr = [
-					'id' => $user[0]['id'],
-					'firstname' => $user[0]['firstname'],
-					'lastname' => $user[0]['lastname'],
-					'email' => $user[0]['email'],
-                    'role' => $user[0]['role'],
-                    'status' => $user[0]['status']
+					'id' => $user['id'],
+					'firstname' => $user['firstname'],
+					'lastname' => $user['lastname'],
+					'email' => $user['email'],
+                    'role' => $user['role'],
+                    'status' => $user['status']
 				];
 	
 				$_SESSION['user'] = $usr;
