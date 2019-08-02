@@ -34,7 +34,7 @@
                       <td><?= $value['token'] ?></td>
                       <td><?= $value['photo_id'] ?></td>
                       <td>
-                          <form action="/dashboard/admin/users/delete" method="post">
+                          <form action="/Admin/dashboard/users/delete" method="post">
                               <input type="hidden" name="id" value="<?= $value['id'] ?>">
                               <input type="submit" value="Delete">
                           </form>

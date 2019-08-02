@@ -21,9 +21,5 @@
     <div class="col-100-center">
       <input class="button-classic-succes" type="submit" value="Submit">
     </div>
-    <div class="col-100-center">
-      <p class="font-14">*Champs obligatoires</p>
-    </div>
-    <div class="space-20"></div>
   </form>
 </div>

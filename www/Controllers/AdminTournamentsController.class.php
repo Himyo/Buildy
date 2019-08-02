@@ -24,10 +24,10 @@ class AdminTournamentsController extends Controller {
     public function deleteTournamentAction() {
         if (isset($_POST['id'])) {
             $this->tournaments->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/tournaments');
+            header('Location: /Admin/dashboard/tournaments');
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/tournaments');
+            header('Location: /Admin/dashboard/tournaments');
         }
 
     }
@@ -49,7 +49,7 @@ class AdminTournamentsController extends Controller {
             }
             
             $this->tournaments->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/tournaments');
+            header('Location: /Admin/dashboard/tournaments');
 
         //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['nb_contenders'])) {
@@ -62,10 +62,10 @@ class AdminTournamentsController extends Controller {
             ];
 
             $this->tournaments->insert($data);
-            header('Location: /dashboard/admin/tournaments');
+            header('Location: /Admin/dashboard/tournaments');
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/tournaments');
+            header('Location: /Admin/dashboard/tournaments');
         }
     }
 }   

@@ -24,10 +24,10 @@ class AdminDecksController extends Controller {
     public function deleteDeckAction() {
         if (isset($_POST['id'])) {
             $this->decks->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/decks');
+            header('Location: /Admin/dashboard/decks');
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/decks');
+            header('Location: /Admin/dashboard/decks');
         }
 
     }
@@ -54,7 +54,7 @@ class AdminDecksController extends Controller {
             }
 
             $this->decks->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/decks');
+            header('Location: /Admin/dashboard/decks');
 
             //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['name'])) {
@@ -67,10 +67,10 @@ class AdminDecksController extends Controller {
             ];
 
             $this->decks->insert($data);
-            header('Location: /dashboard/admin/decks');
+            header('Location: /Admin/dashboard/decks');
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/decks');
+            header('Location: /Admin/dashboard/decks');
         }
     }
 }

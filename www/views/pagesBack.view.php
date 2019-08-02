@@ -25,7 +25,7 @@
                         <td><?= $value['created_at'] ?></td>
                         <td><?= $value['updated_at'] ?></td>
                         <td>
-                            <form action="/dashboard/admin/pages/delete" method="post">
+                            <form action="/Admin/dashboard/pages/delete" method="post">
                                 <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                 <input type="submit" value="Delete">
                             </form>

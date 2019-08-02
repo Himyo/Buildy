@@ -24,10 +24,10 @@ class AdminUsersController extends Controller {
     public function deleteUserAction() {
         if (isset($_POST['id'])) {
             $this->users->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
         }
 
     }
@@ -71,7 +71,7 @@ class AdminUsersController extends Controller {
             }
             
             $this->users->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
 
         //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['firstname']) 
@@ -93,10 +93,10 @@ class AdminUsersController extends Controller {
             ];
 
             $this->users->insert($data);
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
         }
     }
 }

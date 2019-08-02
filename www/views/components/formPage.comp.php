@@ -3,7 +3,7 @@
         <p class="title-h3">Ajouter une page</p>
     </div>
     <div class="space-20"></div>
-    <form class="form-classic border-classic-radius" action="/mysite/page/save" method="post">
+    <form class="form-classic border-classic-radius" action="/Admin/mysite/page/save" method="post">
         <div class="col-100-space-a">
             <div class="col-50-center">
                 <div class="label-input-column-classic padding-20">

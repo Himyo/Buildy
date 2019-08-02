@@ -27,10 +27,10 @@ class AdminArticlesController extends Controller {
     public function deleteArticleAction() {
         if (isset($_POST['id'])) {
             $this->articles->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
         }
 
     }
@@ -50,7 +50,7 @@ class AdminArticlesController extends Controller {
             $data += ['categories_id' => $_POST['category']];
             
             $this->articles->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
 
         //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
@@ -64,10 +64,10 @@ class AdminArticlesController extends Controller {
             ];
 
             $this->articles->insert($data);
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
         }
     }
 

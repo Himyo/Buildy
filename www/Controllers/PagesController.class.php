@@ -50,7 +50,7 @@ class PagesController extends Controller{
             $page = $this->pages->findOrWhere(['*'], ['title' => $_POST['title'], 'slug' => $_POST['slug']]);
 
             if (!empty($page)) {
-                header('Location: /mysite/addpage');
+                header('Location: /Admin/mysite/addpage');
             } else {
                 $data += [
                     'title' => $_POST['title'],
@@ -61,11 +61,11 @@ class PagesController extends Controller{
 
                 $this->pages->insert($data);
                 Routing::addSlug("/site".$_POST['slug'], "display", "GET");
-                header('Location: /mysite/addpage');
+                header('Location: /Admin/mysite/addpage');
             }
         } else {
             //TODO RETURN ERROR
-            header('Location: /mysite/addpage');
+            header('Location: /Admin/mysite/addpage');
         }
     }
 

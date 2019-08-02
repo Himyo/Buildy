@@ -25,10 +25,10 @@ class AdminCommentsController extends Controller {
     public function deleteCommentAction() {
         if (isset($_POST['id'])) {
             $this->comments->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/comments');
+            header('Location: /Admin/dashboard/comments');
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/comments');
+            header('Location: /Admin/dashboard/comments');
         }
 
     }
@@ -55,7 +55,7 @@ class AdminCommentsController extends Controller {
             }
 
             $this->comments->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/comments');
+            header('Location: /Admin/dashboard/comments');
 
             //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['users_id']) && !empty($_POST['comments_id']) && !empty($_POST['articles_id']) && !empty($_POST['content'])) {
@@ -68,10 +68,10 @@ class AdminCommentsController extends Controller {
             ];
 
             $this->comments->insert($data);
-            header('Location: /dashboard/admin/comments');
+            header('Location: /Admin/dashboard/comments');
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/comments');
+            header('Location: /Admin/dashboard/comments');
         }
     }
 }

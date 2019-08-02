@@ -1,11 +1,9 @@
 <?php
 namespace MVC\Controllers;
 
+ use MVC\Core\Auth;
  use MVC\Core\View;
- use MVC\Lib\Form;
  use MVC\Models\Users;
- use MVC\Lib\FormBuilder;
- use MVC\Core\Request;
 
 class UsersController extends Controller {
 
@@ -101,28 +99,18 @@ class UsersController extends Controller {
 		$user = $this->users->findAndWhere(["*"], ['email' => $_POST['email'], 'status' => 'ACCEPTED'])[0];
 		if (!empty($user)) {
 			if (password_verify($_POST['pwd'], $user['password'])) {
-				$usr = [
-					'id' => $user['id'],
-					'firstname' => $user['firstname'],
-					'lastname' => $user['lastname'],
-					'email' => $user['email'],
-                    'role' => $user['role'],
-                    'status' => $user['status']
-				];
-	
-				$_SESSION['user'] = $usr;
-	
+				Auth::Init($user);
 				header('Location: /site');
 			} else {
-				header('Location: /site/login');
+				header('Location: /site/login?error=wrongcredentials');
 			}
 		} else {
-			header('Location: /site/login');
+			header('Location: /site/login?error=pendinguser');
 		}
 	}
 
 	public function deconnexionAction() {
-		unset($_SESSION['user']);
+	    Auth::destroy();
 		header('Location: /site');
 	}
 

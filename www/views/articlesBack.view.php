@@ -27,7 +27,7 @@
                         <td><?= $value['state'] ?></td>
                         <td><?= $value['created_at'] ?></td>
                         <td>
-                            <form action="/dashboard/admin/articles/delete" method="post">
+                            <form action="/Admin/dashboard/articles/delete" method="post">
                                 <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                 <input type="submit" value="Delete">
                             </form>

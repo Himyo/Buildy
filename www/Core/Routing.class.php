@@ -1,14 +1,17 @@
 <?php
 namespace MVC\Core;
 
+use MVC\Core\Middleware;
+
 class Routing{
 
-	public static $routeFile = "routes.yml";
+	public static $routeFile = "routes/routes.yml";
 
 	public static function getRoute($slug) {
         $routes = yaml_parse_file(self::$routeFile);
         $slug = strtolower($slug);
         if (isset($routes[$slug])) {
+            $slug = Middleware::filter($slug, $routes);
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
             $method = $routes[$slug]["method"];
@@ -18,6 +21,11 @@ class Routing{
                 "method" => $method
             ];
         }
+        return [
+            "controller" => 'PagesController',
+            "action" => 'notFoundAction',
+            "method" => 'post'
+        ];
     }
 
     public static function getParametrableRoute($slug) {
@@ -63,7 +71,8 @@ class Routing{
         return [
             "controller" => 'PagesController',
             "action" => 'notFoundAction',
-            "method" => 'post'];
+            "method" => 'post'
+        ];
     }
 
     public static function getCrudRoute($slug) {

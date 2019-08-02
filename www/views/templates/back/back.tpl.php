@@ -16,9 +16,9 @@
         <div id="main-container" class="main-container">
 
             <?php
-            if (strpos($_SERVER['REQUEST_URI'], '/mysite') !== false):
+            if (strpos($_SERVER['REQUEST_URI'], '/Admin/mysite') !== false):
             include "side_menu_mysite.php";
-            elseif (strpos($_SERVER['REQUEST_URI'], '/dashboard') !== false):
+            elseif (strpos($_SERVER['REQUEST_URI'], '/Admin/dashboard') !== false):
             include "side_menu_dashboard.php";
             else: include "side_menu.php";
             endif;

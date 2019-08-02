@@ -22,7 +22,7 @@
                         <td><?= $value['upvotes'] ?></td>
                         <td><?= $value['downvotes'] ?></td>
                         <td>
-                            <form action="/dashboard/admin/comments/delete" method="post">
+                            <form action="/Admin/dashboard/comments/delete" method="post">
                                 <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                 <input type="submit" value="Delete">
                             </form>

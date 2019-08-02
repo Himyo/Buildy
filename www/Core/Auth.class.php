@@ -1,68 +1,34 @@
 <?php
 
 namespace MVC\Core;
-use MVC\Model\Users;
 
 class Auth {
 
-    
-    private $id;
-    private $lastname;
-    private $firstname;
-    private $email;
-    private $token;
+    public static function Init(array $user) {
+        session_start();
+        $_SESSION['user'] = $user;
+    }
 
-    /**
-     * Auth constructor.
-     * @param $token
-     */
-    public function __construct(Users $user) {
-        if (!isset($_SESSION["token"])) {
-            die("AUCUN UTILISATEUR CONNECTE");
-        } else {
-            $this->token = $_SESSION["token"];
-        }
-        $this->id = $user->getId();
-        $this->lastname = $user->getLastname();
-        $this->firstname = $user->getFirstname();
-        $this->email = $user->getEmail();
+    public static function destroy(){
+        session_destroy();
+    }
+
+    public static function User() {
+        return $_SESSION['user'];
+    }
+
+    public static function isAuthenticate() {
+        return isset($_SESSION['user']);
     }
 
 
-
-    /**
-     * @return null
-     */
-    public function getId() {
-        return $this->id;
+    public static function isAdmin() {
+        return (Auth::isAuthenticate() && $_SESSION['user']['role'] == 'ADMIN');
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLastname() {
-        return $this->lastname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFirstname() {
-        return $this->firstname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail() {
-        return $this->email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getToken() {
-        return $this->token;
+    public static function get() {
+        return $_SESSION['user'];
     }
 
 }
+
