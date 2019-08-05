@@ -61,7 +61,10 @@
       <div class="col-50-center">
         <div class="label-input-column-classic padding-20">
           <label class="label-classic" for="role">Role :</label>
-          <input class="input-classic" id="role" type="number" name="role">
+            <select name="role" id="role">
+                <option value="USER">USER</option>
+                <option value="MODERATOR">MODERATOR</option>
+            </select>
         </div>
       </div>
     </div>

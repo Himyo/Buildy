@@ -23,6 +23,7 @@
             </thead>
             <tbody>
               <?php foreach($users as $key => $value): ?>
+                  <?php if($value['role'] != 'ADMIN'):?>
                   <tr>
                       <td><?= $value['id'] ?></td>
                       <td><?= $value['lastname'] ?></td>
@@ -31,7 +32,6 @@
                       <td><?= $value['password'] ?></td>
                       <td><?= $value['status'] ?></td>
                       <td><?= $value['role'] ?></td>
-                      <td><?= $value['token'] ?></td>
                       <td><?= $value['photo_id'] ?></td>
                       <td>
                           <form action="/Admin/dashboard/users/delete" method="post">
@@ -40,6 +40,7 @@
                           </form>
                       </td>
                   </tr>
+                  <?php endif; ?>
               <?php endforeach; ?>
             </tbody>
         </table>

@@ -52,12 +52,16 @@ class UsersController extends Controller {
             if (!empty($_POST['pwd'])) {
                 $data += ['password' => crypt($_POST['pwd'], "yuAhFz628HZ328bz")];
             }
+            if(!empty($_POST['role'])) {
+                $data += ['role' => $_POST['role']];
+            }
+            if(!empty($_POST['status'])) {
+                $data += ['status' => $_POST['status']];
+            }
 
-            $data += ['status' => 1];
-            
-            $data += ['role' => 1];
-            
-            $data += ['photo_id' => 0];
+
+
+//            $data += ['photo_id' => 0];
             
             $this->users->edit($data, ['id' => $_POST['id']]);
             header('Location: /site');
@@ -65,8 +69,8 @@ class UsersController extends Controller {
         //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['firstname']) 
                     && !empty($_POST['lastname']) 
-                    && !empty($_POST['email']) 
-                    && !empty($_POST['pwd']) 
+                    && !empty($_POST['email'])
+                    && !empty($_POST['pwd'])
 					&& !empty($_POST['pwd2'])) {
 				
 			$emails = array_flip(Users::ALL(['email']));
@@ -84,7 +88,6 @@ class UsersController extends Controller {
                 'lastname' => $_POST['lastname'],
                 'email' => $_POST['email'],
                 'password' => password_hash($_POST['pwd'], PASSWORD_BCRYPT),
-                'role' => 1,
                 'photo_id' => 0
             ];
 

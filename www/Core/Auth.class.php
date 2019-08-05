@@ -26,6 +26,10 @@ class Auth {
         return (Auth::isAuthenticate() && $_SESSION['user']['role'] == 'ADMIN');
     }
 
+    public static function isModerator() {
+        return (Auth::isAuthenticate() && $_SESSION['user']['role'] == 'MODERATOR');
+    }
+
     public static function get() {
         return $_SESSION['user'];
     }

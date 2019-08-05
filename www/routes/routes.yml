@@ -82,134 +82,124 @@
   controller: AdminCards
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 ### TOURNAMENTS ###
 "/admin/dashboard/tournaments":
   controller: AdminTournaments
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/tournaments/delete":
   controller: AdminTournaments
   action: deleteTournament
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/tournaments/save":
   controller: AdminTournaments
   action: saveTournament
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 ### ARTICLES ###
 "/admin/dashboard/articles":
   controller: AdminArticles
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
-"/admin/dashboard/articles/delete":
-  controller: AdminArticles
-  action: deleteArticle
-  method: "POST"
-  allow: [ADMIN]
-
-"/admin/dashboard/articles/save":
-  controller: AdminArticles
-  action: saveArticle
-  method: "POST"
-  allow: [ADMIN]
-
-### USERS ###
 "/admin/dashboard/users":
   controller: AdminUsers
   action: default
   method: "GET"
   allow: [ADMIN]
+  redirect: "/admin/dashboard"
 
 "/admin/dashboard/users/delete":
   controller: AdminUsers
   action: deleteUser
   method: "POST"
   allow: [ADMIN]
+  redirect: "/admin/dashboard"
 
 "/admin/dashboard/users/save":
   controller: AdminUsers
   action: saveUser
   method: "POST"
   allow: [ADMIN]
+  redirect: "/admin/dashboard"
 
 ### DECKS ###
 "/admin/dashboard/decks":
   controller: AdminDecks
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/decks/delete":
   controller: AdminDecks
   action: deleteDeck
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/decks/save":
   controller: AdminDecks
   action: saveDeck
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 ### COMMENTS ###
 "/admin/dashboard/comments":
   controller: AdminComments
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/comments/delete":
   controller: AdminComments
   action: deleteComment
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/comments/save":
   controller: AdminComments
   action: saveComment
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 ### PAGES ###
 "/admin/dashboard/pages":
   controller: AdminPages
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/pages/delete":
   controller: AdminPages
   action: deletePage
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/pages/save":
   controller: AdminPages
   action: savePage
   method: "POST"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 ######## DASHBOARD #######
 "/admin/dashboard":
   controller: Dashboard
   action: default
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 "/admin/dashboard/stats":
   controller: Dashboard
   action: getStats
   method: "GET"
-  allow: [ADMIN]
+  allow: [ADMIN, MODERATOR]
 
 
 ######################### FRONT SITE #########################

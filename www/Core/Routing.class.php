@@ -1,9 +1,8 @@
 <?php
 namespace MVC\Core;
 
-use MVC\Core\Middleware;
-
 class Routing{
+    //TODO: Log for moderator action
 
 	public static $routeFile = "routes/routes.yml";
 
@@ -11,7 +10,10 @@ class Routing{
         $routes = yaml_parse_file(self::$routeFile);
         $slug = strtolower($slug);
         if (isset($routes[$slug])) {
-            $slug = Middleware::filter($slug, $routes);
+            $filteredSlug = Middleware::filter($slug, $routes);
+            if($slug != $filteredSlug) {
+                header("Location: {$filteredSlug}");
+            }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
             $method = $routes[$slug]["method"];
