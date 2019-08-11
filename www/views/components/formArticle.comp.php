@@ -15,9 +15,9 @@
                 <div class="label-input-column-classic padding-20 width-100">
                     <label class="label-classic" for="category">Category : </label>
                     <select class="input-classic" name="category" id="category">
-                        <option value="1">Tournament</option>
-                        <option value="2">General</option>
-                        <option value="3">Deck</option>
+                        <option value="GENERAL">General</option>
+                        <option value="TOURNAMENT">Tournament</option>
+                        <option value="DECK">Deck</option>
                     </select>
                 </div>
             </div>
