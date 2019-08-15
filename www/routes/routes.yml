@@ -243,6 +243,18 @@
   action: deconnexion
   method: "POST"
 
+"/site/profile":
+  controller: Users
+  action: getProfile
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
+#  "site/profile/edit":
+#    controller: Users
+#    action: editProfile
+#    method: "POST"
+
 "/site/article/save":
   controller: Articles
   action: save

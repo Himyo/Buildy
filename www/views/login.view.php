@@ -10,6 +10,10 @@
                 case 'pendinguser':
                     echo '<div style="background-color: #d9534f; border-color: #d43f3a;"><p>Ce compte n\'a pas encore ete accepter</p></div>';
                 break;
+                case 'notfound':
+                    echo '<div style="background-color: #d9534f; border-color: #d43f3a;"><p>Ce compte n\'a pas encore ete trouve</p></div>';
+                break;
+
             }
 
         }
