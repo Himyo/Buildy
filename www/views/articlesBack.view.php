@@ -12,7 +12,7 @@
                     <th>Titre</th>
                     <th>Contenu</th>
                     <th>Id membre</th>
-                    <th>Id catégorie</th>
+                    <th>Catégorie</th>
                     <th>Status</th>
                     <th>Date créé</th>
                     <th>Action</th>
@@ -23,7 +23,7 @@
                         <td><?= $value['title'] ?></td>
                         <td><?= $value['content'] ?></td>
                         <td><?= $value['users_id'] ?></td>
-                        <td><?= $value['categories_id'] ?></td>
+                        <td><?= $value['categories'] ?></td>
                         <td><?= $value['state'] ?></td>
                         <td><?= $value['created_at'] ?></td>
                         <td>

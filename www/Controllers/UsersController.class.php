@@ -54,8 +54,8 @@ class UsersController extends Controller
                 $data += ['email' => $_POST['email']];
             }
 
-            if (!empty($_POST['pwd'])) {
-                $data += ['password' => crypt($_POST['pwd'], "yuAhFz628HZ328bz")];
+            if (!empty($_POST['password'])) {
+                $data += ['password' => password_hash($_POST['password'], PASSWORD_BCRYPT)];
             }
             if (!empty($_POST['role'])) {
                 $data += ['role' => $_POST['role']];
@@ -74,7 +74,7 @@ class UsersController extends Controller
         } elseif (empty($_POST['id']) && !empty($_POST['firstname'])
             && !empty($_POST['lastname'])
             && !empty($_POST['email'])
-            && !empty($_POST['pwd'])
+            && !empty($_POST['password'])
             && !empty($_POST['pwd2'])) {
 
             $emails = array_flip(Users::ALL(['email']));
@@ -83,7 +83,7 @@ class UsersController extends Controller
                 header('Location: /site/register?error=emailnotunique');
             }
 
-            if ($_POST['pwd'] != $_POST['pwd2']) {
+            if ($_POST['password'] != $_POST['pwd2']) {
                 header('Location: /site/register?error=pwdmatching');
             }
 
@@ -91,7 +91,7 @@ class UsersController extends Controller
                 'firstname' => $_POST['firstname'],
                 'lastname' => $_POST['lastname'],
                 'email' => $_POST['email'],
-                'password' => password_hash($_POST['pwd'], PASSWORD_BCRYPT),
+                'password' =>  password_hash($_POST['password'], PASSWORD_BCRYPT),
                 'photo_id' => 0
             ];
 
@@ -104,12 +104,13 @@ class UsersController extends Controller
 
     public function connexionAction()
     {
+        //TODO: Split request for photo and user info otherwise might lock user if no photo is found
         $user = $this->users->executeSql([
             'select' => [
                 'Users.id', 'Users.firstname', 'Users.lastname',
                 'Users.email', 'Users.password',
                 'Users.role', 'Users.status',
-                'Photo.name', 'Photo.path'
+                'Photo.name as photo_name', 'Photo.path as photo_path'
             ],
             'innerJoin' => [
                 'Photo' => ['Photo.id', 'Users.photo_id']
@@ -117,12 +118,10 @@ class UsersController extends Controller
             'where' => [
                 'Users.email' => $_POST['email'],
             ]
-        ]);
+        ])[0];
 
-//        var_dump($user);
-//        die();
         if (!empty($user)) {
-            if (password_verify($_POST['pwd'], $user['password'])) {
+            if (password_verify($_POST['password'], $user['password'])) {
                 if ($user['status'] == 'ACCEPTED') {
                     Auth::Init($user);
                     header('Location: /site');

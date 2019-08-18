@@ -117,12 +117,7 @@ class BaseSQL {
         $stmt = $this->pdo->prepare($query);
         $data = Utils::flattenArray($qb->getData());
         $stmt->execute($data);
-//        echo "<pre>";
-//        var_dump($data);
-//        var_dump($query);
-//        var_dump($stmt->errorInfo());
-//        die();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function find(array $data): array {

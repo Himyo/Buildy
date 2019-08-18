@@ -1,6 +1,7 @@
 <?php
 namespace MVC\Controllers;
 
+use MVC\Core\Auth;
 use MVC\Core\View;
 use MVC\Models\Articles;
 
@@ -47,7 +48,7 @@ class AdminArticlesController extends Controller {
                 $data += ['content' => $_POST['content']];
             }
 
-            $data += ['categories_id' => $_POST['category']];
+            $data += ['categories' => $_POST['category']];
             
             $this->articles->edit($data, ['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/articles');
@@ -58,9 +59,9 @@ class AdminArticlesController extends Controller {
             $data = [
                 'title' => $_POST['title'],
                 'content' => $_POST['content'],
-                'users_id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 1,
+                'users_id' => Auth::User()['id'],
                 'created_at' => date('Y-m-d'),
-                'categories_id' => $_POST['category']
+                'categories' => $_POST['category']
             ];
 
             $this->articles->insert($data);

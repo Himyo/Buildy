@@ -26,7 +26,7 @@
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
         <label class="label-classic" for="pwd">Password :</label>
-        <input class="input-classic" id="pwd" type="password" name="pwd">
+        <input class="input-classic" id="pwd" type="password" name="password">
       </div>
     </div>
     <div class="col-100-center">
