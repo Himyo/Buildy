@@ -17,24 +17,24 @@ class PagesController extends Controller{
 
     public function defaultAction(){
         $pages = Pages::ALL();
-        $view = new View("page", "front");
+        $view = new View("page", "back");
         $view->assign('pages', $pages);
     }
 
     public function detailAction() {
         if (isset($_GET['id'])) {
             $page = $this->pages->findAndWhere(['*'], ['id' => $_GET['id']])[0];
-            $view = new View('pageDetail', 'front');
+            $view = new View('pageDetail', 'back');
             $view->assign('page', $page);
         }
     }
 
     public function mySiteAction() {
-        $view = new View("mySite", "front");
+        $view = new View("mySite", "back");
     }
 
     public function addViewAction() {
-        $view = new View("addPage", "front");
+        $view = new View("addPage", "back");
     }
 
     public function saveAction() {

@@ -37,8 +37,24 @@ class ArticlesController extends Controller {
         }
     }
 
+    public function getByIdAction() {
+        if(!Auth::isAuthenticate()){
+            echo json_encode(['qwak']);
+        }
+        else {
+            $articles = Articles::ALL([
+                'categories as Categorie',
+                'content as Contenu',
+                'created_at as Date ',
+                'state as Etat',
+                'title as Titre',
+            ], ['users_id' => Auth::User()['id']]);
+            echo json_encode($articles);
+        }
+    }
+
     public function getAllArticlesAction() {
             $articles = Articles::ALL();
-            echo json_encode($articles);
+            return json_encode($articles);
     }
 }

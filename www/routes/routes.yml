@@ -283,10 +283,31 @@
   action: getAllArticles
   method: "GET"
 
+"/site/profile/articles":
+  controller: Articles
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
 
+"/site/profile/decks":
+  controller: Decks
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/profile/tournaments":
+  controller: Tournaments
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
 
 
 ################## DYNAMIQUE PAGES #######################
 
 
+
+/site/Pages:
+  controller: Pages
+  action: display
+  method: GET
 
