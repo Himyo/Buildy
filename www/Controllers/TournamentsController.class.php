@@ -37,4 +37,20 @@ class TournamentsController extends Controller {
             header("location:javascript://history.go(-1)");
         }
     }
+
+    public function getByIdAction() {
+        if(!isset($_POST['id'])) {
+            echo json_encode([]);
+        }
+        else {
+            $tournaments = Tournaments::ALL([
+                'created_at as Ouverture',
+                'ended_at as Fin',
+                'name as Nom',
+                'description as Description',
+                'nb_contenders as N`Participant'
+            ], ['users_id' => $_POST['id']]);
+            echo json_encode($tournaments);
+        }
+    }
 }

@@ -14,7 +14,7 @@
             <a class="margin-left-10" href="/site/deconnexion"><p style="color: #0c2033">Se déconnecter</p></a>
 
             <?php if(Auth::isAdmin()):?>
-                <a class="margin-left-10" href="/admin"><p style="color: #0c2033">Accès Admin</p></a>
+                <a class="margin-left-10" href="/Admin"><p style="color: #2c2033">Accès Admin</p></a>
             <?php elseif(Auth::isModerator()):?>
                 <a class="margin-left-10" href="/Admin/dashboard"><p style="color: #0c2033">Accès Moderation</p></a>
             <?php endif; ?>
