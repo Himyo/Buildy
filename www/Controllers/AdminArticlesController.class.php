@@ -54,7 +54,19 @@ class AdminArticlesController extends Controller {
             header('Location: /Admin/dashboard/articles');
 
         //CREATE
-        } elseif (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+        } elseif(!empty($_POST['title']) && !empty($_POST['content'])) {
+           $fieldsCheck = [
+               'title' => [
+                   'maxlength' => 50,
+                   'minlength' => 5,
+                   ],
+               'content' => [
+                   'minlenth' => 50
+               ],
+               'categorie' => [
+                   'fixedValue' => ['TOURNAMENT', 'GENERAL', 'DECK']
+               ]
+           ];
 
             $data = [
                 'title' => $_POST['title'],
