@@ -2,24 +2,24 @@
     <div class="content">
       <div class="space-15"></div>
       <div class="buildy-grid-v-center col-100-center">
-        <h1 class="title-h1">CRUD USERS</h1>
+        <h1 class="title-h1">Gestion des membres</h1>
       </div>
       <div class="space-40"></div>
       <div class="width-100" style="overflow-x: scroll">
-        <table class="table-blue">
+        <table class="dataTable">
             <thead>
-              <tr class="title-table-blue">
-                <th><?= "id" ?></th>
-                <th><?= "lastname" ?></th>
-                <th><?= "firstname" ?></th>
-                <th><?= "email" ?></th>
-                <th><?= "password" ?></th>
-                <th><?= "status" ?></th>
-                <th><?= "role" ?></th>
-                <th><?= "token" ?></th>
-                <th><?= "photo_id" ?></th>
+              <tr>
+                <th>Id</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Mot de passe</th>
+                <th>Status</th>
+                <th>Rôle</th>
+                <th>Token</th>
+                <th>Id photo</th>
                 <th colspan="4">Action</th>
-            </tr>
+              </tr>
             </thead>
             <tbody>
               <?php foreach($users as $key => $value): ?>
@@ -36,12 +36,26 @@
                       <td>
                           <form action="/dashboard/admin/users/delete" method="post">
                               <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                              <input type="submit" value="Delete">
+                              <input class="button-classic-error" type="submit" value="Supprimer">
                           </form>
                       </td>
                   </tr>
               <?php endforeach; ?>
             </tbody>
+            <tfoot>
+              <tr>
+                <th>Id</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Mot de passe</th>
+                <th>Status</th>
+                <th>Rôle</th>
+                <th>Token</th>
+                <th>Id photo</th>
+                <th colspan="4">Action</th>
+              </tr>
+            </tfoot>
         </table>
       </div>
       <div class="space-40"></div>

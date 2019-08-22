@@ -2,7 +2,7 @@
     <div class="content">
         <div class="space-15"></div>
         <div class="buildy-grid-v-center col-100-center">
-            <h1 class="title-h1">Dashboard</h1>
+            <h1 class="title-h1">Tableau&nbsp;de&nbsp;bord</h1>
         </div>
         <div class="space-40"></div>
         <div class="buildy-grid-v-start media-column">

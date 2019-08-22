@@ -248,3 +248,8 @@
 
 
 
+/site/test:
+  controller: Pages
+  action: display
+  method: GET
+
