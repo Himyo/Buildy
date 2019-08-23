@@ -89,4 +89,25 @@ class PagesController extends Controller{
         }
     }
 
+ public function getBuildyAction() {
+        $view = new View('getBuildy', 'front');
+ }
+
+ public function setBuildyAction() {
+        extract($_POST);
+        $password =  password_hash($password, PASSWORD_BCRYPT);
+        $usersfield = "(id,lastname, firstname, email, password, status, role)";
+        $uservalues = "(0, {$firstname}, {$lastname}, {$email}, {$password}, 'ACCEPTED', 'ADMIN')";
+        $adminQuery = "INSERT INTO Users {$usersfield} VALUES {$uservalues};";
+
+        $initsql = fopen('init.sql', 'w');
+        fwrite($initsql, $adminQuery);
+        fclose($initsql);
+        $apacheconf = fopen('../server/apache.conf', 'a');
+        fwrite($apacheconf, "\n ServerName {$server_ip}");
+        fclose($initsql);
+        exec('zip -ur buildy.zip ../server ');
+        exec('zip -ur buildy.zip init.sql');
+
+    }
 }

@@ -110,7 +110,7 @@ systemctl restart apache2 &> /tmp/dump
 
 enable)
 clear
-echo -e ${RED}'Enable a disabled website from your apache server'${NC} 
+echo -e ${RED}'Enable a disabled website from your apache server'${NC}
 echo -e 'Enter your website domain (without www and http)'
 read domain
 a2ensite $domain &> /tmp/dump
@@ -126,7 +126,7 @@ read domain
 read -p "Add 'www' alias in your ssl configuration ? [y]es or [n]o" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
-then
+thenfi
 	myvar=1
     echo '\n'
     echo -e "Activating ssl for website ${bold} ${domain} ${NC} and ${bold} www.${domain} ${NC}"
