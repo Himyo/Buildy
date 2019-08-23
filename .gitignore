@@ -1,6 +1,7 @@
 .vscode
 .idea/
 .nyc_output/
+.env
 coverage/
 db_data/
 node_modules/

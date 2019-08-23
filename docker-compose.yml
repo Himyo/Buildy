@@ -24,7 +24,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=pabuildypa
       - MYSQL_DATABASE=buildy
-      - MYSQL_USER=buildy
       - MYSQL_PASSWORD=buildy
     restart: always
 

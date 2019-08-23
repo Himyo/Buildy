@@ -34,6 +34,9 @@ stopAll:
 rmAll:
 	docker rm $$(docker ps -qa)
 
+install:
+
+
 start:
 	docker-compose up -d
 	sleep 5

@@ -62,6 +62,15 @@
   action: download
   method: "POST"
 
+"/get_buildy":
+  controller: Pages
+  action: getBuildy
+  method: "POST"
+
+"/set_buildy":
+  controller: Pages
+  action: setBuildy
+  method: "POST"
 
 
 ################### ADMIN CRUDS ###################
