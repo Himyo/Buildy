@@ -11,7 +11,7 @@
                       <th><?= "id" ?></th>
                       <th><?= "name" ?></th>
                       <th><?= "description" ?></th>
-                      <th><?= "nomber of contenders" ?></th>
+                      <th><?= "nombre of contenders" ?></th>
                       <th><?= "created_at" ?></th>
                       <th><?= "ended_at" ?></th>
                   </tr>

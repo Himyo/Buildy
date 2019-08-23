@@ -1,9 +1,9 @@
 $(document).ready(
 	function(){
 		makeSlider($('.slider-classic'));
-	})
+	});
 
-var images_total = 0
+var images_total = 0;
 var current_image = 0;
 
 function makeSlider(element){
@@ -17,7 +17,7 @@ function makeSlider(element){
 			$(this).remove();
 			images_total += 1;
 		})
-	element.append('<div class="nav-classic"></div');
+	element.append('<div class="nav-classic"></div>');
 	$(".nav-classic").append('<button class="nav-prev-classic" onclick="prev();resetInterval()"></button>');
 	$(".nav-classic").append('<button class="nav-next-classic" onclick="next();resetInterval()"></button>');
 }

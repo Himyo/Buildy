@@ -2,10 +2,13 @@
 namespace MVC\Core;
 
 //TODO: Take only the data key and not the full data array;
+use MongoDB\Driver\Query;
+
 class QueryBuilder {
     private $query = "";
     private $table;
     private $items= [];
+    private $data = [];
 
     public function __construct(string $table) {
         $this->table = $table;
@@ -19,7 +22,7 @@ class QueryBuilder {
                     return $format;
                 };
             // Make transaction for execution
-                break;
+            break;
             case 'INSERT':
                 return function ($items) {
                     $keys = array_keys($items);
@@ -31,7 +34,7 @@ class QueryBuilder {
                     }
                     return $format;
                 };
-                break;
+            break;
             case 'UPDATE':
                 return function ($items) {
                     $keys = array_keys($items);
@@ -42,13 +45,13 @@ class QueryBuilder {
                     $format = trim($format, ",");
                     return $format;
                 };
-                break;
+            break;
             case 'DELETE':
                 return function ($items) {
                     $format = "(" . implode(",", $items) . ")";
                     return $format;
                 };
-                break;
+            break;
             case 'INSERT MANY':
                 return function($items) {
                     $keys = array_keys($items[0]);
@@ -61,27 +64,37 @@ class QueryBuilder {
 
                     return $format.$values;
                 };
-                break;
+            break;
             case 'AND WHERE':
                 return function($items) {
                     $format = "";
                     $keys = array_keys($items);
                     foreach ($keys as $k) {
-                        $format .= " AND ".$k." = :".$k;
+                        $value = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
+                        $format .= " AND ". $k." = :".$value;
                     }
                     return $format;
                 };
-                break;
+            break;
             case 'OR WHERE':
                 return function($items) {
                     $format = "";
                     $keys = array_keys($items);
                     foreach ($keys as $k) {
-                        $format .= " OR ".$k." = :".$k;
+                        $value = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
+                        $format .= " OR ".$k." = :".$value;
                     }
                     return $format;
                 };
-                break;
+            break;
+            case 'WHERE':
+                return function($items) {
+                    $key = array_keys($items)[0];
+                    $value = sizeof(explode( '.', $key)) > 1 ? str_replace('.', '', $key) :  $key;
+                    $format = " WHERE {$key} = :{$value}";
+                    return $format;
+                };
+            break;
             case 'JOIN':
                 return function($items) {
                   $format = "";
@@ -91,6 +104,7 @@ class QueryBuilder {
                   }
                   return $format;
                 };
+            break;
             default:
                 return function ($items) {
                     $keys = array_keys($items);
@@ -100,7 +114,6 @@ class QueryBuilder {
                     }
                     return $format;
                 };
-                break;
         }
     }
 
@@ -108,9 +121,11 @@ class QueryBuilder {
         $this->items['SELECT'] = $items;
         return $this;
     }
+
     public function selectAll(): string {
        return "SELECT * FROM ".$this->table.";";
     }
+
     public function delete(array $items, $opt=[]): QueryBuilder{
         $this->items['DELETE'] = $opt;
         $this->orWhere($items);
@@ -143,6 +158,11 @@ class QueryBuilder {
 
     public function innerJoin($items): QueryBuilder {
         $this->items['JOIN'] =  $items;
+        return $this;
+    }
+
+    public function whereAnon($item): QueryBuilder {
+        $this->items['WHEREANON'] = $item;
         return $this;
     }
 
@@ -196,27 +216,48 @@ class QueryBuilder {
                     $this->query = "SELECT ".QueryBuilder::SQL_PARSER('SELECT')($data)." FROM ".$this->table;
                     break;
                 case 'INSERT':
+                    $this->data += $data;
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT')($data);
                     break;
                 case 'UPDATE':
+                    $this->data += $data;
                     $this->query = "UPDATE ".$this->table." SET ".QueryBuilder::SQL_PARSER('UPDATE')($data);
                     break;
                 case 'DELETE':
+                    $this->data += $data;
                     $this->query = "DELETE FROM ".$this->table;
                     break;
                 case 'JOIN':
-                    $this->query .= ' '.QueryBuilder::SQL_PARSER('JOIN')($data);
+                    $this->query .= QueryBuilder::SQL_PARSER('JOIN')($data);
                     break;
                 case 'INSERT MANY':
+                    $this->data += $data;
                     $this->query = "INSERT INTO ".$this->table." ".QueryBuilder::SQL_PARSER('INSERT MANY')($data);
                     break;
                 case 'AND WHERE':
+                    $keys = array_keys($data);
+                    foreach($keys as $k) {
+                        $key = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
+                        $this->data[$key] = $data[$k];
+                    }
                     $this->query .= QueryBuilder::SQL_PARSER('AND WHERE')($data);
                     break;
                 case 'OR WHERE':
+                    $keys = array_keys($data);
+                    foreach($keys as $k) {
+                        $key = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
+                        $this->data[$key] = $data[$k];
+                    }
                     $this->query .= QueryBuilder::SQL_PARSER('OR WHERE')($data);
                     break;
+                case 'WHERE':
+                    $k = array_keys($data)[0];
+                    $key = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
+                    $this->data[$key] = $data[$k];
+                    $this->query .= QueryBuilder::SQL_PARSER('WHERE')($data);
+                    break;
                 default:
+                    $this->data += $data;
                     $this->query .= " ".$keyword." ".QueryBuilder::SQL_PARSER('DEFAULT')($data);
                     break;
             }
@@ -233,6 +274,9 @@ class QueryBuilder {
 
     public function getItems(): array {
         return $this->items;
+    }
+    public function getData(): array {
+        return $this->data;
     }
     public function getQuery(): string {
         return $this->query;

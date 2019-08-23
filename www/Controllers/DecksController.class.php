@@ -41,5 +41,17 @@ class DecksController extends Controller {
         }
     }
 
-
+    public function getByIdAction() {
+        if(!isset($_POST['id'])){
+            echo json_encode([]);
+        }
+        else {
+            $decks = Decks::ALL([
+                'name as Nom',
+                'upvotes as UP',
+                'downvotes as DOWN'
+            ], ['users_id' => $_POST['id']]);
+            echo json_encode($decks);
+        }
+    }
 }

@@ -219,7 +219,7 @@
   method: "GET"
 
 "/site/register":
-  controller: Users
+  controller: User
   action: getRegisterView
   method: "GET"
 
@@ -243,29 +243,71 @@
   action: deconnexion
   method: "POST"
 
+"/site/profile":
+  controller: Users
+  action: getProfile
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
+#  "site/profile/edit":
+#    controller: Users
+#    action: editProfile
+#    method: "POST"
+
 "/site/article/save":
   controller: Articles
-  action: save
+  action: saveArticle
   method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
 
 "/site/tournament/save":
   controller: Tournaments
-  action: save
+  action: saveTournament
   method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
 
 "/site/deck/save":
   controller: Decks
-  action: save
+  action: saveDeck
   method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
 
 "/site/articles/get":
   controller: Articles
   action: getAllArticles
   method: "GET"
 
+"/site/profile/articles":
+  controller: Articles
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/profile/decks":
+  controller: Decks
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/profile/tournaments":
+  controller: Tournaments
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
 
 
 ################## DYNAMIQUE PAGES #######################
 
 
+
+/site/Pages:
+  controller: Pages
+  action: display
+  method: GET
 

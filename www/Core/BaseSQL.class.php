@@ -108,12 +108,16 @@ class BaseSQL {
 		}
 	}
 
-    public function findAll(): array {
+    public function executeSql(array $querys) {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $query = $qb->selectAll();
+        foreach ($querys as $command => $data) {
+            $qb = $qb->$command($data);
+        }
+        $query = $qb->make()->getQuery();
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = Utils::flattenArray($qb->getData());
+        $stmt->execute($data);
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function find(array $data): array {
