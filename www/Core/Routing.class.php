@@ -31,27 +31,6 @@ class Routing{
         ];
     }
 
-    public static function getCrudRoute($slug) {
-        $slug = strtolower($slug);
-        $routes = yaml_parse_file(self::$routeFile);
-        $slugMethod = substr($slug, 0, strrpos($slug, "/"));
-        $controller = ucwords(substr($slug, strrpos($slug, "/") + 1))."Controller";
-        if( isset($routes[$slugMethod])) {
-            if(empty($routes[$slugMethod]["action"])) {
-                return ["controller" => 'PagesController', "action" => 'notFoundAction',
-                    "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
-            }
-            $controllerPath = "Controllers/" . $controller . ".class.php";
-            $action = $routes[$slugMethod]["action"] . "Action";
-            $method = $routes[$slugMethod]["method"];
-        } else {
-            return ["controller" => 'PagesController', "action" => 'notFoundAction',
-                "controllerPath" => 'Controllers/PagesController.class.php', "method" => 'post'];
-        }
-        return ["controller" => $controller, "action" => $action, "controllerPath" => $controllerPath, "method" =>
-            $method];
-    }
-
     public static function getMethod($slug) {
         $slug = strtolower($slug);
         $routes = yaml_parse_file(self::$routeFile);
