@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: buildydb
--- Generation Time: Aug 05, 2019 at 12:40 AM
+-- Generation Time: Aug 24, 2019 at 04:27 PM
 -- Server version: 10.3.14-MariaDB-1:10.3.14+maria~bionic
 -- PHP Version: 7.2.14
 
@@ -34,7 +34,7 @@ CREATE TABLE `Articles` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `content` varchar(45) DEFAULT NULL,
   `users_id` int(11) NOT NULL,
-  `categories_id` varchar(50) DEFAULT NULL,
+  `categories` varchar(50) DEFAULT 'GENERAL',
   `state` varchar(50) DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -42,8 +42,12 @@ CREATE TABLE `Articles` (
 -- Dumping data for table `Articles`
 --
 
-INSERT INTO `Articles` (`id`, `title`, `created_at`, `content`, `users_id`, `categories_id`, `state`) VALUES
-(15, 'Articles uno', '2019-08-01 00:00:00', 'Contentcontent', 12, '1', 'PENDING');
+INSERT INTO `Articles` (`id`, `title`, `created_at`, `content`, `users_id`, `categories`, `state`) VALUES
+(15, 'Articles uno', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
+(16, 'Articles dos', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
+(17, 'Articles tres', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
+(18, 'Articles quatro', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
+(19, 'cinqo de mayo', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -149,26 +153,6 @@ INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `l
 (75, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129524&type=card', 'Demystify', 0, 0, 'Destroy target enchantment.', '\"Illusion is a crutch for those with no grounding in reality.\" â€”Cho-Manno', 'none', 129524, 1, 23, 4, 3),
 (76, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=135250&type=card', 'Denizen of the Deep', 11, 11, 'When Denizen of the Deep enters the battlefield, return each other creature you control to its owner\'s hand.', 'According to merfolk legend, a denizen of the deep swallows the horizon at the end of each day, bringing on the cold blanket of night.', 'none', 135250, 1, 46, 45, 1),
 (77, 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129525&type=card', 'Diabolic Tutor', 0, 0, 'Search your library for a card and put that card into your hand. Then shuffle your library.', 'The best ideas often come from the worst minds.', 'none', 129525, 1, 6, 5, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Categories`
---
-
-CREATE TABLE `Categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `Categories`
---
-
-INSERT INTO `Categories` (`id`, `name`) VALUES
-(1, 'Tournament'),
-(2, 'General'),
-(3, 'Deck');
 
 -- --------------------------------------------------------
 
@@ -342,6 +326,13 @@ CREATE TABLE `Pages` (
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Pages`
+--
+
+INSERT INTO `Pages` (`id`, `slug`, `content`, `title`, `created_at`, `updated_at`) VALUES
+(12, '/site/Pages', 'alalal', 'Pages', '2019-08-18 00:00:00', '2019-08-18 11:11:03');
+
 -- --------------------------------------------------------
 
 --
@@ -353,6 +344,13 @@ CREATE TABLE `Photo` (
   `path` varchar(45) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Photo`
+--
+
+INSERT INTO `Photo` (`id`, `path`, `name`) VALUES
+(0, 'default-profile.jpg', 'default');
 
 -- --------------------------------------------------------
 
@@ -480,7 +478,7 @@ CREATE TABLE `Users` (
   `firstname` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `status` varchar(25) NOT NULL DEFAULT 'PENDING',
+  `status` varchar(25) NOT NULL DEFAULT 'ACCEPTED',
   `role` varchar(15) NOT NULL DEFAULT 'USER',
   `token` varchar(60) DEFAULT NULL,
   `photo_id` int(11) NOT NULL DEFAULT 0
@@ -491,9 +489,12 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`id`, `lastname`, `firstname`, `email`, `password`, `status`, `role`, `token`, `photo_id`) VALUES
-(12, 'admin', 'admin', 'admin@gmail.com', '$2y$10$70QjRRbrZdl6hJMtuj15qOHqJM2mMt1mD6rxv/Fu2TwbxCx8L/VzW', 'ACCEPTED', 'ADMIN', NULL, 1),
+(12, 'admin', 'admin', 'admin@gmail.com', 'testtest', 'ACCEPTED', 'ADMIN', NULL, 0),
 (13, 'u', 'p', 'u@u.com', '$2y$10$it248g04drfmifcyRT8f5eTd5DAyWZBEiVm9hd4KDXRJFvsYWyDfS', 'ACCEPTED', 'USER', NULL, 0),
-(14, 'Mod', 'Moderator', 'gay@mod.com', '$2y$10$j7hG//HUlnMyID9.z4BAsuKSlz1xoIX/18PlOvAaPvQPaSS81baui', 'ACCEPTED', 'MODERATOR', NULL, 0);
+(14, 'Mod', 'Moderator', 'gay@mod.com', '$2y$10$j7hG//HUlnMyID9.z4BAsuKSlz1xoIX/18PlOvAaPvQPaSS81baui', 'ACCEPTED', 'MODERATOR', NULL, 0),
+(15, 'ddd', 'bad', 'dabdab@gmail.com', '$2y$10$B3nZj84w8N03vnY33XYyXe4jSxbk3nZ9KBEoiIrNi7xAeY6X2W8IG', 'ACCEPTED', 'USER', NULL, 0),
+(16, 'o', 'ba', 'gay@mod.com', '$2y$10$L4L2AaRqq9XEfMrC5egj7uTVw40qC8pumuDrxD4tgF9OYa0Y2eGAe', 'ACCEPTED', 'USER', NULL, 0),
+(20, 'Mod', 'Moderator', 'Mododo@g.com', '$2y$10$AYHf7ufgTlvqbeJiG3gUle2jLr6qd3oPkMZCaqLummmeDJ0pgbSR2', 'ACCEPTED', 'ADMIN', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -515,7 +516,7 @@ CREATE TABLE `Users_cards` (
 --
 ALTER TABLE `Articles`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_articles_categories1_idx` (`categories_id`);
+  ADD KEY `fk_articles_categories1_idx` (`categories`);
 
 --
 -- Indexes for table `Cards`
@@ -523,12 +524,6 @@ ALTER TABLE `Articles`
 ALTER TABLE `Cards`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cards_release1_idx` (`releases_id`);
-
---
--- Indexes for table `Categories`
---
-ALTER TABLE `Categories`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Comments`
@@ -618,19 +613,13 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Articles`
 --
 ALTER TABLE `Articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `Cards`
 --
 ALTER TABLE `Cards`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
-
---
--- AUTO_INCREMENT for table `Categories`
---
-ALTER TABLE `Categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Comments`
@@ -660,13 +649,13 @@ ALTER TABLE `Mana`
 -- AUTO_INCREMENT for table `Pages`
 --
 ALTER TABLE `Pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `Photo`
 --
 ALTER TABLE `Photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `Releases`
@@ -690,7 +679,7 @@ ALTER TABLE `Type`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
