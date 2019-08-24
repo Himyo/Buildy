@@ -21,6 +21,10 @@ class PagesController extends Controller{
         $view->assign('pages', $pages);
     }
 
+    public function notFoundAction() {
+        $view = new View('notFound', 'front');
+    }
+
     public function detailAction() {
         if (isset($_GET['id'])) {
             $page = $this->pages->findAndWhere(['*'], ['id' => $_GET['id']])[0];
