@@ -7,16 +7,16 @@
         <div class="col-100-space-a">
             <div class="col-50-center">
                 <div class="label-input-column-classic padding-20">
-                    <label class="label-classic" for="title">Title :</label>
+                    <label class="label-classic" for="title">Titre :</label>
                     <input class="input-classic" id="title" type="text" name="title">
                 </div>
             </div>
             <div class="col-50-center">
                 <div class="label-input-column-classic padding-20 width-100">
-                    <label class="label-classic" for="category">Category : </label>
+                    <label class="label-classic" for="category">Catégorie : </label>
                     <select class="input-classic" name="category" id="category">
-                        <option value="GENERAL">General</option>
-                        <option value="TOURNAMENT">Tournament</option>
+                        <option value="GENERAL">Général</option>
+                        <option value="TOURNAMENT">Tournois</option>
                         <option value="DECK">Deck</option>
                     </select>
                 </div>
@@ -25,13 +25,13 @@
         <div class="space-20"></div>
         <div class="col-100-center">
             <div class="label-input-column-classic padding-20 width-100">
-                <label class="label-classic" for="content">Content :</label>
+                <label class="label-classic" for="content">Contenu :</label>
                 <textarea class="input-classic width-100" id="content" name="content" rows="15"></textarea>
             </div>
         </div>
         <div class="space-20"></div>
         <div class="col-100-center">
-            <input class="button-classic-succes" type="submit" value="Submit">
+            <input class="button-classic-succes" type="submit" value="Valider">
         </div>
         <div class="space-20"></div>
     </form>

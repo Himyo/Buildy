@@ -1,19 +1,16 @@
 <?php
 namespace MVC\Core;
-
 //TODO: Take only the data key and not the full data array;
-use MongoDB\Driver\Query;
 
 class QueryBuilder {
     private $query = "";
     private $table;
     private $items= [];
     private $data = [];
-
     public function __construct(string $table) {
         $this->table = $table;
     }
- //TODO: INNER/OUTER JOIN, LIKE, BETWEEN, EXISTS, HAVING, ALTER, DROP, CHECK
+    //TODO: INNER/OUTER JOIN, LIKE, BETWEEN, EXISTS, HAVING, ALTER, DROP, CHECK
     public static function SQL_PARSER($format){
         switch ($format) {
             case 'SELECT':
@@ -21,8 +18,8 @@ class QueryBuilder {
                     $format = "" . implode(" ,", $items) . "";
                     return $format;
                 };
-            // Make transaction for execution
-            break;
+                // Make transaction for execution
+                break;
             case 'INSERT':
                 return function ($items) {
                     $keys = array_keys($items);
@@ -61,7 +58,6 @@ class QueryBuilder {
                         $values .= "(:". implode(", :", array_keys($items[$i])) . "),";
                     }
                     $values = trim($values, ",");
-
                     return $format.$values;
                 };
             break;
@@ -86,7 +82,7 @@ class QueryBuilder {
                     }
                     return $format;
                 };
-            break;
+                break;
             case 'WHERE':
                 return function($items) {
                     $key = array_keys($items)[0];
@@ -97,12 +93,12 @@ class QueryBuilder {
             break;
             case 'JOIN':
                 return function($items) {
-                  $format = "";
-                  $keys = array_keys($items);
-                  foreach ($keys as $key) {
-                      $format.= " JOIN ".$key ." ON ".$items[$key][0]." = ".$items[$key][1];
-                  }
-                  return $format;
+                    $format = "";
+                    $keys = array_keys($items);
+                    foreach ($keys as $key) {
+                        $format.= " JOIN ".$key ." ON ".$items[$key][0]." = ".$items[$key][1];
+                    }
+                    return $format;
                 };
             break;
             default:
@@ -116,14 +112,13 @@ class QueryBuilder {
                 };
         }
     }
-
     public function select(array $items): QueryBuilder{
         $this->items['SELECT'] = $items;
         return $this;
     }
 
     public function selectAll(): string {
-       return "SELECT * FROM ".$this->table.";";
+        return "SELECT * FROM ".$this->table.";";
     }
 
     public function delete(array $items, $opt=[]): QueryBuilder{
@@ -135,12 +130,10 @@ class QueryBuilder {
         $this->items = ['INSERT' => $items];
         return $this;
     }
-
     public function insertMany(array $items): QueryBuilder{
         $this->items = ['INSERT MANY' => $items];
         return $this;
     }
-
     public function update(array $items): QueryBuilder {
         $this->items = ['UPDATE' => $items];
         return $this;
@@ -149,28 +142,22 @@ class QueryBuilder {
         isset($this->items['ADDITIONAL']) ? array_push($this->items['ADDITIONAL'], $items) : $this->items['ADDITIONAL'] = $items;
         return $this;
     }
-
     public function where($item): QueryBuilder {
         $this->items['WHERE'] = $item;
-
         return $this;
     }
-
     public function innerJoin($items): QueryBuilder {
         $this->items['JOIN'] =  $items;
         return $this;
     }
-
     public function whereAnon($item): QueryBuilder {
         $this->items['WHEREANON'] = $item;
         return $this;
     }
-
     public function andWhere($item): QueryBuilder{
         if(empty($item)) {
             return $this;
         }
-
         if(!isset($this->items['WHERE'])) {
             $this->items['WHERE'] = [array_keys($item)[0] => array_shift($item)];
         }
@@ -179,7 +166,6 @@ class QueryBuilder {
         }
         return $this;
     }
-
     public function orWhere($item): QueryBuilder{
         if(empty($item)) {
             return $this;
@@ -192,24 +178,20 @@ class QueryBuilder {
         }
         return $this;
     }
-    
+
     public function groupBy($items): QueryBuilder {
         $this->items['GROUP BY'] = $items;
         return $this;
     }
-
     public function orderBy($items): QueryBuilder {
         $this->items['ORDER BY'] = $items;
         return $this;
     }
-
     public function in($items): QueryBuilder {
         $this->items['IN'] = $items;
         return $this;
     }
-
     public function make(): QueryBuilder {
-
         foreach ($this->items as $keyword => $data) {
             switch($keyword) {
                 case 'SELECT':
@@ -265,13 +247,10 @@ class QueryBuilder {
         $this->query.=";";
         return $this;
     }
-
     public function from($table): QueryBuilder {
         $this->table = $table;
         return $this;
     }
-
-
     public function getItems(): array {
         return $this->items;
     }
@@ -281,8 +260,6 @@ class QueryBuilder {
     public function getQuery(): string {
         return $this->query;
     }
-
-
     public static function GetQueryBuilder($class): self {
         return new self($class);
     }

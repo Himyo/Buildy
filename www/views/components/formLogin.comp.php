@@ -13,13 +13,13 @@
     </div>
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
-        <label class="label-classic" for="pwd">Password :</label>
+        <label class="label-classic" for="pwd">Mot de passe :</label>
         <input class="input-classic" id="pwd" type="password" name="password">
       </div>
     </div>
     <div class="space-20"></div>
     <div class="col-100-center">
-      <input class="button-classic-succes" type="submit" value="Submit">
+      <input class="button-classic-succes" type="submit" value="Valider">
     </div>
   </form>
 </div>

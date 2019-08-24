@@ -303,11 +303,3 @@
 
 
 ################## DYNAMIQUE PAGES #######################
-
-
-
-/site/Pages:
-  controller: Pages
-  action: display
-  method: GET
-

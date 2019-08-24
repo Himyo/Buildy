@@ -6,42 +6,42 @@
     <div class="space-20"></div>
     <form class="form-classic border-classic-radius" action="/Admin/dashboard/decks/save" method="post">
         <div class="col-100-space-a">
-            <div class="col-33-center">
-                <div class="label-input-column-classic padding-20">
-                    <label class="label-classic" for="id">ID :</label>
+            <div class="col-100-center">
+                <div class="label-input-column-classic padding-20 width-100">
+                    <label class="label-classic" for="id">Id :</label>
                     <input class="input-classic" id="id" type="number" name="id">
                 </div>
             </div>
-            <div class="col-33-center">
-                <div class="label-input-column-classic padding-20">
-                    <label class="label-classic" for="name">Name :</label>
+            <div class="col-100-center">
+                <div class="label-input-column-classic padding-20 width-100">
+                    <label class="label-classic" for="name">Nom :</label>
                     <input class="input-classic" id="name" type="text" name="name">
                 </div>
             </div>
-            <div class="col-33-center">
-                <div class="label-input-column-classic padding-20 width-100">
-                    <label class="label-classic" for="users_id">Users_id :</label>
-                    <input class="input-classic" id="users_id" type="number" name="users_id">
-                </div>
-            </div>
         </div>
-        <div class="space-20"></div>
         <div class="col-100-center">
             <div class="label-input-column-classic padding-20 width-100">
-                <label class="label-classic" for="upvotes">Upvotes :</label>
-                <input class="input-classic" id="upvotes" type="number" name="upvotes">
+                <label class="label-classic" for="users_id">Id membre :</label>
+                <input class="input-classic" id="users_id" type="number" name="users_id">
             </div>
+        </div>
+        <div class="col-100-space-a">
+          <div class="col-100-center">
+              <div class="label-input-column-classic padding-20 width-100">
+                  <label class="label-classic" for="upvotes">Like :</label>
+                  <input class="input-classic" id="upvotes" type="number" name="upvotes">
+              </div>
+          </div>
+          <div class="col-100-center">
+              <div class="label-input-column-classic padding-20 width-100">
+                  <label class="label-classic" for="downvotes">Dislike :</label>
+                  <input class="input-classic" id="downvotes" type="number" name="downvotes">
+              </div>
+          </div>
         </div>
         <div class="space-20"></div>
         <div class="col-100-center">
-            <div class="label-input-column-classic padding-20 width-100">
-                <label class="label-classic" for="downvotes">Downvotes :</label>
-                <input class="input-classic" id="downvotes" type="number" name="downvotes">
-            </div>
-        </div>
-        <div class="space-20"></div>
-        <div class="col-100-center">
-            <input class="button-classic-succes" type="submit" value="Submit">
+            <input class="button-classic-succes" type="submit" value="Valider">
         </div>
         <div class="space-20"></div>
     </form>

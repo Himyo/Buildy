@@ -7,13 +7,13 @@
         <div class="col-100-space-a">
             <div class="col-50-center">
                 <div class="label-input-column-classic padding-20">
-                    <label class="label-classic" for="name">Name :</label>
+                    <label class="label-classic" for="name">Nom :</label>
                     <input class="input-classic" id="name" type="text" name="name">
                 </div>
             </div>
             <div class="col-50-center">
                 <div class="label-input-column-classic padding-20">
-                    <label class="label-classic" for="nb_contenders">Number of contenders : </label>
+                    <label class="label-classic" for="nb_contenders">Nombre de participants : </label>
                     <input class="input-classic" id="nb_contenders" type="number" name="nb_contenders">
                 </div>
             </div>

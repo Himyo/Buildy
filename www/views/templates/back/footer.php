@@ -16,7 +16,7 @@
       </nav>
       <div class="space-10"></div>
       <div class="col-100-center">
-        <p>© Buildy, 2019 - Tous droits réservés</p>
+        <p class="grey-font">© Buildy, 2019 - Tous droits réservés</p>
       </div>
       <div class="space-10"></div>
     </div>

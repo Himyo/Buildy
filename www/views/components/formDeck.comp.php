@@ -7,14 +7,14 @@
         <div class="col-100-space-a">
             <div class="col-50-center">
                 <div class="label-input-column-classic padding-20">
-                    <label class="label-classic" for="name">Name :</label>
+                    <label class="label-classic" for="name">Nom :</label>
                     <input class="input-classic" id="name" type="text" name="name">
                 </div>
             </div>
         </div>
         <div class="space-20"></div>
         <div class="col-100-center">
-            <input class="button-classic-succes" type="submit" value="Submit">
+            <input class="button-classic-succes" type="submit" value="Valider">
         </div>
         <div class="space-20"></div>
     </form>

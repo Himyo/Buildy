@@ -6,7 +6,7 @@
         use MVC\Core\Auth;
     ?>
   <div class="buildy-grid-v-center margin-right-10">
-    <a class="margin-right-10" href="/Admin/dashboard"><p>Dashboard</p></a>
+    <a class="margin-right-10" href="/Admin/dashboard"><p>Tableau&nbsp;de&nbsp;bord</p></a>
 
      <?php if(Auth::isAdmin()):?>
         <a class="margin-right-10" href="/Admin/mysite"><p>Mon&nbsp;Site</p></a>

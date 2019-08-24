@@ -7,13 +7,13 @@
   <form class="form-classic border-classic-radius" action="/site/save" method="post">
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
-        <label class="label-classic" for="firstname">Firstname :</label>
+        <label class="label-classic" for="firstname">Prénom :</label>
         <input class="input-classic" id="firstname" type="text" name="firstname">
       </div>
     </div>
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
-        <label class="label-classic" for="lastname">Lastname :</label>
+        <label class="label-classic" for="lastname">Nom :</label>
         <input class="input-classic" id="lastname" type="text" name="lastname">
       </div>
     </div>
@@ -25,19 +25,19 @@
     </div>
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
-        <label class="label-classic" for="pwd">Password :</label>
+        <label class="label-classic" for="pwd">Mot de passe :</label>
         <input class="input-classic" id="pwd" type="password" name="password">
       </div>
     </div>
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
-        <label class="label-classic" for="pwd2">Verify password :</label>
+        <label class="label-classic" for="pwd2">Confirmation mot de passe :</label>
         <input class="input-classic" id="pwd2" type="password" name="password2">
       </div>
     </div>
     <div class="space-20"></div>
     <div class="col-100-center">
-      <input class="button-classic-succes" type="submit" value="Submit">
+      <input class="button-classic-succes" type="submit" value="Valider">
     </div>
     <div class="col-100-center">
       <p class="font-14">*Champs obligatoires</p>
