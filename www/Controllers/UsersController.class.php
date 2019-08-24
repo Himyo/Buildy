@@ -76,10 +76,12 @@ class UsersController extends Controller
                 $data['password'] = crypt($data['password'], "yuAhFz628HZ328bz");
                 $this->users->edit($data, ['id' => $data['id']]);
                 header('Location: /site');
+                exit();
             }
             else {
                 $errors = $validator->getErrors();
                 header("Location: /site/profile/edit{$errors}");
+                exit();
             }
 
         //CREATE
@@ -123,10 +125,12 @@ class UsersController extends Controller
 
                 $this->users->insert($data);
                 header('Location: /site/login');
+                exit();
             }
             else {
                 $errors = $validator->getErrors();
                 header("Location: /site/register{$errors}");
+                exit();
             }
         }
     }
@@ -174,6 +178,7 @@ class UsersController extends Controller
     {
         Auth::destroy();
         header('Location: /site');
+        exit();
     }
 
     public function getProfileAction()

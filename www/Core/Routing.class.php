@@ -13,6 +13,7 @@ class Routing{
             $filteredSlug = Middleware::filter($slug, $routes);
             if($slug != $filteredSlug) {
                 header("Location: {$filteredSlug}");
+                exit();
             }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";

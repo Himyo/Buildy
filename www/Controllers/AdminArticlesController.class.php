@@ -29,9 +29,11 @@ class AdminArticlesController extends Controller {
         if (isset($_POST['id'])) {
             $this->articles->delete(['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/articles');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
             header('Location: /Admin/dashboard/articles');
+            exit();
         }
 
     }
@@ -52,6 +54,7 @@ class AdminArticlesController extends Controller {
             
             $this->articles->edit($data, ['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/articles');
+            exit();
 
         //CREATE
         } elseif(!empty($_POST['title']) && !empty($_POST['content'])) {
@@ -78,9 +81,11 @@ class AdminArticlesController extends Controller {
 
             $this->articles->insert($data);
             header('Location: /Admin/dashboard/articles');
+            exit();
         } else {
             //TODO RETURN ERROR
             header('Location: /Admin/dashboard/articles');
+            exit();
         }
     }
 

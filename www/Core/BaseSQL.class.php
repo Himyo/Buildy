@@ -119,18 +119,6 @@ class BaseSQL {
 		}
 	}
 
-    public function executeSql(array $querys) {
-        $qb = QueryBuilder::GetQueryBuilder($this->table);
-        foreach ($querys as $command => $data) {
-            $qb = $qb->$command($data);
-        }
-        $query = $qb->make()->getQuery();
-        $stmt = $this->pdo->prepare($query);
-        $data = Utils::flattenArray($qb->getData());
-        $stmt->execute($data);
-       return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public function find(array $data): array {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
         $query = $qb->select($data)->make()->getQuery();

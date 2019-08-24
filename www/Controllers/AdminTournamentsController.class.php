@@ -25,9 +25,11 @@ class AdminTournamentsController extends Controller {
         if (isset($_POST['id'])) {
             $this->tournaments->delete(['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/tournaments');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
             header('Location: /Admin/dashboard/tournaments');
+            exit();
         }
 
     }
@@ -50,6 +52,7 @@ class AdminTournamentsController extends Controller {
             
             $this->tournaments->edit($data, ['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/tournaments');
+            exit();
 
         //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['nb_contenders'])) {
@@ -63,9 +66,11 @@ class AdminTournamentsController extends Controller {
 
             $this->tournaments->insert($data);
             header('Location: /Admin/dashboard/tournaments');
+            exit();
         } else {
             //TODO RETURN ERROR
             header('Location: /Admin/dashboard/tournaments');
+            exit();
         }
     }
 }   

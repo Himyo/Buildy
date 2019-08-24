@@ -23,6 +23,7 @@ $slug = $_SERVER["REQUEST_URI"];
 
 if($slug == '/' && !(Auth::isAdmin())) {
     header('Location: /site');
+    exit();
 }
 
 //pour palier aux paramètres GET

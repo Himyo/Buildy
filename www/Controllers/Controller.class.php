@@ -34,6 +34,7 @@ abstract class Controller
             $this->$modelName->delete($data);
         }
         header('Location: /list/'.$modelName);
+        exit();
     }
 
     public function editAction() {
@@ -50,6 +51,7 @@ abstract class Controller
            $this->$modelName->edit($data, ['id' => $id]);
         }
         header('Location: /list/'.$modelName);
+        exit();
     }
 
     public function createAction() {
@@ -67,6 +69,7 @@ abstract class Controller
             $this->$modelName->insert($data);
         }
         header('Location: /list/'.$modelName);
+        exit();
 
     }
 }

@@ -21,6 +21,7 @@ class TournamentsController extends Controller {
             if (!isset($_SESSION['user']['id'])) {
                 //TODO RETURN ERROR
                 header('Location: /site');
+                exit();
             }
 
             $data = [
@@ -32,9 +33,11 @@ class TournamentsController extends Controller {
 
             $this->tournaments->insert($data);
             header('Location: /site');
+            exit();
         } else {
             //TODO RETURN ERROR
             header("location:javascript://history.go(-1)");
+            exit();
         }
     }
 

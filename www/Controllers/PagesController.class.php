@@ -57,10 +57,12 @@ class PagesController extends Controller{
                 $this->pages->insert($data);
                 Routing::addSlug("/site".$_POST['slug'], "display", "GET");
                 header('Location: /Admin/mysite/addPage');
+                exit();
             }
         } else {
             //TODO RETURN ERROR
             header('Location: /Admin/mysite/addPage');
+            exit();
         }
     }
 

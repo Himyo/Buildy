@@ -25,9 +25,11 @@ class AdminDecksController extends Controller {
         if (isset($_POST['id'])) {
             $this->decks->delete(['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/decks');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
             header('Location: /Admin/dashboard/decks');
+            exit();
         }
 
     }
@@ -55,6 +57,7 @@ class AdminDecksController extends Controller {
 
             $this->decks->edit($data, ['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/decks');
+            exit();
 
             //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['name'])) {
@@ -68,9 +71,11 @@ class AdminDecksController extends Controller {
 
             $this->decks->insert($data);
             header('Location: /Admin/dashboard/decks');
+            exit();
         } else {
             //TODO RETURN ERROR
             header('Location: /Admin/dashboard/decks');
+            exit();
         }
     }
 }

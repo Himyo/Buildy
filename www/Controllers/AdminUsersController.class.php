@@ -26,9 +26,11 @@ class AdminUsersController extends Controller {
         if (isset($_POST['id'])) {
             $this->users->delete(['id' => $_POST['id']]);
             header('Location: /Admin/dashboard/users');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
             header('Location: /Admin/dashboard/users');
+            exit();
         }
 
     }
@@ -74,6 +76,7 @@ class AdminUsersController extends Controller {
                 $data['password'] = crypt($data['password'], "yuAhFz628HZ328bz");
                 $this->users->edit($data, ['id' => $data['id']]);
                 header('Location: /site');
+                exit();
             }
             else {
                 $view = new View("register", "front");
@@ -127,6 +130,7 @@ class AdminUsersController extends Controller {
 
                 $this->users->insert($data);
                 header('Location: /Admin/dashboard/users');
+                exit();
             }
             else {
                 header('Location: /Admin/dashboard/users');
