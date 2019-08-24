@@ -43,12 +43,12 @@ class UsersController extends Controller
             $fieldsCheck = ['id' => $_POST['id']];
 
             if (!empty($_POST['firstname'])) {
-                $fieldsCheck += [ 'firstname' => ['maxlength' => 50, 'minlength' => 3,] ];
+                $fieldsCheck += [ 'firstname' => ['maxlength' => 50, 'minlength' => 2] ];
                 $data += ['firstname' => $_POST['firstname']];
             }
 
             if (!empty($_POST['lastname'])) {
-                $fieldsCheck += [ 'lastname' => ['maxlength' => 70, 'minlength' => 3,] ];
+                $fieldsCheck += [ 'lastname' => ['maxlength' => 75, 'minlength' => 2] ];
                 $data += ['lastname' => $_POST['lastname']];
             }
 
@@ -86,6 +86,11 @@ class UsersController extends Controller
 
         //CREATE
         } else {
+            $emails = Users::ALL(['email']);
+            $emailArray = [];
+            foreach($emails as $key => $value){
+               array_push($emailArray, $value['email']); 
+            }
             $fieldsCheck =
                 [
                     'firstname' =>
@@ -96,12 +101,12 @@ class UsersController extends Controller
                     'lastname' =>
                         [
                             'minlength' => 2,
-                            'maxlength' => 50,
+                            'maxlength' => 75,
                         ],
                     'email' =>
                         [
                             'checkEmail',
-                            'unique' =>  []
+                            'unique' => $emailArray 
                         ]
                     , 'password' =>
                         [

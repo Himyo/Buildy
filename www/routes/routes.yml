@@ -219,7 +219,7 @@
   method: "GET"
 
 "/site/register":
-  controller: User
+  controller: Users
   action: getRegisterView
   method: "GET"
 
@@ -278,9 +278,9 @@
   redirect: "/site/login"
 
 
-"/site/articles/get":
+"/site/articles":
   controller: Articles
-  action: getAllArticles
+  action: default 
   method: "GET"
 
 "/site/profile/articles":

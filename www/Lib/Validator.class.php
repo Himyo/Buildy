@@ -4,18 +4,6 @@ namespace MVC\Lib;
 class Validator{
 
     public $errors = [];
-    private static $errorlist =
-        [
-            "MISSING_REQUIRED"=> "missreq",
-            "NOT_UNIQUE"=> "nunique",
-            "UNDER_MINLENGTH"=> "umin",
-            "OVER_MAXLENGTH"=> "omax",
-            "INVALID_VALUE"=> "invval",
-            "DIFFERENT_VALUE"=> "diffval",
-            "INVALID_EMAIL"=> "invemail",
-            "UNSAFE_PASSWORD"=> "unsecpwd"
-
-        ];
 
 	public function __construct(){}
 
@@ -26,12 +14,14 @@ class Validator{
     {
         if($this->errors != []) { $this->errors = [];}
         if (count($data) != count($fields)) {
-            die("Tentative : faille XSS");
+            header("Location: /site?xss=1");
+            exit();
         }
 
         foreach ($fields as $field => $rules) {
             if (!isset($data[$field])) {
-                die("Tentative de faille XSS");
+                header("Location: /site?xss=1");
+                exit();
             }
             foreach ($rules as $func => $param) {
                 //if no parameters is given, since it's a array php is going to index the function as such
@@ -69,7 +59,7 @@ class Validator{
 	}
 
 	public function unique($needle, array $stack) {
-	    return !(isset($stack[$needle]));
+	    return !(in_array($needle, $stack));
     }
 
 	public function matching($string, $match) {
@@ -86,7 +76,7 @@ class Validator{
 	}
 
 	public function fixedValue($needle, array $stack) {
-	    return (!in_array($needle, $stack));
+	    return (in_array($needle, $stack));
     }
 
     public function isValid() {

@@ -13,6 +13,10 @@ class ArticlesController extends Controller {
         $this->articles = $articles;
     }
 
+
+    public function defaultAction() {
+    }
+
     public function saveAction() {
         if (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
 
@@ -36,7 +40,7 @@ class ArticlesController extends Controller {
         } else {
             //TODO RETURN ERROR
             header("location:javascript://history.go(-1)");
-                exit();
+            exit();
         }
     }
 

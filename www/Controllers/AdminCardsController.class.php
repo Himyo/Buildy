@@ -92,10 +92,8 @@ class AdminCardsController extends Controller {
             $data = array_merge($data, $this->cards->identity->getAllIdentity());
             $data = array_merge($data, $this->cards->props->getAllProps());
 
-            echo "<pre>";
-            var_dump($data);
-            echo "</pre>";
             $this->cards->insert($data);
+            header('Location: /site');
         }
     }
 }
