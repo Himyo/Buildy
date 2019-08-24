@@ -4,7 +4,7 @@
     <span>Entrer l'id du tournois pour le modifier</span>
   </div>
   <div class="space-20"></div>
-  <form class="form-classic border-classic-radius" action="/dashboard/admin/tournaments/save" method="post">
+  <form class="form-classic border-classic-radius" action="/Admin/dashboard/tournaments/save" method="post">
     <div class="col-100-space-a">
       <div class="col-100-center">
         <div class="label-input-column-classic padding-20 width-100">

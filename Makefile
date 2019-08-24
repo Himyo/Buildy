@@ -29,6 +29,9 @@ db-clean:
 	sleep 5
 	make db-init
 
+db-access:
+	docker exec -it ${DB_CONTAINER_NAME} mysql -uroot -ppabuildypa ${DB_TARGET}
+
 stopAll:
 	docker stop $$(docker ps -qa)
 rmAll:

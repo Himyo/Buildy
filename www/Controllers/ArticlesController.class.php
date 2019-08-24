@@ -1,6 +1,7 @@
 <?php
 namespace MVC\Controllers;
 
+use MVC\Core\Auth;
 use MVC\Core\View;
 use MVC\Models\Articles;
 
@@ -18,26 +19,45 @@ class ArticlesController extends Controller {
             if (!isset($_SESSION['user']['id'])) {
                 //TODO RETURN ERROR
                 header('Location: /site');
+                exit();
             }
 
             $data = [
                 'title' => $_POST['title'],
                 'content' => $_POST['content'],
-                'users_id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 1,
+                'users_id' => Auth::User()['id'],
                 'created_at' => date('Y-m-d'),
-                'categories_id' => $_POST['category']
+                'categories' => $_POST['category']
             ];
 
             $this->articles->insert($data);
             header('Location: /site');
+                exit();
         } else {
             //TODO RETURN ERROR
             header("location:javascript://history.go(-1)");
+                exit();
+        }
+    }
+
+    public function getByIdAction() {
+        if(!Auth::isAuthenticate()){
+            echo json_encode(['qwak']);
+        }
+        else {
+            $articles = Articles::ALL([
+                'categories as Categorie',
+                'content as Contenu',
+                'created_at as Date ',
+                'state as Etat',
+                'title as Titre',
+            ], ['users_id' => Auth::User()['id']]);
+            echo json_encode($articles);
         }
     }
 
     public function getAllArticlesAction() {
             $articles = Articles::ALL();
-            echo json_encode($articles);
+            return json_encode($articles);
     }
 }

@@ -119,14 +119,6 @@ class BaseSQL {
 		}
 	}
 
-    public function findAll(): array {
-        $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $query = $qb->selectAll();
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public function find(array $data): array {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
         $query = $qb->select($data)->make()->getQuery();

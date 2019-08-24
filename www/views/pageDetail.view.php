@@ -24,7 +24,7 @@
     function insertContent() {
         var content = $('#dropper').html();
         $.ajax({
-            url: '/mysite/page/edit/insert',
+            url: '/Admin/mysite/page/edit/insert',
             type: 'POST',
             data: 'content=' + content + '&id=' + <?= $page["id"]?>,
             success: () => {

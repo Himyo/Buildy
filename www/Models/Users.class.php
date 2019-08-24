@@ -57,9 +57,6 @@ class Users extends BaseSQL{
 		$this->id = $id;
     }
 
-    /**
-     * @return null
-     */
     public function getId() {
         return $this->id;
     }

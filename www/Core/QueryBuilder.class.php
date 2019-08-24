@@ -31,7 +31,7 @@ class QueryBuilder {
                     }
                     return $format;
                 };
-                break;
+            break;
             case 'UPDATE':
                 return function ($items) {
                     $keys = array_keys($items);
@@ -42,13 +42,13 @@ class QueryBuilder {
                     $format = trim($format, ",");
                     return $format;
                 };
-                break;
+            break;
             case 'DELETE':
                 return function ($items) {
                     $format = "(" . implode(",", $items) . ")";
                     return $format;
                 };
-                break;
+            break;
             case 'INSERT MANY':
                 return function($items) {
                     $keys = array_keys($items[0]);
@@ -60,7 +60,7 @@ class QueryBuilder {
                     $values = trim($values, ",");
                     return $format.$values;
                 };
-                break;
+            break;
             case 'AND WHERE':
                 return function($items) {
                     $format = "";
@@ -71,7 +71,7 @@ class QueryBuilder {
                     }
                     return $format;
                 };
-                break;
+            break;
             case 'OR WHERE':
                 return function($items) {
                     $format = "";
@@ -90,7 +90,7 @@ class QueryBuilder {
                     $format = " WHERE {$key} = :{$value}";
                     return $format;
                 };
-                break;
+            break;
             case 'JOIN':
                 return function($items) {
                     $format = "";
@@ -100,7 +100,7 @@ class QueryBuilder {
                     }
                     return $format;
                 };
-                break;
+            break;
             default:
                 return function ($items) {
                     $keys = array_keys($items);
@@ -116,9 +116,11 @@ class QueryBuilder {
         $this->items['SELECT'] = $items;
         return $this;
     }
+
     public function selectAll(): string {
         return "SELECT * FROM ".$this->table.";";
     }
+
     public function delete(array $items, $opt=[]): QueryBuilder{
         $this->items['DELETE'] = $opt;
         $this->orWhere($items);

@@ -23,6 +23,7 @@
             </thead>
             <tbody>
               <?php foreach($users as $key => $value): ?>
+                  <?php if($value['role'] != 'ADMIN'):?>
                   <tr>
                       <td><?= $value['id'] ?></td>
                       <td><?= $value['lastname'] ?></td>
@@ -31,15 +32,15 @@
                       <td><?= $value['password'] ?></td>
                       <td><?= $value['status'] ?></td>
                       <td><?= $value['role'] ?></td>
-                      <td><?= $value['token'] ?></td>
                       <td><?= $value['photo_id'] ?></td>
                       <td>
-                          <form action="/dashboard/admin/users/delete" method="post">
+                          <form action="/Admin/dashboard/users/delete" method="post">
                               <input type="hidden" name="id" value="<?= $value['id'] ?>">
                               <input class="button-classic-error" type="submit" value="Supprimer">
                           </form>
                       </td>
                   </tr>
+                  <?php endif; ?>
               <?php endforeach; ?>
             </tbody>
             <tfoot>

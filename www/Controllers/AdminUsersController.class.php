@@ -2,6 +2,7 @@
 namespace MVC\Controllers;
 
 use MVC\Core\View;
+use MVC\Lib\Validator;
 use MVC\Models\Users;
 
 class AdminUsersController extends Controller {
@@ -24,79 +25,120 @@ class AdminUsersController extends Controller {
     public function deleteUserAction() {
         if (isset($_POST['id'])) {
             $this->users->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/users');
+            header('Location: /Admin/dashboard/users');
+            exit();
         }
 
     }
 
-    public function saveUserAction() {
+    public function saveAction() {
         $data = [];
 
         //MODIFY
         if (!empty($_POST['id'])) {
-
-            if (!empty($_POST['name'])) {
-                $data += ['name' => $_POST['name']];
-            }
+            $fieldsCheck = ['id' => $_POST['id']];
 
             if (!empty($_POST['firstname'])) {
+                $fieldsCheck += [ 'firstname' => ['maxlength' => 50, 'minlength' => 3,] ];
                 $data += ['firstname' => $_POST['firstname']];
             }
 
             if (!empty($_POST['lastname'])) {
+                $fieldsCheck += [ 'lastname' => ['maxlength' => 70, 'minlength' => 3,] ];
                 $data += ['lastname' => $_POST['lastname']];
             }
 
             if (!empty($_POST['email'])) {
+                $fieldsCheck+= [ 'email' => ['checkEmail'] ];
                 $data += ['email' => $_POST['email']];
             }
 
-            if (!empty($_POST['pwd'])) {
-                $data += ['password' => password_hash($_POST['pwd'], PASSWORD_BCRYPT)];
+            if (!empty($_POST['password'])) {
+                $fieldsCheck += [ 'password' => ['checkPassword'] ];
+                $data += ['password' => $_POST['password']];
             }
-
-            if (!empty($_POST['status'])) {
-                $data += ['status' => $_POST['status']];
-            }
-
-            if (!empty($_POST['role'])) {
+            if(!empty($_POST['role'])) {
+                $fieldsCheck += [ 'role' => [ 'fixedValue' => ['USER', 'MODERATOR'] ] ];
                 $data += ['role' => $_POST['role']];
             }
-
-            if (!empty($_POST['photo_id'])) {
-                $data += ['photo_id' => $_POST['photo_id']];
+            if(!empty($_POST['status'])) {
+                $fieldsCheck += [ 'role' => [ 'fixedValue' => ['ACCEPTED', 'PENDING', 'REFUSED'] ] ];
+                $data += ['status' => $_POST['status']];
             }
-            
-            $this->users->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/users');
+//            $data += ['photo_id' => 0];
+            Validator::validate($fieldsCheck , $data);
 
-        //CREATE
-        } elseif (empty($_POST['id']) && !empty($_POST['firstname']) 
-                    && !empty($_POST['lastname']) 
-                    && !empty($_POST['email']) 
-                    && !empty($_POST['pwd']) 
-                    && !empty($_POST['status']) 
-                    && !empty($_POST['role']) 
-                    && !empty($_POST['photo_id'])) {
+            if(Validator::isValid()) {
+                $data['password'] = crypt($data['password'], "yuAhFz628HZ328bz");
+                $this->users->edit($data, ['id' => $data['id']]);
+                header('Location: /site');
+                exit();
+            }
+            else {
+                $view = new View("register", "front");
+                $view->assign('errors', Validator::getErrors());
+                $view->assign('data', $data);
+                exit();
+            }
 
-            $data = [
-                'firstname' => $_POST['firstname'],
-                'lastname' => $_POST['lastname'],
-                'email' => $_POST['email'],
-                'password' => password_hash($_POST['pwd'], PASSWORD_BCRYPT),
-                'status' => $_POST['status'],
-                'role' => $_POST['role'],
-                'photo_id' => $_POST['photo_id']
-            ];
-
-            $this->users->insert($data);
-            header('Location: /dashboard/admin/users');
+            //CREATE
         } else {
-            //TODO RETURN ERROR
-            header('Location: /dashboard/admin/users');
+            $fieldsCheck =
+                [
+                    'firstname' =>
+                        [
+                            'required',
+                            'maxlength' => 70,
+                            'minlength' => 1,
+                        ],
+                    'lastname' =>
+                        [
+                            'required',
+                            'maxlength' => 50,
+                            'minlength' => 1,
+                        ],
+                    'email' =>
+                        [
+                            'required',
+                            'checkEmail',
+                            'unique' =>  []
+                        ]
+                    , 'password' =>
+                        [
+                            'required',
+                            'checkPassword'
+                        ],
+                    'password2' =>
+                        [
+                            'required',
+                            'matching' => $_POST['password']
+                        ]
+                ];
+            Validator::validate($fieldsCheck, $_POST);
+            if(Validator::isValid()) {
+                $data = [
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
+                    'email' => $_POST['email'],
+                    'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+                    'photo_id' => 0
+                ];
+
+                $this->users->insert($data);
+                header('Location: /Admin/dashboard/users');
+                exit();
+            }
+            else {
+                header('Location: /Admin/dashboard/users');
+                $view = new View("register", "front");
+                $view->assign('errors', Validator::getErrors());
+                $view->assign('data', $data);
+                exit();
+            }
         }
     }
 }

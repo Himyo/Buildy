@@ -1,186 +1,212 @@
-######## HOME #######
+###### ADMIN ######
 
-"/":
+"/admin":
   controller: Home
   action: default
   method: "GET"
+  allow: [ADMIN]
 
-"/mysite/page":
-  controller: Pages
-  action: default
-  method: "GET"
 
-"/mysite/page/edit":
-  controller: Pages
-  action: detail
-  method: "GET"
-
-"/mysite/page/edit/insert":
-  controller: Pages
-  action: insertContent
-  method: "POST"
-
-"/mysite/addpage":
-  controller: Pages
-  action: addView
-  method: "GET"
-
-"/mysite/page/save":
-  controller: Pages
-  action: save
-  method: "POST"
-
-"/mysite":
+"/admin/mysite":
   controller: Pages
   action: mySite
   method: "GET"
+  allow: [ADMIN]
 
-"/mysite/cards":
+"/admin/mysite/page":
+  controller: Pages
+  action: default
+  method: "GET"
+  allow: [ADMIN]
+
+"/admin/mysite/page/edit":
+  controller: Pages
+  action: detail
+  method: "GET"
+  allow: [ADMIN]
+
+"/admin/mysite/page/edit/insert":
+  controller: Pages
+  action: insertContent
+  method: "POST"
+  allow: [ADMIN]
+
+"/admin/mysite/page/save":
+  controller: Pages
+  action: save
+  method: "POST"
+  allow: [ADMIN]
+
+"/admin/mysite/addpage":
+  controller: Pages
+  action: addView
+  method: "GET"
+  allow: [ADMIN]
+
+"/admin/mysite/cards":
   controller: Cards
   action: backCards
   method: "GET"
+  allow: [ADMIN]
 
-########### LEGAL CONTACT ABOUT ##############
-
-"/mysite/legal":
+"/admin/mysite/legal":
   controller: Home
   action: getLegal
   method: "GET"
+  allow: [ADMIN]
 
-"/mysite/contact":
+"/admin/mysite/contact":
   controller: Home
   action: getContact
   method: "GET"
+  allow: [ADMIN]
 
-"/mysite/about":
+"/admin/mysite/about":
   controller: Home
   action: getAbout
   method: "GET"
+  allow: [ADMIN]
 
-"/download":
+"/admin/download":
   controller: AdminCards
   action: download
   method: "POST"
+  allow: [ADMIN]
 
 
 
 ################### ADMIN CRUDS ###################
 
 ### CARDS ###
-"/dashboard/admin/cards":
+"/admin/dashboard/cards":
   controller: AdminCards
   action: default
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
 ### TOURNAMENTS ###
-"/dashboard/admin/tournaments":
+"/admin/dashboard/tournaments":
   controller: AdminTournaments
   action: default
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/tournaments/delete":
+"/admin/dashboard/tournaments/delete":
   controller: AdminTournaments
   action: deleteTournament
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/tournaments/save":
+"/admin/dashboard/tournaments/save":
   controller: AdminTournaments
   action: saveTournament
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
 ### ARTICLES ###
-"/dashboard/admin/articles":
+"/admin/dashboard/articles":
   controller: AdminArticles
   action: default
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/articles/delete":
-  controller: AdminArticles
-  action: deleteArticle
-  method: "POST"
-
-"/dashboard/admin/articles/save":
-  controller: AdminArticles
-  action: saveArticle
-  method: "POST"
-
-### USERS ###
-"/dashboard/admin/users":
+"/admin/dashboard/users":
   controller: AdminUsers
   action: default
   method: "GET"
+  allow: [ADMIN]
+  redirect: "/admin/dashboard"
 
-"/dashboard/admin/users/delete":
+"/admin/dashboard/users/delete":
   controller: AdminUsers
   action: deleteUser
   method: "POST"
+  allow: [ADMIN]
+  redirect: "/admin/dashboard"
 
-"/dashboard/admin/users/save":
+"/admin/dashboard/users/save":
   controller: AdminUsers
   action: saveUser
   method: "POST"
+  allow: [ADMIN]
+  redirect: "/admin/dashboard"
 
 ### DECKS ###
-"/dashboard/admin/decks":
+"/admin/dashboard/decks":
   controller: AdminDecks
   action: default
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/decks/delete":
+"/admin/dashboard/decks/delete":
   controller: AdminDecks
   action: deleteDeck
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/decks/save":
+"/admin/dashboard/decks/save":
   controller: AdminDecks
   action: saveDeck
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
 ### COMMENTS ###
-"/dashboard/admin/comments":
+"/admin/dashboard/comments":
   controller: AdminComments
   action: default
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/comments/delete":
+"/admin/dashboard/comments/delete":
   controller: AdminComments
   action: deleteComment
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/comments/save":
+"/admin/dashboard/comments/save":
   controller: AdminComments
   action: saveComment
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
 ### PAGES ###
-"/dashboard/admin/pages":
+"/admin/dashboard/pages":
   controller: AdminPages
   action: default
   method: "GET"
-  
-"/dashboard/admin/pages/delete":
+  allow: [ADMIN, MODERATOR]
+
+"/admin/dashboard/pages/delete":
   controller: AdminPages
   action: deletePage
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/admin/pages/save":
+"/admin/dashboard/pages/save":
   controller: AdminPages
   action: savePage
   method: "POST"
+  allow: [ADMIN, MODERATOR]
 
 ######## DASHBOARD #######
-"/dashboard":
+"/admin/dashboard":
   controller: Dashboard
   action: default
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
-"/dashboard/stats":
+"/admin/dashboard/stats":
   controller: Dashboard
   action: getStats
   method: "GET"
+  allow: [ADMIN, MODERATOR]
 
 
 ######################### FRONT SITE #########################
+"/":
+  controller: Site
+  action: default
+  method: "GET"
 
 "/site":
   controller: Site
@@ -192,13 +218,8 @@
   action: frontCards
   method: "GET"
 
-"/site/page":
-  controller: Pages
-  action: getPage
-  method: "GET"
-
 "/site/register":
-  controller: Users
+  controller: User
   action: getRegisterView
   method: "GET"
 
@@ -222,34 +243,63 @@
   action: deconnexion
   method: "POST"
 
+"/site/profile":
+  controller: Users
+  action: getProfile
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
+#  "site/profile/edit":
+#    controller: Users
+#    action: editProfile
+#    method: "POST"
+
 "/site/article/save":
   controller: Articles
-  action: save
+  action: saveArticle
   method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
 
 "/site/tournament/save":
   controller: Tournaments
-  action: save
+  action: saveTournament
   method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
 
 "/site/deck/save":
   controller: Decks
-  action: save
+  action: saveDeck
   method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
+
 
 "/site/articles/get":
   controller: Articles
   action: getAllArticles
   method: "GET"
 
+"/site/profile/articles":
+  controller: Articles
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/profile/decks":
+  controller: Decks
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/profile/tournaments":
+  controller: Tournaments
+  action: getById
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
 
 
 ################## DYNAMIQUE PAGES #######################
-
-
-
-/site/test:
-  controller: Pages
-  action: display
-  method: GET
-

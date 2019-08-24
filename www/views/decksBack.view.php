@@ -22,12 +22,12 @@
                   <?php foreach($decks as $key => $value): ?>
                       <tr>
                           <td><?= $value['id'] ?></td>
-                          <td><?= $value['name'] ?></td>
+                          <td><?= htmlentities($value['name'])?></td>
                           <td><?= $value['users_id'] ?></td>
                           <td><?= $value['upvotes'] ?></td>
                           <td><?= $value['downvotes'] ?></td>
                           <td>
-                              <form action="/dashboard/admin/decks/delete" method="post">
+                              <form action="/admin/dashboard/decks/delete" method="post">
                                   <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                   <input class="button-classic-sm-error" type="submit" value="Supprimer">
                               </form>

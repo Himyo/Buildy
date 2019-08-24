@@ -5,13 +5,18 @@
     <div class="buildy-grid-v-center margin-right-10">
         <a class="margin-right-10" href="/site/cards"><p style="color: #0c2033">Voir&nbsp;les&nbsp;cartes</p></a>
     </div>
-    <?php if(isset($_SESSION['user'])): ?>
+    <?php
+        use MVC\Core\Auth;
+    ?>
+    <?php if(Auth::isAuthenticate()):?>
         <div class="buildy-grid-v-center col-100-end margin-right-10">
-            <a class="margin-left-10" href="/site/profile"><p style="color: #0c2033">Bonjour, <?= ucfirst($_SESSION['user']['firstname']) ?></p></a>
+            <a class="margin-left-10" href="/site/profile"><p style="color: #0c2033">Bonjour, <?= ucfirst(Auth::User()['firstname'])?></p></a>
             <a class="margin-left-10" href="/site/deconnexion"><p style="color: #0c2033">Se déconnecter</p></a>
 
-            <?php if($_SESSION['user']['role']): ?>
-                <a class="margin-left-10" href="/"><p style="color: #0c2033">Accès Admin</p></a>
+            <?php if(Auth::isAdmin()):?>
+                <a class="margin-left-10" href="/Admin"><p style="color: #2c2033">Accès Admin</p></a>
+            <?php elseif(Auth::isModerator()):?>
+                <a class="margin-left-10" href="/Admin/dashboard"><p style="color: #0c2033">Accès Moderation</p></a>
             <?php endif; ?>
         </div>
     <?php else: ?>

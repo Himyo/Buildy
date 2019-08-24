@@ -2,13 +2,19 @@
 namespace MVC\Core;
 
 class Routing{
+    //TODO: Log for moderator action
 
-	public static $routeFile = "routes.yml";
+	public static $routeFile = "routes/routes.yml";
 
 	public static function getRoute($slug) {
         $routes = yaml_parse_file(self::$routeFile);
         $slug = strtolower($slug);
         if (isset($routes[$slug])) {
+            $filteredSlug = Middleware::filter($slug, $routes);
+            if($slug != $filteredSlug) {
+                header("Location: {$filteredSlug}");
+                exit();
+            }
             $controller = ucfirst($routes[$slug]["controller"]) . "Controller";
             $action = $routes[$slug]["action"] . "Action";
             $method = $routes[$slug]["method"];
@@ -18,6 +24,11 @@ class Routing{
                 "method" => $method
             ];
         }
+        return [
+            "controller" => 'PagesController',
+            "action" => 'notFoundAction',
+            "method" => 'post'
+        ];
     }
 
     public static function getParametrableRoute($slug) {
@@ -63,7 +74,8 @@ class Routing{
         return [
             "controller" => 'PagesController',
             "action" => 'notFoundAction',
-            "method" => 'post'];
+            "method" => 'post'
+        ];
     }
 
     public static function getCrudRoute($slug) {

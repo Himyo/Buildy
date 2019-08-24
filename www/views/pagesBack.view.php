@@ -22,13 +22,13 @@
                   <?php foreach($pages as $key => $value): ?>
                       <tr>
                           <td><?= $value['id'] ?></td>
-                          <td><?= $value['title'] ?></td>
-                          <td><?= $value['slug'] ?></td>
+                          <td><?= htmlentites($value['title']) ?></td>
+                          <td><?= htmlentities($value['slug']) ?></td>
                           <td><?= htmlentities($value['content']) ?></td>
                           <td><?= $value['created_at'] ?></td>
                           <td><?= $value['updated_at'] ?></td>
                           <td>
-                              <form action="/dashboard/admin/pages/delete" method="post">
+                              <form action="/admin/dashboard/pages/delete" method="post">
                                   <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                   <input class="button-classic-sm-error" type="submit" value="Supprimer">
                               </form>

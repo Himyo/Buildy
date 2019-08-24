@@ -5,7 +5,7 @@
         <h1 class="title-h1">Liste des pages</h1>
       </div>
       <?php foreach ($pages as $key => $value): ?>
-        <form action="/mysite/page/edit" method="get">
+        <form action="/Admin/mysite/page/edit" method="get">
           <input type="hidden" name="id" value="<?= $value['id'] ?>">
           <div class="space-40"></div>
           <div class="col-100-center">

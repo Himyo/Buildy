@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : buildydb
--- Généré le :  lun. 15 juil. 2019 à 09:42
--- Version du serveur :  10.3.14-MariaDB-1:10.3.14+maria~bionic
--- Version de PHP :  7.2.8
+-- Host: buildydb
+-- Generation Time: Aug 05, 2019 at 12:40 AM
+-- Server version: 10.3.14-MariaDB-1:10.3.14+maria~bionic
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,37 +19,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `buildy`
+-- Database: `buildy`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Articles`
+-- Table structure for table `Articles`
 --
 
 CREATE TABLE `Articles` (
   `id` int(11) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
-  `created_at` varchar(45) DEFAULT current_timestamp(),
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
   `content` varchar(45) DEFAULT NULL,
   `users_id` int(11) NOT NULL,
   `categories_id` varchar(50) DEFAULT NULL,
-  `state` varchar(50) DEFAULT NULL
+  `state` varchar(50) DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Articles`
+-- Dumping data for table `Articles`
 --
 
 INSERT INTO `Articles` (`id`, `title`, `created_at`, `content`, `users_id`, `categories_id`, `state`) VALUES
-(13, 'Article1', 'current_timestamp()', 'Mon Article 1', 1, '1', 'Pending'),
-(14, 'Article2', 'current_timestamp()', 'Mon Article 2', 1, '2', 'Pending');
+(15, 'Articles uno', '2019-08-01 00:00:00', 'Contentcontent', 12, '1', 'PENDING');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Cards`
+-- Table structure for table `Cards`
 --
 
 CREATE TABLE `Cards` (
@@ -69,7 +68,7 @@ CREATE TABLE `Cards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Cards`
+-- Dumping data for table `Cards`
 --
 
 INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `lore`, `ruling`, `multiverse_id`, `releases_id`, `mana_id`, `type_id`, `legalities_id`) VALUES
@@ -154,16 +153,16 @@ INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `l
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Categories`
+-- Table structure for table `Categories`
 --
 
 CREATE TABLE `Categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Categories`
+-- Dumping data for table `Categories`
 --
 
 INSERT INTO `Categories` (`id`, `name`) VALUES
@@ -174,7 +173,7 @@ INSERT INTO `Categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Comments`
+-- Table structure for table `Comments`
 --
 
 CREATE TABLE `Comments` (
@@ -188,7 +187,7 @@ CREATE TABLE `Comments` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Decks`
+-- Table structure for table `Decks`
 --
 
 CREATE TABLE `Decks` (
@@ -197,10 +196,10 @@ CREATE TABLE `Decks` (
   `users_id` int(11) NOT NULL,
   `upvotes` int(11) NOT NULL,
   `downvotes` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Decks`
+-- Dumping data for table `Decks`
 --
 
 INSERT INTO `Decks` (`id`, `name`, `users_id`, `upvotes`, `downvotes`) VALUES
@@ -210,7 +209,7 @@ INSERT INTO `Decks` (`id`, `name`, `users_id`, `upvotes`, `downvotes`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Decks_cards`
+-- Table structure for table `Decks_cards`
 --
 
 CREATE TABLE `Decks_cards` (
@@ -221,7 +220,7 @@ CREATE TABLE `Decks_cards` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Favoris`
+-- Table structure for table `Favoris`
 --
 
 CREATE TABLE `Favoris` (
@@ -235,7 +234,7 @@ CREATE TABLE `Favoris` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Legalities`
+-- Table structure for table `Legalities`
 --
 
 CREATE TABLE `Legalities` (
@@ -248,7 +247,7 @@ CREATE TABLE `Legalities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Legalities`
+-- Dumping data for table `Legalities`
 --
 
 INSERT INTO `Legalities` (`standard`, `modern`, `legacy`, `vintage`, `pauper`, `id`) VALUES
@@ -259,7 +258,7 @@ INSERT INTO `Legalities` (`standard`, `modern`, `legacy`, `vintage`, `pauper`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Mana`
+-- Table structure for table `Mana`
 --
 
 CREATE TABLE `Mana` (
@@ -277,7 +276,7 @@ CREATE TABLE `Mana` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Mana`
+-- Dumping data for table `Mana`
 --
 
 INSERT INTO `Mana` (`id`, `white`, `black`, `blue`, `green`, `red`, `colorless`, `x`, `void`, `cmc`, `mana_cost`) VALUES
@@ -331,22 +330,22 @@ INSERT INTO `Mana` (`id`, `white`, `black`, `blue`, `green`, `red`, `colorless`,
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Pages`
+-- Table structure for table `Pages`
 --
 
 CREATE TABLE `Pages` (
   `id` int(11) NOT NULL,
   `slug` varchar(50) NOT NULL,
-  `content` text DEFAULT NULL,
+  `content` mediumtext DEFAULT NULL,
   `title` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Photo`
+-- Table structure for table `Photo`
 --
 
 CREATE TABLE `Photo` (
@@ -358,7 +357,7 @@ CREATE TABLE `Photo` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Releases`
+-- Table structure for table `Releases`
 --
 
 CREATE TABLE `Releases` (
@@ -369,7 +368,7 @@ CREATE TABLE `Releases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Releases`
+-- Dumping data for table `Releases`
 --
 
 INSERT INTO `Releases` (`id`, `name`, `release_date`, `code`) VALUES
@@ -378,24 +377,13 @@ INSERT INTO `Releases` (`id`, `name`, `release_date`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Roles`
---
-
-CREATE TABLE `Roles` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Tournaments`
+-- Table structure for table `Tournaments`
 --
 
 CREATE TABLE `Tournaments` (
   `id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `ended_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `ended_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `name` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `nb_contenders` int(11) DEFAULT NULL
@@ -404,7 +392,7 @@ CREATE TABLE `Tournaments` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Tournaments_members`
+-- Table structure for table `Tournaments_members`
 --
 
 CREATE TABLE `Tournaments_members` (
@@ -417,7 +405,7 @@ CREATE TABLE `Tournaments_members` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Type`
+-- Table structure for table `Type`
 --
 
 CREATE TABLE `Type` (
@@ -430,7 +418,7 @@ CREATE TABLE `Type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Type`
+-- Dumping data for table `Type`
 --
 
 INSERT INTO `Type` (`id`, `supertype`, `type`, `subtype`, `layout`, `rarity`) VALUES
@@ -483,7 +471,7 @@ INSERT INTO `Type` (`id`, `supertype`, `type`, `subtype`, `layout`, `rarity`) VA
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Users`
+-- Table structure for table `Users`
 --
 
 CREATE TABLE `Users` (
@@ -492,23 +480,25 @@ CREATE TABLE `Users` (
   `firstname` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `status` varchar(25) NOT NULL DEFAULT 'Pending',
-  `role` int(11) NOT NULL DEFAULT 0,
+  `status` varchar(25) NOT NULL DEFAULT 'PENDING',
+  `role` varchar(15) NOT NULL DEFAULT 'USER',
   `token` varchar(60) DEFAULT NULL,
   `photo_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Users`
+-- Dumping data for table `Users`
 --
 
 INSERT INTO `Users` (`id`, `lastname`, `firstname`, `email`, `password`, `status`, `role`, `token`, `photo_id`) VALUES
-(12, 'admin', 'admin', 'admin@gmail.com', '$2y$10$70QjRRbrZdl6hJMtuj15qOHqJM2mMt1mD6rxv/Fu2TwbxCx8L/VzW', 'Pending', 2, NULL, 1);
+(12, 'admin', 'admin', 'admin@gmail.com', '$2y$10$70QjRRbrZdl6hJMtuj15qOHqJM2mMt1mD6rxv/Fu2TwbxCx8L/VzW', 'ACCEPTED', 'ADMIN', NULL, 1),
+(13, 'u', 'p', 'u@u.com', '$2y$10$it248g04drfmifcyRT8f5eTd5DAyWZBEiVm9hd4KDXRJFvsYWyDfS', 'ACCEPTED', 'USER', NULL, 0),
+(14, 'Mod', 'Moderator', 'gay@mod.com', '$2y$10$j7hG//HUlnMyID9.z4BAsuKSlz1xoIX/18PlOvAaPvQPaSS81baui', 'ACCEPTED', 'MODERATOR', NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Users_cards`
+-- Table structure for table `Users_cards`
 --
 
 CREATE TABLE `Users_cards` (
@@ -517,31 +507,31 @@ CREATE TABLE `Users_cards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `Articles`
+-- Indexes for table `Articles`
 --
 ALTER TABLE `Articles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_articles_categories1_idx` (`categories_id`);
 
 --
--- Index pour la table `Cards`
+-- Indexes for table `Cards`
 --
 ALTER TABLE `Cards`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cards_release1_idx` (`releases_id`);
 
 --
--- Index pour la table `Categories`
+-- Indexes for table `Categories`
 --
 ALTER TABLE `Categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Comments`
+-- Indexes for table `Comments`
 --
 ALTER TABLE `Comments`
   ADD PRIMARY KEY (`id`),
@@ -550,13 +540,13 @@ ALTER TABLE `Comments`
   ADD KEY `fk_commentaires_article1_idx` (`articles_id`);
 
 --
--- Index pour la table `Decks`
+-- Indexes for table `Decks`
 --
 ALTER TABLE `Decks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Favoris`
+-- Indexes for table `Favoris`
 --
 ALTER TABLE `Favoris`
   ADD KEY `fk_favoris_members1_idx` (`users_id`),
@@ -566,148 +556,148 @@ ALTER TABLE `Favoris`
   ADD KEY `fk_favoris_tournaments1_idx` (`tournaments_id`);
 
 --
--- Index pour la table `Legalities`
+-- Indexes for table `Legalities`
 --
 ALTER TABLE `Legalities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Mana`
+-- Indexes for table `Mana`
 --
 ALTER TABLE `Mana`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Pages`
+-- Indexes for table `Pages`
 --
 ALTER TABLE `Pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Photo`
+-- Indexes for table `Photo`
 --
 ALTER TABLE `Photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Releases`
+-- Indexes for table `Releases`
 --
 ALTER TABLE `Releases`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Tournaments`
+-- Indexes for table `Tournaments`
 --
 ALTER TABLE `Tournaments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Tournaments_members`
+-- Indexes for table `Tournaments_members`
 --
 ALTER TABLE `Tournaments_members`
   ADD KEY `fk_tournament_member_members1_idx` (`users_id`),
   ADD KEY `fk_tournament_member_tournaments1_idx` (`tournaments_id`);
 
 --
--- Index pour la table `Type`
+-- Indexes for table `Type`
 --
 ALTER TABLE `Type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Users`
+-- Indexes for table `Users`
 --
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `Articles`
+-- AUTO_INCREMENT for table `Articles`
 --
 ALTER TABLE `Articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT pour la table `Cards`
+-- AUTO_INCREMENT for table `Cards`
 --
 ALTER TABLE `Cards`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
--- AUTO_INCREMENT pour la table `Categories`
+-- AUTO_INCREMENT for table `Categories`
 --
 ALTER TABLE `Categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `Comments`
+-- AUTO_INCREMENT for table `Comments`
 --
 ALTER TABLE `Comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `Decks`
+-- AUTO_INCREMENT for table `Decks`
 --
 ALTER TABLE `Decks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `Legalities`
+-- AUTO_INCREMENT for table `Legalities`
 --
 ALTER TABLE `Legalities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `Mana`
+-- AUTO_INCREMENT for table `Mana`
 --
 ALTER TABLE `Mana`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT pour la table `Pages`
+-- AUTO_INCREMENT for table `Pages`
 --
 ALTER TABLE `Pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT pour la table `Photo`
+-- AUTO_INCREMENT for table `Photo`
 --
 ALTER TABLE `Photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `Releases`
+-- AUTO_INCREMENT for table `Releases`
 --
 ALTER TABLE `Releases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `Tournaments`
+-- AUTO_INCREMENT for table `Tournaments`
 --
 ALTER TABLE `Tournaments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `Type`
+-- AUTO_INCREMENT for table `Type`
 --
 ALTER TABLE `Type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT pour la table `Users`
+-- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `Cards`
+-- Constraints for table `Cards`
 --
 ALTER TABLE `Cards`
   ADD CONSTRAINT `fk_cards_release1` FOREIGN KEY (`releases_id`) REFERENCES `Releases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

@@ -23,14 +23,14 @@
                   <?php foreach($articles as $key => $value): ?>
                       <tr>
                           <td><?= $value['id'] ?></td>
-                          <td><?= $value['title'] ?></td>
-                          <td><?= $value['content'] ?></td>
+                          <td><?= htmlentities($value['title']) ?></td>
+                          <td><?= htmlentitiies($value['content']) ?></td>
                           <td><?= $value['users_id'] ?></td>
-                          <td><?= $value['categories_id'] ?></td>
+                          <td><?= htmlentities($value['categories']) ?></td>
                           <td><?= $value['state'] ?></td>
                           <td><?= $value['created_at'] ?></td>
                           <td>
-                              <form action="/dashboard/admin/articles/delete" method="post">
+                              <form action="/admin/dashboard/articles/delete" method="post">
                                   <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                   <input class="button-classic-sm-error" type="submit" value="Supprimer">
                               </form>

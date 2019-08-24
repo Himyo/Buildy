@@ -21,6 +21,7 @@ class TournamentsController extends Controller {
             if (!isset($_SESSION['user']['id'])) {
                 //TODO RETURN ERROR
                 header('Location: /site');
+                exit();
             }
 
             $data = [
@@ -32,9 +33,27 @@ class TournamentsController extends Controller {
 
             $this->tournaments->insert($data);
             header('Location: /site');
+            exit();
         } else {
             //TODO RETURN ERROR
             header("location:javascript://history.go(-1)");
+            exit();
+        }
+    }
+
+    public function getByIdAction() {
+        if(!isset($_POST['id'])) {
+            echo json_encode([]);
+        }
+        else {
+            $tournaments = Tournaments::ALL([
+                'created_at as Ouverture',
+                'ended_at as Fin',
+                'name as Nom',
+                'description as Description',
+                'nb_contenders as N`Participant'
+            ], ['users_id' => $_POST['id']]);
+            echo json_encode($tournaments);
         }
     }
 }

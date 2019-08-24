@@ -4,7 +4,7 @@
     <span>Entrer l'id du membre pour le modifier</span>
   </div>
   <div class="space-20"></div>
-  <form class="form-classic border-classic-radius" action="/dashboard/admin/users/save" method="post">
+  <form class="form-classic border-classic-radius" action="/Admin/dashboard/users/save" method="post">
     <div class="col-100-space-a">
       <div class="col-100-center">
         <div class="label-input-column-classic padding-20 width-100">
@@ -61,7 +61,10 @@
       <div class="col-100-center">
         <div class="label-input-column-classic padding-20 width-100">
           <label class="label-classic" for="role">Rôle :</label>
-          <input class="input-classic" id="role" type="number" name="role">
+            <select name="role" id="role">
+                <option value="USER">UTILISATEUR</option>
+                <option value="MODERATOR">MODERATEUR</option>
+            </select>
         </div>
       </div>
     </div>

@@ -29,11 +29,6 @@ class PagesController extends Controller{
         }
     }
 
-    public function testAction() {
-        $view = new View("test", "back");
-        $view->assign('test', [1,2,3]);
-    }
-
     public function mySiteAction() {
         $view = new View("mySite", "back");
     }
@@ -50,7 +45,7 @@ class PagesController extends Controller{
             $page = $this->pages->findOrWhere(['*'], ['title' => $_POST['title'], 'slug' => $_POST['slug']]);
 
             if (!empty($page)) {
-                header('Location: /mysite/addpage');
+                header('Location: /Admin/mysite/addPage');
             } else {
                 $data += [
                     'title' => $_POST['title'],
@@ -61,11 +56,13 @@ class PagesController extends Controller{
 
                 $this->pages->insert($data);
                 Routing::addSlug("/site".$_POST['slug'], "display", "GET");
-                header('Location: /mysite/addpage');
+                header('Location: /Admin/mysite/addPage');
+                exit();
             }
         } else {
             //TODO RETURN ERROR
-            header('Location: /mysite/addpage');
+            header('Location: /Admin/mysite/addPage');
+            exit();
         }
     }
 

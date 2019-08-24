@@ -25,10 +25,12 @@ class AdminPagesController extends Controller {
     public function deletePageAction() {
         if (isset($_POST['id'])) {
             $this->pages->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/pages');
+            header('Location: /Admin/dashboard/pages');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/pages');
+            header('Location: /Admin/dashboard/pages');
+            exit();
         }
 
     }
@@ -52,7 +54,8 @@ class AdminPagesController extends Controller {
             $data += ['updated_at' => date('Y-m-d')];
             
             $this->pages->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/pages');
+            header('Location: /Admin/dashboard/pages');
+            exit();
 
         //CREATE
         } elseif (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['slug']) && !empty($_POST['content'])) {
@@ -60,7 +63,8 @@ class AdminPagesController extends Controller {
             $page = $this->pages->findOrWhere(['*'], ['title' => $_POST['title'], 'slug' => $_POST['slug']]);
             
             if (!empty($page)) {
-                header('Location: /dashboard/admin/pages');
+                header('Location: /Admin/dashboard/pages');
+                exit();
             } else {
                 $data += [
                     'title' => $_POST['title'],
@@ -71,11 +75,13 @@ class AdminPagesController extends Controller {
     
                 $this->pages->insert($data);
                 Routing::addSlug("/site".$_POST['slug'], "display", "GET");
-                header('Location: /dashboard/admin/pages');
+                header('Location: /Admin/dashboard/pages');
+            exit();
             }
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/pages');
+            header('Location: /Admin/dashboard/pages');
+            exit();
         }
     }
 

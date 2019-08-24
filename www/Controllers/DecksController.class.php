@@ -24,6 +24,7 @@ class DecksController extends Controller {
             if (!isset($_SESSION['user']['id'])) {
                 //TODO RETURN ERROR
                 header('Location: /site');
+                exit();
             }
 
             $data = [
@@ -35,11 +36,25 @@ class DecksController extends Controller {
 
             $this->decks->insert($data);
             header('Location: /site');
+            exit();
         } else {
             //TODO RETURN ERROR
             header("location:javascript://history.go(-1)");
+            exit();
         }
     }
 
-
+    public function getByIdAction() {
+        if(!isset($_POST['id'])){
+            echo json_encode([]);
+        }
+        else {
+            $decks = Decks::ALL([
+                'name as Nom',
+                'upvotes as UP',
+                'downvotes as DOWN'
+            ], ['users_id' => $_POST['id']]);
+            echo json_encode($decks);
+        }
+    }
 }

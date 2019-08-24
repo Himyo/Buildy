@@ -21,13 +21,13 @@
                 <?php foreach($tournaments as $key => $value): ?>
                     <tr>
                         <td><?= $value['id'] ?></td>
-                        <td><?= $value['name'] ?></td>
-                        <td><?= $value['description'] ?></td>
+                        <td><?= htmlentities($value['name']) ?></td>
+                        <td><?= htmlentities($value['description'])?></td>
                         <td><?= $value['nb_contenders'] ?></td>
                         <td><?= $value['created_at'] ?></td>
                         <td><?= $value['ended_at'] ?></td>
                         <td>
-                            <form action="/dashboard/admin/tournaments/delete" method="post">
+                            <form action="/admin/dashboard/tournaments/delete" method="post">
                                 <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                 <input class="button-classic-sm-error" type="submit" value="Supprimer">
                             </form>

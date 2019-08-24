@@ -16,16 +16,22 @@ function autoload($class) {
     }
 }
 spl_autoload_register("autoload");
+MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 
+use MVC\Core\Auth;
 $slug = $_SERVER["REQUEST_URI"];
+
+if($slug == '/' && !(Auth::isAdmin())) {
+    header('Location: /site');
+    exit();
+}
 
 //pour palier aux paramètres GET
 $slugExploded = explode("?", $slug);
 $slug = $slugExploded[0];
-MVC\Core\BaseSQL::getConnection('mysql', 'buildydb', 'buildy', 'root', 'pabuildypa');
 use MVC\Core\Routing;
 
-$routes = Routing::getRoute($slug) ?? Routing::getParametrableRoute($slug);
+$routes = Routing::getRoute($slug);
 extract($routes);
 
 $container = [];

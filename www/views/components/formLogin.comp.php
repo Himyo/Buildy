@@ -14,16 +14,12 @@
     <div class="col-100-center">
       <div class="label-input-column-classic padding-10">
         <label class="label-classic" for="pwd">Mot de passe :</label>
-        <input class="input-classic" id="pwd" type="password" name="pwd">
+        <input class="input-classic" id="pwd" type="password" name="password">
       </div>
     </div>
     <div class="space-20"></div>
     <div class="col-100-center">
       <input class="button-classic-succes" type="submit" value="Valider">
     </div>
-    <div class="col-100-center">
-      <p class="font-14">*Champs obligatoires</p>
-    </div>
-    <div class="space-20"></div>
   </form>
 </div>

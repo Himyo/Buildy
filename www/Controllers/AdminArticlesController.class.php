@@ -1,6 +1,7 @@
 <?php
 namespace MVC\Controllers;
 
+use MVC\Core\Auth;
 use MVC\Core\View;
 use MVC\Models\Articles;
 
@@ -27,10 +28,12 @@ class AdminArticlesController extends Controller {
     public function deleteArticleAction() {
         if (isset($_POST['id'])) {
             $this->articles->delete(['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
+            exit();
         } else {
             //TODO RENVOYER L'ERROR
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
+            exit();
         }
 
     }
@@ -47,27 +50,42 @@ class AdminArticlesController extends Controller {
                 $data += ['content' => $_POST['content']];
             }
 
-            $data += ['categories_id' => $_POST['category']];
+            $data += ['categories' => $_POST['category']];
             
             $this->articles->edit($data, ['id' => $_POST['id']]);
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
+            exit();
 
         //CREATE
-        } elseif (empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+        } elseif(!empty($_POST['title']) && !empty($_POST['content'])) {
+           $fieldsCheck = [
+               'title' => [
+                   'maxlength' => 50,
+                   'minlength' => 5,
+                   ],
+               'content' => [
+                   'minlenth' => 50
+               ],
+               'categorie' => [
+                   'fixedValue' => ['TOURNAMENT', 'GENERAL', 'DECK']
+               ]
+           ];
 
             $data = [
                 'title' => $_POST['title'],
                 'content' => $_POST['content'],
-                'users_id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 1,
+                'users_id' => Auth::User()['id'],
                 'created_at' => date('Y-m-d'),
-                'categories_id' => $_POST['category']
+                'categories' => $_POST['category']
             ];
 
             $this->articles->insert($data);
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
+            exit();
         } else {
             //TODO RETURN ERROR
-            header('Location: /dashboard/admin/articles');
+            header('Location: /Admin/dashboard/articles');
+            exit();
         }
     }
 
