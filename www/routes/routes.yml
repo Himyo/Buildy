@@ -61,12 +61,11 @@
   method: "GET"
   allow: [ADMIN]
 
-"/admin/mysite/sitemap":
+"/sitemap":
   controller: Home
   action: getSitemap
   method: "GET"
-  allow: [ADMIN]
-
+ 
 "/admin/mysite/about":
   controller: Home
   action: getAbout
