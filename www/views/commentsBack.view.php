@@ -1,5 +1,5 @@
 <?php
-use MVC\Core\Text;
+    use MVC\Core\Text;
 ?>
 <div id="container" class="container">
     <div class="content">
@@ -8,15 +8,16 @@ use MVC\Core\Text;
             <h1 class="title-h1">Gestion des commentaires</h1>
         </div>
         <div class="space-40"></div>
-        <div class="col-100-center">
-            <table class="dataTable">
+        <div class="width-100">
+            <table class="dataTable table table-striped" id="comment-table">
                 <thead>
                   <tr>
                       <th>Id</th>
                       <th>Contenu</th>
-                      <th>Id membre</th>
-                      <th>Id commentaire</th>
-                      <th>Id article</th>
+                      <th>Id&nbsp;membre</th>
+                      <th>Id&nbsp;commentaire</th>
+                      <th>Id&nbsp;article</th>
+                      <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -28,10 +29,10 @@ use MVC\Core\Text;
                           <td><?= $value['comments_id']   ?></td>
                           <td><?= $value['articles_id'] ?></td>
                           <td>
-                              <form action="/admin/dashboard/comments/delete" method="post">
-                                  <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                  <input class="button-classic-sm-error" type="submit" value="Supprimer">
-                              </form>
+                            <form action="/dashboard/admin/comments/delete" method="post">
+                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                <input  class="button-classic-sm-error" type="submit" value="Supprimer">
+                            </form>
                           </td>
                       </tr>
                   <?php endforeach; ?>
@@ -40,9 +41,10 @@ use MVC\Core\Text;
                   <tr>
                       <th>Id</th>
                       <th>Contenu</th>
-                      <th>Id membre</th>
-                      <th>Id commentaire</th>
-                      <th>Id article</th>
+                      <th>Id&nbsp;membre</th>
+                      <th>Id&nbsp;commentaire</th>
+                      <th>Id&nbsp;article</th>
+                      <th>Action</th>
                   </tr>
                 </tfoot>
             </table>

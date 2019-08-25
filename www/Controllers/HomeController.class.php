@@ -28,4 +28,8 @@ class HomeController extends Controller {
     public function getAboutAction() {
         $view = new View("about", "back");
     }
+
+    public function getSitemapAction() {
+        $view = new View("sitemap", "back");
+    }
 }

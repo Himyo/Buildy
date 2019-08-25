@@ -10,11 +10,11 @@
         </div>
         <div class="col-100-center">
         <ul>
-          <li><h4 class="title-h4">Prénom: <?= ucfirst($profile['firstname']) ?></h4></li>
+          <li><h4 class="title-h4">Prénom: <?= htmlentities(ucfirst($profile['firstname'])) ?></h4></li>
           <div class="space-30"></div>
-          <li><h4 class="title-h4">Nom : <?= strtoupper($profile['lastname']) ?></h4></li>
+          <li><h4 class="title-h4">Nom : <?= htmlentities(hstrtoupper($profile['lastname'])) ?></h4></li>
           <div class="space-30"></div>
-          <li><h4 class="title-h4">Email: <?= $profile['email'] ?></h4></li>
+          <li><h4 class="title-h4">Email: <?= htmlentities($profile['email']) ?></h4></li>
           <div class="space-30"></div>
           <li><h4 class="title-h4">Role: <?= $profile['role'] ?></h4></li>
         </ul>

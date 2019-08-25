@@ -8,17 +8,17 @@ use MVC\Core\Text;
             <h1 class="title-h1">Gestion des articles</h1>
         </div>
         <div class="space-40"></div>
-        <div class="col-100-center">
-            <table class="dataTable">
+        <div class="width-100">
+            <table class="dataTable table table-striped" id="article-table">
                 <thead>
                   <tr>
                       <th>Id</th>
                       <th>Titre</th>
                       <th>Contenu</th>
-                      <th>Id membre</th>
-                      <th>Id catégorie</th>
+                      <th>Id&nbsp;membre</th>
+                      <th>Id&nbsp;catégorie</th>
                       <th>Status</th>
-                      <th>Date créé</th>
+                      <th>Date&nbsp;créé</th>
                       <th>Action</th>
                   </tr>
                 </thead>
@@ -29,14 +29,14 @@ use MVC\Core\Text;
                           <td><?= htmlentities($value['title']) ?></td>
                           <td><?= Text::excerpt(htmlentities($value['content'])) ?></td>
                           <td><?= $value['users_id'] ?></td>
-                          <td><?= htmlentities($value['categories']) ?></td>
+                          <td><?= $value['categories_id'] ?></td>
                           <td><?= $value['state'] ?></td>
                           <td><?= $value['created_at'] ?></td>
                           <td>
-                              <form action="/admin/dashboard/articles/delete" method="post">
-                                  <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                  <input class="button-classic-sm-error" type="submit" value="Supprimer">
-                              </form>
+                            <form action="/dashboard/admin/articles/delete" method="post">
+                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                <input class="button-classic-sm-error" type="submit" value="Supprimer">
+                            </form>
                           </td>
                       </tr>
                   <?php endforeach; ?>
@@ -46,10 +46,10 @@ use MVC\Core\Text;
                       <th>Id</th>
                       <th>Titre</th>
                       <th>Contenu</th>
-                      <th>Id membre</th>
-                      <th>Id catégorie</th>
+                      <th>Id&nbsp;membre</th>
+                      <th>Id&nbsp;catégorie</th>
                       <th>Status</th>
-                      <th>Date créé</th>
+                      <th>Date&nbsp;créé</th>
                       <th>Action</th>
                   </tr>
                 </tfoot>

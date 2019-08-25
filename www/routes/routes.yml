@@ -61,6 +61,11 @@
   method: "GET"
   allow: [ADMIN]
 
+"/sitemap":
+  controller: Home
+  action: getSitemap
+  method: "GET"
+ 
 "/admin/mysite/about":
   controller: Home
   action: getAbout
@@ -381,14 +386,3 @@
 
 
 ################## DYNAMIQUE PAGES #######################
-/site/mapage:
-  controller: Pages
-  action: display
-  method: GET
-
-/site/yugi:
-  controller: Pages
-  action: display
-  method: GET
-
-

@@ -8,16 +8,16 @@ use MVC\Core\Text;
             <h1 class="title-h1">Gestion des pages</h1>
         </div>
         <div class="space-40"></div>
-        <div class="col-100-center">
-            <table class="dataTable">
+        <div class="width-100">
+            <table class="dataTable table table-striped" id="page-table">
                 <thead>
                   <tr>
                       <th>Id</th>
                       <th>Titre</th>
                       <th>Route</th>
                       <th>Contenu</th>
-                      <th>Date de création</th>
-                      <th>Date de modification</th>
+                      <th>Date&nbsp;de création</th>
+                      <th>Date&nbsp;de modification</th>
                       <th>Action</th>
                   </tr>
                 </thead>
@@ -31,10 +31,10 @@ use MVC\Core\Text;
                           <td><?= $value['created_at'] ?></td>
                           <td><?= $value['updated_at'] ?></td>
                           <td>
-                              <form action="/admin/dashboard/pages/delete" method="post">
-                                  <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                  <input class="button-classic-sm-error" type="submit" value="Supprimer">
-                              </form>
+                            <form action="/dashboard/admin/pages/delete" method="post">
+                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                <input  class="button-classic-sm-error" type="submit" value="Supprimer">
+                            </form>
                           </td>
                       </tr>
                   <?php endforeach; ?>
@@ -45,15 +45,14 @@ use MVC\Core\Text;
                     <th>Titre</th>
                     <th>Route</th>
                     <th>Contenu</th>
-                    <th>Date de création</th>
-                    <th>Date de modification</th>
+                    <th>Date&nbsp;de création</th>
+                    <th>Date&nbsp;de modification</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
             </table>
         </div>
-
-        <br><br>
+        <div class="space-40"></div>
         <div class="col-100-center">
             <?php $this->addComponent('formAdminPage', ""); ?>
         </div>

@@ -6,13 +6,13 @@
         </div>
         <div class="space-40"></div>
 
-        <div class="col-100-center">
-            <table class="dataTable">
+        <div class="width-100">
+            <table class="dataTable table table-striped" id="deck-table">
                 <thead>
                   <tr>
                       <th>Id</th>
                       <th>Nom</th>
-                      <th>Id membre</th>
+                      <th>Id&nbsp;membre</th>
                       <th>Like</th>
                       <th>Dislike</th>
                       <th>Action</th>
@@ -27,10 +27,10 @@
                           <td><?= $value['upvotes'] ?></td>
                           <td><?= $value['downvotes'] ?></td>
                           <td>
-                              <form action="/admin/dashboard/decks/delete" method="post">
-                                  <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                  <input class="button-classic-sm-error" type="submit" value="Supprimer">
-                              </form>
+                            <form action="/dashboard/admin/decks/delete" method="post">
+                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                <input  class="button-classic-sm-error" type="submit" value="Supprimer">
+                            </form>
                           </td>
                       </tr>
                   <?php endforeach; ?>
@@ -39,7 +39,7 @@
                   <tr>
                       <th>Id</th>
                       <th>Nom</th>
-                      <th>Id membre</th>
+                      <th>Id&nbsp;membre</th>
                       <th>Like</th>
                       <th>Dislike</th>
                       <th>Action</th>

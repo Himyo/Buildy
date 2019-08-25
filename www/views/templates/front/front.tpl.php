@@ -19,8 +19,8 @@
         <?php include "header.php"; ?>
         <div id="main-container" class="main-container">
 
-            <?php 
-            include $this->v; 
+            <?php
+            include $this->v;
             ?>
 
         </div>
