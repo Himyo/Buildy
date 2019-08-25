@@ -5,16 +5,17 @@
         <h1 class="title-h1">Gestion des tournois</h1>
       </div>
       <div class="space-40"></div>
-        <div class="col-100-center">
-          <table class="dataTable">
+        <div class="width-100">
+          <table class="dataTable table table-striped" id="tournament-table">
               <thead>
                 <tr>
                     <th>Id</th>
                     <th>Nom</th>
                     <th>Description</th>
-                    <th>Nombre de participants</th>
-                    <th>Date de création</th>
-                    <th>Date de fin</th>
+                    <th>Nombre&nbsp;de participants</th>
+                    <th>Date&nbsp;de création</th>
+                    <th>Date&nbsp;de fin</th>
+                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,10 +28,10 @@
                         <td><?= $value['created_at'] ?></td>
                         <td><?= $value['ended_at'] ?></td>
                         <td>
-                            <form action="/admin/dashboard/tournaments/delete" method="post">
-                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                <input class="button-classic-sm-error" type="submit" value="Supprimer">
-                            </form>
+                          <form action="/dashboard/admin/tournaments/delete" method="post">
+                              <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                              <input  class="button-classic-sm-error" type="submit" value="Supprimer">
+                          </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -40,15 +41,15 @@
                   <th>Id</th>
                   <th>Nom</th>
                   <th>Description</th>
-                  <th>Nombre de participants</th>
-                  <th>Date de création</th>
-                  <th>Date de fin</th>
+                  <th>Nombre&nbsp;de participants</th>
+                  <th>Date&nbsp;de création</th>
+                  <th>Date&nbsp;de fin</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
           </table>
         </div>
-
-        <br><br>
+        <div class="space-40"></div>
         <div class="col-100-center">
             <?php $this->addComponent('formAdminTournament', ""); ?>
         </div>

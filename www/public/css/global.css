@@ -3,6 +3,10 @@
   background-color: #0c2033;
 }
 
+.dark-grey-bg {
+  background-color: #555555;
+}
+
 .lightgrey-font {
   color: #555555;
 }
@@ -97,6 +101,23 @@ a {
 .icon-sidemenu {
   width: 20px;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
 
 /* SPACE BOTTOM */
 .space-100 {
@@ -1054,6 +1075,25 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
+/* BORDER */
+.border-left-radius {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-right: 0;
+}
+
+.border-right-radius {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-left: 0;
+}
+
+.border-none {
+  border-right: 0;
+  border-left: 0;
+}
+
+
 /* LABEL */
 .label-classic {
   color: #777;
@@ -1554,6 +1594,10 @@ h1, h2, h3, h4, h5, h6 {
 
 tbody tr {
   text-align: center;
+}
+
+.dataTable {
+  width: 100% !important;
 }
 
 .table-classic {
