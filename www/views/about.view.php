@@ -18,8 +18,8 @@
                 <li>Se déconnecter</li>
                 <li>Modifier ses informations</li>
                 <li>Créer un deck</li>
+                <li>Creer un article</li>
                 <li>Ecrire des commentaires sur un article</li>
-                <li>Répondre à un commentaire</li>
                 <li>Voir la liste des cartes</li>
               </ul>
             </div>
@@ -34,13 +34,13 @@
                 <li>Se connecter</li>
                 <li>Se déconnecter</li>
                 <li>Modifier ses informations</li>
-                <li>Ajouter / modifier / supprimer un membre</li>
-                <li>Ajouter / modifier / supprimer un article</li>
+                <li>Ajouter / modifier / supprimer / bannir un membre</li>
+                <li>Ajouter / modifier / supprimer / bannir un article</li>
                 <li>Ajouter / modifier / supprimer un commentaire</li>
                 <li>Ajouter / modifier / supprimer un tournois</li>
                 <li>Ajouter / modifier / supprimer un deck</li>
                 <li>Ajouter / modifier / supprimer une page</li>
-                <li>Editer une page</li>
+                <li>Creet et editer une page</li>
                   <ul>
                     <li>Utiliser un système de glisser-déposer afin de réaliser la page désiré</li>
                     <li>Styliser les éléments de la page dans le menu de personnalisation</li>
