@@ -5,15 +5,16 @@
             <h1 class="title-h1">Gestion des commentaires</h1>
         </div>
         <div class="space-40"></div>
-        <div class="col-100-center">
-            <table class="dataTable">
+        <div class="width-100">
+            <table class="dataTable table table-striped" id="comment-table">
                 <thead>
                   <tr>
                       <th>Id</th>
                       <th>Contenu</th>
-                      <th>Id membre</th>
-                      <th>Id commentaire</th>
-                      <th>Id article</th>
+                      <th>Id&nbsp;membre</th>
+                      <th>Id&nbsp;commentaire</th>
+                      <th>Id&nbsp;article</th>
+                      <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -25,10 +26,10 @@
                           <td><?= $value['upvotes'] ?></td>
                           <td><?= $value['downvotes'] ?></td>
                           <td>
-                              <form action="/admin/dashboard/comments/delete" method="post">
-                                  <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                  <input class="button-classic-sm-error" type="submit" value="Supprimer">
-                              </form>
+                            <form action="/dashboard/admin/comments/delete" method="post">
+                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                <input  class="button-classic-sm-error" type="submit" value="Supprimer">
+                            </form>
                           </td>
                       </tr>
                   <?php endforeach; ?>
@@ -37,13 +38,15 @@
                   <tr>
                       <th>Id</th>
                       <th>Contenu</th>
-                      <th>Id membre</th>
-                      <th>Id commentaire</th>
-                      <th>Id article</th>
+                      <th>Id&nbsp;membre</th>
+                      <th>Id&nbsp;commentaire</th>
+                      <th>Id&nbsp;article</th>
+                      <th>Action</th>
                   </tr>
                 </tfoot>
             </table>
         </div>
+        <div class="space-40"></div>
         <div class="col-100-center">
             <?php $this->addComponent('formAdminComment', ""); ?>
         </div>

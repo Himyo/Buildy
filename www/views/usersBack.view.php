@@ -5,20 +5,19 @@
         <h1 class="title-h1">Gestion des membres</h1>
       </div>
       <div class="space-40"></div>
-      <div class="width-100" style="overflow-x: scroll">
-        <table class="dataTable">
+      <div class="width-100">
+        <table class="dataTable table table-striped" id="user-table">
             <thead>
               <tr>
                 <th>Id</th>
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Mot de passe</th>
                 <th>Status</th>
                 <th>Rôle</th>
                 <th>Token</th>
-                <th>Id photo</th>
-                <th colspan="4">Action</th>
+                <th>Id&nbsp;photo</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -29,15 +28,15 @@
                       <td><?= $value['lastname'] ?></td>
                       <td><?= $value['firstname'] ?></td>
                       <td><?= $value['email'] ?></td>
-                      <td><?= $value['password'] ?></td>
                       <td><?= $value['status'] ?></td>
                       <td><?= $value['role'] ?></td>
+                      <td><?= $value['token'] ?></td>
                       <td><?= $value['photo_id'] ?></td>
                       <td>
-                          <form action="/Admin/dashboard/users/delete" method="post">
-                              <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                              <input class="button-classic-error" type="submit" value="Supprimer">
-                          </form>
+                        <form action="/dashboard/admin/users/delete" method="post">
+                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                            <input  class="button-classic-sm-error" type="submit" value="Supprimer">
+                        </form>
                       </td>
                   </tr>
                   <?php endif; ?>
@@ -49,12 +48,11 @@
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Mot de passe</th>
                 <th>Status</th>
                 <th>Rôle</th>
                 <th>Token</th>
-                <th>Id photo</th>
-                <th colspan="4">Action</th>
+                <th>Id&nbsp;photo</th>
+                <th>Action</th>
               </tr>
             </tfoot>
         </table>

@@ -6,15 +6,15 @@
         </div>
         <div class="space-40"></div>
 
-        <div class="col-100-center">
-            <table class="dataTable">
+        <div class="width-100">
+            <table class="dataTable table table-striped" id="card-table">
               <thead>
                 <tr>
                     <th>Id</th>
                     <th>Nom</th>
                     <th>Endurance</th>
                     <th>Puissance</th>
-                    <th>Coût en mana</th>
+                    <th>Coût&nbsp;en&nbsp;mana</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,7 +34,7 @@
                   <th>Nom</th>
                   <th>Endurance</th>
                   <th>Puissance</th>
-                  <th>Coût en mana</th>
+                  <th>Coût&nbsp;en&nbsp;mana</th>
                 </tr>
               </tfoot>
             </table>

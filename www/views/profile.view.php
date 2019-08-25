@@ -4,7 +4,11 @@
 ?>
 <div id="container-user" class="container">
     <div class="content">
-        <h1 class="title-h1"> Profile </h1>
+      <div class="space-15"></div>
+      <div class="buildy-grid-v-center col-100-center">
+          <h1 class="title-h1">Profile</h1>
+      </div>
+      <div class="space-40"></div>
         <h2>Firstname: <?php echo $profile['firstname']?> </h2>
         <h2>Lastname: <?php echo $profile['lastname']?> </h2>
         <h2>Email: <?php echo $profile['email']?> </h2>

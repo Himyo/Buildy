@@ -61,6 +61,12 @@
   method: "GET"
   allow: [ADMIN]
 
+"/admin/mysite/sitemap":
+  controller: Home
+  action: getSitemap
+  method: "GET"
+  allow: [ADMIN]
+
 "/admin/mysite/about":
   controller: Home
   action: getAbout
@@ -280,7 +286,7 @@
 
 "/site/articles":
   controller: Articles
-  action: default 
+  action: default
   method: "GET"
 
 "/site/profile/articles":
