@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: buildydb
--- Generation Time: Aug 24, 2019 at 04:27 PM
--- Server version: 10.3.14-MariaDB-1:10.3.14+maria~bionic
--- PHP Version: 7.2.14
+-- Hôte : buildydb
+-- Généré le :  Dim 25 août 2019 à 22:59
+-- Version du serveur :  10.3.17-MariaDB-1:10.3.17+maria~bionic
+-- Version de PHP :  7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,40 +19,43 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `buildy`
+-- Base de données :  `buildy`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Articles`
+-- Structure de la table `Articles`
 --
 
 CREATE TABLE `Articles` (
   `id` int(11) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `content` varchar(45) DEFAULT NULL,
+  `content` longtext DEFAULT NULL,
+  `image` varchar(45) NOT NULL DEFAULT 'default-article.jpg',
   `users_id` int(11) NOT NULL,
   `categories` varchar(50) DEFAULT 'GENERAL',
   `state` varchar(50) DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Articles`
+-- Déchargement des données de la table `Articles`
 --
 
-INSERT INTO `Articles` (`id`, `title`, `created_at`, `content`, `users_id`, `categories`, `state`) VALUES
-(15, 'Articles uno', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
-(16, 'Articles dos', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
-(17, 'Articles tres', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
-(18, 'Articles quatro', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING'),
-(19, 'cinqo de mayo', '2019-08-01 00:00:00', 'Contentcontent', 20, '1', 'PENDING');
+INSERT INTO `Articles` (`id`, `title`, `created_at`, `content`, `image`, `users_id`, `categories`, `state`) VALUES
+(15, 'Articles uno', '2019-08-01 00:00:00', '<p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\"><strong>Paris</strong> <span style=\'white-space: nowrap; font-family: \"Segoe UI\", \"DejaVu Sans\", \"Lucida Grande\", \"Lucida Sans Unicode\", \"Arial Unicode MS\", \"Hiragino Kaku Gothic Pro\", sans-serif;\' title=\"Alphabet phonÃ©tique international\">[<a href=\"https://fr.wikipedia.org/wiki/API_p\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"API p\"><span title=\"[p] Â« p Â» dans Â« papa Â».\">p</span></a><a href=\"https://fr.wikipedia.org/wiki/API_a\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"API a\"><span title=\"[a] Â« a Â» dans Â« patte Â».\">a</span></a><a href=\"https://fr.wikipedia.org/wiki/API_.\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"API .\"><span title=\"[.] indique la sÃ©paration entre deux syllabes.\">.</span></a><a href=\"https://fr.wikipedia.org/wiki/API_%CA%81\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"API Ê\"><span title=\"[Ê] Â« r Â» dans Â« roue Â».\">Ê</span></a><a href=\"https://fr.wikipedia.org/wiki/API_i\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"API i\"><span title=\"[i] Â« i Â» dans Â« si Â».\">i</span></a>]</span><sup style=\"line-height: 1; vertical-align: text-top; position: relative; font-size: 0.8em; top: -5px; padding-left: 1px; unicode-bidi: isolate; white-space: nowrap; font-weight: normal; font-style: normal;\"><a href=\"https://fr.wikipedia.org/wiki/Paris#cite_note-1\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\">a</a></sup> <sup style=\"line-height: 1;\"><a href=\"https://fr.wikipedia.org/wiki/Fichier:Paris1.ogg\" style=\'text-decoration: none; color: rgb(11, 0, 128); background: url(\"//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/11px-Loudspeaker.svg.png\") left center no-repeat; padding-left: 15px; font-size: smaller;\' title=\"Fichier:Paris1.ogg\">&Eacute;couter</a></sup>, la ville la plus peupl&eacute;e de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"France\">France</a> et l&#39;actuelle&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Capitale_de_la_France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Capitale de la France\">capitale du pays</a>,&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Paris#Organisation_administrative\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\">constitue</a> depuis le&nbsp;<time data-sort-value=\"2019-01-01\" datetime=\"2019-01-01\" style=\"white-space: nowrap;\"><a href=\"https://fr.wikipedia.org/wiki/1er_janvier\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"1er janvier\">1<sup style=\"line-height: 1;\">er</sup></a> <a href=\"https://fr.wikipedia.org/wiki/Janvier_2019\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Janvier 2019\">janvier</a> <a href=\"https://fr.wikipedia.org/wiki/2019\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"2019\">2019</a></time> une&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Collectivit%C3%A9_territoriale_en_France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"CollectivitÃ© territoriale en France\">collectivit&eacute; &agrave; statut particulier</a> nomm&eacute;e&nbsp;<strong><a href=\"https://fr.wikipedia.org/wiki/Mairie_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Mairie de Paris\">Ville de Paris</a></strong> (auparavant, elle &eacute;tait &agrave; la fois une&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Commune_(France)\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Commune (France)\">commune</a>, la commune de Paris, et un&nbsp;<a href=\"https://fr.wikipedia.org/wiki/D%C3%A9partement_fran%C3%A7ais\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"DÃ©partement franÃ§ais\">d&eacute;partement</a>, le d&eacute;partement de Paris). Elle se situe au c&oelig;ur d&#39;un vaste bassin&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Roche_s%C3%A9dimentaire\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Roche sÃ©dimentaire\">s&eacute;dimentaire</a> aux sols fertiles et au climat temp&eacute;r&eacute;, le&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Bassin_parisien\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Bassin parisien\">bassin parisien</a>, sur une boucle de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Seine\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Seine\">Seine</a>, entre les confluents de celle-ci avec la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Marne_(rivi%C3%A8re)\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Marne (riviÃ¨re)\">Marne</a> et l&#39;<a href=\"https://fr.wikipedia.org/wiki/Oise_(rivi%C3%A8re)\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Oise (riviÃ¨re)\">Oise</a>. Ses habitants s&rsquo;appellent les Parisiens. Paris est &eacute;galement le&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Chef-lieu\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Chef-lieu\">chef-lieu</a> de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/R%C3%A9gion_fran%C3%A7aise\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"RÃ©gion franÃ§aise\">r&eacute;gion</a> <a href=\"https://fr.wikipedia.org/wiki/%C3%8Ele-de-France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"ÃŽle-de-France\">&Icirc;le-de-France</a> et le centre de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/M%C3%A9tropole_du_Grand_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"MÃ©tropole du Grand Paris\">m&eacute;tropole du Grand Paris</a>, cr&eacute;&eacute;e en 2016. Elle est divis&eacute;e en&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Arrondissement\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Arrondissement\">arrondissements</a>, comme les villes de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Lyon\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Lyon\">Lyon</a> et de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Marseille\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Marseille\">Marseille</a>,&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Arrondissements_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Arrondissements de Paris\">au nombre de vingt</a>. L&rsquo;&Eacute;tat y dispose de pr&eacute;rogatives particuli&egrave;res exerc&eacute;es par le&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Pr%C3%A9fecture_de_police_(Paris)\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"PrÃ©fecture de police (Paris)\">pr&eacute;fet de police de Paris</a>. La ville a connu de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Transformations_de_Paris_sous_le_Second_Empire\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Transformations de Paris sous le Second Empire\">profondes transformations dans les d&eacute;cennies 1850 &agrave; 1860</a> &agrave; travers d&#39;importants travaux consistant notamment au percement de larges avenues, places et jardins et la construction de nombreux &eacute;difices, dirig&eacute;s par le&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Baron_Haussmann\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Baron Haussmann\">baron Haussmann</a>.</p><p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\">Ville la plus peupl&eacute;e de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"France\">France</a>, elle est la premi&egrave;re parmi les&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Liste_des_aires_urbaines_d%27Europe#Liste_des_aires_urbaines_de_l\'Union_europ%C3%A9enne\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Liste des aires urbaines d\'Europe\">aires urbaines de l&#39;Union europ&eacute;enne</a> devant&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Londres\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Londres\">Londres</a> et la&nbsp;<abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"Vingt-neuviÃ¨me\">29<sup style=\"line-height: 1;\">e</sup></abbr> plus peupl&eacute;e du monde. Paris compte 2,19 millions d&#39;habitants au&nbsp;<time data-sort-value=\"2016-01-01\" datetime=\"2016-01-01\" style=\"white-space: nowrap;\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"premier\">1<sup style=\"line-height: 1;\">er</sup></abbr> janvier 2016</time>. L&#39;<a href=\"https://fr.wikipedia.org/wiki/Unit%C3%A9_urbaine_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"UnitÃ© urbaine de Paris\">agglom&eacute;ration parisienne</a> s&rsquo;est largement d&eacute;velopp&eacute;e au cours du&nbsp;<abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"20áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xx</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle, rassemblant 10,73 millions d&#39;habitants au&nbsp;<time data-sort-value=\"2016-01-01\" datetime=\"2016-01-01\" style=\"white-space: nowrap;\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"premier\">1<sup style=\"line-height: 1;\">er</sup></abbr> janvier 2016</time>, et son&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Aire_urbaine_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Aire urbaine de Paris\">aire urbaine</a> (l&#39;<a href=\"https://fr.wikipedia.org/wiki/Agglom%C3%A9ration\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"AgglomÃ©ration\">agglom&eacute;ration</a> et la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Couronne_p%C3%A9riurbaine\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Couronne pÃ©riurbaine\">couronne p&eacute;riurbaine</a>) comptait 12,57&nbsp;millions d&#39;habitants.</p><p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\">La position de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Lut%C3%A8ce\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"LutÃ¨ce\">Lut&egrave;ce</a>, sur l&#39;&icirc;le aujourd&#39;hui nomm&eacute;e l&#39;<a href=\"https://fr.wikipedia.org/wiki/%C3%8Ele_de_la_Cit%C3%A9\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"ÃŽle de la CitÃ©\">&icirc;le de la Cit&eacute;</a>, permettant le franchissement du grand fleuve navigable qu&#39;est la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Seine\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Seine\">Seine</a> par une voie reliant le Nord et le Sud des&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Gaule\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Gaule\">Gaules</a>, en fait d&egrave;s l&#39;Antiquit&eacute; une cit&eacute; importante, capitale des&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Parisii\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Parisii\">Parisii</a>, puis lieu de s&eacute;jour d&#39;un empereur romain. Sa position au centre du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Territoire\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Territoire\">territoire</a> contr&ocirc;l&eacute; par les&nbsp;<a href=\"https://fr.wikipedia.org/wiki/M%C3%A9rovingiens\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"MÃ©rovingiens\">rois francs</a> la fait choisir comme&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Capitale_de_la_France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Capitale de la France\">capitale de la France</a> &agrave; la place de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Tournai\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Tournai\">Tournai</a>. Situ&eacute;e au c&oelig;ur d&#39;un territoire agricole fertile avec un climat humide et doux, Paris devient une des principales villes de France au cours du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Xe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Xe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"10áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">x</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a>, avec&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Cat%C3%A9gorie:Palais_%C3%A0_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"CatÃ©gorie:Palais Ã  Paris\">des palais</a>royaux, de riches&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Abbaye\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Abbaye\">abbayes</a> et&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Cath%C3%A9drale_Notre-Dame_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"CathÃ©drale Notre-Dame de Paris\">une cath&eacute;drale</a>. Au cours du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XIIe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XIIe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"12áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xii</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a>, avec l&#39;<a href=\"https://fr.wikipedia.org/wiki/Ancienne_universit%C3%A9_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Ancienne universitÃ© de Paris\">Universit&eacute; de Paris</a>, la cit&eacute; devient un des premiers foyers en Europe pour l&rsquo;enseignement et les arts. Le pouvoir royal se fixant dans cette ville, son importance &eacute;conomique et politique ne cesse de cro&icirc;tre. Ainsi, au d&eacute;but du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XIVe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XIVe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"14áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xiv</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a>, Paris est l&#39;une des villes les plus importantes du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Occident_chr%C3%A9tien\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Occident chrÃ©tien\">monde chr&eacute;tien</a>. Au&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XVIIe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XVIIe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"17áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xvii</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a>, elle est la capitale de la principale puissance politique europ&eacute;enne&nbsp;; au&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XVIIIe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XVIIIe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"18áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xviii</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a>, l&#39;un des plus grands centres culturels de l&rsquo;Europe&nbsp;; et au&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XIXe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XIXe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"19áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xix</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a>, la capitale des arts et des plaisirs. Du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XVIe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XVIe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"16áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xvi</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a> au&nbsp;<a href=\"https://fr.wikipedia.org/wiki/XXe_si%C3%A8cle\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"XXe siÃ¨cle\"><abbr style=\"border-bottom: 0px; cursor: help; text-decoration: none;\" title=\"20áµ‰ siÃ¨cle\"><span style=\"text-transform: lowercase; font-variant: small-caps;\">xx</span><sup style=\"line-height: 1; font-size: 10.08px;\">e</sup></abbr> si&egrave;cle</a> Paris a &eacute;t&eacute; la capitale de l&#39;<a href=\"https://fr.wikipedia.org/wiki/Empire_colonial_fran%C3%A7ais\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Empire colonial franÃ§ais\">Empire colonial fran&ccedil;ais</a>. Paris joue donc un r&ocirc;le de tout premier plan dans l&rsquo;<a href=\"https://fr.wikipedia.org/wiki/Histoire_de_l%27Europe\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Histoire de l\'Europe\">histoire de l&#39;Europe</a>et du monde depuis des si&egrave;cles.</p><p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\">Symbole de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Culture_fran%C3%A7aise\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Culture franÃ§aise\">culture fran&ccedil;aise</a>, connue dans le monde entier pour sa beaut&eacute; et son &eacute;l&eacute;gance, abritant de nombreux monuments, la ville, surnomm&eacute;e la&nbsp;<em>Ville Lumi&egrave;re</em>, attire en&nbsp;<a href=\"https://fr.wikipedia.org/wiki/2017\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"2017\">2017</a> pr&egrave;s de 34&nbsp;millions de visiteurs, ce qui en fait une des capitales les plus visit&eacute;es au monde. Paris occupe &eacute;galement, au niveau mondial, une place unique dans les secteurs du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Luxe\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Luxe\">luxe</a>, de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Mode_(habillement)\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Mode (habillement)\">mode</a>, de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Grande_cuisine\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Grande cuisine\">haute gastronomie</a>, et dans le monde de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Culture\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Culture\">culture</a>. La capitale fran&ccedil;aise n&#39;est&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Jumelage\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Jumelage\">jumel&eacute;e</a> qu&#39;avec une seule autre ville,&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Rome\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Rome\">Rome</a>, ce qui est aussi valable dans l&#39;autre sens, avec ce slogan&nbsp;: &laquo;&nbsp;Seul Paris est digne de Rome, seule Rome est digne de Paris&nbsp;&raquo;.</p><p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\">La ville est, avec&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Unit%C3%A9_urbaine_de_Paris\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"UnitÃ© urbaine de Paris\">sa banlieue</a>, la capitale &eacute;conomique et commerciale de la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"France\">France</a>, ainsi que sa premi&egrave;re place financi&egrave;re et boursi&egrave;re. Elle a accueilli en 2019 l&#39;<a href=\"https://fr.wikipedia.org/wiki/Autorit%C3%A9_bancaire_europ%C3%A9enne\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"AutoritÃ© bancaire europÃ©enne\">Autorit&eacute; bancaire europ&eacute;enne</a>. Paris est le si&egrave;ge de plusieurs organisations internationales comme l&#39;<a href=\"https://fr.wikipedia.org/wiki/Organisation_des_Nations_unies_pour_l%27%C3%A9ducation,_la_science_et_la_culture\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Organisation des Nations unies pour l\'Ã©ducation, la science et la culture\">UNESCO</a>, l&#39;<a href=\"https://fr.wikipedia.org/wiki/Organisation_de_coop%C3%A9ration_et_de_d%C3%A9veloppement_%C3%A9conomiques\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Organisation de coopÃ©ration et de dÃ©veloppement Ã©conomiques\">OCDE</a>, l&#39;<a href=\"https://fr.wikipedia.org/wiki/Chambre_de_commerce_internationale\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Chambre de commerce internationale\">ICC</a>.&nbsp;<a href=\"https://fr.wikipedia.org/wiki/%C3%8Ele-de-France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"ÃŽle-de-France\">La r&eacute;gion parisienne</a> est l&#39;une des plus riches r&eacute;gions d&#39;<a href=\"https://fr.wikipedia.org/wiki/Europe\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Europe\">Europe</a>.</p><p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\">La densit&eacute; de ses r&eacute;seaux ferroviaire, autoroutier et de ses structures a&eacute;roportuaires en font un point de convergence pour les transports nationaux et internationaux. Cette situation r&eacute;sulte d&#39;une longue &eacute;volution, en particulier des conceptions&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Centralisme\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Centralisme\">centralisatrices</a> des monarchies et des r&eacute;publiques, qui donnent un r&ocirc;le consid&eacute;rable &agrave; la capitale dans le pays et tendent &agrave; y concentrer les institutions. Depuis les&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Ann%C3%A9es_1960\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"AnnÃ©es 1960\">ann&eacute;es 1960</a>, les politiques gouvernementales oscillent toutefois entre&nbsp;<a href=\"https://fr.wikipedia.org/wiki/D%C3%A9concentration\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"DÃ©concentration\">d&eacute;concentration</a> et&nbsp;<a href=\"https://fr.wikipedia.org/wiki/D%C3%A9centralisation\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"DÃ©centralisation\">d&eacute;centralisation</a>. La&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Macroc%C3%A9phalie_urbaine\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"MacrocÃ©phalie urbaine\">macroc&eacute;phalie</a> dont est atteinte la ville se concr&eacute;tise par la convergence de la plupart des r&eacute;seaux routiers et ferroviaires du pays en son centre et des &eacute;carts d&eacute;mographiques et &eacute;conomiques disproportionn&eacute;s entre la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Capitale\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Capitale\">capitale</a> et la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Province\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Province\">province</a> : pr&egrave;s de 19 % de la population fran&ccedil;aise vit dans l&#39;aire urbaine de Paris.</p><p style=\"margin: 0.5em 0px; line-height: inherit; color: rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;\">Le club de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Football\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Football\">football</a> du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Paris_Saint-Germain_Football_Club\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Paris Saint-Germain Football Club\">Paris Saint-Germain</a> et celui de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Rugby_%C3%A0_XV\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Rugby Ã  XV\">rugby &agrave; XV</a> du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Stade_fran%C3%A7ais_Paris_rugby\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Stade franÃ§ais Paris rugby\">Stade fran&ccedil;ais</a> sont bas&eacute;s &agrave; Paris. Le&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Stade_de_France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Stade de France\">Stade de France</a>, enceinte de 80&nbsp;000&nbsp;places construite pour la&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Coupe_du_monde_de_football_de_1998\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Coupe du monde de football de 1998\">Coupe du monde de football de 1998</a>, est situ&eacute; au nord de la capitale, dans la commune voisine de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Saint-Denis_(Seine-Saint-Denis)\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Saint-Denis (Seine-Saint-Denis)\">Saint-Denis</a>. Paris, qui accueille chaque ann&eacute;e le tournoi du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Grand_Chelem_de_tennis\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Grand Chelem de tennis\">Grand Chelem de tennis</a> de&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Internationaux_de_France_de_tennis\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Internationaux de France de tennis\">Roland Garros</a>, a organis&eacute; les Jeux olympiques&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Jeux_olympiques_de_1900\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Jeux olympiques de 1900\">en 1900</a> puis&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Jeux_olympiques_d%27%C3%A9t%C3%A9_de_1924\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Jeux olympiques d\'Ã©tÃ© de 1924\">en 1924</a>et deviendra&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Jeux_olympiques_d%27%C3%A9t%C3%A9_de_2024\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Jeux olympiques d\'Ã©tÃ© de 2024\">en 2024</a> la deuxi&egrave;me ville avec&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Londres\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Londres\">Londres</a> &agrave; les avoir accueillis trois fois. Paris accueille &eacute;galement de nombreuses comp&eacute;titions internationales et tous les ans l&#39;arriv&eacute;e du&nbsp;<a href=\"https://fr.wikipedia.org/wiki/Tour_de_France\" style=\"text-decoration: none; color: rgb(11, 0, 128); background: none;\" title=\"Tour de France\">Tour de France</a>.</p>', 'default-article.jpg', 20, '2', 'PENDING'),
+(16, 'Articles dos', '2019-08-01 00:00:00', 'Contentcontent', 'default-article.jpg', 20, '1', 'PENDING'),
+(17, 'Articles tres', '2019-08-01 00:00:00', 'Contentcontent', 'default-article.jpg', 20, '3', 'PENDING'),
+(18, 'Articles quatro', '2019-08-01 00:00:00', 'Contentcontent', 'default-article.jpg', 20, '1', 'PENDING'),
+(20, 'MAGIC', '2019-08-25 00:00:00', '<p>zfzefzdfzd</p>', 'default-article.jpg', 21, '2', 'PENDING'),
+(21, 'Trumuche', '2019-08-25 00:00:00', '<p>Un trucmuche d&#39;&quot;article</p>', 'default-article.jpg', 21, '2', 'PENDING'),
+(22, 'Test', '2019-08-25 00:00:00', '<p>Un test</p>', 'default-article.jpg', 21, '3', 'PENDING');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Cards`
+-- Structure de la table `Cards`
 --
 
 CREATE TABLE `Cards` (
@@ -72,7 +75,7 @@ CREATE TABLE `Cards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Cards`
+-- Déchargement des données de la table `Cards`
 --
 
 INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `lore`, `ruling`, `multiverse_id`, `releases_id`, `mana_id`, `type_id`, `legalities_id`) VALUES
@@ -157,21 +160,30 @@ INSERT INTO `Cards` (`id`, `image_url`, `name`, `toughness`, `power`, `text`, `l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Comments`
+-- Structure de la table `Comments`
 --
 
 CREATE TABLE `Comments` (
   `id` int(11) NOT NULL,
-  `content` varchar(45) DEFAULT NULL,
+  `content` longtext DEFAULT NULL,
   `users_id` int(11) NOT NULL,
-  `comments_id` int(11) NOT NULL,
+  `comments_id` int(11) DEFAULT NULL,
   `articles_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Déchargement des données de la table `Comments`
+--
+
+INSERT INTO `Comments` (`id`, `content`, `users_id`, `comments_id`, `articles_id`) VALUES
+(1, 'WOA TROP BIEN L\'ARTICLE DE FOU lol', 21, NULL, 15),
+(2, '<p>Test d&#39;un commentaire</p>', 21, NULL, 15),
+(3, '<p>LE GRAND TEST</p>', 21, NULL, 16);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Decks`
+-- Structure de la table `Decks`
 --
 
 CREATE TABLE `Decks` (
@@ -183,17 +195,20 @@ CREATE TABLE `Decks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Decks`
+-- Déchargement des données de la table `Decks`
 --
 
 INSERT INTO `Decks` (`id`, `name`, `users_id`, `upvotes`, `downvotes`) VALUES
 (1, 'Deck feu', 1, 0, 0),
-(3, 'Deck eau', 1, 0, 0);
+(3, 'Deck eau', 1, 0, 0),
+(4, 'SUPER DECK FEU', 21, 0, 0),
+(5, 'Deck eau', 21, 0, 0),
+(6, 'Nouveau deck', 21, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Decks_cards`
+-- Structure de la table `Decks_cards`
 --
 
 CREATE TABLE `Decks_cards` (
@@ -201,10 +216,27 @@ CREATE TABLE `Decks_cards` (
   `cards_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `Decks_cards`
+--
+
+INSERT INTO `Decks_cards` (`decks_id`, `cards_id`) VALUES
+(4, 3),
+(4, 2),
+(4, 6),
+(4, 7),
+(4, 2),
+(4, 6),
+(5, 7),
+(5, 8),
+(5, 17),
+(5, 25),
+(6, 5);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Favoris`
+-- Structure de la table `Favoris`
 --
 
 CREATE TABLE `Favoris` (
@@ -218,7 +250,7 @@ CREATE TABLE `Favoris` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Legalities`
+-- Structure de la table `Legalities`
 --
 
 CREATE TABLE `Legalities` (
@@ -231,7 +263,7 @@ CREATE TABLE `Legalities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Legalities`
+-- Déchargement des données de la table `Legalities`
 --
 
 INSERT INTO `Legalities` (`standard`, `modern`, `legacy`, `vintage`, `pauper`, `id`) VALUES
@@ -242,7 +274,7 @@ INSERT INTO `Legalities` (`standard`, `modern`, `legacy`, `vintage`, `pauper`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Mana`
+-- Structure de la table `Mana`
 --
 
 CREATE TABLE `Mana` (
@@ -260,7 +292,7 @@ CREATE TABLE `Mana` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Mana`
+-- Déchargement des données de la table `Mana`
 --
 
 INSERT INTO `Mana` (`id`, `white`, `black`, `blue`, `green`, `red`, `colorless`, `x`, `void`, `cmc`, `mana_cost`) VALUES
@@ -314,7 +346,7 @@ INSERT INTO `Mana` (`id`, `white`, `black`, `blue`, `green`, `red`, `colorless`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Pages`
+-- Structure de la table `Pages`
 --
 
 CREATE TABLE `Pages` (
@@ -327,16 +359,18 @@ CREATE TABLE `Pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Pages`
+-- Déchargement des données de la table `Pages`
 --
 
 INSERT INTO `Pages` (`id`, `slug`, `content`, `title`, `created_at`, `updated_at`) VALUES
-(12, '/site/Pages', 'alalal', 'Pages', '2019-08-18 00:00:00', '2019-08-18 11:11:03');
+(12, '/site/Pages', 'alalal', 'Pages', '2019-08-18 00:00:00', '2019-08-18 11:11:03'),
+(13, '/site/mapage', '<p>Une petite page viteuf</p><p><br></p><p><br></p><table style=\"width: 100%;\"><tbody><tr><td style=\"width: 33.3333%;\">1</td><td style=\"width: 33.3333%;\">2</td><td style=\"width: 33.3333%;\">3</td></tr><tr><td style=\"width: 33.3333%;\">4</td><td style=\"width: 33.3333%;\">5</td><td style=\"width: 33.3333%;\">6</td></tr><tr><td style=\"width: 33.3333%;\">7</td><td style=\"width: 33.3333%;\">8</td><td style=\"width: 33.3333%;\">9</td></tr></tbody></table>', 'Une page', '2019-08-25 00:00:00', '2019-08-25 14:07:42'),
+(14, '/site/yugi', '<p>yugiohnaziuazndazodozad,pzoadlezbluielneqzjlfbnqez$f</p><p>f&ugrave;azfezf</p><p>eazfkeazfkeaz</p><p>fjk</p><p>eaz,</p><p>azefczldc</p><p>,zqo,c</p><p>zofcqzofz</p><p>qfncz</p><p>qednc</p><p>zdnzsdnz</p><p>nd</p><p>zdf</p>', 'YUGI', '2019-08-25 00:00:00', '2019-08-25 14:11:33');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Photo`
+-- Structure de la table `Photo`
 --
 
 CREATE TABLE `Photo` (
@@ -346,7 +380,7 @@ CREATE TABLE `Photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Photo`
+-- Déchargement des données de la table `Photo`
 --
 
 INSERT INTO `Photo` (`id`, `path`, `name`) VALUES
@@ -355,7 +389,7 @@ INSERT INTO `Photo` (`id`, `path`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Releases`
+-- Structure de la table `Releases`
 --
 
 CREATE TABLE `Releases` (
@@ -366,7 +400,7 @@ CREATE TABLE `Releases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Releases`
+-- Déchargement des données de la table `Releases`
 --
 
 INSERT INTO `Releases` (`id`, `name`, `release_date`, `code`) VALUES
@@ -375,7 +409,7 @@ INSERT INTO `Releases` (`id`, `name`, `release_date`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tournaments`
+-- Structure de la table `Tournaments`
 --
 
 CREATE TABLE `Tournaments` (
@@ -383,14 +417,21 @@ CREATE TABLE `Tournaments` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `ended_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `name` varchar(45) DEFAULT NULL,
-  `description` varchar(45) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
   `nb_contenders` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Tournaments`
+--
+
+INSERT INTO `Tournaments` (`id`, `created_at`, `ended_at`, `name`, `description`, `nb_contenders`) VALUES
+(5, '2019-08-25 00:00:00', '0000-00-00 00:00:00', 'Tournois Magic', '<p>Mon super tournois sur le jeu magic, 10 joueurs.</p>', 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tournaments_members`
+-- Structure de la table `Tournaments_members`
 --
 
 CREATE TABLE `Tournaments_members` (
@@ -400,10 +441,17 @@ CREATE TABLE `Tournaments_members` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `Tournaments_members`
+--
+
+INSERT INTO `Tournaments_members` (`users_id`, `tournaments_id`, `status`, `updated_at`) VALUES
+(21, 5, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Type`
+-- Structure de la table `Type`
 --
 
 CREATE TABLE `Type` (
@@ -416,7 +464,7 @@ CREATE TABLE `Type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Type`
+-- Déchargement des données de la table `Type`
 --
 
 INSERT INTO `Type` (`id`, `supertype`, `type`, `subtype`, `layout`, `rarity`) VALUES
@@ -469,7 +517,7 @@ INSERT INTO `Type` (`id`, `supertype`, `type`, `subtype`, `layout`, `rarity`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Structure de la table `Users`
 --
 
 CREATE TABLE `Users` (
@@ -485,7 +533,7 @@ CREATE TABLE `Users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Users`
+-- Déchargement des données de la table `Users`
 --
 
 INSERT INTO `Users` (`id`, `lastname`, `firstname`, `email`, `password`, `status`, `role`, `token`, `photo_id`) VALUES
@@ -494,12 +542,13 @@ INSERT INTO `Users` (`id`, `lastname`, `firstname`, `email`, `password`, `status
 (14, 'Mod', 'Moderator', 'gay@mod.com', '$2y$10$j7hG//HUlnMyID9.z4BAsuKSlz1xoIX/18PlOvAaPvQPaSS81baui', 'ACCEPTED', 'MODERATOR', NULL, 0),
 (15, 'ddd', 'bad', 'dabdab@gmail.com', '$2y$10$B3nZj84w8N03vnY33XYyXe4jSxbk3nZ9KBEoiIrNi7xAeY6X2W8IG', 'ACCEPTED', 'USER', NULL, 0),
 (16, 'o', 'ba', 'gay@mod.com', '$2y$10$L4L2AaRqq9XEfMrC5egj7uTVw40qC8pumuDrxD4tgF9OYa0Y2eGAe', 'ACCEPTED', 'USER', NULL, 0),
-(20, 'Mod', 'Moderator', 'Mododo@g.com', '$2y$10$AYHf7ufgTlvqbeJiG3gUle2jLr6qd3oPkMZCaqLummmeDJ0pgbSR2', 'ACCEPTED', 'ADMIN', NULL, 0);
+(20, 'Mod', 'Moderator', 'Mododo@g.com', '$2y$10$AYHf7ufgTlvqbeJiG3gUle2jLr6qd3oPkMZCaqLummmeDJ0pgbSR2', 'ACCEPTED', 'ADMIN', NULL, 0),
+(21, 'marinier', 'anthony', 'eldera@gmail.com', '$2y$10$kohsjOeDd5KSa1uc.518quhM1WpKYYgWf3EHR9jadK1iD25qbgeBK', 'ACCEPTED', 'ADMIN', NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users_cards`
+-- Structure de la table `Users_cards`
 --
 
 CREATE TABLE `Users_cards` (
@@ -508,25 +557,25 @@ CREATE TABLE `Users_cards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `Articles`
+-- Index pour la table `Articles`
 --
 ALTER TABLE `Articles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_articles_categories1_idx` (`categories`);
 
 --
--- Indexes for table `Cards`
+-- Index pour la table `Cards`
 --
 ALTER TABLE `Cards`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cards_release1_idx` (`releases_id`);
 
 --
--- Indexes for table `Comments`
+-- Index pour la table `Comments`
 --
 ALTER TABLE `Comments`
   ADD PRIMARY KEY (`id`),
@@ -535,13 +584,13 @@ ALTER TABLE `Comments`
   ADD KEY `fk_commentaires_article1_idx` (`articles_id`);
 
 --
--- Indexes for table `Decks`
+-- Index pour la table `Decks`
 --
 ALTER TABLE `Decks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Favoris`
+-- Index pour la table `Favoris`
 --
 ALTER TABLE `Favoris`
   ADD KEY `fk_favoris_members1_idx` (`users_id`),
@@ -551,142 +600,142 @@ ALTER TABLE `Favoris`
   ADD KEY `fk_favoris_tournaments1_idx` (`tournaments_id`);
 
 --
--- Indexes for table `Legalities`
+-- Index pour la table `Legalities`
 --
 ALTER TABLE `Legalities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Mana`
+-- Index pour la table `Mana`
 --
 ALTER TABLE `Mana`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Pages`
+-- Index pour la table `Pages`
 --
 ALTER TABLE `Pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Photo`
+-- Index pour la table `Photo`
 --
 ALTER TABLE `Photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Releases`
+-- Index pour la table `Releases`
 --
 ALTER TABLE `Releases`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Tournaments`
+-- Index pour la table `Tournaments`
 --
 ALTER TABLE `Tournaments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Tournaments_members`
+-- Index pour la table `Tournaments_members`
 --
 ALTER TABLE `Tournaments_members`
   ADD KEY `fk_tournament_member_members1_idx` (`users_id`),
   ADD KEY `fk_tournament_member_tournaments1_idx` (`tournaments_id`);
 
 --
--- Indexes for table `Type`
+-- Index pour la table `Type`
 --
 ALTER TABLE `Type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Users`
+-- Index pour la table `Users`
 --
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `Articles`
+-- AUTO_INCREMENT pour la table `Articles`
 --
 ALTER TABLE `Articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `Cards`
+-- AUTO_INCREMENT pour la table `Cards`
 --
 ALTER TABLE `Cards`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
--- AUTO_INCREMENT for table `Comments`
+-- AUTO_INCREMENT pour la table `Comments`
 --
 ALTER TABLE `Comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Decks`
---
-ALTER TABLE `Decks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `Legalities`
+-- AUTO_INCREMENT pour la table `Decks`
+--
+ALTER TABLE `Decks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `Legalities`
 --
 ALTER TABLE `Legalities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `Mana`
+-- AUTO_INCREMENT pour la table `Mana`
 --
 ALTER TABLE `Mana`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT for table `Pages`
+-- AUTO_INCREMENT pour la table `Pages`
 --
 ALTER TABLE `Pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `Photo`
+-- AUTO_INCREMENT pour la table `Photo`
 --
 ALTER TABLE `Photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
--- AUTO_INCREMENT for table `Releases`
+-- AUTO_INCREMENT pour la table `Releases`
 --
 ALTER TABLE `Releases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `Tournaments`
+-- AUTO_INCREMENT pour la table `Tournaments`
 --
 ALTER TABLE `Tournaments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `Type`
+-- AUTO_INCREMENT pour la table `Type`
 --
 ALTER TABLE `Type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT pour la table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `Cards`
+-- Contraintes pour la table `Cards`
 --
 ALTER TABLE `Cards`
   ADD CONSTRAINT `fk_cards_release1` FOREIGN KEY (`releases_id`) REFERENCES `Releases` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
