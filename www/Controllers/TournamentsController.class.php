@@ -13,7 +13,7 @@ class TournamentsController extends Controller {
         $this->tournaments =  $tournament;
     }
 
-    public function saveAction() {
+    public function saveTournamentAction() {
         $data = [];
 
         if (empty($_POST['id']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['nb_contenders'])) {
@@ -32,7 +32,7 @@ class TournamentsController extends Controller {
             ];
 
             $this->tournaments->insert($data);
-            header('Location: /site');
+            header('Location: /site/tournaments');
             exit();
         } else {
             //TODO RETURN ERROR
@@ -54,6 +54,46 @@ class TournamentsController extends Controller {
                 'nb_contenders as N`Participant'
             ], ['users_id' => $_POST['id']]);
             echo json_encode($tournaments);
+        }
+    }
+
+    public function getTournamentsAction() {
+        $tournaments = Tournaments::ALL();
+
+        $view = new View("tournaments", "front");
+        $view->assign('tournaments', $tournaments);
+    }
+
+    public function getDetailAction() {
+
+        $tournament = $this->tournaments->find(['*'], ['Tournaments.id' => $_GET['id']])[0];
+
+        $this->tournaments->setTable('Tournaments_members');
+        $members = $this->tournaments->executeSql([
+            'select'=> [ 'Users.firstname', 'Users.lastname', 'Users.id'],
+            'innerJoin'=>['Users' => ['Users.id', 'Tournaments_members.users_id']],
+            'where' => ['Tournaments_members.tournaments_id' => $_GET['id']]
+            ]
+        );
+
+        $view = new View('tournamentDetail', 'front');
+        $view->assign('tournament', $tournament);
+        $view->assign('members', $members);
+    }
+
+    public function signupAction() {
+        if (isset($_POST['users_id']) && isset($_POST['tournament_id'])) {
+            $this->tournaments->setTable('Tournaments_members');
+
+            $data = [
+                'users_id' => $_POST['users_id'],
+                'tournaments_id' => $_POST['tournament_id']
+            ];
+
+            $this->tournaments->insert($data);
+
+            header('Location: /site/tournament?id='.$_POST['tournament_id']);
+            exit();
         }
     }
 }

@@ -17,7 +17,7 @@ class AdminCommentsController extends Controller {
 
     public function defaultAction() {
 
-        $comments = Comments::ALL();
+        $comments = Comments::ALL(['*']);
         $view = new View("commentsBack", "back");
         $view->assign('comments', $comments);
     }

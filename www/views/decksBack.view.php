@@ -47,6 +47,11 @@
                 </tfoot>
             </table>
         </div>
+
+        <div class="space-50"></div>
+        <hr class="">
+        <div class="space-50"></div>
+        
         <div class="space-40"></div>
         <div class="col-100-center">
             <?php $this->addComponent('formAdminDeck', ""); ?>

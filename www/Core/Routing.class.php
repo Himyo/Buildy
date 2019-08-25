@@ -60,7 +60,7 @@ class Routing{
 
         $newRouteYAML = substr($newRouteYAML, 4);
         $newRouteYAML = substr($newRouteYAML, 0, -4);
-        file_put_contents(self::$routeFile, $newRouteYAML."\n", FILE_APPEND);
+        file_put_contents(self::$routeFile, $newRouteYAML."\n\n", FILE_APPEND);
     }
 
 }

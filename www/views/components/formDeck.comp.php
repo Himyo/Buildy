@@ -1,4 +1,4 @@
-<div class="col-50-center column">
+<div class="col-100-center column">
     <div class="buildy-grid-v-center col-100-center column">
         <h3 class="title-h3">Créer un deck</h3>
     </div>

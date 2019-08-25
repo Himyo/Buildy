@@ -8,7 +8,6 @@
         <?php if(Auth::isAdmin()):?>
             <a class="padding-10" href="/admin/dashboard/users"><p><i class="icon-sidemenu fas fa-users"></i> Gestion Membres</p></a>
         <?php endif; ?>
-        <a class="padding-10" href="/admin/dashboard/users"><p><i class="icon-sidemenu fas fa-users"></i> Gestion Membres</p></a>
         <a class="padding-10" href="/admin/dashboard/articles"><p><i class="icon-sidemenu fas fa-newspaper"></i> Gestion Articles</p></a>
         <a class="padding-10" href="/admin/dashboard/comments"><p><i class="icon-sidemenu fas fa-comment"></i> Gestion des commentaires</p></a>
         <a class="padding-10" href="/admin/dashboard/tournaments"><p><i class="icon-sidemenu fas fa-dice-d20"></i> Gestion des tournois</p></a>

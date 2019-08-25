@@ -15,9 +15,8 @@
                 <th>Email</th>
                 <th>Status</th>
                 <th>Rôle</th>
-                <th>Token</th>
                 <th>Id&nbsp;photo</th>
-                <th>Action</th>
+                <th colspan="4">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -50,9 +49,8 @@
                 <th>Email</th>
                 <th>Status</th>
                 <th>Rôle</th>
-                <th>Token</th>
                 <th>Id&nbsp;photo</th>
-                <th>Action</th>
+                <th colspan="4">Action</th>
               </tr>
             </tfoot>
         </table>

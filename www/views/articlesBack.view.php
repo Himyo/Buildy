@@ -1,3 +1,6 @@
+<?php 
+use MVC\Core\Text;
+?>
 <div id="container" class="container">
     <div class="content">
         <div class="space-15"></div>
@@ -23,8 +26,8 @@
                   <?php foreach($articles as $key => $value): ?>
                       <tr>
                           <td><?= $value['id'] ?></td>
-                          <td><?= $value['title'] ?></td>
-                          <td><?= $value['content'] ?></td>
+                          <td><?= htmlentities($value['title']) ?></td>
+                          <td><?= Text::excerpt(htmlentities($value['content'])) ?></td>
                           <td><?= $value['users_id'] ?></td>
                           <td><?= $value['categories_id'] ?></td>
                           <td><?= $value['state'] ?></td>
@@ -52,7 +55,11 @@
                 </tfoot>
             </table>
         </div>
-        <div class="space-40"></div>
+
+        <div class="space-50"></div>
+        <hr class="">
+        <div class="space-50"></div>
+        
         <div class="col-100-center">
             <?php $this->addComponent('formAdminArticle', ""); ?>
         </div>

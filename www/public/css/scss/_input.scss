@@ -35,3 +35,20 @@
    border: 2px solid #243647;
    width: 200px;
 }
+
+.border-left-radius {
+   border-top-left-radius: 6px;
+   border-bottom-left-radius: 6px;
+   border-right: 0;
+ }
+ 
+ .border-right-radius {
+   border-top-right-radius: 6px;
+   border-bottom-right-radius: 6px;
+   border-left: 0;
+ }
+ 
+ .border-none {
+   border-right: 0;
+   border-left: 0;
+ }

@@ -17,6 +17,8 @@
     <script type="text/javascript" src="../../../public/vendor/chart.js/Chart.js"></script>
     <script type="text/javascript" src="../../../public/js/script.js"></script>
     <script type="text/javascript" src="../../../public/js/datatables.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js"></script>
     <script type="text/javascript" src="../../../public/js/dataTables.altEditor.free.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js" ></script>
 </head>
