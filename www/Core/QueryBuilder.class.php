@@ -146,6 +146,10 @@ class QueryBuilder {
         $this->items['WHERE'] = $item;
         return $this;
     }
+    public function wherelike($item): QueryBuilder {
+        $this->items['WHERELIKE'] =  $item;
+        return $this;
+    }
     public function innerJoin($items): QueryBuilder {
         $this->items['JOIN'] =  $items;
         return $this;
@@ -237,6 +241,12 @@ class QueryBuilder {
                     $key = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
                     $this->data[$key] = $data[$k];
                     $this->query .= QueryBuilder::SQL_PARSER('WHERE')($data);
+                    break;
+                case 'WHERELIKE':
+                    $k = array_keys($data)[0];
+                    $key = sizeof(explode( '.', $k)) > 1 ? str_replace('.', '', $k) :  $k;
+                    $this->data[$key] = $data[$k];
+                    $this->query .= "WHERE {$k} LIKE {$data[$k]}%'";
                     break;
                 default:
                     $this->data += $data;

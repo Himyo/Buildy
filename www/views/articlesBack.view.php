@@ -24,7 +24,7 @@
                       <tr>
                           <td><?= $value['id'] ?></td>
                           <td><?= htmlentities($value['title']) ?></td>
-                          <td><?= htmlentitiies($value['content']) ?></td>
+                          <td><?= htmlentities($value['content']) ?></td>
                           <td><?= $value['users_id'] ?></td>
                           <td><?= htmlentities($value['categories']) ?></td>
                           <td><?= $value['state'] ?></td>
