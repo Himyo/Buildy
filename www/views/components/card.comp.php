@@ -1,1 +1,1 @@
-<img src="<?= $card['image_url'] ?>">
+<img id="<?= str_replace(" ", "-", str_replace( "'", " ", $card['name'])); ?>" src="<?= $card['image_url'] ?>">
