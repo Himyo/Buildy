@@ -110,6 +110,19 @@
   method: "GET"
   allow: [ADMIN, MODERATOR]
 
+"/admin/dashboard/articles/save":
+  controller: AdminArticles
+  action: saveArticle
+  method: "POST"
+  allow: [ADMIN, MODERATOR]
+
+"/admin/dashboard/articles/delete":
+  controller: AdminArticles
+  action: deleteArticle
+  method: "POST"
+  allow: [ADMIN, MODERATOR]
+
+### USERS ###
 "/admin/dashboard/users":
   controller: AdminUsers
   action: default
@@ -243,13 +256,6 @@
   action: deconnexion
   method: "POST"
 
-"/site/profile":
-  controller: Users
-  action: getProfile
-  method: "GET"
-  allow: [ADMIN, MODERATOR, USER]
-  redirect: "/site/login"
-
 #  "site/profile/edit":
 #    controller: Users
 #    action: editProfile
@@ -269,6 +275,22 @@
   allow: [ADMIN, MODERATOR, USER]
   redirect: "/site/login"
 
+"/site/tournaments":
+  controller: Tournaments
+  action: getTournaments
+  method: "GET"
+
+"/site/tournament":
+  controller: Tournaments
+  action: getDetail
+  method: "GET"
+
+"/site/tournament/signup":
+  controller: Tournaments
+  action: signup
+  method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+
 
 "/site/deck/save":
   controller: Decks
@@ -277,11 +299,67 @@
   allow: [ADMIN, MODERATOR, USER]
   redirect: "/site/login"
 
-
-"/site/articles":
-  controller: Articles
-  action: default 
+"/site/decks":
+  controller: Decks
+  action: getDecks
   method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/decks/all":
+  controller: Decks
+  action: getAllDecks
+  method: "GET"
+
+"/site/deck":
+  controller: Decks
+  action: getDetail
+  method: "GET"
+
+"/site/deck/edit":
+  controller: Decks
+  action: editPage
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/deck/edit/save":
+  controller: Decks
+  action: saveEdit
+  method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/deck/edit/delete":
+  controller: Decks
+  action: deleteEdit
+  method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/blog":
+  controller: Articles
+  action: getBlog
+  method: "GET"
+
+"/site/blog/category":
+  controller: Articles
+  action: getArticlesByCategory
+  method: "GET"
+
+"/site/article":
+  controller: Articles
+  action: getDetail
+  method: "GET"
+
+"/site/comment/save":
+  controller: Comments
+  action: saveComment
+  method: "POST"
+  allow: [ADMIN, MODERATOR, USER]
+
+"/site/profile":
+  controller: Profile
+  action: getDefault
+  method: "GET"
+  allow: [ADMIN, MODERATOR, USER]
+  redirect: "/site/login"
 
 "/site/profile/articles":
   controller: Articles
@@ -303,3 +381,14 @@
 
 
 ################## DYNAMIQUE PAGES #######################
+/site/mapage:
+  controller: Pages
+  action: display
+  method: GET
+
+/site/yugi:
+  controller: Pages
+  action: display
+  method: GET
+
+

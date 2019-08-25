@@ -2,6 +2,7 @@
 namespace MVC\Controllers;
 
 use MVC\Core\View;
+use MVC\Core\Auth;
 
 class CommentsController extends Controller {
 
@@ -31,6 +32,30 @@ class CommentsController extends Controller {
         $view = new View('comments', 'back');
         $view->assign('comments', $comments);
 
+    }
+
+    public function saveCommentAction() {
+        if (empty($_POST['id']) && !empty($_POST['content'])) {
+            if (!Auth::isAuthenticate()) {
+                //TODO RETURN ERROR
+                header('Location: /site');
+                exit();
+            }
+
+            $data = [
+                'content' => $_POST['content'],
+                'users_id' => $_POST['users_id'],
+                'articles_id' => $_POST['articles_id']
+            ];
+            
+            $this->comments->insert($data);
+            header('Location: /site/article?id='.$_POST['articles_id']);
+            exit();
+        } else {
+            //TODO RETURN ERROR
+            header('Location: /site');
+            exit();
+        }
     }
 
 }

@@ -1,3 +1,6 @@
+<?php 
+use MVC\Core\Text;
+?>
 <div id="container" class="container">
     <div class="content">
       <div class="space-15"></div>
@@ -22,7 +25,7 @@
                     <tr>
                         <td><?= $value['id'] ?></td>
                         <td><?= htmlentities($value['name']) ?></td>
-                        <td><?= htmlentities($value['description'])?></td>
+                        <td><?= Text::excerpt(htmlentities($value['description']))?></td>
                         <td><?= $value['nb_contenders'] ?></td>
                         <td><?= $value['created_at'] ?></td>
                         <td><?= $value['ended_at'] ?></td>

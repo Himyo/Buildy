@@ -16,7 +16,6 @@
                 <th>Mot de passe</th>
                 <th>Status</th>
                 <th>Rôle</th>
-                <th>Token</th>
                 <th>Id photo</th>
                 <th colspan="4">Action</th>
               </tr>
@@ -52,7 +51,6 @@
                 <th>Mot de passe</th>
                 <th>Status</th>
                 <th>Rôle</th>
-                <th>Token</th>
                 <th>Id photo</th>
                 <th colspan="4">Action</th>
               </tr>

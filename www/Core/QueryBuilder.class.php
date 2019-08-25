@@ -123,7 +123,7 @@ class QueryBuilder {
 
     public function delete(array $items, $opt=[]): QueryBuilder{
         $this->items['DELETE'] = $opt;
-        $this->orWhere($items);
+        $this->andWhere($items);
         return $this;
     }
     public function insert(array $items): QueryBuilder{

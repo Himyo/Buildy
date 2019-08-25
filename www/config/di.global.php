@@ -36,6 +36,7 @@ use MVC\Controllers\TournamentsController;
  use MVC\Controllers\DashboardController;
 use MVC\Controllers\SiteController;
 use MVC\Controllers\AdminPagesController;
+use MVC\Controllers\ProfileController;
 
 $container = [
     // Card
@@ -71,13 +72,23 @@ $container = [
         return new CardsController($container[Cards::class]($container));
     },
 
+    //Comments
+    Comments::class => function($container) {
+        return new Comments();
+    },
+    CommentsController::class => function($container) {
+        $commentsModel = $container[Comments::class]($container);
+        return new CommentsController($commentsModel);
+    },
+
     //Articles
     Articles::class => function($container) {
         return new Articles();
     },
     ArticlesController::class => function($container) {
         $articlesModel = $container[Articles::class]($container);
-        return new ArticlesController($articlesModel);
+        $commentsModel = $container[Comments::class]($container);
+        return new ArticlesController($articlesModel, $commentsModel);
     },
     //Users
     Users::class => function($container) {
@@ -87,6 +98,11 @@ $container = [
         $usersModel = $container[Users::class]($container);
         return new UsersController($usersModel);
     },
+
+    ProfileController::class => function($container) {
+        return new ProfileController();
+    },
+
     //Pages
     Pages::class => function($container) {
         return new Pages();
@@ -99,15 +115,6 @@ $container = [
     //Home
     HomeController::class => function($container) {
         return new HomeController();
-    },
-
-    //Comments
-    Comments::class => function($container) {
-        return new Comments();
-    },
-    CommentsController::class => function($container) {
-        $commentsModel = $container[Comments::class]($container);
-        return new CommentsController($commentsModel);
     },
 
     //Decks

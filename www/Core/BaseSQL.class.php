@@ -54,6 +54,10 @@ class BaseSQL {
         $stmt = $this->pdo->prepare($query);
         $data = Utils::flattenArray($qb->getData());
         $stmt->execute($data);
+        // echo "<pre>";
+        // var_dump($stmt->errorInfo());
+        // var_dump($query);
+        // die();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -144,7 +148,7 @@ class BaseSQL {
 
     public function findOne(array $data) {
         $qb = QueryBuilder::GetQueryBuilder($this->table);
-        $query = $qb->select(['id'])->andWhere($data)->make()->getQuery();
+        $query = $qb->select(['*'])->andWhere($data)->make()->getQuery();
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($data);
         return $stmt->fetch();

@@ -1,3 +1,6 @@
+<?php 
+use MVC\Core\Text;
+?>
 <div id="container" class="container">
     <div class="content">
         <div class="space-15"></div>
@@ -24,7 +27,7 @@
                       <tr>
                           <td><?= $value['id'] ?></td>
                           <td><?= htmlentities($value['title']) ?></td>
-                          <td><?= htmlentitiies($value['content']) ?></td>
+                          <td><?= Text::excerpt(htmlentities($value['content'])) ?></td>
                           <td><?= $value['users_id'] ?></td>
                           <td><?= htmlentities($value['categories']) ?></td>
                           <td><?= $value['state'] ?></td>
@@ -52,6 +55,11 @@
                 </tfoot>
             </table>
         </div>
+
+        <div class="space-50"></div>
+        <hr class="">
+        <div class="space-50"></div>
+        
         <div class="col-100-center">
             <?php $this->addComponent('formAdminArticle', ""); ?>
         </div>
