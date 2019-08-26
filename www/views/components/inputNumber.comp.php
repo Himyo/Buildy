@@ -1,0 +1,1 @@
+<input class="input-classic" type="number">
