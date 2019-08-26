@@ -28,23 +28,19 @@
             </div>
             <hr class="width-100 space-20">
             <div class="draggable" draggable="true">
-                <?php $this->addComponent("formArticle", ""); ?>
-            </div>
-            <hr class="width-100 space-20">
-            <div class="draggable" draggable="true">
-                <?php $this->addComponent("formDeck", ""); ?>
-            </div>
-            <hr class="width-100 space-20">
-            <div class="draggable" draggable="true">
-                <?php $this->addComponent("formTournament", ""); ?>
-            </div>
-            <hr class="width-100 space-20">
-            <div class="draggable" draggable="true">
                 <?php $this->addComponent("href", ""); ?>
             </div>
             <hr class="width-100 space-20">
             <div class="draggable" draggable="true">
-                <?php $this->addComponent("welcome", ""); ?>
+                <?php $this->addComponent("inputTxt", ""); ?>
+            </div>
+            <hr class="width-100 space-20">
+            <div class="draggable" draggable="true">
+                <?php $this->addComponent("inputNumber", ""); ?>
+            </div>
+            <hr class="width-100 space-20">
+            <div class="draggable" draggable="true">
+                <?php $this->addComponent("image", ""); ?>
             </div>
             <hr class="width-100 space-20">
         </div>
